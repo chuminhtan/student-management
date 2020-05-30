@@ -18,29 +18,30 @@ public class UI_Main extends javax.swing.JFrame {
     public UI_Main() {
         initComponents();
     }
-    
-    /*  =====================Khu vực của Tân======*/  
-    
-    
+
+    /*  =====================Khu vực của Tân======*/
     //method giao diện cho nhân viên ghi danh 
-    public void showGhiDanh(){
+    public void showGhiDanh() {
         ui_lop.hideBtnLop();
         btnTaiKhoan.setVisible(false);
         ui_ct.hideBtnCt();
     }
+
     //method giao diện cho nhân viên học vụ
-    public void showHocVu(){
+    public void showHocVu() {
         ui_kh.hideBtnKh();
         btnTaiKhoan.setVisible(false);
         ui_ct.hideBtnCt();
     }
+
     //method hiển thị thông tin người dùng bên góc phải phía trên UI_Main
-    public void setThongTinDangNhap(dto_DangNhap dn){
+    public void setThongTinDangNhap(dto_DangNhap dn) {
         txtThongTinDangNhap.setText(dn.getMa() + " | " + dn.getHoTen());
     }
+
     /*  ====================Hết khu vực của Tân
-    */
-    
+     */
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -296,7 +297,7 @@ public class UI_Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btnThongKeActionPerformed
 
     private void btnKhachHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKhachHangActionPerformed
-        lblKhachHang.setBackground(new Color(255,0,151));
+        lblKhachHang.setBackground(new Color(255, 0, 151));
 
         lblThongKe.setBackground(new Color(255, 255, 255));
         lblLopHoc.setBackground(new Color(255, 255, 255));
@@ -312,7 +313,7 @@ public class UI_Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btnKhachHangActionPerformed
 
     private void btnLopHocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLopHocActionPerformed
-        lblLopHoc.setBackground(new Color(96,60,186));
+        lblLopHoc.setBackground(new Color(96, 60, 186));
 
         lblThongKe.setBackground(new Color(255, 255, 255));
         lblKhachHang.setBackground(new Color(255, 255, 255));
@@ -328,7 +329,7 @@ public class UI_Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLopHocActionPerformed
 
     private void btnCTHocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCTHocActionPerformed
-        lblCTHoc.setBackground(new Color(0,171,169));
+        lblCTHoc.setBackground(new Color(0, 171, 169));
         lblThongKe.setBackground(new Color(255, 255, 255));
         lblKhachHang.setBackground(new Color(255, 255, 255));
         lblLopHoc.setBackground(new Color(255, 255, 255));
@@ -344,7 +345,7 @@ public class UI_Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCTHocActionPerformed
 
     private void btnTaiKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaiKhoanActionPerformed
-        lblTaiKhoan.setBackground(new Color(255,196,13));
+        lblTaiKhoan.setBackground(new Color(255, 196, 13));
         lblThongKe.setBackground(new Color(255, 255, 255));
         lblKhachHang.setBackground(new Color(255, 255, 255));
         lblLopHoc.setBackground(new Color(255, 255, 255));
@@ -356,9 +357,9 @@ public class UI_Main extends javax.swing.JFrame {
         pnBody.add(ui_tk);
         pnBody.repaint();
         pnBody.revalidate();
-        
+
         //Lấy thông tin tài khoản từ CSDL
-        
+
     }//GEN-LAST:event_btnTaiKhoanActionPerformed
 
     private void txtThongTinDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtThongTinDangNhapActionPerformed
@@ -418,7 +419,7 @@ public class UI_Main extends javax.swing.JFrame {
     private UI_ChuongTrinh ui_ct = new UI_ChuongTrinh();
     private UI_TaiKhoan ui_tk = new UI_TaiKhoan();
     //Kết thúc biến tự định nghĩa
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCTHoc;
     private javax.swing.JButton btnDangXuat;

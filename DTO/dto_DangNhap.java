@@ -82,8 +82,4 @@ public class dto_DangNhap {
     public void setSdt(String sdt) {
         this.sdt = sdt;
     }
-    
-    
-
-    
 }

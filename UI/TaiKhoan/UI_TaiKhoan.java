@@ -22,7 +22,7 @@ public class UI_TaiKhoan extends javax.swing.JPanel {
         tbTaiKhoan.getTableHeader().setFont(new Font("Tahoma", Font.BOLD, 12));
         tbTaiKhoan.getTableHeader().setOpaque(false);
         tbTaiKhoan.getTableHeader().setForeground(new Color(22, 105, 158));
-        tbTaiKhoan.setSelectionBackground(new java.awt.Color(204,204,204));
+        tbTaiKhoan.setSelectionBackground(new java.awt.Color(204, 204, 204));
     }
 
     /**
@@ -232,7 +232,16 @@ public class UI_TaiKhoan extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThemTKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemTKActionPerformed
-        new FormThemTaiKhoan().show();
+        FormThemTaiKhoan formThemTaiKhoan = new FormThemTaiKhoan();
+        
+        formThemTaiKhoan.setAfterThemTaiKhoan(new AfterThemTaiKhoan() {
+            @Override
+            public void DoAfterThemTaiKhoan() {
+                System.out.println("Cái này làm ở trong lớp UI_TaiKhoan nha!");
+            }
+        });
+        
+        formThemTaiKhoan.show();
     }//GEN-LAST:event_btnThemTKActionPerformed
 
     private void btnXoaNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaNhanVienActionPerformed
@@ -240,7 +249,8 @@ public class UI_TaiKhoan extends javax.swing.JPanel {
     }//GEN-LAST:event_btnXoaNhanVienActionPerformed
 
     private void btnCapNhatNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatNhanVienActionPerformed
-        new FormCapNhatTaiKhoan().show();
+        FormCapNhatTaiKhoan formCapNhatTaiKhoan = new FormCapNhatTaiKhoan();
+        formCapNhatTaiKhoan.show();
     }//GEN-LAST:event_btnCapNhatNhanVienActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

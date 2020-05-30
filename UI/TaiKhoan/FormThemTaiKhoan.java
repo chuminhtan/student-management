@@ -11,11 +11,26 @@ package UI.TaiKhoan;
  */
 public class FormThemTaiKhoan extends javax.swing.JFrame {
 
+    private AfterThemTaiKhoan afterThemTaiKhoan;
+
     /**
      * Creates new form FormThemNhanVien
      */
     public FormThemTaiKhoan() {
         initComponents();
+        this.afterThemTaiKhoan = null;
+    }
+
+    public AfterThemTaiKhoan getAfterThemTaiKhoan() {
+        return afterThemTaiKhoan;
+    }
+
+    public void setAfterThemTaiKhoan(AfterThemTaiKhoan afterThemTaiKhoan) {
+        this.afterThemTaiKhoan = afterThemTaiKhoan;
+    }
+
+    public void ClearAfterThemTaiKhoan() {
+        this.afterThemTaiKhoan = null;
     }
 
     /**
@@ -164,7 +179,16 @@ public class FormThemTaiKhoan extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnXacNhanThemTKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXacNhanThemTKActionPerformed
+        //Làm gì đó thêm tài khoản 
+        System.out.println("Mình thêm Tài khoản rồi nè!");
 
+        //Sau đó làm phần AfterThemTaiKhoan
+        if (this.afterThemTaiKhoan != null) {
+            this.afterThemTaiKhoan.DoAfterThemTaiKhoan();
+        }
+        
+        //Cuối cùng là đóng form lại thôi
+        this.dispose();
     }//GEN-LAST:event_btnXacNhanThemTKActionPerformed
 
     /**
