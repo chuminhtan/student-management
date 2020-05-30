@@ -19,20 +19,20 @@ public class UI_Main extends javax.swing.JFrame {
         initComponents();
     }
     
-    /*  =====================Khu vực của Tân          
-    */
+    /*  =====================Khu vực của Tân======*/  
+    
     
     //method giao diện cho nhân viên ghi danh 
     public void showGhiDanh(){
         ui_lop.hideBtnLop();
         btnTaiKhoan.setVisible(false);
-        btnCTHoc.setVisible(false);
+        ui_ct.hideBtnCt();
     }
     //method giao diện cho nhân viên học vụ
     public void showHocVu(){
         ui_kh.hideBtnKh();
         btnTaiKhoan.setVisible(false);
-        btnCTHoc.setVisible(false);
+        ui_ct.hideBtnCt();
     }
     //method hiển thị thông tin người dùng bên góc phải phía trên UI_Main
     public void setThongTinDangNhap(dto_DangNhap dn){
@@ -337,7 +337,7 @@ public class UI_Main extends javax.swing.JFrame {
         pnBody.removeAll();
         pnBody.repaint();
         pnBody.revalidate();
-        pnBody.add(new UI_ChuongTrinh());
+        pnBody.add(ui_ct);
         pnBody.repaint();
         pnBody.revalidate();
 
@@ -353,7 +353,7 @@ public class UI_Main extends javax.swing.JFrame {
         pnBody.removeAll();
         pnBody.repaint();
         pnBody.revalidate();
-        pnBody.add(new UI_TaiKhoan());
+        pnBody.add(ui_tk);
         pnBody.repaint();
         pnBody.revalidate();
     }//GEN-LAST:event_btnTaiKhoanActionPerformed
@@ -412,6 +412,8 @@ public class UI_Main extends javax.swing.JFrame {
     //Biến tự định nghĩa
     private UI_LopHoc ui_lop = new UI_LopHoc();
     private UI_KhachHang ui_kh = new UI_KhachHang();
+    private UI_ChuongTrinh ui_ct = new UI_ChuongTrinh();
+    private UI_TaiKhoan ui_tk = new UI_TaiKhoan();
     //Kết thúc biến tự định nghĩa
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
