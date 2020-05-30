@@ -26,7 +26,19 @@ public class UI_LopHoc extends javax.swing.JPanel {
         tbLopHoc.getTableHeader().setForeground(new Color(22, 105, 158));
         tbLopHoc.setSelectionBackground(new Color(204,204,204));
     }
-
+    /** KHU VỰC CỦA TÂN */
+   
+    // * method hideBtnLop() Ẩn các button trong giao diện lớp học
+    public void hideBtnLop(){
+        btnChiTietLop.setVisible(false);
+        btnThemLop.setVisible(false);
+        btnUpdateLop.setVisible(false);
+        btnXoaLop.setVisible(false);
+    } 
+    
+    /** HẾT KHU VỰC CỦA BẠN TÂN  */
+   
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

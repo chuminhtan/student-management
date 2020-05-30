@@ -25,7 +25,18 @@ public class UI_ChuongTrinh extends javax.swing.JPanel {
         tbChuongTrinh.getTableHeader().setForeground(new Color(22, 105, 158));
         tbChuongTrinh.setSelectionBackground(new Color(204,204,204));
     }
-
+    /**
+     * Khu vực của Tân
+     * WARNING: Do NOT modify this code.
+     */
+    public void hideBtnCt(){
+        btnCapNhatChuongTrinh.setVisible(false);
+        btnThemChuongTrinh.setVisible(false);
+        btnXoaChuongTrinh.setVisible(false);
+    }
+    /*---------------------------------------------------*/
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

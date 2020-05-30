@@ -83,7 +83,6 @@
                           <Component id="btnCTHoc" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
                           <Component id="lblCTHoc" min="-2" pref="184" max="-2" attributes="0"/>
                           <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
                       </Group>

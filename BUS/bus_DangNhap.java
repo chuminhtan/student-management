@@ -24,6 +24,15 @@ public class bus_DangNhap {
         else{
             UI_Main ui_m = new UI_Main();
             ui_m.setThongTinDangNhap(dto_dn);
+            
+            if(dto_dn.getLoai() == 2){
+                ui_m.showGhiDanh();
+            }
+            else if(dto_dn.getLoai() == 3){
+                ui_m.showHocVu();
+            }
+            
+            ui_m.setVisible(true);           
             return true;
         }
     }
