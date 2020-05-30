@@ -58,7 +58,7 @@ public class FormCapNhatTaiKhoan extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel4.setText("LOẠI NHÂN VIÊN");
 
-        cbCapNhatLoaiNV.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbCapNhatLoaiNV.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Quản lý", "Ghi danh", "Học vụ" }));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel5.setText("TÊN ĐĂNG NHẬP");

@@ -5,10 +5,6 @@
  */
 package UI.TaiKhoan;
 
-/**
- *
- * @author caonguyen
- */
 public interface AfterThemTaiKhoan {
     public void DoAfterThemTaiKhoan();
 }

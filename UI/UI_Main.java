@@ -359,7 +359,7 @@ public class UI_Main extends javax.swing.JFrame {
         pnBody.revalidate();
 
         //Lấy thông tin tài khoản từ CSDL
-
+        this.ui_tk.refreshDataInTable();
     }//GEN-LAST:event_btnTaiKhoanActionPerformed
 
     private void txtThongTinDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtThongTinDangNhapActionPerformed
