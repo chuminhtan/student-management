@@ -80,10 +80,10 @@ public class UI_TaiKhoan extends javax.swing.JPanel {
         tbTaiKhoan.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         tbTaiKhoan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, "1", "a", null, null, null},
-                {null, "2", "a", null, null, null},
-                {null, "3", "a", null, null, null},
-                {null, "4", "a", null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},

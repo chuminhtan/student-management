@@ -169,10 +169,10 @@
                   <Table columnCount="6" rowCount="24">
                     <Column editable="false" title="STT" type="java.lang.String"/>
                     <Column editable="false" title="M&#xe3; NV" type="java.lang.String">
-                      <Data value="1"/>
-                      <Data value="2"/>
-                      <Data value="3"/>
-                      <Data value="4"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
                       <Data value="null"/>
                       <Data value="null"/>
                       <Data value="null"/>
@@ -195,10 +195,10 @@
                       <Data value="null"/>
                     </Column>
                     <Column editable="false" title="H&#x1ecd; T&#xea;n" type="java.lang.String">
-                      <Data value="a"/>
-                      <Data value="a"/>
-                      <Data value="a"/>
-                      <Data value="a"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
                       <Data value="null"/>
                       <Data value="null"/>
                       <Data value="null"/>
