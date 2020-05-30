@@ -12,6 +12,7 @@ package DTO;
 public class dto_DangNhap {
     private String ma;
     private String hoTen;
+    private int loai;
     private String tenDangNhap;
     private String matKhau;
 
@@ -21,6 +22,14 @@ public class dto_DangNhap {
     public dto_DangNhap(String tenDangNhap, String matKhau) {
         this.tenDangNhap = tenDangNhap;
         this.matKhau = matKhau;
+    }
+
+    public int getLoai() {
+        return loai;
+    }
+
+    public void setLoai(int loai) {
+        this.loai = loai;
     }
 
 

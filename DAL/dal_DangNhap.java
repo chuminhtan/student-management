@@ -20,7 +20,7 @@ public class dal_DangNhap extends DBConnect {
         dto_DangNhap dn = null;
 
         try {
-            String sql = "SELECT MA_NV, HO_TEN, TEN_DANG_NHAP, MAT_KHAU "
+            String sql = "SELECT MA_NV, HO_TEN, LOAI, TEN_DANG_NHAP, MAT_KHAU "
                     + "FROM NHAN_VIEN "
                     + "WHERE TEN_DANG_NHAP=? AND MAT_KHAU=?";
 
@@ -34,6 +34,7 @@ public class dal_DangNhap extends DBConnect {
                 dn = new dto_DangNhap();
                 dn.setMa(result.getString(1));
                 dn.setHoTen(result.getString(2));
+                dn.setLoai(result.getInt(3));
                 dn.setTenDangNhap(result.getString(3));
                 dn.setMatKhau(result.getString(4));
             }

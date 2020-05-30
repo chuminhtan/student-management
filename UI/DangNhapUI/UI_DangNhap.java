@@ -9,6 +9,7 @@ import BUS.bus_DangNhap;
 import DTO.dto_DangNhap;
 import UI.ChuongTrinhUI.UI_ChuongTrinh;
 import UI.UI_Main;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -24,7 +25,23 @@ public class UI_DangNhap extends javax.swing.JFrame {
     public UI_DangNhap() {
         initComponents();
     }
-    
+
+    /**
+     * Khu vực của Tân
+     */
+    public void eBtnDangNhap() {
+        bus_DangNhap bus_dn = new bus_DangNhap();
+        dto_DangNhap dto_dn = new dto_DangNhap(txtTenDangNhap.getText(), txtMatKhau.getText());
+        boolean rs = bus_dn.xyLyDangNhap(dto_dn);
+
+        if (rs == true) {
+            dispose();
+        } else {
+            JOptionPane.showMessageDialog(null, "Đăng nhập không thành công");
+        }
+    }
+
+    /*Hết khu vực của Tân*/
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -38,7 +55,7 @@ public class UI_DangNhap extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         btnLogin = new keeptoo.KGradientPanel();
-        jLabel5 = new javax.swing.JLabel();
+        lblDangNhap = new javax.swing.JLabel();
         txtMatKhau = new javax.swing.JPasswordField();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -60,15 +77,33 @@ public class UI_DangNhap extends javax.swing.JFrame {
 
         btnLogin.setkEndColor(new java.awt.Color(0, 204, 255));
         btnLogin.setkStartColor(new java.awt.Color(153, 0, 153));
-
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("ĐĂNG NHẬP");
-        jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnLogin.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel5MouseClicked(evt);
+                btnLoginMouseClicked(evt);
+            }
+        });
+        btnLogin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnLoginKeyPressed(evt);
+            }
+        });
+
+        lblDangNhap.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblDangNhap.setForeground(new java.awt.Color(255, 255, 255));
+        lblDangNhap.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblDangNhap.setText("ĐĂNG NHẬP");
+        lblDangNhap.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblDangNhap.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblDangNhapMouseClicked(evt);
+            }
+        });
+        lblDangNhap.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                lblDangNhapKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                lblDangNhapKeyTyped(evt);
             }
         });
 
@@ -78,17 +113,22 @@ public class UI_DangNhap extends javax.swing.JFrame {
             btnLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnLoginLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(lblDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         btnLoginLayout.setVerticalGroup(
             btnLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnLoginLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(lblDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         txtMatKhau.setBackground(new java.awt.Color(239, 231, 231));
         txtMatKhau.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        txtMatKhau.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtMatKhauKeyPressed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -107,6 +147,11 @@ public class UI_DangNhap extends javax.swing.JFrame {
                 txtTenDangNhapActionPerformed(evt);
             }
         });
+        txtTenDangNhap.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtTenDangNhapKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout kGradientPanel1Layout = new javax.swing.GroupLayout(kGradientPanel1);
         kGradientPanel1.setLayout(kGradientPanel1Layout);
@@ -122,16 +167,12 @@ public class UI_DangNhap extends javax.swing.JFrame {
                         .addComponent(jLabel2)))
                 .addGap(158, 158, 158)
                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                        .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                        .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtTenDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1)
-                            .addComponent(txtMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTenDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         kGradientPanel1Layout.setVerticalGroup(
             kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -177,17 +218,38 @@ public class UI_DangNhap extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTenDangNhapActionPerformed
 
-    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
-        bus_DangNhap bus_dn = new bus_DangNhap();
-        dto_DangNhap dto_dn = new dto_DangNhap(txtTenDangNhap.getText(), txtMatKhau.getText());
-        boolean rs = bus_dn.xyLyDangNhap(dto_dn);
-        
-        if(rs == true)
-            dispose();
-        else
-            JOptionPane.showMessageDialog(null, "Đăng nhập không thành công");
-                
-    }//GEN-LAST:event_jLabel5MouseClicked
+    private void lblDangNhapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblDangNhapMouseClicked
+        eBtnDangNhap();
+
+    }//GEN-LAST:event_lblDangNhapMouseClicked
+
+    private void lblDangNhapKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lblDangNhapKeyPressed
+
+    }//GEN-LAST:event_lblDangNhapKeyPressed
+
+    private void lblDangNhapKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lblDangNhapKeyTyped
+
+    }//GEN-LAST:event_lblDangNhapKeyTyped
+
+    private void btnLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseClicked
+
+    }//GEN-LAST:event_btnLoginMouseClicked
+
+    private void btnLoginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnLoginKeyPressed
+
+    }//GEN-LAST:event_btnLoginKeyPressed
+
+    private void txtTenDangNhapKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTenDangNhapKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            eBtnDangNhap();
+        }
+    }//GEN-LAST:event_txtTenDangNhapKeyPressed
+
+    private void txtMatKhauKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMatKhauKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            eBtnDangNhap();
+        }
+    }//GEN-LAST:event_txtMatKhauKeyPressed
 
     /**
      * @param args the command line arguments
@@ -233,8 +295,8 @@ public class UI_DangNhap extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private keeptoo.KGradientPanel kGradientPanel1;
+    private javax.swing.JLabel lblDangNhap;
     private javax.swing.JPasswordField txtMatKhau;
     private javax.swing.JTextField txtTenDangNhap;
     // End of variables declaration//GEN-END:variables
