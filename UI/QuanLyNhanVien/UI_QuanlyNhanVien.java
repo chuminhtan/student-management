@@ -3,43 +3,45 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package UI.TaiKhoan;
+package UI.QuanLyNhanVien;
 
+import BUS.NhanVienBUS;
 import DTO.NhanVienDTO;
 import java.awt.Color;
 import java.awt.Font;
-import java.util.Vector;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author ThinkPro
  */
-public class UI_TaiKhoan extends javax.swing.JPanel {
+public class UI_QuanlyNhanVien extends javax.swing.JPanel {
 
     /**
      * Creates new form FormTaiKhoanUI
      */
-    public UI_TaiKhoan() {
+    public UI_QuanlyNhanVien() {
         initComponents();
         tableTaiKhoan.getTableHeader().setFont(new Font("Tahoma", Font.BOLD, 12));
         tableTaiKhoan.getTableHeader().setOpaque(false);
         tableTaiKhoan.getTableHeader().setForeground(new Color(22, 105, 158));
         tableTaiKhoan.setSelectionBackground(new java.awt.Color(204, 204, 204));
     }
-    
+
     public void refreshDataInTable() {
         DefaultTableModel defaultTableModel = (DefaultTableModel) this.tableTaiKhoan.getModel();
-        
+
         //Cài tên cột trong bảng
         defaultTableModel.setColumnIdentifiers(NhanVienDTO.getVectorColumnIdentifiers());
-        
+
         //Thêm giá trị cho từng dòng trong bảng
         defaultTableModel.getDataVector().clear();
-        for (int i=0; i<10; i+=1) {
-            NhanVienDTO nhanVienDTO = new NhanVienDTO("Ma" + i, "Hoten" + i, "sdt" + i, 1, "TenDangNhap", "MatKhau");
+        ArrayList<NhanVienDTO> nhanVienDTOs = NhanVienBUS.getInstance().getDanhSachNhanVien();
+        for  (NhanVienDTO nhanVienDTO : nhanVienDTOs) {
             defaultTableModel.getDataVector().add(nhanVienDTO.toVector());
-        }        
+        }
     }
 
     /**
@@ -59,6 +61,7 @@ public class UI_TaiKhoan extends javax.swing.JPanel {
         tableTaiKhoan = new javax.swing.JTable();
         buttonXoaNhanVien = new javax.swing.JButton();
         buttonCapNhatNhanVien = new javax.swing.JButton();
+        buttonLamMoi = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(1200, 659));
@@ -66,6 +69,7 @@ public class UI_TaiKhoan extends javax.swing.JPanel {
         paneChuongTrinh.setBackground(new java.awt.Color(255, 255, 255));
 
         labelTimLop.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        labelTimLop.setForeground(new java.awt.Color(0, 0, 0));
         labelTimLop.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelTimLop.setText("TÌM NHÂN VIÊN");
 
@@ -73,9 +77,9 @@ public class UI_TaiKhoan extends javax.swing.JPanel {
         textfeildTimTK.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         textfeildTimTK.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 0, 1, 0, new java.awt.Color(153, 153, 153)));
 
-        buttonThemTK.setBackground(new java.awt.Color(91, 155, 213));
+        buttonThemTK.setBackground(new java.awt.Color(239, 158, 154));
         buttonThemTK.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        buttonThemTK.setForeground(new java.awt.Color(255, 255, 255));
+        buttonThemTK.setForeground(new java.awt.Color(0, 0, 0));
         buttonThemTK.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/them lop.png"))); // NOI18N
         buttonThemTK.setText("TẠO TÀI KHOẢN MỚI");
         buttonThemTK.setContentAreaFilled(false);
@@ -112,9 +116,9 @@ public class UI_TaiKhoan extends javax.swing.JPanel {
         tableTaiKhoan.getTableHeader().setReorderingAllowed(false);
         scrollpaneLH.setViewportView(tableTaiKhoan);
 
-        buttonXoaNhanVien.setBackground(new java.awt.Color(239, 158, 154));
+        buttonXoaNhanVien.setBackground(new java.awt.Color(91, 155, 213));
         buttonXoaNhanVien.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        buttonXoaNhanVien.setForeground(new java.awt.Color(255, 255, 255));
+        buttonXoaNhanVien.setForeground(new java.awt.Color(0, 0, 0));
         buttonXoaNhanVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/xoa.png"))); // NOI18N
         buttonXoaNhanVien.setText("XÓA");
         buttonXoaNhanVien.setContentAreaFilled(false);
@@ -132,7 +136,7 @@ public class UI_TaiKhoan extends javax.swing.JPanel {
 
         buttonCapNhatNhanVien.setBackground(new java.awt.Color(239, 158, 154));
         buttonCapNhatNhanVien.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        buttonCapNhatNhanVien.setForeground(new java.awt.Color(255, 255, 255));
+        buttonCapNhatNhanVien.setForeground(new java.awt.Color(0, 0, 0));
         buttonCapNhatNhanVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cap nhat 1.png"))); // NOI18N
         buttonCapNhatNhanVien.setText("CẬP NHẬT");
         buttonCapNhatNhanVien.setContentAreaFilled(false);
@@ -148,6 +152,19 @@ public class UI_TaiKhoan extends javax.swing.JPanel {
             }
         });
 
+        buttonLamMoi.setBackground(new java.awt.Color(91, 155, 213));
+        buttonLamMoi.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        buttonLamMoi.setForeground(new java.awt.Color(0, 0, 0));
+        buttonLamMoi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/update.png"))); // NOI18N
+        buttonLamMoi.setText("LÀM MỚI");
+        buttonLamMoi.setContentAreaFilled(false);
+        buttonLamMoi.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonLamMoi.setFocusable(false);
+        buttonLamMoi.setMaximumSize(new java.awt.Dimension(129, 49));
+        buttonLamMoi.setMinimumSize(new java.awt.Dimension(129, 49));
+        buttonLamMoi.setOpaque(true);
+        buttonLamMoi.setPreferredSize(new java.awt.Dimension(129, 49));
+
         javax.swing.GroupLayout paneChuongTrinhLayout = new javax.swing.GroupLayout(paneChuongTrinh);
         paneChuongTrinh.setLayout(paneChuongTrinhLayout);
         paneChuongTrinhLayout.setHorizontalGroup(
@@ -156,21 +173,21 @@ public class UI_TaiKhoan extends javax.swing.JPanel {
                 .addGap(50, 50, 50)
                 .addGroup(paneChuongTrinhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(paneChuongTrinhLayout.createSequentialGroup()
-                        .addComponent(scrollpaneLH, javax.swing.GroupLayout.DEFAULT_SIZE, 1100, Short.MAX_VALUE)
+                        .addComponent(scrollpaneLH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(50, 50, 50))
                     .addGroup(paneChuongTrinhLayout.createSequentialGroup()
                         .addComponent(labelTimLop)
-                        .addGap(65, 65, 65)
+                        .addGap(18, 18, 18)
                         .addComponent(textfeildTimTK, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(buttonThemTK, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(72, 72, 72))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paneChuongTrinhLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(buttonCapNhatNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(buttonXoaNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(74, 74, 74))
+                        .addGap(18, 18, 18)
+                        .addComponent(buttonThemTK, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(buttonCapNhatNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(buttonXoaNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(buttonLamMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(74, Short.MAX_VALUE))))
         );
         paneChuongTrinhLayout.setVerticalGroup(
             paneChuongTrinhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -178,52 +195,106 @@ public class UI_TaiKhoan extends javax.swing.JPanel {
                 .addGroup(paneChuongTrinhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelTimLop, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(textfeildTimTK, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonThemTK, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25)
-                .addComponent(scrollpaneLH, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(paneChuongTrinhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buttonThemTK, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonCapNhatNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonXoaNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(85, Short.MAX_VALUE))
+                    .addComponent(buttonXoaNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonLamMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(75, 75, 75)
+                .addComponent(scrollpaneLH, javax.swing.GroupLayout.PREFERRED_SIZE, 538, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(paneChuongTrinh, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(paneChuongTrinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(paneChuongTrinh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(paneChuongTrinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 38, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonThemTKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonThemTKActionPerformed
-        FormThemTaiKhoan formThemTaiKhoan = new FormThemTaiKhoan();
-        
-        formThemTaiKhoan.setAfterThemTaiKhoan(new AfterThemTaiKhoan() {
+        FormThemNhanVien formThemNhanVien = new FormThemNhanVien();
+
+        formThemNhanVien.setAfterThemTaiKhoan(new AfterThemNhanVien() {
             @Override
             public void DoAfterThemTaiKhoan() {
-                System.out.println("Cái này làm ở trong lớp UI_TaiKhoan nha!");
+                refreshDataInTable();
             }
         });
-        
-        formThemTaiKhoan.show();
+
+        formThemNhanVien.show();
     }//GEN-LAST:event_buttonThemTKActionPerformed
 
     private void buttonXoaNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonXoaNhanVienActionPerformed
-        // TODO add your handling code here:
+        int rowSelected = this.tableTaiKhoan.getSelectedRow();
+        
+        if (rowSelected < 0) {
+            JOptionPane.showMessageDialog(
+                    this, 
+                    "Hãy chọn một nhân viên trước khi nhấn nút", 
+                    "Thông báo", 
+                    JOptionPane.ERROR_MESSAGE
+            );            
+            return;
+        }        
+        
+        int deleteResult = JOptionPane.showConfirmDialog(
+                this, 
+                "Bạn có chắc chắn muốn xoá nhân viên " + rowSelected + " không?", 
+                "Xóa nhân viên", 
+                JOptionPane.YES_NO_OPTION, 
+                JOptionPane.INFORMATION_MESSAGE
+        );
+        
+        if (deleteResult == JOptionPane.YES_OPTION) {
+            //Xoá ngay và luôn 
+        }
+        else if (deleteResult == JOptionPane.NO_OPTION) {
+            //Thôi
+        }
     }//GEN-LAST:event_buttonXoaNhanVienActionPerformed
 
     private void buttonCapNhatNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCapNhatNhanVienActionPerformed
-        FormCapNhatTaiKhoan formCapNhatTaiKhoan = new FormCapNhatTaiKhoan();
-        formCapNhatTaiKhoan.show();
+        int rowSelected = this.tableTaiKhoan.getSelectedRow();
+        
+        if (rowSelected < 0) {
+            JOptionPane.showMessageDialog(
+                    this, 
+                    "Hãy chọn một nhân viên trước khi nhấn nút", 
+                    "Thông báo", 
+                    JOptionPane.ERROR_MESSAGE
+            );            
+            return;
+        }       
+        
+        FormCapNhatNhanVien formCapNhatNhanVien = new FormCapNhatNhanVien();
+        
+        DefaultTableModel defaultTableModel = (DefaultTableModel) this.tableTaiKhoan.getModel();
+        NhanVienDTO nhanVienDTO = new NhanVienDTO();
+        nhanVienDTO.fromVector(defaultTableModel.getDataVector().get(rowSelected));
+        formCapNhatNhanVien.setDefaultInformations(nhanVienDTO);
+        
+        formCapNhatNhanVien.setAfterSuaNhanVien(new AfterSuaNhanVien() {
+            @Override
+            public void DoAfterSuaNhanVien() {
+                refreshDataInTable();
+            }
+        });
+        
+        formCapNhatNhanVien.show();
     }//GEN-LAST:event_buttonCapNhatNhanVienActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonCapNhatNhanVien;
+    private javax.swing.JButton buttonLamMoi;
     private javax.swing.JButton buttonThemTK;
     private javax.swing.JButton buttonXoaNhanVien;
     private javax.swing.JLabel labelTimLop;

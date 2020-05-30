@@ -3,8 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package UI.TaiKhoan;
+package UI.QuanLyNhanVien;
 
-public interface AfterThemTaiKhoan {
-    public void DoAfterThemTaiKhoan();
+/**
+ *
+ * @author caonguyen
+ */
+public interface AfterSuaNhanVien {
+    public void DoAfterSuaNhanVien();
 }

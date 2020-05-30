@@ -10,7 +10,7 @@ import UI.ChuongTrinhUI.UI_ChuongTrinh;
 import UI.LopHocUI.UI_LopHoc;
 import UI.KhachHangUI.UI_KhachHang;
 import UI.DangNhapUI.UI_DangNhap;
-import UI.TaiKhoan.UI_TaiKhoan;
+import UI.QuanLyNhanVien.UI_QuanlyNhanVien;
 import java.awt.Color;
 
 public class UI_Main extends javax.swing.JFrame {
@@ -417,7 +417,7 @@ public class UI_Main extends javax.swing.JFrame {
     private UI_LopHoc ui_lop = new UI_LopHoc();
     private UI_KhachHang ui_kh = new UI_KhachHang();
     private UI_ChuongTrinh ui_ct = new UI_ChuongTrinh();
-    private UI_TaiKhoan ui_tk = new UI_TaiKhoan();
+    private UI_QuanlyNhanVien ui_tk = new UI_QuanlyNhanVien();
     //Kết thúc biến tự định nghĩa
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

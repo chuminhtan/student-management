@@ -3,19 +3,37 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package UI.TaiKhoan;
+package UI.QuanLyNhanVien;
+
+import DAL.dal_DangNhap;
+import DTO.dto_DangNhap;
 
 /**
  *
  * @author USER
  */
-public class FormCapNhatTaiKhoan extends javax.swing.JFrame {
+public class FormThemNhanVien extends javax.swing.JFrame {
+
+    private AfterThemNhanVien afterThemTaiKhoan;
 
     /**
-     * Creates new form FormCapNhatTaiKhoan
+     * Creates new form FormThemNhanVien
      */
-    public FormCapNhatTaiKhoan() {
+    public FormThemNhanVien() {
         initComponents();
+        this.afterThemTaiKhoan = null;
+    }
+
+    public AfterThemNhanVien getAfterThemTaiKhoan() {
+        return afterThemTaiKhoan;
+    }
+
+    public void setAfterThemTaiKhoan(AfterThemNhanVien afterThemTaiKhoan) {
+        this.afterThemTaiKhoan = afterThemTaiKhoan;
+    }
+
+    public void ClearAfterThemTaiKhoan() {
+        this.afterThemTaiKhoan = null;
     }
 
     /**
@@ -27,7 +45,7 @@ public class FormCapNhatTaiKhoan extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        pnCapNhatTK = new javax.swing.JPanel();
+        pnThemTK = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtCapNhatTenNV = new javax.swing.JTextField();
@@ -39,15 +57,15 @@ public class FormCapNhatTaiKhoan extends javax.swing.JFrame {
         txtThemTenDangNhap = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jPasswordField1 = new javax.swing.JPasswordField();
-        btnXacNhanCapNhatTK = new javax.swing.JButton();
+        btnXacNhanThemTK = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Cập Nhật Tài Khoản");
+        setTitle("Tạo Tài Khoản");
 
-        pnCapNhatTK.setBackground(new java.awt.Color(255, 255, 255));
+        pnThemTK.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel1.setText("CẬP NHẬT");
+        jLabel1.setText("TẠO MỚI");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel2.setText("TÊN NHÂN VIÊN");
@@ -66,85 +84,85 @@ public class FormCapNhatTaiKhoan extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel6.setText("MẬT KHẨU");
 
-        btnXacNhanCapNhatTK.setBackground(new java.awt.Color(91, 155, 213));
-        btnXacNhanCapNhatTK.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnXacNhanCapNhatTK.setForeground(new java.awt.Color(255, 255, 255));
-        btnXacNhanCapNhatTK.setText("XÁC NHẬN");
-        btnXacNhanCapNhatTK.setContentAreaFilled(false);
-        btnXacNhanCapNhatTK.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnXacNhanCapNhatTK.setFocusable(false);
-        btnXacNhanCapNhatTK.setOpaque(true);
-        btnXacNhanCapNhatTK.setPreferredSize(new java.awt.Dimension(209, 40));
-        btnXacNhanCapNhatTK.addActionListener(new java.awt.event.ActionListener() {
+        btnXacNhanThemTK.setBackground(new java.awt.Color(91, 155, 213));
+        btnXacNhanThemTK.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnXacNhanThemTK.setForeground(new java.awt.Color(255, 255, 255));
+        btnXacNhanThemTK.setText("XÁC NHẬN");
+        btnXacNhanThemTK.setContentAreaFilled(false);
+        btnXacNhanThemTK.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnXacNhanThemTK.setFocusable(false);
+        btnXacNhanThemTK.setOpaque(true);
+        btnXacNhanThemTK.setPreferredSize(new java.awt.Dimension(209, 40));
+        btnXacNhanThemTK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnXacNhanCapNhatTKActionPerformed(evt);
+                btnXacNhanThemTKActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout pnCapNhatTKLayout = new javax.swing.GroupLayout(pnCapNhatTK);
-        pnCapNhatTK.setLayout(pnCapNhatTKLayout);
-        pnCapNhatTKLayout.setHorizontalGroup(
-            pnCapNhatTKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnCapNhatTKLayout.createSequentialGroup()
+        javax.swing.GroupLayout pnThemTKLayout = new javax.swing.GroupLayout(pnThemTK);
+        pnThemTK.setLayout(pnThemTKLayout);
+        pnThemTKLayout.setHorizontalGroup(
+            pnThemTKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnThemTKLayout.createSequentialGroup()
                 .addGap(39, 39, 39)
-                .addGroup(pnCapNhatTKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnCapNhatTKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(pnThemTKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnThemTKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(jLabel3)
                         .addComponent(jLabel2))
-                    .addGroup(pnCapNhatTKLayout.createSequentialGroup()
+                    .addGroup(pnThemTKLayout.createSequentialGroup()
                         .addGap(2, 2, 2)
-                        .addGroup(pnCapNhatTKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(pnThemTKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
                             .addComponent(jLabel4)
                             .addComponent(jLabel6))))
                 .addGap(38, 38, 38)
-                .addGroup(pnCapNhatTKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(pnThemTKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtCapNhatTenNV)
                     .addComponent(txtCapNhatSDTNV)
                     .addComponent(cbCapNhatLoaiNV, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtThemTenDangNhap)
                     .addComponent(jPasswordField1, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE))
                 .addContainerGap(52, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnCapNhatTKLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnThemTKLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(pnCapNhatTKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnCapNhatTKLayout.createSequentialGroup()
-                        .addComponent(btnXacNhanCapNhatTK, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(145, 145, 145))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnCapNhatTKLayout.createSequentialGroup()
+                .addGroup(pnThemTKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnThemTKLayout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(167, 167, 167))))
+                        .addGap(180, 180, 180))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnThemTKLayout.createSequentialGroup()
+                        .addComponent(btnXacNhanThemTK, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(145, 145, 145))))
         );
-        pnCapNhatTKLayout.setVerticalGroup(
-            pnCapNhatTKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnCapNhatTKLayout.createSequentialGroup()
+        pnThemTKLayout.setVerticalGroup(
+            pnThemTKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnThemTKLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(33, 33, 33)
-                .addGroup(pnCapNhatTKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnThemTKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtCapNhatTenNV, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(pnCapNhatTKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnCapNhatTKLayout.createSequentialGroup()
+                .addGroup(pnThemTKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnThemTKLayout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addComponent(jLabel3))
-                    .addGroup(pnCapNhatTKLayout.createSequentialGroup()
+                    .addGroup(pnThemTKLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(txtCapNhatSDTNV, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addGroup(pnCapNhatTKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnThemTKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbCapNhatLoaiNV, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addGap(18, 18, 18)
-                .addGroup(pnCapNhatTKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnThemTKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtThemTenDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(pnCapNhatTKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnThemTKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33)
-                .addComponent(btnXacNhanCapNhatTK, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnXacNhanThemTK, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(26, Short.MAX_VALUE))
         );
 
@@ -152,20 +170,37 @@ public class FormCapNhatTaiKhoan extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnCapNhatTK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(pnThemTK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnCapNhatTK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(pnThemTK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnXacNhanCapNhatTKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXacNhanCapNhatTKActionPerformed
-        //
-    }//GEN-LAST:event_btnXacNhanCapNhatTKActionPerformed
+    private void btnXacNhanThemTKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXacNhanThemTKActionPerformed
+        //Làm gì đó thêm tài khoản 
+        dto_DangNhap dtoDangNhap = new dto_DangNhap(
+                null, 
+                this.txtCapNhatTenNV.getText(), 
+                ABORT, 
+                this.txtThemTenDangNhap.getText(), 
+                this.jPasswordField1.getText(), 
+                this.txtCapNhatSDTNV.getText()
+        );
+        dal_DangNhap dalDangNhap = new dal_DangNhap();
+
+        //Sau đó làm phần AfterThemTaiKhoan
+        if (this.afterThemTaiKhoan != null) {
+            this.afterThemTaiKhoan.DoAfterThemTaiKhoan();
+        }
+        
+        //Cuối cùng là đóng form lại thôi
+        this.dispose();
+    }//GEN-LAST:event_btnXacNhanThemTKActionPerformed
 
     /**
      * @param args the command line arguments
@@ -184,26 +219,29 @@ public class FormCapNhatTaiKhoan extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FormCapNhatTaiKhoan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormThemNhanVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FormCapNhatTaiKhoan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormThemNhanVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FormCapNhatTaiKhoan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormThemNhanVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FormCapNhatTaiKhoan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormThemNhanVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FormCapNhatTaiKhoan().setVisible(true);
+                new FormThemNhanVien().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnXacNhanCapNhatTK;
+    private javax.swing.JButton btnXacNhanThemTK;
     private javax.swing.JComboBox<String> cbCapNhatLoaiNV;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -212,7 +250,7 @@ public class FormCapNhatTaiKhoan extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JPanel pnCapNhatTK;
+    private javax.swing.JPanel pnThemTK;
     private javax.swing.JTextField txtCapNhatSDTNV;
     private javax.swing.JTextField txtCapNhatTenNV;
     private javax.swing.JTextField txtThemTenDangNhap;

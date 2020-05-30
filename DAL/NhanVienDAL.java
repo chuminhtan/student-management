@@ -9,8 +9,8 @@ import DTO.NhanVienDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -28,32 +28,40 @@ public class NhanVienDAL {
     }
 
     public ArrayList<NhanVienDTO> getAll() {
-        ArrayList<NhanVienDTO> result = new ArrayList<>();
+        ArrayList<NhanVienDTO> nhanVienDTOs = new ArrayList<>();
 
         try {
             Connection connection = DatabaseConnection.getInstance().CreateNewConnection();
             String query = "";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            
+
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 NhanVienDTO nhanVienDTO = new NhanVienDTO(
-                        resultSet.getString("MA_NV"), 
-                        resultSet.getString("HO_TEN"), 
-                        resultSet.getString("SDT"), 
-                        resultSet.getInt("LOAI"), 
-                        resultSet.getString("TEN_DANG_NHAP"), 
+                        resultSet.getString("MA_NV"),
+                        resultSet.getString("HO_TEN"),
+                        resultSet.getString("SDT"),
+                        resultSet.getInt("LOAI"),
+                        resultSet.getString("TEN_DANG_NHAP"),
                         resultSet.getString("MAT_KHAU")
                 );
-                
-                result.add(nhanVienDTO);
+
+                nhanVienDTOs.add(nhanVienDTO);
             }
 
             DatabaseConnection.getInstance().RemoveConnection(connection);
-        } catch (SQLException ex) {
-            Logger.getLogger(NhanVienDAL.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+//            Logger.getLogger(NhanVienDAL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        //test
+        for (int i = 0; i < 10; i++) {
+            NhanVienDTO nhanVienDTO = new NhanVienDTO(
+                    "NV" + i, "Nhân viên " + i, "2347856348756",  2,  "2345", "c4ca4238a0b923820dcc509a6f75849b"
+            );
+            nhanVienDTOs.add(nhanVienDTO);
         }
 
-        return result;
+        return nhanVienDTOs;
     }
 }

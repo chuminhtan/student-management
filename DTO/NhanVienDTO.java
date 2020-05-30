@@ -5,6 +5,7 @@
  */
 package DTO;
 
+import java.util.Objects;
 import java.util.Vector;
 
 public class NhanVienDTO {
@@ -12,14 +13,14 @@ public class NhanVienDTO {
     private String MA_NV;
     private String HO_TEN;
     private String SDT;
-    private int LOAI;
+    private Integer LOAI;
     private String TEN_DANG_NHAP;
     private String MAT_KHAU;
 
     public NhanVienDTO() {
     }
 
-    public NhanVienDTO(String MA_NV, String HO_TEN, String SDT, int LOAI, String TEN_DANG_NHAP, String MAT_KHAU) {
+    public NhanVienDTO(String MA_NV, String HO_TEN, String SDT, Integer LOAI, String TEN_DANG_NHAP, String MAT_KHAU) {
         this.MA_NV = MA_NV;
         this.HO_TEN = HO_TEN;
         this.SDT = SDT;
@@ -62,6 +63,82 @@ public class NhanVienDTO {
         return result;
     }
 
+    public NhanVienDTO fromVector(Vector vector) {
+        this.MA_NV = (String) vector.get(0);
+        this.HO_TEN = (String) vector.get(1);
+        this.SDT = (String) vector.get(2);
+
+        this.LOAI = 0;
+        if ("Ghi danh".equals((String) vector.get(3))) {
+            this.LOAI = 1;
+        } else if ("Học vụ".equals((String) vector.get(3))) {
+            this.LOAI = 2;
+        }
+
+        this.TEN_DANG_NHAP = (String) vector.get(4);
+        this.MAT_KHAU = (String) vector.get(5);
+
+        return this;
+    }
+
+    @Override
+    public String toString() {
+        return "Nhân viên có" 
+                + " mã nhân viên là " + MA_NV 
+                + ",  họ tên là " + HO_TEN 
+                + ",  số điện thoại là " + SDT 
+                + ", thuộc loại " + (this.LOAI == 1 ? "Ghi danh" : (this.LOAI == 2 ? "Học vụ" : "Quản lý")) 
+                + ", tên đăng nhập là " + TEN_DANG_NHAP 
+                + " và mật khẩu là " + MAT_KHAU;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 41 * hash + Objects.hashCode(this.MA_NV);
+        hash = 41 * hash + Objects.hashCode(this.HO_TEN);
+        hash = 41 * hash + Objects.hashCode(this.SDT);
+        hash = 41 * hash + Objects.hashCode(this.LOAI);
+        hash = 41 * hash + Objects.hashCode(this.TEN_DANG_NHAP);
+        hash = 41 * hash + Objects.hashCode(this.MAT_KHAU);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final NhanVienDTO other = (NhanVienDTO) obj;
+        if (!Objects.equals(this.MA_NV, other.MA_NV)) {
+            return false;
+        }
+        if (!Objects.equals(this.HO_TEN, other.HO_TEN)) {
+            return false;
+        }
+        if (!Objects.equals(this.SDT, other.SDT)) {
+            return false;
+        }
+        if (!Objects.equals(this.TEN_DANG_NHAP, other.TEN_DANG_NHAP)) {
+            return false;
+        }
+        if (!Objects.equals(this.MAT_KHAU, other.MAT_KHAU)) {
+            return false;
+        }
+        if (!Objects.equals(this.LOAI, other.LOAI)) {
+            return false;
+        }
+        return true;
+    }
+    
+    
+
     public String getMA_NV() {
         return MA_NV;
     }
@@ -86,11 +163,11 @@ public class NhanVienDTO {
         this.SDT = SDT;
     }
 
-    public int getLOAI() {
+    public Integer getLOAI() {
         return LOAI;
     }
 
-    public void setLOAI(int LOAI) {
+    public void setLOAI(Integer LOAI) {
         this.LOAI = LOAI;
     }
 
