@@ -5,10 +5,16 @@
  */
 package UI.LopHocUI.ChiTietLopHoc;
 
+import BUS.bus_ChiTiet;
+import DTO.dto_ChiTiet;
+import DTO.dto_LopHoc;
 import UI.LopHocUI.ChiTietLopHoc.FormThemVaoLop;
 import UI.LopHocUI.FormCapNhatLH;
 import java.awt.Color;
 import java.awt.Font;
+import java.util.ArrayList;
+import java.util.Vector;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -21,13 +27,74 @@ public class UI_ChiTietLop extends javax.swing.JFrame {
      */
     public UI_ChiTietLop() {
         initComponents();
-        
-        tbLopHoc.getTableHeader().setFont(new Font("Tahoma", Font.BOLD, 12));
-        tbLopHoc.getTableHeader().setOpaque(false);
-        tbLopHoc.getTableHeader().setForeground(new Color(22, 105, 158));
-        tbLopHoc.setSelectionBackground(new Color(204,204,204));
+        setupTable();
+        requestReloadTable();
     }
 
+    /**
+     * Khu vực của Tân
+     */
+    
+    static dto_LopHoc dto_lop = new dto_LopHoc(1);
+    static bus_ChiTiet bus_chiTiet =  new bus_ChiTiet();
+    static DefaultTableModel dtmChiTiet  = new DefaultTableModel();
+    static int stt = 0;
+    
+    // Hàm truyền Mã lớp yêu cầu bus lấy dữ liệu đẩy lên bảng
+    public void requestReloadTable(){
+        bus_chiTiet.getListChiTietLop(dto_lop);
+    }
+    
+    // Hàm đẩy dữ liệu lên bảng - được gọi từ lớp bus.
+    public static void reloadTable(ArrayList<dto_ChiTiet> listChiTiet){
+        stt = 0;
+        dtmChiTiet.setRowCount(0);
+        for(dto_ChiTiet ct : listChiTiet){
+            stt++;
+            Vector<Object> vc = new Vector<Object>();
+            
+            vc.add(stt);
+            vc.add(ct.getMa());
+            vc.add(ct.getHoTen());
+            vc.add(ct.getGioiTinh());
+            vc.add(ct.getSdt());
+            vc.add(ct.getNghe());
+            vc.add(ct.getNoi());
+            vc.add(ct.getDoc());
+            vc.add(ct.getViet());
+            vc.add(ct.getTb());
+            dtmChiTiet.addRow(vc);
+        }
+    }
+    
+    // Setup Bảng: Tạo column - setModel - chỉnh độ rộng cột - chỉnh màu.
+    public void setupTable(){
+
+        dtmChiTiet.addColumn("STT");
+        dtmChiTiet.addColumn("Mã KH");
+        dtmChiTiet.addColumn("Họ Tên");
+        dtmChiTiet.addColumn("Giới Tính");
+        dtmChiTiet.addColumn("Điện Thoại");
+        dtmChiTiet.addColumn("Nghe");
+        dtmChiTiet.addColumn("Nói");
+        dtmChiTiet.addColumn("Đọc");
+        dtmChiTiet.addColumn("Viết");
+        dtmChiTiet.addColumn("Trung Bình");
+           
+        tbChiTiet.setModel(dtmChiTiet);
+        
+        tbChiTiet.getColumnModel().getColumn(0).setMaxWidth(50);
+	tbChiTiet.getColumnModel().getColumn(1).setMinWidth(80);
+	tbChiTiet.getColumnModel().getColumn(2).setMinWidth(150);
+	tbChiTiet.getColumnModel().getColumn(4).setMinWidth(100);
+        
+        tbChiTiet.getTableHeader().setFont(new Font("Tahoma", Font.BOLD, 12));
+        tbChiTiet.getTableHeader().setOpaque(false);
+        tbChiTiet.getTableHeader().setForeground(new Color(22, 105, 158));
+        tbChiTiet.setSelectionBackground(new Color(204,204,204));
+    }
+    
+    //----------------------------------------------------
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -40,7 +107,7 @@ public class UI_ChiTietLop extends javax.swing.JFrame {
         pnLop = new javax.swing.JPanel();
         btnThemLop = new javax.swing.JButton();
         jspLH = new javax.swing.JScrollPane();
-        tbLopHoc = new javax.swing.JTable();
+        tbChiTiet = new javax.swing.JTable(dtmChiTiet);
         btnChiTietLop = new javax.swing.JButton();
         btnXoaLop = new javax.swing.JButton();
         btnUpdateLop = new javax.swing.JButton();
@@ -63,6 +130,11 @@ public class UI_ChiTietLop extends javax.swing.JFrame {
         btnThemLop.setFocusable(false);
         btnThemLop.setOpaque(true);
         btnThemLop.setPreferredSize(new java.awt.Dimension(183, 40));
+        btnThemLop.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnThemLopMouseClicked(evt);
+            }
+        });
         btnThemLop.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnThemLopActionPerformed(evt);
@@ -74,67 +146,46 @@ public class UI_ChiTietLop extends javax.swing.JFrame {
         jspLH.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jspLH.setPreferredSize(new java.awt.Dimension(450, 400));
 
-        tbLopHoc.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        tbLopHoc.setModel(new javax.swing.table.DefaultTableModel(
+        tbChiTiet.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        tbChiTiet.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"1", "a", null, null, null, null, null, null, null, null},
-                {"2", "a", null, null, null, null, null, null, null, null},
-                {"3", "a", null, null, null, null, null, null, null, null},
-                {"4", "a", null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null}
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "STT", "Mã KH", "Tên Khách Hàng", "Giới Tính", "Số Điện Thoại", "Nghe", "Nói", "Đọc", "Viết", "TB"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, true, true, true, true, false
-            };
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
             }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        tbLopHoc.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        tbLopHoc.setDoubleBuffered(true);
-        tbLopHoc.setFocusable(false);
-        tbLopHoc.setPreferredSize(new java.awt.Dimension(600, 450));
-        tbLopHoc.setRowHeight(30);
-        tbLopHoc.setSelectionBackground(new java.awt.Color(232, 57, 95));
-        tbLopHoc.getTableHeader().setReorderingAllowed(false);
-        jspLH.setViewportView(tbLopHoc);
-        if (tbLopHoc.getColumnModel().getColumnCount() > 0) {
-            tbLopHoc.getColumnModel().getColumn(0).setMaxWidth(50);
-            tbLopHoc.getColumnModel().getColumn(1).setMaxWidth(100);
-            tbLopHoc.getColumnModel().getColumn(2).setMinWidth(150);
-            tbLopHoc.getColumnModel().getColumn(3).setMaxWidth(100);
-        }
+        ));
+        tbChiTiet.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        tbChiTiet.setDoubleBuffered(true);
+        tbChiTiet.setFocusable(false);
+        tbChiTiet.setPreferredSize(new java.awt.Dimension(600, 450));
+        tbChiTiet.setRowHeight(30);
+        tbChiTiet.setSelectionBackground(new java.awt.Color(232, 57, 95));
+        tbChiTiet.getTableHeader().setReorderingAllowed(false);
+        jspLH.setViewportView(tbChiTiet);
 
         btnChiTietLop.setBackground(new java.awt.Color(239, 158, 154));
         btnChiTietLop.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -232,7 +283,7 @@ public class UI_ChiTietLop extends javax.swing.JFrame {
                     .addGroup(pnLopLayout.createSequentialGroup()
                         .addGap(41, 41, 41)
                         .addComponent(jTextArea1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                         .addComponent(jspLH, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(pnLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -254,7 +305,9 @@ public class UI_ChiTietLop extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnLop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pnLop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -276,6 +329,10 @@ public class UI_ChiTietLop extends javax.swing.JFrame {
     private void btnUpdateLopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateLopActionPerformed
         new FormCapNhatBangDiem().show();
     }//GEN-LAST:event_btnUpdateLopActionPerformed
+
+    private void btnThemLopMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThemLopMouseClicked
+        
+    }//GEN-LAST:event_btnThemLopMouseClicked
 
     /**
      * @param args the command line arguments
@@ -318,7 +375,8 @@ public class UI_ChiTietLop extends javax.swing.JFrame {
             }
         });
     }
-
+    //biến tự định nghĩa
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnChiTietLop;
     private javax.swing.JButton btnThemLop;
@@ -328,6 +386,6 @@ public class UI_ChiTietLop extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JScrollPane jspLH;
     private javax.swing.JPanel pnLop;
-    private javax.swing.JTable tbLopHoc;
+    public static javax.swing.JTable tbChiTiet;
     // End of variables declaration//GEN-END:variables
 }

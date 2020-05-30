@@ -5,8 +5,11 @@
  */
 package UI.LopHocUI.ChiTietLopHoc;
 
+import BUS.bus_ChiTiet;
+import DTO.dto_ChiTiet;
 import java.awt.Color;
 import java.awt.Font;
+import java.util.ArrayList;
 
 /**
  *
@@ -38,7 +41,7 @@ public class FormThemVaoLop extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        scThemVaoLop = new javax.swing.JScrollPane();
         tbThemVaoLop = new javax.swing.JTable();
         btnXacNhan = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -50,6 +53,8 @@ public class FormThemVaoLop extends javax.swing.JFrame {
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("TÌM KIẾM KHÁCH HÀNG");
+
+        jTextField1.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 0, 1, 0, new java.awt.Color(0, 0, 0)));
 
         tbThemVaoLop.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         tbThemVaoLop.setModel(new javax.swing.table.DefaultTableModel(
@@ -85,7 +90,7 @@ public class FormThemVaoLop extends javax.swing.JFrame {
             }
         });
         tbThemVaoLop.setRowHeight(30);
-        jScrollPane1.setViewportView(tbThemVaoLop);
+        scThemVaoLop.setViewportView(tbThemVaoLop);
         if (tbThemVaoLop.getColumnModel().getColumnCount() > 0) {
             tbThemVaoLop.getColumnModel().getColumn(0).setMaxWidth(100);
             tbThemVaoLop.getColumnModel().getColumn(1).setMinWidth(150);
@@ -131,10 +136,11 @@ public class FormThemVaoLop extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addGap(34, 34, 34)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(37, 37, 37))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 825, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(scThemVaoLop, javax.swing.GroupLayout.PREFERRED_SIZE, 825, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -147,7 +153,7 @@ public class FormThemVaoLop extends javax.swing.JFrame {
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(scThemVaoLop, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addComponent(btnXacNhan, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -169,7 +175,12 @@ public class FormThemVaoLop extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnXacNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXacNhanActionPerformed
-       
+        ArrayList<dto_ChiTiet> list = new ArrayList<dto_ChiTiet>();
+        dto_ChiTiet ct1 = new dto_ChiTiet(10, "Test");
+        list.add(ct1);
+        
+        UI_ChiTietLop.reloadTable(list);
+        
     }//GEN-LAST:event_btnXacNhanActionPerformed
 
     /**
@@ -212,8 +223,8 @@ public class FormThemVaoLop extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JScrollPane scThemVaoLop;
     private javax.swing.JTable tbThemVaoLop;
     // End of variables declaration//GEN-END:variables
 }

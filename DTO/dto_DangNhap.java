@@ -64,6 +64,4 @@ public class dto_DangNhap {
     public void setMatKhau(String matKhau) {
         this.matKhau = matKhau;
     }
-
-    
 }
