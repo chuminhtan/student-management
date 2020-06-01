@@ -9,7 +9,7 @@ package DTO;
  *
  * @author USER
  */
-public class dto_ChiTiet {
+public class dto_ChiTiet_KH {
     private int ma;
     private String hoTen;
     private String gioiTinh;
@@ -20,10 +20,10 @@ public class dto_ChiTiet {
     private int viet;
     private int tb;
 
-    public dto_ChiTiet() {
+    public dto_ChiTiet_KH() {
     }
 
-    public dto_ChiTiet(int ma, String hoTen) {
+    public dto_ChiTiet_KH(int ma, String hoTen) {
         this.ma = ma;
         this.hoTen = hoTen;
     }

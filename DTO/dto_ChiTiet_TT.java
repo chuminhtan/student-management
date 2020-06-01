@@ -4,15 +4,16 @@
  * and open the template in the editor.
  */
 package DTO;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
  *
- * @author HaiDuyhd789
+ * @author USER
  */
-public class dto_LopHoc {
+public class dto_ChiTiet_TT {
     private int MaLop;
     private int MaCT;
     private int MaNV;
@@ -23,27 +24,19 @@ public class dto_LopHoc {
     private String giaoVien;
     private String phong;
     private int trangThai;
+    private String tenCt;
 
+    public dto_ChiTiet_TT() {
+    }
 
-    public dto_LopHoc() {
+    public String getTenCt() {
+        return tenCt;
+    }
+
+    public void setTenCt(String tenCt) {
+        this.tenCt = tenCt;
     }
     
-    public dto_LopHoc(int MaLop) {
-        this.MaLop = MaLop;
-    }
-    public dto_LopHoc(int MaLop, int MaCT, int MaNV, String tenLop, Date ngayBD, Date ngayKT, String soLuong, String giaoVien, String phong) {
-        this.MaLop = MaLop;
-        this.MaCT = MaCT;
-        this.MaNV = MaNV;
-        this.tenLop = tenLop;
-        this.ngayBD = ngayBD;
-        this.ngayKT = ngayKT;
-        this.soLuong = soLuong;
-        this.giaoVien = giaoVien;
-        this.phong = phong;
-        this.trangThai = trangThai;
-    }
-
     public int getMaLop() {
         return MaLop;
     }

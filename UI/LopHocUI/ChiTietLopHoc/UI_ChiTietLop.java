@@ -6,7 +6,8 @@
 package UI.LopHocUI.ChiTietLopHoc;
 
 import BUS.bus_ChiTiet;
-import DTO.dto_ChiTiet;
+import DTO.dto_ChiTiet_KH;
+import DTO.dto_ChiTiet_TT;
 import DTO.dto_LopHoc;
 import UI.LopHocUI.ChiTietLopHoc.FormThemVaoLop;
 import UI.LopHocUI.FormCapNhatLH;
@@ -27,8 +28,7 @@ public class UI_ChiTietLop extends javax.swing.JFrame {
      */
     public UI_ChiTietLop() {
         initComponents();
-        setupTable();
-        requestReloadTable();
+        setThongTinLop();
     }
 
     /**
@@ -45,11 +45,46 @@ public class UI_ChiTietLop extends javax.swing.JFrame {
         bus_chiTiet.getListChiTietLop(dto_lop);
     }
     
+    // Hàm set thông tin cho lớp học
+    public void setThongTinLop(){
+        dto_ChiTiet_TT thongTinLop = new bus_ChiTiet().getLopHoc(dto_lop);
+        lblTenLop.setText(thongTinLop.getTenLop() + " | " + thongTinLop.getMaCT());
+        this.setTitle("Lớp " + thongTinLop.getTenLop());
+        
+        String strThongTin = ""; 
+        strThongTin += "Chương trình: " + thongTinLop.getTenCt();
+                if(thongTinLop.getTrangThai() == 0){
+            strThongTin += "\t\tTrạng thái: Đóng";
+            hideBtn();
+        }
+        else{
+            strThongTin += "\t\tTrạng thái: Mở";
+        }
+                
+        strThongTin += "\n\nGiảng viên: " + thongTinLop.getGiaoVien();
+        strThongTin += "\t\tPhòng: " + thongTinLop.getPhong();
+        strThongTin += "\n\nNgày bắt đầu: " + thongTinLop.getNgayBD();
+        strThongTin += "\t\tNgày kết thúc: " + thongTinLop.getNgayKT();
+     
+        txtThongTinLop.setText(strThongTin);     
+        
+        setupTable();
+        requestReloadTable();
+    }
+    
+    // Hàm ẩn button khi lớp đóng
+    public void hideBtn(){
+
+        btnThemVaoLop.setVisible(false);
+        btnChuyenLop.setVisible(false);
+        btnXoaKhoiLop.setVisible(false);
+    }
+    
     // Hàm đẩy dữ liệu lên bảng - được gọi từ lớp bus.
-    public static void reloadTable(ArrayList<dto_ChiTiet> listChiTiet){
+    public static void reloadTable(ArrayList<dto_ChiTiet_KH> listChiTiet){
         stt = 0;
         dtmChiTiet.setRowCount(0);
-        for(dto_ChiTiet ct : listChiTiet){
+        for(dto_ChiTiet_KH ct : listChiTiet){
             stt++;
             Vector<Object> vc = new Vector<Object>();
             
@@ -105,14 +140,14 @@ public class UI_ChiTietLop extends javax.swing.JFrame {
     private void initComponents() {
 
         pnLop = new javax.swing.JPanel();
-        btnThemLop = new javax.swing.JButton();
+        btnThemVaoLop = new javax.swing.JButton();
         jspLH = new javax.swing.JScrollPane();
         tbChiTiet = new javax.swing.JTable(dtmChiTiet);
-        btnChiTietLop = new javax.swing.JButton();
-        btnXoaLop = new javax.swing.JButton();
-        btnUpdateLop = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jTextArea1 = new javax.swing.JTextArea();
+        btnChuyenLop = new javax.swing.JButton();
+        btnXoaKhoiLop = new javax.swing.JButton();
+        btnCapNhatBangDiem = new javax.swing.JButton();
+        lblTenLop = new javax.swing.JLabel();
+        txtThongTinLop = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("CHI TIẾT LỚP HỌC");
@@ -120,24 +155,24 @@ public class UI_ChiTietLop extends javax.swing.JFrame {
 
         pnLop.setBackground(new java.awt.Color(255, 255, 255));
 
-        btnThemLop.setBackground(new java.awt.Color(91, 155, 213));
-        btnThemLop.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnThemLop.setForeground(new java.awt.Color(255, 255, 255));
-        btnThemLop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/them lop.png"))); // NOI18N
-        btnThemLop.setText("THÊM VÀO LỚP");
-        btnThemLop.setContentAreaFilled(false);
-        btnThemLop.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnThemLop.setFocusable(false);
-        btnThemLop.setOpaque(true);
-        btnThemLop.setPreferredSize(new java.awt.Dimension(183, 40));
-        btnThemLop.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnThemVaoLop.setBackground(new java.awt.Color(91, 155, 213));
+        btnThemVaoLop.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnThemVaoLop.setForeground(new java.awt.Color(255, 255, 255));
+        btnThemVaoLop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/them lop.png"))); // NOI18N
+        btnThemVaoLop.setText("THÊM VÀO LỚP");
+        btnThemVaoLop.setContentAreaFilled(false);
+        btnThemVaoLop.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnThemVaoLop.setFocusable(false);
+        btnThemVaoLop.setOpaque(true);
+        btnThemVaoLop.setPreferredSize(new java.awt.Dimension(183, 40));
+        btnThemVaoLop.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnThemLopMouseClicked(evt);
+                btnThemVaoLopMouseClicked(evt);
             }
         });
-        btnThemLop.addActionListener(new java.awt.event.ActionListener() {
+        btnThemVaoLop.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnThemLopActionPerformed(evt);
+                btnThemVaoLopActionPerformed(evt);
             }
         });
 
@@ -187,114 +222,115 @@ public class UI_ChiTietLop extends javax.swing.JFrame {
         tbChiTiet.getTableHeader().setReorderingAllowed(false);
         jspLH.setViewportView(tbChiTiet);
 
-        btnChiTietLop.setBackground(new java.awt.Color(239, 158, 154));
-        btnChiTietLop.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnChiTietLop.setForeground(new java.awt.Color(255, 255, 255));
-        btnChiTietLop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/lich su 3.png"))); // NOI18N
-        btnChiTietLop.setText("CHUYỂN LỚP");
-        btnChiTietLop.setActionCommand("");
-        btnChiTietLop.setContentAreaFilled(false);
-        btnChiTietLop.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnChiTietLop.setFocusable(false);
-        btnChiTietLop.setOpaque(true);
-        btnChiTietLop.addActionListener(new java.awt.event.ActionListener() {
+        btnChuyenLop.setBackground(new java.awt.Color(239, 158, 154));
+        btnChuyenLop.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnChuyenLop.setForeground(new java.awt.Color(255, 255, 255));
+        btnChuyenLop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/lich su 3.png"))); // NOI18N
+        btnChuyenLop.setText("CHUYỂN LỚP");
+        btnChuyenLop.setActionCommand("");
+        btnChuyenLop.setContentAreaFilled(false);
+        btnChuyenLop.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnChuyenLop.setFocusable(false);
+        btnChuyenLop.setOpaque(true);
+        btnChuyenLop.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnChiTietLopActionPerformed(evt);
+                btnChuyenLopActionPerformed(evt);
             }
         });
 
-        btnXoaLop.setBackground(new java.awt.Color(239, 158, 154));
-        btnXoaLop.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnXoaLop.setForeground(new java.awt.Color(255, 255, 255));
-        btnXoaLop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/xoa.png"))); // NOI18N
-        btnXoaLop.setText("XÓA KHỎI LỚP");
-        btnXoaLop.setContentAreaFilled(false);
-        btnXoaLop.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnXoaLop.setFocusable(false);
-        btnXoaLop.setMaximumSize(new java.awt.Dimension(129, 49));
-        btnXoaLop.setMinimumSize(new java.awt.Dimension(129, 49));
-        btnXoaLop.setOpaque(true);
-        btnXoaLop.setPreferredSize(new java.awt.Dimension(129, 49));
-        btnXoaLop.addActionListener(new java.awt.event.ActionListener() {
+        btnXoaKhoiLop.setBackground(new java.awt.Color(239, 158, 154));
+        btnXoaKhoiLop.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnXoaKhoiLop.setForeground(new java.awt.Color(255, 255, 255));
+        btnXoaKhoiLop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/xoa.png"))); // NOI18N
+        btnXoaKhoiLop.setText("XÓA KHỎI LỚP");
+        btnXoaKhoiLop.setContentAreaFilled(false);
+        btnXoaKhoiLop.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnXoaKhoiLop.setFocusable(false);
+        btnXoaKhoiLop.setMaximumSize(new java.awt.Dimension(129, 49));
+        btnXoaKhoiLop.setMinimumSize(new java.awt.Dimension(129, 49));
+        btnXoaKhoiLop.setOpaque(true);
+        btnXoaKhoiLop.setPreferredSize(new java.awt.Dimension(129, 49));
+        btnXoaKhoiLop.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnXoaLopActionPerformed(evt);
+                btnXoaKhoiLopActionPerformed(evt);
             }
         });
 
-        btnUpdateLop.setBackground(new java.awt.Color(239, 158, 154));
-        btnUpdateLop.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnUpdateLop.setForeground(new java.awt.Color(255, 255, 255));
-        btnUpdateLop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cap nhat 1.png"))); // NOI18N
-        btnUpdateLop.setText("CẬP NHẬT BẢNG ĐIỂM");
-        btnUpdateLop.setContentAreaFilled(false);
-        btnUpdateLop.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnUpdateLop.setFocusable(false);
-        btnUpdateLop.setMaximumSize(new java.awt.Dimension(129, 49));
-        btnUpdateLop.setMinimumSize(new java.awt.Dimension(129, 49));
-        btnUpdateLop.setOpaque(true);
-        btnUpdateLop.setPreferredSize(new java.awt.Dimension(129, 49));
-        btnUpdateLop.addActionListener(new java.awt.event.ActionListener() {
+        btnCapNhatBangDiem.setBackground(new java.awt.Color(239, 158, 154));
+        btnCapNhatBangDiem.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnCapNhatBangDiem.setForeground(new java.awt.Color(255, 255, 255));
+        btnCapNhatBangDiem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cap nhat 1.png"))); // NOI18N
+        btnCapNhatBangDiem.setText("CẬP NHẬT BẢNG ĐIỂM");
+        btnCapNhatBangDiem.setContentAreaFilled(false);
+        btnCapNhatBangDiem.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCapNhatBangDiem.setFocusable(false);
+        btnCapNhatBangDiem.setMaximumSize(new java.awt.Dimension(129, 49));
+        btnCapNhatBangDiem.setMinimumSize(new java.awt.Dimension(129, 49));
+        btnCapNhatBangDiem.setOpaque(true);
+        btnCapNhatBangDiem.setPreferredSize(new java.awt.Dimension(129, 49));
+        btnCapNhatBangDiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdateLopActionPerformed(evt);
+                btnCapNhatBangDiemActionPerformed(evt);
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel1.setText("LỚP AV1 - 12343432");
+        lblTenLop.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblTenLop.setText("LỚP AV1 - 12343432");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        jTextArea1.setRows(5);
-        jTextArea1.setText("<KHU VỰC THÔNG TIN LỚP HỌC>");
+        txtThongTinLop.setEditable(false);
+        txtThongTinLop.setColumns(20);
+        txtThongTinLop.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        txtThongTinLop.setRows(5);
+        txtThongTinLop.setText("<KHU VỰC THÔNG TIN LỚP HỌC>");
+        txtThongTinLop.setBorder(null);
 
         javax.swing.GroupLayout pnLopLayout = new javax.swing.GroupLayout(pnLop);
         pnLop.setLayout(pnLopLayout);
         pnLopLayout.setHorizontalGroup(
             pnLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnLopLayout.createSequentialGroup()
-                .addGap(527, 527, 527)
-                .addComponent(jLabel1)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnLopLayout.createSequentialGroup()
-                .addContainerGap(578, Short.MAX_VALUE)
-                .addComponent(btnUpdateLop, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49)
-                .addComponent(btnChiTietLop)
-                .addGap(54, 54, 54)
-                .addComponent(btnXoaLop, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnLopLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(jspLH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(30, 30, 30))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnLopLayout.createSequentialGroup()
                 .addGap(75, 75, 75)
-                .addComponent(jTextArea1, javax.swing.GroupLayout.PREFERRED_SIZE, 571, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnThemLop, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtThongTinLop, javax.swing.GroupLayout.PREFERRED_SIZE, 571, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 369, Short.MAX_VALUE)
+                .addComponent(btnThemVaoLop, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(54, 54, 54))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnLopLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pnLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnLopLayout.createSequentialGroup()
+                        .addComponent(btnCapNhatBangDiem, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(49, 49, 49)
+                        .addComponent(btnChuyenLop)
+                        .addGap(54, 54, 54)
+                        .addComponent(btnXoaKhoiLop, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(48, 48, 48))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnLopLayout.createSequentialGroup()
+                        .addComponent(lblTenLop)
+                        .addGap(549, 549, 549))))
         );
         pnLopLayout.setVerticalGroup(
             pnLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnLopLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addGroup(pnLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnLopLayout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addComponent(jTextArea1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                        .addComponent(jspLH, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(pnLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnUpdateLop, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnChiTietLop, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnXoaLop, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(34, 34, 34))
-                    .addGroup(pnLopLayout.createSequentialGroup()
-                        .addGap(89, 89, 89)
-                        .addComponent(btnThemLop, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addComponent(lblTenLop)
+                .addGap(41, 41, 41)
+                .addComponent(txtThongTinLop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addComponent(jspLH, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(pnLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCapNhatBangDiem, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnChuyenLop, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnXoaKhoiLop, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34))
+            .addGroup(pnLopLayout.createSequentialGroup()
+                .addGap(117, 117, 117)
+                .addComponent(btnThemVaoLop, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -305,34 +341,32 @@ public class UI_ChiTietLop extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(pnLop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(pnLop, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnThemLopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemLopActionPerformed
+    private void btnThemVaoLopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemVaoLopActionPerformed
         new FormThemVaoLop().show();
-    }//GEN-LAST:event_btnThemLopActionPerformed
+    }//GEN-LAST:event_btnThemVaoLopActionPerformed
 
-    private void btnChiTietLopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChiTietLopActionPerformed
+    private void btnChuyenLopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChuyenLopActionPerformed
         new FormChuyenLop().show();
-    }//GEN-LAST:event_btnChiTietLopActionPerformed
+    }//GEN-LAST:event_btnChuyenLopActionPerformed
 
-    private void btnXoaLopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaLopActionPerformed
+    private void btnXoaKhoiLopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaKhoiLopActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnXoaLopActionPerformed
+    }//GEN-LAST:event_btnXoaKhoiLopActionPerformed
 
-    private void btnUpdateLopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateLopActionPerformed
+    private void btnCapNhatBangDiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatBangDiemActionPerformed
         new FormCapNhatBangDiem().show();
-    }//GEN-LAST:event_btnUpdateLopActionPerformed
+    }//GEN-LAST:event_btnCapNhatBangDiemActionPerformed
 
-    private void btnThemLopMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThemLopMouseClicked
+    private void btnThemVaoLopMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThemVaoLopMouseClicked
         
-    }//GEN-LAST:event_btnThemLopMouseClicked
+    }//GEN-LAST:event_btnThemVaoLopMouseClicked
 
     /**
      * @param args the command line arguments
@@ -378,14 +412,14 @@ public class UI_ChiTietLop extends javax.swing.JFrame {
     //biến tự định nghĩa
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnChiTietLop;
-    private javax.swing.JButton btnThemLop;
-    private javax.swing.JButton btnUpdateLop;
-    private javax.swing.JButton btnXoaLop;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JButton btnCapNhatBangDiem;
+    private javax.swing.JButton btnChuyenLop;
+    private javax.swing.JButton btnThemVaoLop;
+    private javax.swing.JButton btnXoaKhoiLop;
     private javax.swing.JScrollPane jspLH;
+    private javax.swing.JLabel lblTenLop;
     private javax.swing.JPanel pnLop;
     public static javax.swing.JTable tbChiTiet;
+    private javax.swing.JTextArea txtThongTinLop;
     // End of variables declaration//GEN-END:variables
 }

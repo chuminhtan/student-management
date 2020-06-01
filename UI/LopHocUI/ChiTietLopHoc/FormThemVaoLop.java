@@ -6,29 +6,63 @@
 package UI.LopHocUI.ChiTietLopHoc;
 
 import BUS.bus_ChiTiet;
-import DTO.dto_ChiTiet;
+import DTO.dto_ChiTiet_KH;
+import static UI.LopHocUI.ChiTietLopHoc.UI_ChiTietLop.dtmChiTiet;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.util.ArrayList;
+import java.util.Vector;
+import javax.swing.JDialog;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author ThinkPro
  */
-public class FormThemVaoLop extends javax.swing.JFrame {
+public class FormThemVaoLop extends JDialog {
 
     /**
      * Creates new form FormThemVaoLop
      */
     public FormThemVaoLop() {
         initComponents();
+        setupThongTin();
+        
+
+    }
+    /*Khu vực của Tân*/
+    DefaultTableModel dtmThemVaoLop = new DefaultTableModel();
+    
+    // Setup thông tin
+    public void setupThongTin(){
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setupTable();
+    }
+    // Setup Bảng: Tạo column - setModel - chỉnh độ rộng cột - chỉnh màu.
+    public void setupTable(){
+
+        dtmThemVaoLop.addColumn("STT");
+        dtmThemVaoLop.addColumn("Mã KH");
+        dtmThemVaoLop.addColumn("Họ Tên");
+        dtmThemVaoLop.addColumn("Giới Tính");
+        dtmThemVaoLop.addColumn("Điện Thoại");
+        dtmThemVaoLop.addColumn("Địa Chỉ");
+        dtmThemVaoLop.addColumn("Lớp hiện tại");
+        
+        tbThemVaoLop.setModel(dtmThemVaoLop);
+        
+        tbThemVaoLop.getColumnModel().getColumn(0).setMaxWidth(50);
+	tbThemVaoLop.getColumnModel().getColumn(1).setMinWidth(80);
+	tbThemVaoLop.getColumnModel().getColumn(2).setMinWidth(150);
+	tbThemVaoLop.getColumnModel().getColumn(4).setMinWidth(100);
         
         tbThemVaoLop.getTableHeader().setFont(new Font("Tahoma", Font.BOLD, 12));
         tbThemVaoLop.getTableHeader().setOpaque(false);
         tbThemVaoLop.getTableHeader().setForeground(new Color(22, 105, 158));
-        tbThemVaoLop.setSelectionBackground(new Color(239, 158, 154));
+        tbThemVaoLop.setSelectionBackground(new Color(204,204,204));   
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -40,7 +74,7 @@ public class FormThemVaoLop extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtTimKH = new javax.swing.JTextField();
         scThemVaoLop = new javax.swing.JScrollPane();
         tbThemVaoLop = new javax.swing.JTable();
         btnXacNhan = new javax.swing.JButton();
@@ -54,7 +88,19 @@ public class FormThemVaoLop extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("TÌM KIẾM KHÁCH HÀNG");
 
-        jTextField1.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 0, 1, 0, new java.awt.Color(0, 0, 0)));
+        txtTimKH.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtTimKH.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 0, 1, 0, new java.awt.Color(0, 0, 0)));
+        txtTimKH.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtTimKHKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTimKHKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTimKHKeyTyped(evt);
+            }
+        });
 
         tbThemVaoLop.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         tbThemVaoLop.setModel(new javax.swing.table.DefaultTableModel(
@@ -123,25 +169,26 @@ public class FormThemVaoLop extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnXacNhan, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(349, 349, 349))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(49, 49, 49)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(34, 34, 34)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(37, 37, 37))))
+                        .addComponent(jLabel1)
+                        .addGap(34, 34, 34)
+                        .addComponent(txtTimKH, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(scThemVaoLop, javax.swing.GroupLayout.PREFERRED_SIZE, 825, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(19, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnXacNhan, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(349, 349, 349))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(354, 354, 354))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -150,11 +197,11 @@ public class FormThemVaoLop extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addGap(31, 31, 31)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTimKH, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(scThemVaoLop, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addComponent(btnXacNhan, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -175,13 +222,27 @@ public class FormThemVaoLop extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnXacNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXacNhanActionPerformed
-        ArrayList<dto_ChiTiet> list = new ArrayList<dto_ChiTiet>();
-        dto_ChiTiet ct1 = new dto_ChiTiet(10, "Test");
+        ArrayList<dto_ChiTiet_KH> list = new ArrayList<dto_ChiTiet_KH>();
+        dto_ChiTiet_KH ct1 = new dto_ChiTiet_KH(10, "Test");
         list.add(ct1);
         
         UI_ChiTietLop.reloadTable(list);
         
     }//GEN-LAST:event_btnXacNhanActionPerformed
+
+    private void txtTimKHKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKHKeyTyped
+
+    }//GEN-LAST:event_txtTimKHKeyTyped
+
+    private void txtTimKHKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKHKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTimKHKeyPressed
+    
+    String txt = "";
+    private void txtTimKHKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKHKeyReleased
+        txt = txtTimKH.getText();
+        
+    }//GEN-LAST:event_txtTimKHKeyReleased
 
     /**
      * @param args the command line arguments
@@ -223,8 +284,8 @@ public class FormThemVaoLop extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JScrollPane scThemVaoLop;
     private javax.swing.JTable tbThemVaoLop;
+    private javax.swing.JTextField txtTimKH;
     // End of variables declaration//GEN-END:variables
 }
