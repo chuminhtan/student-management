@@ -5,8 +5,9 @@
  */
 package UI.LopHocUI.ChiTietLopHoc;
 
-import BUS.bus_ChiTiet;
+import BUS.bus_ChiTietLop;
 import DTO.dto_ChiTiet_KH;
+import DTO.dto_KhachHang;
 import static UI.LopHocUI.ChiTietLopHoc.UI_ChiTietLop.dtmChiTiet;
 
 import java.awt.Color;
@@ -14,6 +15,7 @@ import java.awt.Font;
 import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -28,39 +30,99 @@ public class FormThemVaoLop extends JDialog {
     public FormThemVaoLop() {
         initComponents();
         setupThongTin();
-        
+        layGiaTriNhap();
+        //new bus_ChiTietLop().dsTimKH("N");
 
     }
     /*Khu vực của Tân*/
-    DefaultTableModel dtmThemVaoLop = new DefaultTableModel();
+    
+    static DefaultTableModel static_dtmThemVaoLop = new DefaultTableModel();
+    static ArrayList<dto_KhachHang> static_dsKhachHang = new ArrayList<dto_KhachHang>();
+    String txt ="";
+    bus_ChiTietLop bus_ctl = new bus_ChiTietLop();
+    
     
     // Setup thông tin
     public void setupThongTin(){
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setupTable();
     }
-    // Setup Bảng: Tạo column - setModel - chỉnh độ rộng cột - chỉnh màu.
-    public void setupTable(){
-
-        dtmThemVaoLop.addColumn("STT");
-        dtmThemVaoLop.addColumn("Mã KH");
-        dtmThemVaoLop.addColumn("Họ Tên");
-        dtmThemVaoLop.addColumn("Giới Tính");
-        dtmThemVaoLop.addColumn("Điện Thoại");
-        dtmThemVaoLop.addColumn("Địa Chỉ");
-        dtmThemVaoLop.addColumn("Lớp hiện tại");
+    
+    // Reload Table
+    public static void static_reloadTable(ArrayList<dto_KhachHang> list){
+        static_dsKhachHang = list;
         
-        tbThemVaoLop.setModel(dtmThemVaoLop);
+        static_dtmThemVaoLop.setRowCount(0);
+        int stt = 0;
+        
+        if(list != null){
+
+            for(dto_KhachHang kh : list){
+                stt++;
+                Vector<Object> vc = new Vector<Object>();
+                vc.add(stt);
+                vc.add(kh.getMaKH());
+                vc.add(kh.getHoTen());
+                vc.add(kh.getGioiTinh());
+                vc.add(kh.getNgaySinh());
+                vc.add(kh.getSdt());
+                
+                if(kh.getTrangThai() == 0)
+                    vc.add("Chưa có");
+                else
+                    vc.add("Đã có");
+                
+                static_dtmThemVaoLop.addRow(vc);
+            }
+        }   
+    }
+    
+    // Setup Bảng: Tạo column - setModel - chỉnh độ rộng cột - chỉnh màu.
+    public  void setupTable(){
+
+        static_dtmThemVaoLop.addColumn("STT");
+        static_dtmThemVaoLop.addColumn("Mã KH");
+        static_dtmThemVaoLop.addColumn("Họ Tên");
+        static_dtmThemVaoLop.addColumn("Giới Tính");
+        static_dtmThemVaoLop.addColumn("Ngày Sinh");
+        static_dtmThemVaoLop.addColumn("Điện Thoại");
+        //static_dtmThemVaoLop.addColumn("Địa Chỉ");
+        static_dtmThemVaoLop.addColumn("Lớp hiện tại");
+        
+        tbThemVaoLop.setModel(static_dtmThemVaoLop);
         
         tbThemVaoLop.getColumnModel().getColumn(0).setMaxWidth(50);
-	tbThemVaoLop.getColumnModel().getColumn(1).setMinWidth(80);
+	tbThemVaoLop.getColumnModel().getColumn(1).setMinWidth(50);
 	tbThemVaoLop.getColumnModel().getColumn(2).setMinWidth(150);
-	tbThemVaoLop.getColumnModel().getColumn(4).setMinWidth(100);
+	tbThemVaoLop.getColumnModel().getColumn(3).setMinWidth(50);
+	tbThemVaoLop.getColumnModel().getColumn(4).setMinWidth(50);
+	tbThemVaoLop.getColumnModel().getColumn(5).setMinWidth(50);
         
         tbThemVaoLop.getTableHeader().setFont(new Font("Tahoma", Font.BOLD, 12));
         tbThemVaoLop.getTableHeader().setOpaque(false);
         tbThemVaoLop.getTableHeader().setForeground(new Color(22, 105, 158));
         tbThemVaoLop.setSelectionBackground(new Color(204,204,204));   
+    }
+    
+    // Event keyRealeas: Khi gõ vào khung tìm kiếm
+    private void layGiaTriNhap(){
+       txt = txtTimKH.getText();
+       bus_ctl.dsTimKH(txt);
+       
+    }
+    // Event btnXacNhanThem Lấy thông tin dòng được chọn trong cửa sổ Thêm vào lớp 
+    private void layGiaTriDong(){ 
+        int row = tbThemVaoLop.getSelectedRow();
+        
+        if(row >= 0){
+            
+            dto_KhachHang kh = static_dsKhachHang.get(row);
+            
+            
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Chưa chọn khách hàng");
+        }
     }
     
     /**
@@ -77,7 +139,7 @@ public class FormThemVaoLop extends JDialog {
         txtTimKH = new javax.swing.JTextField();
         scThemVaoLop = new javax.swing.JScrollPane();
         tbThemVaoLop = new javax.swing.JTable();
-        btnXacNhan = new javax.swing.JButton();
+        btnXacNhanThem = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -124,7 +186,7 @@ public class FormThemVaoLop extends JDialog {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, true, true
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -135,7 +197,9 @@ public class FormThemVaoLop extends JDialog {
                 return canEdit [columnIndex];
             }
         });
+        tbThemVaoLop.setPreferredSize(new java.awt.Dimension(600, 400));
         tbThemVaoLop.setRowHeight(30);
+        tbThemVaoLop.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         scThemVaoLop.setViewportView(tbThemVaoLop);
         if (tbThemVaoLop.getColumnModel().getColumnCount() > 0) {
             tbThemVaoLop.getColumnModel().getColumn(0).setMaxWidth(100);
@@ -147,18 +211,23 @@ public class FormThemVaoLop extends JDialog {
             tbThemVaoLop.getColumnModel().getColumn(5).setMaxWidth(200);
         }
 
-        btnXacNhan.setBackground(new java.awt.Color(91, 155, 213));
-        btnXacNhan.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnXacNhan.setForeground(new java.awt.Color(255, 255, 255));
-        btnXacNhan.setText("XÁC NHẬN");
-        btnXacNhan.setContentAreaFilled(false);
-        btnXacNhan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnXacNhan.setFocusable(false);
-        btnXacNhan.setOpaque(true);
-        btnXacNhan.setPreferredSize(new java.awt.Dimension(209, 40));
-        btnXacNhan.addActionListener(new java.awt.event.ActionListener() {
+        btnXacNhanThem.setBackground(new java.awt.Color(91, 155, 213));
+        btnXacNhanThem.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnXacNhanThem.setForeground(new java.awt.Color(255, 255, 255));
+        btnXacNhanThem.setText("XÁC NHẬN");
+        btnXacNhanThem.setContentAreaFilled(false);
+        btnXacNhanThem.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnXacNhanThem.setFocusable(false);
+        btnXacNhanThem.setOpaque(true);
+        btnXacNhanThem.setPreferredSize(new java.awt.Dimension(209, 40));
+        btnXacNhanThem.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnXacNhanThemMouseClicked(evt);
+            }
+        });
+        btnXacNhanThem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnXacNhanActionPerformed(evt);
+                btnXacNhanThemActionPerformed(evt);
             }
         });
 
@@ -184,7 +253,7 @@ public class FormThemVaoLop extends JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnXacNhan, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnXacNhanThem, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(349, 349, 349))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
@@ -202,7 +271,7 @@ public class FormThemVaoLop extends JDialog {
                 .addGap(18, 18, 18)
                 .addComponent(scThemVaoLop, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
-                .addComponent(btnXacNhan, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnXacNhanThem, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -221,28 +290,31 @@ public class FormThemVaoLop extends JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnXacNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXacNhanActionPerformed
+    private void btnXacNhanThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXacNhanThemActionPerformed
         ArrayList<dto_ChiTiet_KH> list = new ArrayList<dto_ChiTiet_KH>();
         dto_ChiTiet_KH ct1 = new dto_ChiTiet_KH(10, "Test");
         list.add(ct1);
         
         UI_ChiTietLop.reloadTable(list);
         
-    }//GEN-LAST:event_btnXacNhanActionPerformed
+    }//GEN-LAST:event_btnXacNhanThemActionPerformed
 
     private void txtTimKHKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKHKeyTyped
 
     }//GEN-LAST:event_txtTimKHKeyTyped
 
     private void txtTimKHKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKHKeyPressed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_txtTimKHKeyPressed
     
-    String txt = "";
-    private void txtTimKHKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKHKeyReleased
-        txt = txtTimKH.getText();
         
+    private void txtTimKHKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKHKeyReleased
+             layGiaTriNhap();
     }//GEN-LAST:event_txtTimKHKeyReleased
+
+    private void btnXacNhanThemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnXacNhanThemMouseClicked
+        layGiaTriDong();
+    }//GEN-LAST:event_btnXacNhanThemMouseClicked
 
     /**
      * @param args the command line arguments
@@ -280,7 +352,7 @@ public class FormThemVaoLop extends JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnXacNhan;
+    private javax.swing.JButton btnXacNhanThem;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

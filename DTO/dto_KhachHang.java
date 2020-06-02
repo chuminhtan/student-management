@@ -6,25 +6,31 @@
 package DTO;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 /**
  *
  * @author USER
  */
 public class dto_KhachHang {
-    private String MaKH;
+    private int MaKH;
     private String hoTen;
     private Date ngaySinh;
     private String gioiTinh;
     private String diaChi;
     private String sdt;
-    private String trangThai;
-    private String diemDauVao;
+    private int trangThai;
+    private int diemDauVao;
 
+    //CONSTRUCTOR
     public dto_KhachHang() {
     }
 
-    public dto_KhachHang(String MaKH, String hoTen, Date ngaySinh, String gioiTinh, String diaChi, String sdt, String trangThai, String diemDauVao) {
+    public dto_KhachHang(int MaKH) {
+        this.MaKH = MaKH;
+    }
+    
+    public dto_KhachHang(int MaKH, String hoTen, Date ngaySinh, String gioiTinh, String diaChi, String sdt, int trangThai, int diemDauVao) {
         this.MaKH = MaKH;
         this.hoTen = hoTen;
         this.ngaySinh = ngaySinh;
@@ -35,8 +41,8 @@ public class dto_KhachHang {
         this.diemDauVao = diemDauVao;
     }
     
-    
-    public String getMaKH() {
+    //GETTER
+    public int getMaKH() {
         return MaKH;
     }
 
@@ -45,6 +51,7 @@ public class dto_KhachHang {
     }
 
     public Date getNgaySinh() {
+        SimpleDateFormat dfm = new SimpleDateFormat("dd/MM/yyyy");
         return ngaySinh;
     }
 
@@ -60,15 +67,16 @@ public class dto_KhachHang {
         return sdt;
     }
 
-    public String getTrangThai() {
+    public int getTrangThai() {
         return trangThai;
     }
 
-    public String getDiemDauVao() {
+    public int getDiemDauVao() {
         return diemDauVao;
     }
-
-    public void setMaKH(String MaKH) {
+    
+    //SETTER
+    public void setMaKH(int MaKH) {
         this.MaKH = MaKH;
     }
 
@@ -92,11 +100,11 @@ public class dto_KhachHang {
         this.sdt = sdt;
     }
 
-    public void setTrangThai(String trangThai) {
+    public void setTrangThai(int trangThai) {
         this.trangThai = trangThai;
     }
 
-    public void setDiemDauVao(String diemDauVao) {
+    public void setDiemDauVao(int diemDauVao) {
         this.diemDauVao = diemDauVao;
     }
     

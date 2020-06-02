@@ -8,7 +8,9 @@ package BUS;
 import DAL.dal_ChiTietLop;
 import DTO.dto_ChiTiet_KH;
 import DTO.dto_ChiTiet_TT;
+import DTO.dto_KhachHang;
 import DTO.dto_LopHoc;
+import UI.LopHocUI.ChiTietLopHoc.FormThemVaoLop;
 import UI.LopHocUI.ChiTietLopHoc.UI_ChiTietLop;
 
 import java.util.ArrayList;
@@ -19,7 +21,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author USER
  */
-public class bus_ChiTiet {
+public class bus_ChiTietLop {
     public void getListChiTietLop(dto_LopHoc dto_lop){
         ArrayList<dto_ChiTiet_KH> list = new ArrayList<dto_ChiTiet_KH>();
         dal_ChiTietLop dal_ct = new dal_ChiTietLop();
@@ -32,7 +34,18 @@ public class bus_ChiTiet {
         return new dal_ChiTietLop().getDataLop(dto_lop);
     }
     
-    public void loadTable(){
-        
+    public void dsTimKH(String tt){
+        ArrayList<dto_KhachHang> list = new ArrayList<dto_KhachHang>();
+        list = new dal_ChiTietLop().timKH(tt);
+        for(dto_KhachHang kh : list){
+            System.out.println(kh.getTrangThai());
+        }
+        FormThemVaoLop.static_reloadTable(list);
     }
+    
+    
+    public static void main(String[] args){
+        new bus_ChiTietLop().dsTimKH("n");
+    }
+    
 }

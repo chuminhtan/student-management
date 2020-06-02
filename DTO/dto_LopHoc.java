@@ -102,27 +102,12 @@ public class dto_LopHoc {
         this.tenLop = tenLop;
     }
 
-    public void setNgayBD(String ngayBD) {
-        
-        try{  
-            
-          SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");    
-          this.ngayBD = sdf.parse(ngayBD);
-          
-        }catch(ParseException ex){
-            ex.printStackTrace();
-        }
+    public void setNgayBD(Date ngayBD) {
+       this.ngayBD = ngayBD;    
     }
 
-    public void setNgayKT(String ngayKT) {
-                try{  
-            
-          SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");    
-          this.ngayKT = sdf.parse(ngayKT);
-          
-        }catch(ParseException ex){
-            ex.printStackTrace();
-        }
+    public void setNgayKT(Date ngayKT) {
+        this.ngayKT = ngayKT;
     }
 
     public void setSoLuong(String soLuong) {

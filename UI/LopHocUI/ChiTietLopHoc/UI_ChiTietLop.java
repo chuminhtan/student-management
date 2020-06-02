@@ -5,7 +5,7 @@
  */
 package UI.LopHocUI.ChiTietLopHoc;
 
-import BUS.bus_ChiTiet;
+import BUS.bus_ChiTietLop;
 import DTO.dto_ChiTiet_KH;
 import DTO.dto_ChiTiet_TT;
 import DTO.dto_LopHoc;
@@ -35,8 +35,8 @@ public class UI_ChiTietLop extends javax.swing.JFrame {
      * Khu vực của Tân
      */
     
-    static dto_LopHoc dto_lop = new dto_LopHoc(1);
-    static bus_ChiTiet bus_chiTiet =  new bus_ChiTiet();
+    static dto_LopHoc dto_lop = new dto_LopHoc(2);
+    static bus_ChiTietLop bus_chiTiet =  new bus_ChiTietLop();
     static DefaultTableModel dtmChiTiet  = new DefaultTableModel();
     static int stt = 0;
     
@@ -47,7 +47,7 @@ public class UI_ChiTietLop extends javax.swing.JFrame {
     
     // Hàm set thông tin cho lớp học
     public void setThongTinLop(){
-        dto_ChiTiet_TT thongTinLop = new bus_ChiTiet().getLopHoc(dto_lop);
+        dto_ChiTiet_TT thongTinLop = new bus_ChiTietLop().getLopHoc(dto_lop);
         lblTenLop.setText(thongTinLop.getTenLop() + " | " + thongTinLop.getMaCT());
         this.setTitle("Lớp " + thongTinLop.getTenLop());
         
@@ -117,6 +117,7 @@ public class UI_ChiTietLop extends javax.swing.JFrame {
         dtmChiTiet.addColumn("Trung Bình");
            
         tbChiTiet.setModel(dtmChiTiet);
+        
         
         tbChiTiet.getColumnModel().getColumn(0).setMaxWidth(50);
 	tbChiTiet.getColumnModel().getColumn(1).setMinWidth(80);
@@ -275,6 +276,7 @@ public class UI_ChiTietLop extends javax.swing.JFrame {
         });
 
         lblTenLop.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblTenLop.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTenLop.setText("LỚP AV1 - 12343432");
 
         txtThongTinLop.setEditable(false);
@@ -300,17 +302,16 @@ public class UI_ChiTietLop extends javax.swing.JFrame {
                 .addGap(54, 54, 54))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnLopLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(pnLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnLopLayout.createSequentialGroup()
-                        .addComponent(btnCapNhatBangDiem, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(49, 49, 49)
-                        .addComponent(btnChuyenLop)
-                        .addGap(54, 54, 54)
-                        .addComponent(btnXoaKhoiLop, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(48, 48, 48))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnLopLayout.createSequentialGroup()
-                        .addComponent(lblTenLop)
-                        .addGap(549, 549, 549))))
+                .addComponent(btnCapNhatBangDiem, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(49, 49, 49)
+                .addComponent(btnChuyenLop)
+                .addGap(54, 54, 54)
+                .addComponent(btnXoaKhoiLop, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(48, 48, 48))
+            .addGroup(pnLopLayout.createSequentialGroup()
+                .addGap(565, 565, 565)
+                .addComponent(lblTenLop)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnLopLayout.setVerticalGroup(
             pnLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

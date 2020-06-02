@@ -25,17 +25,18 @@ public class dto_ChiTiet_TT {
     private String phong;
     private int trangThai;
     private String tenCt;
+    private int level;
 
+    //constructor
     public dto_ChiTiet_TT() {
     }
-
+    
+    //setter
     public String getTenCt() {
         return tenCt;
     }
 
-    public void setTenCt(String tenCt) {
-        this.tenCt = tenCt;
-    }
+
     
     public int getMaLop() {
         return MaLop;
@@ -78,6 +79,11 @@ public class dto_ChiTiet_TT {
     public int getTrangThai() {
         return trangThai;
     }
+    
+    //SETTER
+    public void setLevel(int level) {
+        this.level = level;
+    }
 
     public void setMaLop(int MaLop) {
         this.MaLop = MaLop;
@@ -95,27 +101,12 @@ public class dto_ChiTiet_TT {
         this.tenLop = tenLop;
     }
 
-    public void setNgayBD(String ngayBD) {
-        
-        try{  
-            
-          SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");    
-          this.ngayBD = sdf.parse(ngayBD);
-          
-        }catch(ParseException ex){
-            ex.printStackTrace();
-        }
+    public void setNgayBD(Date ngayBD) {
+        this.ngayBD = ngayBD;
     }
 
-    public void setNgayKT(String ngayKT) {
-                try{  
-            
-          SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");    
-          this.ngayKT = sdf.parse(ngayKT);
-          
-        }catch(ParseException ex){
-            ex.printStackTrace();
-        }
+    public void setNgayKT(Date ngayKT) {
+        this.ngayKT = ngayKT;
     }
 
     public void setSoLuong(String soLuong) {
@@ -132,5 +123,9 @@ public class dto_ChiTiet_TT {
 
     public void setTrangThai(int trangThai) {
         this.trangThai = trangThai;
+    }
+    
+    public void setTenCt(String tenCt) {
+        this.tenCt = tenCt;
     }
 }
