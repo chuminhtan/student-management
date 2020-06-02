@@ -9,35 +9,66 @@ import BUS.NhanVienBUS;
 import DTO.NhanVienDTO;
 import java.awt.Color;
 import java.awt.Font;
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 
 public class UI_QuanlyNhanVien extends javax.swing.JPanel {
+
+    private final NhanVienTableModel nhanVienTableModel = new NhanVienTableModel();
 
     /**
      * Creates new form FormTaiKhoanUI
      */
     public UI_QuanlyNhanVien() {
         initComponents();
-        tableTaiKhoan.getTableHeader().setFont(new Font("Tahoma", Font.BOLD, 12));
-        tableTaiKhoan.getTableHeader().setOpaque(false);
-        tableTaiKhoan.getTableHeader().setForeground(new Color(22, 105, 158));
-        tableTaiKhoan.setSelectionBackground(new java.awt.Color(204, 204, 204));
+
+        this.tableTaiKhoan.getTableHeader().setFont(new Font("Tahoma", Font.BOLD, 12));
+        this.tableTaiKhoan.getTableHeader().setOpaque(false);
+        this.tableTaiKhoan.getTableHeader().setForeground(new Color(22, 105, 158));
+        this.tableTaiKhoan.setSelectionBackground(new java.awt.Color(204, 204, 204));
+        this.tableTaiKhoan.setModel(this.nhanVienTableModel);
+
+        this.buttonStopSearch.setVisible(false);
+        
+        this.textfeildTimTK.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent arg0) {
+                ChangeFilter();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent arg0) {
+                 ChangeFilter();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent arg0) {
+                 ChangeFilter();
+            }
+            
+            public void ChangeFilter() {
+                String keyword = textfeildTimTK.getText();
+                if (keyword.isEmpty()) {
+                     buttonStopSearch.setVisible(false);
+                     nhanVienTableModel.UpdataInTable();
+                 }
+                else {
+                    buttonStopSearch.setVisible(true);
+                    nhanVienTableModel.FilterNhanVienDTO(keyword);
+                }
+            }
+        });
+    }
+
+    public NhanVienTableModel getNhanVienTableModel() {
+        return nhanVienTableModel;
     }
 
     public void refreshDataInTable() {
-        DefaultTableModel defaultTableModel = (DefaultTableModel) this.tableTaiKhoan.getModel();
-
-        //Cài tên cột trong bảng
-        defaultTableModel.setColumnIdentifiers(NhanVienDTO.getVectorColumnIdentifiers());
-
-        //Thêm giá trị cho từng dòng trong bảng
-        defaultTableModel.getDataVector().clear();
-        ArrayList<NhanVienDTO> nhanVienDTOs = NhanVienBUS.getInstance().getDanhSachNhanVien();
-        for (NhanVienDTO nhanVienDTO : nhanVienDTOs) {
-            defaultTableModel.getDataVector().add(nhanVienDTO.toVector());
-        }
+        this.nhanVienTableModel.setNhanVienDTOs(NhanVienBUS.getInstance().getDanhSachNhanVien());
+        this.nhanVienTableModel.UpdataInTable();
     }
 
     /**
@@ -58,6 +89,7 @@ public class UI_QuanlyNhanVien extends javax.swing.JPanel {
         buttonXoaNhanVien = new javax.swing.JButton();
         buttonCapNhatNhanVien = new javax.swing.JButton();
         buttonLamMoi = new javax.swing.JButton();
+        buttonStopSearch = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(1200, 659));
@@ -160,6 +192,26 @@ public class UI_QuanlyNhanVien extends javax.swing.JPanel {
         buttonLamMoi.setMinimumSize(new java.awt.Dimension(129, 49));
         buttonLamMoi.setOpaque(true);
         buttonLamMoi.setPreferredSize(new java.awt.Dimension(129, 49));
+        buttonLamMoi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonLamMoiActionPerformed(evt);
+            }
+        });
+
+        buttonStopSearch.setBackground(new java.awt.Color(237, 209, 203));
+        buttonStopSearch.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        buttonStopSearch.setForeground(new java.awt.Color(0, 0, 0));
+        buttonStopSearch.setText("✕");
+        buttonStopSearch.setContentAreaFilled(false);
+        buttonStopSearch.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonStopSearch.setFocusable(false);
+        buttonStopSearch.setOpaque(true);
+        buttonStopSearch.setPreferredSize(new java.awt.Dimension(183, 40));
+        buttonStopSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonStopSearchActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout paneChuongTrinhLayout = new javax.swing.GroupLayout(paneChuongTrinh);
         paneChuongTrinh.setLayout(paneChuongTrinhLayout);
@@ -171,11 +223,13 @@ public class UI_QuanlyNhanVien extends javax.swing.JPanel {
                     .addGroup(paneChuongTrinhLayout.createSequentialGroup()
                         .addComponent(scrollpaneLH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(50, 50, 50))
-                    .addGroup(paneChuongTrinhLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, paneChuongTrinhLayout.createSequentialGroup()
                         .addComponent(labelTimLop)
                         .addGap(18, 18, 18)
                         .addComponent(textfeildTimTK, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonStopSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buttonThemTK, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(buttonCapNhatNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -194,13 +248,12 @@ public class UI_QuanlyNhanVien extends javax.swing.JPanel {
                     .addComponent(buttonThemTK, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonCapNhatNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonXoaNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonLamMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(75, 75, 75)
-                .addComponent(scrollpaneLH, javax.swing.GroupLayout.PREFERRED_SIZE, 538, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonLamMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonStopSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(36, 36, 36)
+                .addComponent(scrollpaneLH, javax.swing.GroupLayout.PREFERRED_SIZE, 670, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(26, Short.MAX_VALUE))
         );
-
-        labelTimLop.getAccessibleContext().setAccessibleName("TÌM NHÂN VIÊN");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -246,9 +299,9 @@ public class UI_QuanlyNhanVien extends javax.swing.JPanel {
         }
 
         DefaultTableModel defaultTableModel = (DefaultTableModel) this.tableTaiKhoan.getModel();
-       
-       String deletedNhanVienDTOInfos = ""; 
-        for (int rowSelected: rowSelecteds) {
+
+        String deletedNhanVienDTOInfos = "";
+        for (int rowSelected : rowSelecteds) {
             deletedNhanVienDTOInfos += new NhanVienDTO().fromVector(defaultTableModel.getDataVector().get(rowSelected)).toString();
             deletedNhanVienDTOInfos += "\n";
         }
@@ -300,9 +353,20 @@ public class UI_QuanlyNhanVien extends javax.swing.JPanel {
         formCapNhatNhanVien.show();
     }//GEN-LAST:event_buttonCapNhatNhanVienActionPerformed
 
+    private void buttonLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLamMoiActionPerformed
+        this.refreshDataInTable();
+    }//GEN-LAST:event_buttonLamMoiActionPerformed
+
+    private void buttonStopSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonStopSearchActionPerformed
+        this.textfeildTimTK.setText("");
+        this.nhanVienTableModel.UpdataInTable();
+        this.buttonStopSearch.setVisible(false);
+    }//GEN-LAST:event_buttonStopSearchActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonCapNhatNhanVien;
     private javax.swing.JButton buttonLamMoi;
+    private javax.swing.JButton buttonStopSearch;
     private javax.swing.JButton buttonThemTK;
     private javax.swing.JButton buttonXoaNhanVien;
     private javax.swing.JLabel labelTimLop;
