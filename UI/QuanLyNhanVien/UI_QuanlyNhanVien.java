@@ -141,6 +141,7 @@ public class UI_QuanlyNhanVien extends javax.swing.JPanel {
         tableTaiKhoan.setPreferredSize(new java.awt.Dimension(600, 450));
         tableTaiKhoan.setRowHeight(30);
         tableTaiKhoan.setSelectionBackground(new java.awt.Color(204, 204, 204));
+        tableTaiKhoan.setShowGrid(true);
         tableTaiKhoan.getTableHeader().setReorderingAllowed(false);
         scrollpaneLH.setViewportView(tableTaiKhoan);
 
@@ -217,13 +218,11 @@ public class UI_QuanlyNhanVien extends javax.swing.JPanel {
         paneChuongTrinh.setLayout(paneChuongTrinhLayout);
         paneChuongTrinhLayout.setHorizontalGroup(
             paneChuongTrinhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paneChuongTrinhLayout.createSequentialGroup()
+            .addGroup(paneChuongTrinhLayout.createSequentialGroup()
                 .addGap(50, 50, 50)
-                .addGroup(paneChuongTrinhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(paneChuongTrinhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(scrollpaneLH, javax.swing.GroupLayout.PREFERRED_SIZE, 1040, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(paneChuongTrinhLayout.createSequentialGroup()
-                        .addComponent(scrollpaneLH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(50, 50, 50))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, paneChuongTrinhLayout.createSequentialGroup()
                         .addComponent(labelTimLop)
                         .addGap(18, 18, 18)
                         .addComponent(textfeildTimTK, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -236,8 +235,8 @@ public class UI_QuanlyNhanVien extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(buttonXoaNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(buttonLamMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(74, Short.MAX_VALUE))))
+                        .addComponent(buttonLamMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
         paneChuongTrinhLayout.setVerticalGroup(
             paneChuongTrinhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -251,8 +250,8 @@ public class UI_QuanlyNhanVien extends javax.swing.JPanel {
                     .addComponent(buttonLamMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonStopSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(36, 36, 36)
-                .addComponent(scrollpaneLH, javax.swing.GroupLayout.PREFERRED_SIZE, 670, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addComponent(scrollpaneLH, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(192, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

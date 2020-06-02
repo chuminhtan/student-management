@@ -10,8 +10,11 @@ import UI.ChuongTrinhUI.UI_ChuongTrinh;
 import UI.LopHocUI.UI_LopHoc;
 import UI.KhachHangUI.UI_KhachHang;
 import UI.DangNhapUI.UI_DangNhap;
+import UI.QuanLyNhanVien.UI_QuanLyNhanVien_Custom;
 import UI.QuanLyNhanVien.UI_QuanlyNhanVien;
 import java.awt.Color;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowStateListener;
 
 public class UI_Main extends javax.swing.JFrame {
 
@@ -360,6 +363,10 @@ public class UI_Main extends javax.swing.JFrame {
 
         //Lấy thông tin tài khoản từ CSDL
         this.ui_tk.refreshDataInTable();
+        
+        UI_QuanLyNhanVien_Custom uI_QuanLyNhanVien_Custom = new UI_QuanLyNhanVien_Custom(this, rootPaneCheckingEnabled);
+        uI_QuanLyNhanVien_Custom.setLocationRelativeTo(this);
+        uI_QuanLyNhanVien_Custom.show();
     }//GEN-LAST:event_btnTaiKhoanActionPerformed
 
     private void txtThongTinDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtThongTinDangNhapActionPerformed

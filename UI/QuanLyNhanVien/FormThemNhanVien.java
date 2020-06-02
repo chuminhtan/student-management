@@ -7,12 +7,13 @@ package UI.QuanLyNhanVien;
 
 import DAL.dal_DangNhap;
 import DTO.dto_DangNhap;
+import java.awt.Frame;
 
 /**
  *
  * @author USER
  */
-public class FormThemNhanVien extends javax.swing.JFrame {
+public class FormThemNhanVien extends javax.swing.JDialog {
 
     private AfterThemNhanVien afterThemTaiKhoan;
 
@@ -22,6 +23,10 @@ public class FormThemNhanVien extends javax.swing.JFrame {
     public FormThemNhanVien() {
         initComponents();
         this.afterThemTaiKhoan = null;
+    }
+
+    public FormThemNhanVien(Frame owner) {
+        super(owner);
     }
 
     public AfterThemNhanVien getAfterThemTaiKhoan() {

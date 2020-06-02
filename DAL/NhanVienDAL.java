@@ -5,6 +5,7 @@
  */
 package DAL;
 
+import BUS.NhanVienBUS;
 import DTO.NhanVienDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -52,9 +53,9 @@ public class NhanVienDAL {
         }
 
         //test
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 100; i++) {
             NhanVienDTO nhanVienDTO = new NhanVienDTO(
-                    "NV" + i, "Nhân viên " + i, "2347856348756", 2, "2345", "c4ca4238a0b923820dcc509a6f75849b"
+                    "NV" + i, "Nhân viên " + i, "2347856348756", i % 3, "" + i, NhanVienBUS.getInstance().hashPassword("" + i, null)
             );
             nhanVienDTOs.add(nhanVienDTO);
         }

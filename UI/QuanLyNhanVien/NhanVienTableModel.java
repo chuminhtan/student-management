@@ -29,11 +29,13 @@ public class NhanVienTableModel extends DefaultTableModel {
     }
 
     public void AddNhanVienDTO(NhanVienDTO nhanVienDTO) {
-        //
+        this.nhanVienDTOs.add(nhanVienDTO);
+        this.UpdataInTable();
     }
 
     public void RemoveNhanVienDTO(NhanVienDTO nhanVienDTO) {
-        //
+        this.nhanVienDTOs.remove(nhanVienDTO);
+        this.UpdataInTable();
     }
 
     public void UpdataInTable() {

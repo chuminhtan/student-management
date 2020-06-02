@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
  *
  * @author USER
  */
-public class FormCapNhatNhanVien extends javax.swing.JFrame {
+public class FormCapNhatNhanVien extends javax.swing.JDialog {
     
     private AfterSuaNhanVien afterSuaNhanVien;
     private NhanVienDTO nhanVienDTO;
