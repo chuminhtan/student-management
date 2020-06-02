@@ -83,13 +83,13 @@ public class NhanVienDTO {
 
     @Override
     public String toString() {
-        return "Nhân viên có" 
-                + " mã nhân viên là " + MA_NV 
-                + ",  họ tên là " + HO_TEN 
-                + ",  số điện thoại là " + SDT 
-                + ", thuộc loại " + (this.LOAI == 1 ? "Ghi danh" : (this.LOAI == 2 ? "Học vụ" : "Quản lý")) 
-                + ", tên đăng nhập là " + TEN_DANG_NHAP 
-                + " và mật khẩu là " + MAT_KHAU;
+        return "Nhân viên có"
+                + " mã nhân viên là '" + MA_NV + "'"
+                + ",  họ tên là '" + HO_TEN + "'"
+                + ",  số điện thoại là '" + SDT + "'"
+                + ", thuộc loại '" + (this.LOAI == 1 ? "Ghi danh" : (this.LOAI == 2 ? "Học vụ" : "Quản lý")) + "'"
+                + ", tên đăng nhập là '" + TEN_DANG_NHAP + "'"
+                + " và mật khẩu là '" + MAT_KHAU + "'";
     }
 
     @Override
@@ -136,8 +136,6 @@ public class NhanVienDTO {
         }
         return true;
     }
-    
-    
 
     public String getMA_NV() {
         return MA_NV;

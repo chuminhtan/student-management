@@ -13,10 +13,6 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author ThinkPro
- */
 public class UI_QuanlyNhanVien extends javax.swing.JPanel {
 
     /**
@@ -39,7 +35,7 @@ public class UI_QuanlyNhanVien extends javax.swing.JPanel {
         //Thêm giá trị cho từng dòng trong bảng
         defaultTableModel.getDataVector().clear();
         ArrayList<NhanVienDTO> nhanVienDTOs = NhanVienBUS.getInstance().getDanhSachNhanVien();
-        for  (NhanVienDTO nhanVienDTO : nhanVienDTOs) {
+        for (NhanVienDTO nhanVienDTO : nhanVienDTOs) {
             defaultTableModel.getDataVector().add(nhanVienDTO.toVector());
         }
     }
@@ -81,7 +77,7 @@ public class UI_QuanlyNhanVien extends javax.swing.JPanel {
         buttonThemTK.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         buttonThemTK.setForeground(new java.awt.Color(0, 0, 0));
         buttonThemTK.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/them lop.png"))); // NOI18N
-        buttonThemTK.setText("TẠO TÀI KHOẢN MỚI");
+        buttonThemTK.setText("TẠO NHÂN VIÊN MỚI");
         buttonThemTK.setContentAreaFilled(false);
         buttonThemTK.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         buttonThemTK.setFocusable(false);
@@ -204,6 +200,8 @@ public class UI_QuanlyNhanVien extends javax.swing.JPanel {
                 .addContainerGap(26, Short.MAX_VALUE))
         );
 
+        labelTimLop.getAccessibleContext().setAccessibleName("TÌM NHÂN VIÊN");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -216,7 +214,7 @@ public class UI_QuanlyNhanVien extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(paneChuongTrinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 38, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -234,61 +232,71 @@ public class UI_QuanlyNhanVien extends javax.swing.JPanel {
     }//GEN-LAST:event_buttonThemTKActionPerformed
 
     private void buttonXoaNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonXoaNhanVienActionPerformed
-        int rowSelected = this.tableTaiKhoan.getSelectedRow();
-        
-        if (rowSelected < 0) {
+
+        int[] rowSelecteds = this.tableTaiKhoan.getSelectedRows();
+
+        if (rowSelecteds.length < 0) {
             JOptionPane.showMessageDialog(
-                    this, 
-                    "Hãy chọn một nhân viên trước khi nhấn nút", 
-                    "Thông báo", 
+                    this,
+                    "Hãy chọn ít nhất một nhân viên trước khi nhấn nút",
+                    "Thông báo",
                     JOptionPane.ERROR_MESSAGE
-            );            
+            );
             return;
-        }        
-        
+        }
+
+        DefaultTableModel defaultTableModel = (DefaultTableModel) this.tableTaiKhoan.getModel();
+       
+       String deletedNhanVienDTOInfos = ""; 
+        for (int rowSelected: rowSelecteds) {
+            deletedNhanVienDTOInfos += new NhanVienDTO().fromVector(defaultTableModel.getDataVector().get(rowSelected)).toString();
+            deletedNhanVienDTOInfos += "\n";
+        }
+
         int deleteResult = JOptionPane.showConfirmDialog(
-                this, 
-                "Bạn có chắc chắn muốn xoá nhân viên " + rowSelected + " không?", 
-                "Xóa nhân viên", 
-                JOptionPane.YES_NO_OPTION, 
+                this,
+                "Bạn có chắc chắn muốn xoá " + rowSelecteds.length + " nhân viên không? "
+                + "\n"
+                + "Thông tin" + (rowSelecteds.length > 1 ? " các" : "") + " nhân viên đó là: "
+                + "\n"
+                + deletedNhanVienDTOInfos,
+                "Xóa nhân viên",
+                JOptionPane.YES_NO_OPTION,
                 JOptionPane.INFORMATION_MESSAGE
         );
-        
+
         if (deleteResult == JOptionPane.YES_OPTION) {
             //Xoá ngay và luôn 
-        }
-        else if (deleteResult == JOptionPane.NO_OPTION) {
-            //Thôi
         }
     }//GEN-LAST:event_buttonXoaNhanVienActionPerformed
 
     private void buttonCapNhatNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCapNhatNhanVienActionPerformed
         int rowSelected = this.tableTaiKhoan.getSelectedRow();
-        
+
         if (rowSelected < 0) {
             JOptionPane.showMessageDialog(
-                    this, 
-                    "Hãy chọn một nhân viên trước khi nhấn nút", 
-                    "Thông báo", 
+                    this,
+                    "Hãy chọn một nhân viên trước khi nhấn nút",
+                    "Thông báo",
                     JOptionPane.ERROR_MESSAGE
-            );            
+            );
             return;
-        }       
-        
+        }
+
         FormCapNhatNhanVien formCapNhatNhanVien = new FormCapNhatNhanVien();
-        
+
         DefaultTableModel defaultTableModel = (DefaultTableModel) this.tableTaiKhoan.getModel();
         NhanVienDTO nhanVienDTO = new NhanVienDTO();
         nhanVienDTO.fromVector(defaultTableModel.getDataVector().get(rowSelected));
         formCapNhatNhanVien.setDefaultInformations(nhanVienDTO);
-        
+
         formCapNhatNhanVien.setAfterSuaNhanVien(new AfterSuaNhanVien() {
             @Override
             public void DoAfterSuaNhanVien() {
                 refreshDataInTable();
             }
         });
-        
+
         formCapNhatNhanVien.show();
     }//GEN-LAST:event_buttonCapNhatNhanVienActionPerformed
 
