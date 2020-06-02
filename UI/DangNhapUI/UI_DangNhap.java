@@ -30,15 +30,15 @@ public class UI_DangNhap extends javax.swing.JFrame {
      * Khu vực của Tân
      */
     public void eBtnDangNhap() {
-        bus_DangNhap bus_dn = new bus_DangNhap();
-        dto_DangNhap dto_dn = new dto_DangNhap(txtTenDangNhap.getText(), txtMatKhau.getText());
-        boolean rs = bus_dn.xyLyDangNhap(dto_dn);
-
-        if (rs == true) {
+//        bus_DangNhap bus_dn = new bus_DangNhap();
+//        dto_DangNhap dto_dn = new dto_DangNhap(txtTenDangNhap.getText(), txtMatKhau.getText());
+//        boolean rs = bus_dn.xyLyDangNhap(dto_dn);
+//
+//        if (rs == true) {
             dispose();
-        } else {
-            JOptionPane.showMessageDialog(null, "Đăng nhập không thành công");
-        }
+//        } else {
+//            JOptionPane.showMessageDialog(null, "Đăng nhập không thành công");
+//        }
     }
 
     /*Hết khu vực của Tân*/

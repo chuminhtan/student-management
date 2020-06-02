@@ -40,7 +40,7 @@ public class NhanVienBUS {
         return false;
     }
 
-    public boolean suaNhanVien(NhanVienDTO nhanVienDTO) {
+    public boolean suaNhanVien(NhanVienDTO nhanVienDTO, NhanVienDTO newNhanVienDTO) {
         return false;
     }
 

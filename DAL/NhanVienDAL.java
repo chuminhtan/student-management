@@ -50,15 +50,27 @@ public class NhanVienDAL {
         } catch (Exception ex) {
 //            Logger.getLogger(NhanVienDAL.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         //test
         for (int i = 0; i < 10; i++) {
             NhanVienDTO nhanVienDTO = new NhanVienDTO(
-                    "NV" + i, "Nhân viên " + i, "2347856348756",  2,  "2345", "c4ca4238a0b923820dcc509a6f75849b"
+                    "NV" + i, "Nhân viên " + i, "2347856348756", 2, "2345", "c4ca4238a0b923820dcc509a6f75849b"
             );
             nhanVienDTOs.add(nhanVienDTO);
         }
 
         return nhanVienDTOs;
+    }
+
+    public boolean them(NhanVienDTO nhanVienDTO) {
+        return false;
+    }
+
+    public boolean xoa(NhanVienDTO nhanVienDTO) {
+        return false;
+    }
+
+    public boolean sua(NhanVienDTO nhanVienDTO, NhanVienDTO newNhanVienDTO) {
+        return false;
     }
 }

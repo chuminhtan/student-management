@@ -5,6 +5,7 @@
  */
 package DTO;
 
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.Vector;
 
@@ -29,56 +30,48 @@ public class NhanVienDTO {
         this.MAT_KHAU = MAT_KHAU;
     }
 
+    public static Object[] getArrayColumnIdentifiers() {
+        return new Object[]{
+            "Mã nhân viên",
+            "Họ tên",
+            "Số điện thoại",
+            "Loại",
+            "Tên đăng nhập",
+            "Mật khẩu"
+        };
+    }
+    
     public static Vector getVectorColumnIdentifiers() {
-        Vector result = new Vector();
-
-        result.add("Mã nhân viên");
-        result.add("Họ tên");
-        result.add("Số điện thoại");
-        result.add("Loại");
-        result.add("Tên đăng nhập");
-        result.add("Mật khẩu");
-
-        return result;
+        return new Vector(Arrays.asList(NhanVienDTO.getArrayColumnIdentifiers()));
     }
 
+    public Object[] toArray() {
+        return new Object[]{
+            this.MA_NV,
+            this.HO_TEN,
+            this.SDT,
+            this.LOAI,
+            this.TEN_DANG_NHAP,
+            this.MAT_KHAU
+        };
+    }
+    
     public Vector toVector() {
-        Vector result = new Vector();
-
-        result.add(this.MA_NV);
-        result.add(this.HO_TEN);
-        result.add(this.SDT);
-
-        String loai = "Quản lý";
-        if (this.LOAI == 2) {
-            loai = "Ghi danh";
-        } else if (this.LOAI == 3) {
-            loai = "Học vụ";
-        }
-        result.add(loai);
-
-        result.add(this.TEN_DANG_NHAP);
-        result.add(this.MAT_KHAU);
-
-        return result;
+        return new Vector(Arrays.asList(this.toArray()));
     }
 
-    public NhanVienDTO fromVector(Vector vector) {
-        this.MA_NV = (String) vector.get(0);
-        this.HO_TEN = (String) vector.get(1);
-        this.SDT = (String) vector.get(2);
-
-        this.LOAI = 0;
-        if ("Ghi danh".equals((String) vector.get(3))) {
-            this.LOAI = 1;
-        } else if ("Học vụ".equals((String) vector.get(3))) {
-            this.LOAI = 2;
-        }
-
-        this.TEN_DANG_NHAP = (String) vector.get(4);
-        this.MAT_KHAU = (String) vector.get(5);
-
+    public NhanVienDTO fromArray(Object[] array) {
+        this.MA_NV = (String) array[0];
+        this.HO_TEN = (String) array[1];
+        this.SDT = (String) array[2];
+        this.LOAI = (Integer) array[3];
+        this.TEN_DANG_NHAP = (String) array[4];
+        this.MAT_KHAU = (String) array[5];
         return this;
+    }
+    
+    public NhanVienDTO fromVector(Vector vector) {
+        return this.fromArray(vector.toArray());
     }
 
     @Override
@@ -87,7 +80,7 @@ public class NhanVienDTO {
                 + " mã nhân viên là '" + MA_NV + "'"
                 + ",  họ tên là '" + HO_TEN + "'"
                 + ",  số điện thoại là '" + SDT + "'"
-                + ", thuộc loại '" + (this.LOAI == 1 ? "Ghi danh" : (this.LOAI == 2 ? "Học vụ" : "Quản lý")) + "'"
+                + ", thuộc loại '" + this.getLOAIToString() + "'"
                 + ", tên đăng nhập là '" + TEN_DANG_NHAP + "'"
                 + " và mật khẩu là '" + MAT_KHAU + "'";
     }
@@ -135,6 +128,14 @@ public class NhanVienDTO {
             return false;
         }
         return true;
+    }
+    
+    public String getLOAIToString() {
+        return this.LOAI == 1 ? "Ghi danh" : (this.LOAI == 2 ? "Học vụ" : "Quản lý");
+    }
+    
+    public void setLOAIFromString(String stringLOAI){
+        this.LOAI = "Ghi danh".equals(stringLOAI) ? 1 : ("Học vụ".equals(stringLOAI) ? 2 : 0);
     }
 
     public String getMA_NV() {
