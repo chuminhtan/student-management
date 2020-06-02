@@ -10,7 +10,6 @@ import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JButton;
-import javax.swing.border.LineBorder;
 
 public class CustomComponentModify {
 
@@ -45,6 +44,8 @@ public class CustomComponentModify {
     public static final Color HOVER_LIGHT = new Color(226, 230, 234);
     public static final Color HOVER_DARK = new Color(35, 39, 43);
     public static final Color HOVER_LINK = new Color(0, 86, 179);
+
+    public static final Color TRANSPARENT = new Color(0, 0, 0, 0);
 
     public static final String FONT_NOTO_SANS = "Noto Sans";
     public static final String FONT_NOTO_SERIF = "Noto Serif";
