@@ -32,7 +32,7 @@ public class DatabaseConnection {
         try {
             connection = DriverManager.getConnection(url, user, password);
         } catch (Exception ex) {
-//            Logger.getLogger(DatabaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DatabaseConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return connection;

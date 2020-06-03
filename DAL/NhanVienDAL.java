@@ -11,6 +11,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class NhanVienDAL {
 
@@ -49,7 +51,7 @@ public class NhanVienDAL {
 
             DatabaseConnection.getInstance().RemoveConnection(connection);
         } catch (Exception ex) {
-//            Logger.getLogger(NhanVienDAL.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(NhanVienDAL.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         //test
