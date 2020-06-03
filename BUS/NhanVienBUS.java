@@ -33,15 +33,15 @@ public class NhanVienBUS {
     }
 
     public boolean themNhanVien(NhanVienDTO nhanVienDTO) {
-        return false;
+        return NhanVienDAL.getInstance().them(nhanVienDTO);
     }
 
     public boolean xoaNhanVien(NhanVienDTO nhanVienDTO) {
-        return false;
+        return NhanVienDAL.getInstance().xoa(nhanVienDTO);
     }
 
     public boolean suaNhanVien(NhanVienDTO nhanVienDTO, NhanVienDTO newNhanVienDTO) {
-        return false;
+        return NhanVienDAL.getInstance().sua(nhanVienDTO, newNhanVienDTO);
     }
 
     public String hashPassword(String input, String hashMenthod) {

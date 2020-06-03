@@ -58,7 +58,10 @@ public class CustomComponentModify {
     public void modifyButtonColor(JButton button, Color colorBgNormal, Color colorFgNormal, Color colorBorderNormal, Color colorBgHover, Color colorFgHover, Color colorBorderHover) {
         button.setBackground(colorBgNormal);
         button.setForeground(colorFgNormal);
-        ((CustomInterfaceBorder) button.getBorder()).setColor(colorBorderNormal);
+
+        if (button.getBorder() instanceof CustomInterfaceBorder) {
+            ((CustomInterfaceBorder) button.getBorder()).setColor(colorBorderNormal);
+        }
 
         button.addMouseListener(new MouseAdapter() {
             @Override
@@ -67,7 +70,10 @@ public class CustomComponentModify {
 
                 button.setBackground(colorBgNormal);
                 button.setForeground(colorFgNormal);
-                ((CustomInterfaceBorder) button.getBorder()).setColor(colorBorderNormal);
+
+                if (button.getBorder() instanceof CustomInterfaceBorder) {
+                    ((CustomInterfaceBorder) button.getBorder()).setColor(colorBorderNormal);
+                }
             }
 
             @Override
@@ -76,7 +82,10 @@ public class CustomComponentModify {
 
                 button.setBackground(colorBgHover);
                 button.setForeground(colorFgHover);
-                ((CustomInterfaceBorder) button.getBorder()).setColor(colorBorderHover);
+
+                if (button.getBorder() instanceof CustomInterfaceBorder) {
+                    ((CustomInterfaceBorder) button.getBorder()).setColor(colorBorderHover);
+                }
             }
         });
     }
@@ -139,7 +148,7 @@ public class CustomComponentModify {
     }
 
     public void modifyButton(JButton button, buttonType type) {
-        this.modifyButton(button, type, new Font(FONT_NOTO_SANS, Font.PLAIN, 24));
+        this.modifyButton(button, type, new Font(FONT_NOTO_SANS, Font.PLAIN, 16));
     }
 
     public void modifyButton(JButton button) {

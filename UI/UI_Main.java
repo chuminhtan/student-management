@@ -12,8 +12,8 @@ import UI.KhachHangUI.UI_KhachHang;
 import UI.DangNhapUI.UI_DangNhap;
 import UI.QuanLyNhanVien.CustomBorder;
 import UI.QuanLyNhanVien.CustomComponentModify;
+import UI.QuanLyNhanVien.UI_QuanLyNhanVIen_New;
 import UI.QuanLyNhanVien.UI_QuanLyNhanVien_Custom;
-import UI.QuanLyNhanVien.UI_QuanlyNhanVien;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
@@ -45,8 +45,8 @@ public final class UI_Main extends javax.swing.JFrame {
                 ((CustomBorder) button.getBorder()).setColor(hoverColor);
             }
         });
-        
-        button.setFont(new Font("Noto Sans", Font.PLAIN, 24));        
+
+        button.setFont(new Font("Noto Sans", Font.PLAIN, 24));
     }
 
     public void setAllTabButtonColor(Color currentColor, Color hoverColor) {
@@ -245,7 +245,7 @@ public final class UI_Main extends javax.swing.JFrame {
                             .addComponent(btnKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtThongTinDangNhap)
                             .addComponent(btnDangXuat, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -258,8 +258,8 @@ public final class UI_Main extends javax.swing.JFrame {
                                             .addGap(1, 1, 1)
                                             .addComponent(btnLopHoc, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addComponent(btnCTHoc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                        .addGap(49, 49, 49)))
-                .addComponent(pnBody, javax.swing.GroupLayout.PREFERRED_SIZE, 612, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(11, 11, 11)))
+                .addComponent(pnBody, javax.swing.GroupLayout.DEFAULT_SIZE, 650, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -293,10 +293,6 @@ public final class UI_Main extends javax.swing.JFrame {
 
         //Lấy thông tin tài khoản từ CSDL
         this.ui_tk.refreshDataInTable();
-
-        UI_QuanLyNhanVien_Custom uI_QuanLyNhanVien_Custom = new UI_QuanLyNhanVien_Custom(this, rootPaneCheckingEnabled);
-        uI_QuanLyNhanVien_Custom.setLocationRelativeTo(this);
-        uI_QuanLyNhanVien_Custom.show();
     }//GEN-LAST:event_btnTaiKhoanActionPerformed
 
     private void btnCTHocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCTHocActionPerformed
@@ -394,7 +390,7 @@ public final class UI_Main extends javax.swing.JFrame {
     private UI_LopHoc ui_lop = new UI_LopHoc();
     private UI_KhachHang ui_kh = new UI_KhachHang();
     private UI_ChuongTrinh ui_ct = new UI_ChuongTrinh();
-    private UI_QuanlyNhanVien ui_tk = new UI_QuanlyNhanVien();
+    private UI_QuanLyNhanVIen_New ui_tk = new UI_QuanLyNhanVIen_New();
     //Kết thúc biến tự định nghĩa
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

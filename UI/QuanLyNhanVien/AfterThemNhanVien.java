@@ -6,5 +6,5 @@
 package UI.QuanLyNhanVien;
 
 public interface AfterThemNhanVien {
-    public void DoAfterThemTaiKhoan();
+    public void DoAfterThemNhanVien();
 }

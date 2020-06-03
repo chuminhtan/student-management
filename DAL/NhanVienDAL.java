@@ -32,7 +32,9 @@ public class NhanVienDAL {
 
         try {
             Connection connection = DatabaseConnection.getInstance().CreateNewConnection();
-            String query = "";
+            connection.setAutoCommit(false);
+
+            String query = "SELECT * FROM NHANVIEN;";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
 
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -49,12 +51,13 @@ public class NhanVienDAL {
                 nhanVienDTOs.add(nhanVienDTO);
             }
 
+            connection.commit();
             DatabaseConnection.getInstance().RemoveConnection(connection);
         } catch (Exception ex) {
             Logger.getLogger(NhanVienDAL.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        //test
+        //Tạo dữ liệu mẫu để test
         for (int i = 0; i < 100; i++) {
             NhanVienDTO nhanVienDTO = new NhanVienDTO(
                     "NV" + i, "Nhân viên " + i, "2347856348756", i % 3, "" + i, NhanVienBUS.getInstance().hashPassword("" + i, null)
@@ -66,14 +69,76 @@ public class NhanVienDAL {
     }
 
     public boolean them(NhanVienDTO nhanVienDTO) {
+        try {
+            Connection connection = DatabaseConnection.getInstance().CreateNewConnection();
+            connection.setAutoCommit(false);
+
+            String query = "INSERT INTO NHANVIEN (MA_NV,HO_TEN,SDT,LOAI,TEN_DANG_NHAP,MAT_KHAU) VALUES (?,?,?,?,?,?);";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, nhanVienDTO.getMA_NV());
+            preparedStatement.setString(2, nhanVienDTO.getHO_TEN());
+            preparedStatement.setString(3, nhanVienDTO.getSDT());
+            preparedStatement.setInt(4, nhanVienDTO.getLOAI());
+            preparedStatement.setString(5, nhanVienDTO.getTEN_DANG_NHAP());
+            preparedStatement.setString(6, nhanVienDTO.getMAT_KHAU());
+            
+            int queryResult = preparedStatement.executeUpdate();
+
+            connection.commit();
+            DatabaseConnection.getInstance().RemoveConnection(connection);
+
+            return queryResult > 0;
+        } catch (Exception ex) {
+            Logger.getLogger(NhanVienDAL.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return false;
     }
 
     public boolean xoa(NhanVienDTO nhanVienDTO) {
+        try {
+            Connection connection = DatabaseConnection.getInstance().CreateNewConnection();
+            connection.setAutoCommit(false);
+
+            String query = "DELETE FROM NHANVIEN WHERE NHANVIEN.MA_NV = ?;";
+            PreparedStatement preparedStatement = DatabaseConnection.getInstance().CreateNewConnection().prepareStatement(query);
+            preparedStatement.setString(1, nhanVienDTO.getMA_NV());
+            
+            int queryResult = preparedStatement.executeUpdate();
+
+            connection.commit();
+            DatabaseConnection.getInstance().RemoveConnection(connection);
+
+            return queryResult > 0;
+        } catch (Exception ex) {
+            Logger.getLogger(NhanVienDAL.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return false;
     }
 
     public boolean sua(NhanVienDTO nhanVienDTO, NhanVienDTO newNhanVienDTO) {
+        try {
+            Connection connection = DatabaseConnection.getInstance().CreateNewConnection();
+            connection.setAutoCommit(false);
+
+            String query = "UPDATE NHANVIEN SET NHANVIEN.MA_NV= ?, NHANVIEN.HO_TEN= ?, NHANVIEN.SDT= ?, NHANVIEN.LOAI= ?, NHANVIEN.TEN_DANG_NHAP= ?, NHANVIEN.MAT_KHAU= ? WHERE NHANVIEN.MA_NV = ?;";
+            PreparedStatement preparedStatement = DatabaseConnection.getInstance().CreateNewConnection().prepareStatement(query);
+            preparedStatement.setString(1, newNhanVienDTO.getMA_NV());
+            preparedStatement.setString(2, newNhanVienDTO.getHO_TEN());
+            preparedStatement.setString(3, newNhanVienDTO.getSDT());
+            preparedStatement.setInt(4, newNhanVienDTO.getLOAI());
+            preparedStatement.setString(5, newNhanVienDTO.getTEN_DANG_NHAP());
+            preparedStatement.setString(6, newNhanVienDTO.getMAT_KHAU());
+            preparedStatement.setString(7, nhanVienDTO.getMA_NV());
+
+            int queryResult = preparedStatement.executeUpdate();
+            
+            connection.commit();
+            DatabaseConnection.getInstance().RemoveConnection(connection);
+
+            return queryResult > 0;
+        } catch (Exception ex) {
+            Logger.getLogger(NhanVienDAL.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return false;
     }
 }

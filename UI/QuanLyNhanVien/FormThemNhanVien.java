@@ -5,24 +5,23 @@
  */
 package UI.QuanLyNhanVien;
 
+import BUS.NhanVienBUS;
 import DAL.dal_DangNhap;
+import DTO.NhanVienDTO;
 import DTO.dto_DangNhap;
 import java.awt.Frame;
+import javax.swing.JOptionPane;
 
-/**
- *
- * @author USER
- */
 public class FormThemNhanVien extends javax.swing.JDialog {
 
-    private AfterThemNhanVien afterThemTaiKhoan;
+    private AfterThemNhanVien afterThemNhanVien;
 
     /**
      * Creates new form FormThemNhanVien
      */
     public FormThemNhanVien() {
         initComponents();
-        this.afterThemTaiKhoan = null;
+        this.afterThemNhanVien = null;
     }
 
     public FormThemNhanVien(Frame owner) {
@@ -30,15 +29,15 @@ public class FormThemNhanVien extends javax.swing.JDialog {
     }
 
     public AfterThemNhanVien getAfterThemTaiKhoan() {
-        return afterThemTaiKhoan;
+        return afterThemNhanVien;
     }
 
-    public void setAfterThemTaiKhoan(AfterThemNhanVien afterThemTaiKhoan) {
-        this.afterThemTaiKhoan = afterThemTaiKhoan;
+    public void setAfterThemNhanVien(AfterThemNhanVien afterThemNhanVien) {
+        this.afterThemNhanVien = afterThemNhanVien;
     }
 
     public void ClearAfterThemTaiKhoan() {
-        this.afterThemTaiKhoan = null;
+        this.afterThemNhanVien = null;
     }
 
     /**
@@ -53,16 +52,16 @@ public class FormThemNhanVien extends javax.swing.JDialog {
         pnThemTK = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txtCapNhatTenNV = new javax.swing.JTextField();
+        textfeildTenNhanVien = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        txtCapNhatSDTNV = new javax.swing.JTextField();
+        textfeildSDT = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        cbCapNhatLoaiNV = new javax.swing.JComboBox<>();
+        comboxLoai = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
-        txtThemTenDangNhap = new javax.swing.JTextField();
+        textfieldTenDangNhap = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        btnXacNhanThemTK = new javax.swing.JButton();
+        passwordFeild = new javax.swing.JPasswordField();
+        buttonXacNhan = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Tạo Tài Khoản");
@@ -81,7 +80,7 @@ public class FormThemNhanVien extends javax.swing.JDialog {
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel4.setText("LOẠI NHÂN VIÊN");
 
-        cbCapNhatLoaiNV.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Quản lý", "Ghi danh", "Học vụ" }));
+        comboxLoai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Quản lý", "Ghi danh", "Học vụ" }));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel5.setText("TÊN ĐĂNG NHẬP");
@@ -89,18 +88,18 @@ public class FormThemNhanVien extends javax.swing.JDialog {
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel6.setText("MẬT KHẨU");
 
-        btnXacNhanThemTK.setBackground(new java.awt.Color(91, 155, 213));
-        btnXacNhanThemTK.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnXacNhanThemTK.setForeground(new java.awt.Color(255, 255, 255));
-        btnXacNhanThemTK.setText("XÁC NHẬN");
-        btnXacNhanThemTK.setContentAreaFilled(false);
-        btnXacNhanThemTK.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnXacNhanThemTK.setFocusable(false);
-        btnXacNhanThemTK.setOpaque(true);
-        btnXacNhanThemTK.setPreferredSize(new java.awt.Dimension(209, 40));
-        btnXacNhanThemTK.addActionListener(new java.awt.event.ActionListener() {
+        buttonXacNhan.setBackground(new java.awt.Color(91, 155, 213));
+        buttonXacNhan.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        buttonXacNhan.setForeground(new java.awt.Color(255, 255, 255));
+        buttonXacNhan.setText("XÁC NHẬN");
+        buttonXacNhan.setContentAreaFilled(false);
+        buttonXacNhan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonXacNhan.setFocusable(false);
+        buttonXacNhan.setOpaque(true);
+        buttonXacNhan.setPreferredSize(new java.awt.Dimension(209, 40));
+        buttonXacNhan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnXacNhanThemTKActionPerformed(evt);
+                buttonXacNhanActionPerformed(evt);
             }
         });
 
@@ -122,11 +121,11 @@ public class FormThemNhanVien extends javax.swing.JDialog {
                             .addComponent(jLabel6))))
                 .addGap(38, 38, 38)
                 .addGroup(pnThemTKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtCapNhatTenNV)
-                    .addComponent(txtCapNhatSDTNV)
-                    .addComponent(cbCapNhatLoaiNV, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtThemTenDangNhap)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE))
+                    .addComponent(textfeildTenNhanVien)
+                    .addComponent(textfeildSDT)
+                    .addComponent(comboxLoai, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textfieldTenDangNhap)
+                    .addComponent(passwordFeild, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE))
                 .addContainerGap(52, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnThemTKLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -135,7 +134,7 @@ public class FormThemNhanVien extends javax.swing.JDialog {
                         .addComponent(jLabel1)
                         .addGap(180, 180, 180))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnThemTKLayout.createSequentialGroup()
-                        .addComponent(btnXacNhanThemTK, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(buttonXacNhan, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(145, 145, 145))))
         );
         pnThemTKLayout.setVerticalGroup(
@@ -146,28 +145,28 @@ public class FormThemNhanVien extends javax.swing.JDialog {
                 .addGap(33, 33, 33)
                 .addGroup(pnThemTKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtCapNhatTenNV, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textfeildTenNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(pnThemTKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnThemTKLayout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addComponent(jLabel3))
                     .addGroup(pnThemTKLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(txtCapNhatSDTNV, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(textfeildSDT, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(pnThemTKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbCapNhatLoaiNV, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboxLoai, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addGap(18, 18, 18)
                 .addGroup(pnThemTKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(txtThemTenDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textfieldTenDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(pnThemTKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(passwordFeild, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33)
-                .addComponent(btnXacNhanThemTK, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(buttonXacNhan, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(26, Short.MAX_VALUE))
         );
 
@@ -186,26 +185,26 @@ public class FormThemNhanVien extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnXacNhanThemTKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXacNhanThemTKActionPerformed
-        //Làm gì đó thêm tài khoản 
-        dto_DangNhap dtoDangNhap = new dto_DangNhap(
-                null, 
-                this.txtCapNhatTenNV.getText(), 
-                ABORT, 
-                this.txtThemTenDangNhap.getText(), 
-                this.jPasswordField1.getText(), 
-                this.txtCapNhatSDTNV.getText()
+    private void buttonXacNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonXacNhanActionPerformed
+        //Làm gì đó thêm nhân viên
+        NhanVienDTO newNhanVienDTO = new NhanVienDTO(
+                null,
+                this.textfeildTenNhanVien.getText(),
+                this.textfeildSDT.getText(),
+                this.comboxLoai.getSelectedIndex(),
+                this.textfieldTenDangNhap.getText(),
+                new String(this.passwordFeild.getPassword())
         );
-        dal_DangNhap dalDangNhap = new dal_DangNhap();
 
-        //Sau đó làm phần AfterThemTaiKhoan
-        if (this.afterThemTaiKhoan != null) {
-            this.afterThemTaiKhoan.DoAfterThemTaiKhoan();
+        boolean themResult = NhanVienBUS.getInstance().themNhanVien(newNhanVienDTO);
+        String messageResults = "Thêm nhân viên " + newNhanVienDTO.getHO_TEN() + " " + (themResult ? "thành công" : "thất bại");
+        JOptionPane.showMessageDialog(this, messageResults, "Kết quả thêm nhân viên", JOptionPane.INFORMATION_MESSAGE);
+
+        //Sau đó làm phần AfterThem
+        if (this.afterThemNhanVien != null) {
+            this.afterThemNhanVien.DoAfterThemNhanVien();
         }
-        
-        //Cuối cùng là đóng form lại thôi
-        this.dispose();
-    }//GEN-LAST:event_btnXacNhanThemTKActionPerformed
+    }//GEN-LAST:event_buttonXacNhanActionPerformed
 
     /**
      * @param args the command line arguments
@@ -246,18 +245,18 @@ public class FormThemNhanVien extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnXacNhanThemTK;
-    private javax.swing.JComboBox<String> cbCapNhatLoaiNV;
+    private javax.swing.JButton buttonXacNhan;
+    private javax.swing.JComboBox<String> comboxLoai;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JPasswordField jPasswordField1;
+    private javax.swing.JPasswordField passwordFeild;
     private javax.swing.JPanel pnThemTK;
-    private javax.swing.JTextField txtCapNhatSDTNV;
-    private javax.swing.JTextField txtCapNhatTenNV;
-    private javax.swing.JTextField txtThemTenDangNhap;
+    private javax.swing.JTextField textfeildSDT;
+    private javax.swing.JTextField textfeildTenNhanVien;
+    private javax.swing.JTextField textfieldTenDangNhap;
     // End of variables declaration//GEN-END:variables
 }
