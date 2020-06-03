@@ -29,6 +29,13 @@ public class NhanVienBUS {
 
     public ArrayList<NhanVienDTO> getDanhSachNhanVien() {
         ArrayList<NhanVienDTO> nhanVienDTOs = NhanVienDAL.getInstance().getAll();
+        
+        //Just for test
+        nhanVienDTOs.add(new NhanVienDTO("MANV01", "Chu Min Ton", "0823451262", new java.util.Random().nextInt(3), "TonCuTeez", this.hashPassword("", null)));
+        nhanVienDTOs.add(new NhanVienDTO("MANV02", "Hai Duy", "0789789789789", new java.util.Random().nextInt(3), "Duy789", this.hashPassword("", null)));
+        nhanVienDTOs.add(new NhanVienDTO("MANV03", "Nguyen Minh Hy", "0890563456", new java.util.Random().nextInt(3), "HyHy", this.hashPassword("", null)));
+        nhanVienDTOs.add(new NhanVienDTO("MANV04", "Không phải Chu Min Ton", "0123456789", new java.util.Random().nextInt(3), "NotTan", this.hashPassword("", null)));
+        
         return nhanVienDTOs;
     }
 

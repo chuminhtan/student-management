@@ -57,14 +57,6 @@ public class NhanVienDAL {
             Logger.getLogger(NhanVienDAL.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        //Tạo dữ liệu mẫu để test
-        for (int i = 0; i < 100; i++) {
-            NhanVienDTO nhanVienDTO = new NhanVienDTO(
-                    "NV" + i, "Nhân viên " + i, "2347856348756", i % 3, "" + i, NhanVienBUS.getInstance().hashPassword("" + i, null)
-            );
-            nhanVienDTOs.add(nhanVienDTO);
-        }
-
         return nhanVienDTOs;
     }
 

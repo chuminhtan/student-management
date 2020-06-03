@@ -10,11 +10,10 @@ import DTO.NhanVienDTO;
 import java.awt.Color;
 import java.awt.Font;
 import java.util.ArrayList;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -62,7 +61,21 @@ public final class UI_QuanLyNhanVIen_New extends javax.swing.JPanel {
         this.tableNhanVien.getTableHeader().setForeground(CustomComponentModify.DARK);
         this.tableNhanVien.setSelectionBackground(new Color(0, 0, 0, 100));
         this.tableNhanVien.setModel(this.nhanVienTableModel);
-        //Tính thêm padding cho cell mà lười nên thôi
+        this.nhanVienTableModel.UpdataInTable();
+        this.nhanVienTableModel.setColumnIdentifiers(NhanVienDTO.getVectorColumnIdentifiers());
+        this.tableNhanVien.getColumnModel().getColumn(3).setCellRenderer(new DefaultTableCellRenderer() {
+            @Override
+            protected void setValue(Object value) {
+                if (value != null) {
+                    String loai = value.toString();
+                    this.setText("1".equals(loai) ? "Ghi danh" : ("2".equals(loai) ? "Học vụ" : "Quản lý"));
+                } else {
+                    super.setValue(value);
+                }
+            }
+
+        });
+        //Tính thêm padding,striped cho cell mà lười nên thôi
     }
 
     public void initializeEvents() {
@@ -103,7 +116,7 @@ public final class UI_QuanLyNhanVIen_New extends javax.swing.JPanel {
 
     public void refreshDataInTable() {
         this.nhanVienTableModel.setNhanVienDTOs(NhanVienBUS.getInstance().getDanhSachNhanVien());
-        this.nhanVienTableModel.UpdataInTable();
+        this.nhanVienTableModel.UpdataInTable();        
     }
 
     /**
@@ -208,10 +221,9 @@ public final class UI_QuanLyNhanVIen_New extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(buttonLamMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 58, Short.MAX_VALUE)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(buttonSua, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
-                        .addComponent(buttonXoa, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(buttonThem, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(buttonSua, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
+                    .addComponent(buttonXoa, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(buttonThem, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -232,15 +244,30 @@ public final class UI_QuanLyNhanVIen_New extends javax.swing.JPanel {
         tableNhanVien.setForeground(new java.awt.Color(0, 0, 0));
         tableNhanVien.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Mã nhân viên", "Họ tên", "Số điện thoại", "Loại", "Tên đăng nhập", "<ật khẩu"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, true, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(tableNhanVien);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -341,7 +368,7 @@ public final class UI_QuanLyNhanVIen_New extends javax.swing.JPanel {
 
         if (deleteChooseResult == JOptionPane.YES_OPTION) {
             //Xoá ngay và luôn 
-String messageResults = "";            
+            String messageResults = "";
             for (NhanVienDTO deletedNhanVienDTO : deletedNhanVienDTOs) {
                 boolean deleteResult = NhanVienBUS.getInstance().xoaNhanVien(deletedNhanVienDTO);
                 messageResults += "Xóa nhân viên " + deletedNhanVienDTO.getMA_NV() + " - " + deletedNhanVienDTO.getHO_TEN() + " " + (deleteResult ? "thành công" : "thất bại");

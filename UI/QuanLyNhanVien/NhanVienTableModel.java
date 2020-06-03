@@ -39,22 +39,18 @@ public class NhanVienTableModel extends DefaultTableModel {
     }
 
     public void UpdataInTable() {
-        Vector<Vector> dataVectors = new Vector<>();
+        super.getDataVector().clear();
         for (NhanVienDTO nhanVienDTO : this.nhanVienDTOs) {
-            dataVectors.add(nhanVienDTO.toVector());
+            super.addRow(nhanVienDTO.toVector());
         }
-
-        super.setDataVector(dataVectors, NhanVienDTO.getVectorColumnIdentifiers());
         super.fireTableDataChanged();
     }
 
     public void UpdataInTable(Collection<NhanVienDTO> inputNhanVienDTOs) {
-        Vector<Vector> dataVectors = new Vector<>();
+        super.getDataVector().clear();
         for (NhanVienDTO inputNhanVienDTO : inputNhanVienDTOs) {
-            dataVectors.add(inputNhanVienDTO.toVector());
+            super.addRow(inputNhanVienDTO.toVector());
         }
-
-        super.setDataVector(dataVectors, NhanVienDTO.getVectorColumnIdentifiers());
         super.fireTableDataChanged();
     }
 
@@ -74,4 +70,10 @@ public class NhanVienTableModel extends DefaultTableModel {
 
         this.UpdataInTable(filteredNhanVienDTOs);
     }
+
+    @Override
+    public boolean isCellEditable(int row, int column) {
+        return false;
+    }
+
 }
