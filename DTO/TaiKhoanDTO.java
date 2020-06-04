@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.Vector;
 
-public class NhanVienDTO {
+public class TaiKhoanDTO {
 
     private String MA_NV;
     private String HO_TEN;
@@ -18,10 +18,10 @@ public class NhanVienDTO {
     private String TEN_DANG_NHAP;
     private String MAT_KHAU;
 
-    public NhanVienDTO() {
+    public TaiKhoanDTO() {
     }
 
-    public NhanVienDTO(String MA_NV, String HO_TEN, String SDT, Integer LOAI, String TEN_DANG_NHAP, String MAT_KHAU) {
+    public TaiKhoanDTO(String MA_NV, String HO_TEN, String SDT, Integer LOAI, String TEN_DANG_NHAP, String MAT_KHAU) {
         this.MA_NV = MA_NV;
         this.HO_TEN = HO_TEN;
         this.SDT = SDT;
@@ -32,7 +32,7 @@ public class NhanVienDTO {
 
     public static Object[] getArrayColumnIdentifiers() {
         return new Object[]{
-            "Mã nhân viên",
+            "Mã tài khoản",
             "Họ tên",
             "Số điện thoại",
             "Loại",
@@ -40,9 +40,9 @@ public class NhanVienDTO {
             "Mật khẩu"
         };
     }
-    
+
     public static Vector getVectorColumnIdentifiers() {
-        return new Vector(Arrays.asList(NhanVienDTO.getArrayColumnIdentifiers()));
+        return new Vector(Arrays.asList(TaiKhoanDTO.getArrayColumnIdentifiers()));
     }
 
     public Object[] toArray() {
@@ -55,12 +55,12 @@ public class NhanVienDTO {
             this.MAT_KHAU
         };
     }
-    
+
     public Vector toVector() {
         return new Vector(Arrays.asList(this.toArray()));
     }
 
-    public NhanVienDTO fromArray(Object[] array) {
+    public TaiKhoanDTO fromArray(Object[] array) {
         this.MA_NV = (String) array[0];
         this.HO_TEN = (String) array[1];
         this.SDT = (String) array[2];
@@ -69,15 +69,15 @@ public class NhanVienDTO {
         this.MAT_KHAU = (String) array[5];
         return this;
     }
-    
-    public NhanVienDTO fromVector(Vector vector) {
+
+    public TaiKhoanDTO fromVector(Vector vector) {
         return this.fromArray(vector.toArray());
     }
 
     @Override
     public String toString() {
         return "Nhân viên có"
-                + " mã nhân viên là '" + MA_NV + "'"
+                + " mã tài khoản là '" + MA_NV + "'"
                 + ",  họ tên là '" + HO_TEN + "'"
                 + ",  số điện thoại là '" + SDT + "'"
                 + ", thuộc loại '" + this.getLOAIToString() + "'"
@@ -108,7 +108,7 @@ public class NhanVienDTO {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final NhanVienDTO other = (NhanVienDTO) obj;
+        final TaiKhoanDTO other = (TaiKhoanDTO) obj;
         if (!Objects.equals(this.MA_NV, other.MA_NV)) {
             return false;
         }
@@ -129,12 +129,69 @@ public class NhanVienDTO {
         }
         return true;
     }
-    
+
+    public boolean validateMA_NV() throws TaiKhoanValidateException {
+        if (this.MA_NV == null) {
+            throw new TaiKhoanValidateException("Mã nhân viên của tài khoản không tồn tại");
+        }
+        return true;
+    }
+
+    public boolean validateHO_TEN() throws TaiKhoanValidateException {
+        if (this.HO_TEN == null) {
+            throw new TaiKhoanValidateException("Họ tên của tài khoản không tồn tại");
+        }
+        if (!this.HO_TEN.matches("^([A-Z][a-z]*)( [A-Z][a-z]*)*$")) {
+            throw new TaiKhoanValidateException("Họ tên của tài khoản không đạt yêu cầu");
+        }
+        return true;
+    }
+
+    public boolean validateSDT() throws TaiKhoanValidateException {
+        if (this.SDT == null) {
+            throw new TaiKhoanValidateException("Số điện thoại của tài khoản không tồn tại");
+        }
+        if (!this.SDT.matches("^[0-9]{10,}$")) {
+            throw new TaiKhoanValidateException("Số điện thoại của tài khoản không đạt yêu cầu");
+        }
+        return true;
+    }
+
+    public boolean validateLOAI() throws TaiKhoanValidateException {
+        if (this.LOAI == null) {
+            throw new TaiKhoanValidateException("Loại của tài khoản không tồn tại");
+        }
+        if (!this.LOAI.toString().matches("[0-9]")) {
+            throw new TaiKhoanValidateException("Loại của tài khoản không đạt yêu cầu");
+        }
+        return true;
+    }
+
+    public boolean validateTEN_DANG_NHAP() throws TaiKhoanValidateException {
+        if (this.TEN_DANG_NHAP == null) {
+            throw new TaiKhoanValidateException("Tên đăng nhập của tài khoản không tồn tại");
+        }
+        if (!this.TEN_DANG_NHAP.matches("^[A-Za-z0-9 ]+$")) {
+            throw new TaiKhoanValidateException("Tên đăng nhập của tài khoản không đạt yêu cầu");
+        }
+        return true;
+    }
+
+    public boolean validateMAT_KHAU() throws TaiKhoanValidateException {
+        if (this.MAT_KHAU == null) {
+            throw new TaiKhoanValidateException("Mật khẩu của tài khoản không tồn tại");
+        }
+        if (this.MAT_KHAU.length() < 1) {
+            throw new TaiKhoanValidateException("Mật khẩu của tài khoản quá ngắn");
+        }
+        return true;
+    }
+
     public String getLOAIToString() {
         return this.LOAI == 1 ? "Ghi danh" : (this.LOAI == 2 ? "Học vụ" : "Quản lý");
     }
-    
-    public void setLOAIFromString(String stringLOAI){
+
+    public void setLOAIFromString(String stringLOAI) {
         this.LOAI = "Ghi danh".equals(stringLOAI) ? 1 : ("Học vụ".equals(stringLOAI) ? 2 : 0);
     }
 

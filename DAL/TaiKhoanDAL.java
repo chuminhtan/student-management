@@ -5,8 +5,8 @@
  */
 package DAL;
 
-import BUS.NhanVienBUS;
-import DTO.NhanVienDTO;
+import BUS.TaiKhoanBUS;
+import DTO.TaiKhoanDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,21 +14,21 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class NhanVienDAL {
+public class TaiKhoanDAL {
 
-    private NhanVienDAL() {
+    private TaiKhoanDAL() {
     }
-    private static NhanVienDAL instance;
+    private static TaiKhoanDAL instance;
 
-    public static NhanVienDAL getInstance() {
+    public static TaiKhoanDAL getInstance() {
         if (instance == null) {
-            instance = new NhanVienDAL();
+            instance = new TaiKhoanDAL();
         }
         return instance;
     }
 
-    public ArrayList<NhanVienDTO> getAll() {
-        ArrayList<NhanVienDTO> nhanVienDTOs = new ArrayList<>();
+    public ArrayList<TaiKhoanDTO> getAll() {
+        ArrayList<TaiKhoanDTO> nhanVienDTOs = new ArrayList<>();
 
         try {
             Connection connection = DatabaseConnection.getInstance().CreateNewConnection();
@@ -39,7 +39,7 @@ public class NhanVienDAL {
 
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                NhanVienDTO nhanVienDTO = new NhanVienDTO(
+                TaiKhoanDTO nhanVienDTO = new TaiKhoanDTO(
                         resultSet.getString("MA_NV"),
                         resultSet.getString("HO_TEN"),
                         resultSet.getString("SDT"),
@@ -54,13 +54,13 @@ public class NhanVienDAL {
             connection.commit();
             DatabaseConnection.getInstance().RemoveConnection(connection);
         } catch (Exception ex) {
-            Logger.getLogger(NhanVienDAL.class.getName()).log(Level.SEVERE, null, ex);
+//            Logger.getLogger(TaiKhoanDAL.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return nhanVienDTOs;
     }
 
-    public boolean them(NhanVienDTO nhanVienDTO) {
+    public boolean them(TaiKhoanDTO nhanVienDTO) {
         try {
             Connection connection = DatabaseConnection.getInstance().CreateNewConnection();
             connection.setAutoCommit(false);
@@ -81,12 +81,12 @@ public class NhanVienDAL {
 
             return queryResult > 0;
         } catch (Exception ex) {
-            Logger.getLogger(NhanVienDAL.class.getName()).log(Level.SEVERE, null, ex);
+//            Logger.getLogger(TaiKhoanDAL.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }
 
-    public boolean xoa(NhanVienDTO nhanVienDTO) {
+    public boolean xoa(TaiKhoanDTO nhanVienDTO) {
         try {
             Connection connection = DatabaseConnection.getInstance().CreateNewConnection();
             connection.setAutoCommit(false);
@@ -102,12 +102,12 @@ public class NhanVienDAL {
 
             return queryResult > 0;
         } catch (Exception ex) {
-            Logger.getLogger(NhanVienDAL.class.getName()).log(Level.SEVERE, null, ex);
+//            Logger.getLogger(TaiKhoanDAL.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }
 
-    public boolean sua(NhanVienDTO nhanVienDTO, NhanVienDTO newNhanVienDTO) {
+    public boolean sua(TaiKhoanDTO nhanVienDTO, TaiKhoanDTO newNhanVienDTO) {
         try {
             Connection connection = DatabaseConnection.getInstance().CreateNewConnection();
             connection.setAutoCommit(false);
@@ -129,7 +129,7 @@ public class NhanVienDAL {
 
             return queryResult > 0;
         } catch (Exception ex) {
-            Logger.getLogger(NhanVienDAL.class.getName()).log(Level.SEVERE, null, ex);
+//            Logger.getLogger(TaiKhoanDAL.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }

@@ -12,7 +12,7 @@ import UI.KhachHangUI.UI_KhachHang;
 import UI.DangNhapUI.UI_DangNhap;
 import UI.QuanLyNhanVien.CustomBorder;
 import UI.QuanLyNhanVien.CustomComponentModify;
-import UI.QuanLyNhanVien.UI_QuanLyNhanVIen_New;
+import UI.QuanLyNhanVien.UI_QuanLyTaiKhoan;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
@@ -383,7 +383,7 @@ public final class UI_Main extends javax.swing.JFrame {
     private UI_LopHoc ui_lop = new UI_LopHoc();
     private UI_KhachHang ui_kh = new UI_KhachHang();
     private UI_ChuongTrinh ui_ct = new UI_ChuongTrinh();
-    private UI_QuanLyNhanVIen_New ui_tk = new UI_QuanLyNhanVIen_New();
+    private UI_QuanLyTaiKhoan ui_tk = new UI_QuanLyTaiKhoan();
     //Kết thúc biến tự định nghĩa
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

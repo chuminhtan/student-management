@@ -5,10 +5,6 @@
  */
 package UI.QuanLyNhanVien;
 
-/**
- *
- * @author caonguyen
- */
-public interface AfterSuaNhanVien {
-    public void DoAfterSuaNhanVien();
+public interface AfterThemTaiKhoan {
+    public void DoAfterThemTaiKhoan();
 }

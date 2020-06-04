@@ -5,43 +5,48 @@
  */
 package UI.QuanLyNhanVien;
 
-import BUS.NhanVienBUS;
-import DTO.NhanVienDTO;
+import BUS.TaiKhoanBUS;
+import DTO.TaiKhoanValidateException;
+import DTO.TaiKhoanDTO;
+import java.awt.Window;
 import javax.swing.JOptionPane;
 
-public class FormSuaNhanVien extends javax.swing.JDialog {
+public class FormSuaTaiKhoan extends javax.swing.JDialog {
 
-    private AfterSuaNhanVien afterSuaNhanVien;
-    private NhanVienDTO defaultNhanVienDTO;
+    private AfterSuaTaiKhoan afterSuaNhanVien;
+    private TaiKhoanDTO defaultNhanVienDTO;
 
-    /**
-     * Creates new form FormCapNhatTaiKhoan
-     */
-    public FormSuaNhanVien() {
+    public FormSuaTaiKhoan() {
+        super();
         initComponents();
     }
 
-    public AfterSuaNhanVien getAfterSuaNhanVien() {
+    public FormSuaTaiKhoan(Window owner, ModalityType modalityType) {
+        super(owner, modalityType);
+        initComponents();
+    }
+
+    public AfterSuaTaiKhoan getAfterSuaNhanVien() {
         return afterSuaNhanVien;
     }
 
-    public void setAfterSuaNhanVien(AfterSuaNhanVien afterSuaNhanVien) {
-        this.afterSuaNhanVien = afterSuaNhanVien;
+    public void setAfterSuaTaiKhoan(AfterSuaTaiKhoan afterSuaTaiKhoan) {
+        this.afterSuaNhanVien = afterSuaTaiKhoan;
     }
 
-    public void clearAfterSuaNhanVien(AfterSuaNhanVien afterSuaNhanVien) {
+    public void clearAfterSuaNhanVien() {
         this.afterSuaNhanVien = null;
     }
 
-    public NhanVienDTO getDefaultNhanVienDTO() {
+    public TaiKhoanDTO getDefaultNhanVienDTO() {
         return defaultNhanVienDTO;
     }
 
-    public void setDefaultNhanVienDTO(NhanVienDTO defaultNhanVienDTO) {
+    public void setDefaultNhanVienDTO(TaiKhoanDTO defaultNhanVienDTO) {
         this.defaultNhanVienDTO = defaultNhanVienDTO;
     }
 
-    public void setDefaultInformations(NhanVienDTO nhanVienDTO) {
+    public void setDefaultInformations(TaiKhoanDTO nhanVienDTO) {
         this.textfeildHoTen.setText(this.defaultNhanVienDTO.getHO_TEN());
         this.textfeilTenDangNhap.setText(this.defaultNhanVienDTO.getTEN_DANG_NHAP());
         this.textfeildSDT.setText(this.defaultNhanVienDTO.getSDT());
@@ -49,10 +54,10 @@ public class FormSuaNhanVien extends javax.swing.JDialog {
         this.comboboxLoaiNhanVien.setSelectedIndex(this.defaultNhanVienDTO.getLOAI());
     }
 
-    public NhanVienDTO parseInformation() {
-        NhanVienDTO nhanVienDTO = null;
+    public TaiKhoanDTO parseInformation() {
+        TaiKhoanDTO nhanVienDTO = null;
 
-        nhanVienDTO = new NhanVienDTO(
+        nhanVienDTO = new TaiKhoanDTO(
                 this.defaultNhanVienDTO.getMA_NV(),
                 this.textfeildHoTen.getText(),
                 this.textfeildSDT.getText(),
@@ -239,13 +244,13 @@ public class FormSuaNhanVien extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonXacNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonXacNhanActionPerformed
-        //Tiến hành sửa nhân viên 
-        NhanVienDTO newNhanVienDTO = this.parseInformation();
+        //Tiến hành sửa tài khoản 
+        TaiKhoanDTO newNhanVienDTO = this.parseInformation();
 
         if (newNhanVienDTO.equals(this.defaultNhanVienDTO)) {
             JOptionPane.showMessageDialog(
                     this,
-                    "Bạn chưa sửa thông tin nhân viên",
+                    "Bạn chưa sửa thông tin tài khoản",
                     "Thông báo",
                     JOptionPane.ERROR_MESSAGE
             );
@@ -253,29 +258,36 @@ public class FormSuaNhanVien extends javax.swing.JDialog {
         }
 
         int deleteResult = JOptionPane.showConfirmDialog(this,
-                "Bạn có chắc chắn muốn sửa thông tin nhân viên " + newNhanVienDTO.getMA_NV() + ":\n"
-                + "'" + this.defaultNhanVienDTO.getHO_TEN() + "'   ➠   '" + newNhanVienDTO.getHO_TEN() + "'" + "\n"
-                + "'" + this.defaultNhanVienDTO.getSDT() + "'   ➠   '" + newNhanVienDTO.getSDT() + "'" + "\n"
-                + "'" + this.defaultNhanVienDTO.getLOAIToString() + "'   ➠   '" + newNhanVienDTO.getLOAIToString() + "'" + "\n"
-                + "'" + this.defaultNhanVienDTO.getTEN_DANG_NHAP() + "'   ➠   '" + newNhanVienDTO.getTEN_DANG_NHAP() + "'" + "\n"
-                + "'" + this.defaultNhanVienDTO.getMAT_KHAU() + "'   ➠   '" + newNhanVienDTO.getMAT_KHAU() + "'" + "\n",
-                "Sủa thông tin nhân viên",
+                "Bạn có chắc chắn muốn sửa thông tin tài khoản " + newNhanVienDTO.getMA_NV() + ":\n"
+                + "Tên tài khoản: '" + this.defaultNhanVienDTO.getHO_TEN() + "'   ➠   '" + newNhanVienDTO.getHO_TEN() + "'" + "\n"
+                + "Số điện thoại: '" + this.defaultNhanVienDTO.getSDT() + "'   ➠   '" + newNhanVienDTO.getSDT() + "'" + "\n"
+                + "Loại tài khoản: '" + this.defaultNhanVienDTO.getLOAIToString() + "'   ➠   '" + newNhanVienDTO.getLOAIToString() + "'" + "\n"
+                + "Tên đăng nhập: '" + this.defaultNhanVienDTO.getTEN_DANG_NHAP() + "'   ➠   '" + newNhanVienDTO.getTEN_DANG_NHAP() + "'" + "\n"
+                + "Mật khẩu: '" + this.defaultNhanVienDTO.getMAT_KHAU() + "'   ➠   '" + newNhanVienDTO.getMAT_KHAU() + "'" + "\n",
+                "Sủa thông tin tài khoản",
                 JOptionPane.YES_NO_OPTION,
                 JOptionPane.INFORMATION_MESSAGE
         );
 
         if (deleteResult == JOptionPane.YES_OPTION) {
             //Sửa ngay và luôn 
-            boolean suaResult = NhanVienBUS.getInstance().suaNhanVien(defaultNhanVienDTO, newNhanVienDTO);
-            String messageResults = "Sửa nhân viên " + newNhanVienDTO.getMA_NV() + " - " + newNhanVienDTO.getHO_TEN() + " " + (suaResult ? "thành công" : "thất bại");
-            JOptionPane.showMessageDialog(this, messageResults, "Kết quả sửa nhân viên", JOptionPane.INFORMATION_MESSAGE);
+            boolean suaResult;
+            try {
+                suaResult = TaiKhoanBUS.getInstance().suaNhanVien(defaultNhanVienDTO, newNhanVienDTO);
+                String messageResults = "Sửa tài khoản " + newNhanVienDTO.getMA_NV() + " - " + newNhanVienDTO.getHO_TEN() + " " + (suaResult ? "thành công" : "thất bại");
+                JOptionPane.showMessageDialog(this, messageResults, "Kết quả sửa tài khoản", JOptionPane.INFORMATION_MESSAGE);
+            } catch (TaiKhoanValidateException ex) {
+                String messageResults = "Sửa tài khoản " + newNhanVienDTO.getMA_NV() + " - " + newNhanVienDTO.getHO_TEN() + " " + "thất bại do " + ex.getMessage();
+                JOptionPane.showMessageDialog(this, messageResults, "Kết quả sửa tài khoản", JOptionPane.INFORMATION_MESSAGE);
+            }
+
         } else if (deleteResult == JOptionPane.NO_OPTION) {
             return;
         }
 
         //Làm việc sau khi sửa 
         if (this.afterSuaNhanVien != null) {
-            this.afterSuaNhanVien.DoAfterSuaNhanVien();
+            this.afterSuaNhanVien.DoAfterSuaTaiKhoan();
         }
     }//GEN-LAST:event_buttonXacNhanActionPerformed
 
@@ -300,14 +312,18 @@ public class FormSuaNhanVien extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FormSuaNhanVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormSuaTaiKhoan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FormSuaNhanVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormSuaTaiKhoan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FormSuaNhanVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormSuaTaiKhoan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FormSuaNhanVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormSuaTaiKhoan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -316,7 +332,7 @@ public class FormSuaNhanVien extends javax.swing.JDialog {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FormSuaNhanVien().setVisible(true);
+                new FormSuaTaiKhoan().setVisible(true);
             }
         });
     }

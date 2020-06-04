@@ -27,7 +27,7 @@ public class DBConnect {
         try {
             conn = DriverManager.getConnection(url, user, password);
         } catch (SQLException ex) {
-            Logger.getLogger(DBConnect.class.getName()).log(Level.SEVERE, null, ex);
+//            Logger.getLogger(DBConnect.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

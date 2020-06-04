@@ -5,29 +5,25 @@
  */
 package UI.QuanLyNhanVien;
 
-import BUS.NhanVienBUS;
-import DTO.NhanVienDTO;
+import BUS.TaiKhoanBUS;
+import DTO.TaiKhoanValidateException;
+import DTO.TaiKhoanDTO;
 import java.awt.Color;
+import java.awt.Dialog;
 import java.awt.Font;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author caonguyen
- */
-public final class UI_QuanLyNhanVIen_New extends javax.swing.JPanel {
+public final class UI_QuanLyTaiKhoan extends javax.swing.JPanel {
 
-    private final NhanVienTableModel nhanVienTableModel = new NhanVienTableModel();
+    private final TaiKhoanTableModel nhanVienTableModel = new TaiKhoanTableModel();
 
-    /**
-     * Creates new form UI_QuanLyNhanVIen_New
-     */
-    public UI_QuanLyNhanVIen_New() {
+    public UI_QuanLyTaiKhoan() {
         this.initComponents();
         this.initializeLookAndFeels();
         this.initializeEvents();
@@ -62,7 +58,7 @@ public final class UI_QuanLyNhanVIen_New extends javax.swing.JPanel {
         this.tableNhanVien.setSelectionBackground(new Color(0, 0, 0, 100));
         this.tableNhanVien.setModel(this.nhanVienTableModel);
         this.nhanVienTableModel.UpdataInTable();
-        this.nhanVienTableModel.setColumnIdentifiers(NhanVienDTO.getVectorColumnIdentifiers());
+        this.nhanVienTableModel.setColumnIdentifiers(TaiKhoanDTO.getVectorColumnIdentifiers());
         this.tableNhanVien.getColumnModel().getColumn(3).setCellRenderer(new DefaultTableCellRenderer() {
             @Override
             protected void setValue(Object value) {
@@ -109,16 +105,16 @@ public final class UI_QuanLyNhanVIen_New extends javax.swing.JPanel {
             }
         });
     }
-
-    public NhanVienTableModel getNhanVienTableModel() {
+    
+    public TaiKhoanTableModel getNhanVienTableModel() {
         return nhanVienTableModel;
     }
 
     public void refreshDataInTable() {
-        this.nhanVienTableModel.setNhanVienDTOs(NhanVienBUS.getInstance().getDanhSachNhanVien());
-        this.nhanVienTableModel.UpdataInTable();        
+        this.nhanVienTableModel.setNhanVienDTOs(TaiKhoanBUS.getInstance().getDanhSachNhanVien());
+        this.nhanVienTableModel.UpdataInTable();
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -219,12 +215,12 @@ public final class UI_QuanLyNhanVIen_New extends javax.swing.JPanel {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(buttonLamMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 58, Short.MAX_VALUE)
                     .addComponent(buttonSua, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
                     .addComponent(buttonXoa, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(buttonThem, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -316,18 +312,17 @@ public final class UI_QuanLyNhanVIen_New extends javax.swing.JPanel {
     }//GEN-LAST:event_buttonStopSearchActionPerformed
 
     private void buttonThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonThemActionPerformed
-        FormThemNhanVien formThemNhanVien = new FormThemNhanVien();
+        FormThemTaiKhoan formThemTaiKhoan = new FormThemTaiKhoan(SwingUtilities.getWindowAncestor(this), Dialog.ModalityType.DOCUMENT_MODAL);
 
-        formThemNhanVien.setAfterThemNhanVien(new AfterThemNhanVien() {
+        formThemTaiKhoan.setAfterThemTaiKhoan(new AfterThemTaiKhoan() {
             @Override
-            public void DoAfterThemNhanVien() {
+            public void DoAfterThemTaiKhoan() {
                 refreshDataInTable();
             }
         });
 
-        formThemNhanVien.setLocationRelativeTo(this);
-        formThemNhanVien.setVisible(true);
-        formThemNhanVien.show();
+        formThemTaiKhoan.setLocationRelativeTo(this);
+        formThemTaiKhoan.setVisible(true);
     }//GEN-LAST:event_buttonThemActionPerformed
 
     private void buttonXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonXoaActionPerformed
@@ -336,7 +331,7 @@ public final class UI_QuanLyNhanVIen_New extends javax.swing.JPanel {
         if (rowSelecteds.length < 0) {
             JOptionPane.showMessageDialog(
                     this,
-                    "Hãy chọn ít nhất một nhân viên trước khi nhấn nút",
+                    "Hãy chọn ít nhất một tài khoản trước khi nhấn nút",
                     "Thông báo",
                     JOptionPane.ERROR_MESSAGE
             );
@@ -346,9 +341,9 @@ public final class UI_QuanLyNhanVIen_New extends javax.swing.JPanel {
         DefaultTableModel defaultTableModel = (DefaultTableModel) this.tableNhanVien.getModel();
 
         String deletedNhanVienDTOInfos = "";
-        ArrayList<NhanVienDTO> deletedNhanVienDTOs = new ArrayList<>();
+        ArrayList<TaiKhoanDTO> deletedNhanVienDTOs = new ArrayList<>();
         for (int rowSelected : rowSelecteds) {
-            NhanVienDTO deletedNhanVienDTO = new NhanVienDTO().fromVector(defaultTableModel.getDataVector().get(rowSelected));
+            TaiKhoanDTO deletedNhanVienDTO = new TaiKhoanDTO().fromVector(defaultTableModel.getDataVector().get(rowSelected));
             deletedNhanVienDTOs.add(deletedNhanVienDTO);
             deletedNhanVienDTOInfos += deletedNhanVienDTO.toString();
             deletedNhanVienDTOInfos += "\n";
@@ -356,12 +351,12 @@ public final class UI_QuanLyNhanVIen_New extends javax.swing.JPanel {
 
         int deleteChooseResult = JOptionPane.showConfirmDialog(
                 this,
-                "Bạn có chắc chắn muốn xoá " + rowSelecteds.length + " nhân viên không? "
+                "Bạn có chắc chắn muốn xoá " + rowSelecteds.length + " tài khoản không? "
                 + "\n"
-                + "Thông tin" + (rowSelecteds.length > 1 ? " các" : "") + " nhân viên đó là: "
+                + "Thông tin" + (rowSelecteds.length > 1 ? " các" : "") + " tài khoản đó là: "
                 + "\n"
                 + deletedNhanVienDTOInfos,
-                "Xóa nhân viên",
+                "Xóa tài khoản",
                 JOptionPane.YES_NO_OPTION,
                 JOptionPane.INFORMATION_MESSAGE
         );
@@ -369,12 +364,19 @@ public final class UI_QuanLyNhanVIen_New extends javax.swing.JPanel {
         if (deleteChooseResult == JOptionPane.YES_OPTION) {
             //Xoá ngay và luôn 
             String messageResults = "";
-            for (NhanVienDTO deletedNhanVienDTO : deletedNhanVienDTOs) {
-                boolean deleteResult = NhanVienBUS.getInstance().xoaNhanVien(deletedNhanVienDTO);
-                messageResults += "Xóa nhân viên " + deletedNhanVienDTO.getMA_NV() + " - " + deletedNhanVienDTO.getHO_TEN() + " " + (deleteResult ? "thành công" : "thất bại");
+            for (TaiKhoanDTO deletedNhanVienDTO : deletedNhanVienDTOs) {
+                boolean deleteResult;
+                messageResults += "Xóa tài khoản " + deletedNhanVienDTO.getMA_NV() + " - " + deletedNhanVienDTO.getHO_TEN() + " ";
+                try {
+                    deleteResult = TaiKhoanBUS.getInstance().xoaNhanVien(deletedNhanVienDTO);
+                    messageResults += (deleteResult ? "thành công" : "thất bại");
+                } catch (TaiKhoanValidateException ex) {
+                    messageResults += "Thất bại do " + ex.getMessage();
+                }
+
                 messageResults += "\n";
             }
-            JOptionPane.showMessageDialog(this, messageResults, "Kết quả xóa nhân viên", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, messageResults, "Kết quả xóa tài khoản", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_buttonXoaActionPerformed
 
@@ -384,29 +386,29 @@ public final class UI_QuanLyNhanVIen_New extends javax.swing.JPanel {
         if (rowSelected < 0) {
             JOptionPane.showMessageDialog(
                     this,
-                    "Hãy chọn một nhân viên trước khi nhấn nút",
+                    "Hãy chọn một tài khoản trước khi nhấn nút",
                     "Thông báo",
                     JOptionPane.ERROR_MESSAGE
             );
             return;
         }
 
-        FormSuaNhanVien formCapNhatNhanVien = new FormSuaNhanVien();
+        FormSuaTaiKhoan formSuaTaiKhoan = new FormSuaTaiKhoan(SwingUtilities.getWindowAncestor(this), Dialog.ModalityType.DOCUMENT_MODAL);
 
         DefaultTableModel defaultTableModel = (DefaultTableModel) this.tableNhanVien.getModel();
-        NhanVienDTO nhanVienDTO = new NhanVienDTO();
+        TaiKhoanDTO nhanVienDTO = new TaiKhoanDTO();
         nhanVienDTO.fromVector(defaultTableModel.getDataVector().get(rowSelected));
-        formCapNhatNhanVien.setDefaultNhanVienDTO(nhanVienDTO);
-        formCapNhatNhanVien.setDefaultInformations(nhanVienDTO);
+        formSuaTaiKhoan.setDefaultNhanVienDTO(nhanVienDTO);
+        formSuaTaiKhoan.setDefaultInformations(nhanVienDTO);
 
-        formCapNhatNhanVien.setAfterSuaNhanVien(new AfterSuaNhanVien() {
+        formSuaTaiKhoan.setAfterSuaTaiKhoan(new AfterSuaTaiKhoan() {
             @Override
-            public void DoAfterSuaNhanVien() {
-                refreshDataInTable();
+            public void DoAfterSuaTaiKhoan() {
+                refreshDataInTable();                
             }
         });
 
-        formCapNhatNhanVien.show();
+        formSuaTaiKhoan.setVisible(true);
     }//GEN-LAST:event_buttonSuaActionPerformed
 
     private void buttonLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLamMoiActionPerformed
