@@ -332,7 +332,7 @@ public final class UI_QuanLyTaiKhoan extends javax.swing.JPanel {
     private void buttonXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonXoaActionPerformed
         int[] rowSelecteds = this.tableNhanVien.getSelectedRows();
 
-        if (rowSelecteds.length < 0) {
+        if (rowSelecteds.length < 1) {
             JOptionPane.showMessageDialog(
                     this,
                     "Hãy chọn ít nhất một tài khoản trước khi nhấn nút",
