@@ -176,6 +176,7 @@
                 <Component class="javax.swing.JButton" name="buttonThem">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="&#x2295;"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Th&#xea;m t&#xe0;i kho&#x1ea3;n"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonThemActionPerformed"/>
@@ -184,6 +185,7 @@
                 <Component class="javax.swing.JButton" name="buttonXoa">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="&#x2296;"/>
+                    <Property name="toolTipText" type="java.lang.String" value="X&#xf3;a t&#xe0;i kho&#x1ea3;n"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonXoaActionPerformed"/>
@@ -192,6 +194,7 @@
                 <Component class="javax.swing.JButton" name="buttonSua">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="&#x2217;"/>
+                    <Property name="toolTipText" type="java.lang.String" value="S&#x1eed;a t&#xe0;i kho&#x1ea3;n"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonSuaActionPerformed"/>
@@ -200,6 +203,7 @@
                 <Component class="javax.swing.JButton" name="buttonLamMoi">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="\ud83d\uddd8" containsInvalidXMLChars="true"/>
+                    <Property name="toolTipText" type="java.lang.String" value="L&#xe0;m m&#x1edb;i"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonLamMoiActionPerformed"/>
