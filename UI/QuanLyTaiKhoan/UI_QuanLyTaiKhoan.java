@@ -141,10 +141,11 @@ public final class UI_QuanLyTaiKhoan extends javax.swing.JPanel {
         jPanel1.setPreferredSize(new java.awt.Dimension(1067, 678));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setForeground(new java.awt.Color(0, 0, 0));
         jPanel2.setPreferredSize(new java.awt.Dimension(297, 70));
 
         labelTimKiem.setText("Tìm kiếm");
+
+        textfieldTuKhoa.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 0, 1, 0, new java.awt.Color(0, 0, 0)));
 
         buttonStopSearch.setText("✕");
         buttonStopSearch.addActionListener(new java.awt.event.ActionListener() {
@@ -178,7 +179,6 @@ public final class UI_QuanLyTaiKhoan extends javax.swing.JPanel {
         );
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel3.setForeground(new java.awt.Color(0, 0, 0));
         jPanel3.setPreferredSize(new java.awt.Dimension(70, 58));
 
         buttonThem.setText("⊕");
@@ -220,7 +220,7 @@ public final class UI_QuanLyTaiKhoan extends javax.swing.JPanel {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(buttonLamMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 58, Short.MAX_VALUE)
+                    .addComponent(buttonLamMoi, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
                     .addComponent(buttonSua, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
                     .addComponent(buttonXoa, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(buttonThem, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -240,8 +240,7 @@ public final class UI_QuanLyTaiKhoan extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        tableNhanVien.setBackground(new java.awt.Color(255, 255, 255));
-        tableNhanVien.setForeground(new java.awt.Color(0, 0, 0));
+        tableNhanVien.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         tableNhanVien.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
@@ -281,7 +280,7 @@ public final class UI_QuanLyTaiKhoan extends javax.swing.JPanel {
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 979, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 1061, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 1057, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
