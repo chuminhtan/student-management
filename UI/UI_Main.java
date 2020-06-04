@@ -27,7 +27,7 @@ public final class UI_Main extends javax.swing.JFrame {
     }
 
     public void changeTabButtonColor(JButton button, Color currentColor, Color hoverColor) {
-        CustomBorder customBorder = new CustomBorder(0, 0, 3, 0);
+        CustomBorder customBorder = new CustomBorder(null, null, new CustomBorder.BorderPiece(10), null);
         button.setBorder(customBorder);
         ((CustomBorder) button.getBorder()).setColor(currentColor);
 
@@ -45,7 +45,7 @@ public final class UI_Main extends javax.swing.JFrame {
             }
         });
 
-        button.setFont(new Font("Noto Sans", Font.PLAIN, 24));
+        button.setFont(new Font("Noto Sans", Font.BOLD, 13));
     }
 
     public void setAllTabButtonColor(Color currentColor, Color hoverColor) {
@@ -58,7 +58,7 @@ public final class UI_Main extends javax.swing.JFrame {
 
     public void changeTabEffect(JButton nextButton) {
         this.setAllTabButtonColor(CustomComponentModify.TRANSPARENT, CustomComponentModify.HOVER_DANGER);
-        this.changeTabButtonColor(nextButton, CustomComponentModify.SUCCESS, CustomComponentModify.HOVER_SUCCESS);
+        this.changeTabButtonColor(nextButton, CustomComponentModify.WARNING, CustomComponentModify.HOVER_WARNING);
     }
 
     /*  =====================Khu vực của Tân======*/
@@ -126,6 +126,7 @@ public final class UI_Main extends javax.swing.JFrame {
         btnThongKe.setContentAreaFilled(false);
         btnThongKe.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnThongKe.setFocusable(false);
+        btnThongKe.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnThongKe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnThongKeActionPerformed(evt);
@@ -139,6 +140,7 @@ public final class UI_Main extends javax.swing.JFrame {
         btnKhachHang.setContentAreaFilled(false);
         btnKhachHang.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnKhachHang.setFocusable(false);
+        btnKhachHang.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnKhachHang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnKhachHangActionPerformed(evt);
@@ -152,6 +154,7 @@ public final class UI_Main extends javax.swing.JFrame {
         btnLopHoc.setContentAreaFilled(false);
         btnLopHoc.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnLopHoc.setFocusable(false);
+        btnLopHoc.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnLopHoc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLopHocActionPerformed(evt);
@@ -165,6 +168,7 @@ public final class UI_Main extends javax.swing.JFrame {
         btnCTHoc.setContentAreaFilled(false);
         btnCTHoc.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCTHoc.setFocusable(false);
+        btnCTHoc.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnCTHoc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCTHocActionPerformed(evt);
@@ -178,6 +182,7 @@ public final class UI_Main extends javax.swing.JFrame {
         btnTaiKhoan.setContentAreaFilled(false);
         btnTaiKhoan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnTaiKhoan.setFocusable(false);
+        btnTaiKhoan.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnTaiKhoan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTaiKhoanActionPerformed(evt);
@@ -230,8 +235,9 @@ public final class UI_Main extends javax.swing.JFrame {
                 .addComponent(btnTaiKhoan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(txtThongTinDangNhap, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnDangXuat, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnDangXuat, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
+                .addContainerGap())
             .addComponent(pnBody, javax.swing.GroupLayout.DEFAULT_SIZE, 1216, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
@@ -247,10 +253,10 @@ public final class UI_Main extends javax.swing.JFrame {
                             .addComponent(btnTaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(btnThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnDangXuat, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtThongTinDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnDangXuat, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtThongTinDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(8, 8, 8)
-                .addComponent(pnBody, javax.swing.GroupLayout.DEFAULT_SIZE, 643, Short.MAX_VALUE))
+                .addComponent(pnBody, javax.swing.GroupLayout.DEFAULT_SIZE, 650, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
