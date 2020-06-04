@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package UI.QuanLyNhanVien;
+package UI.QuanLyTaiKhoan;
 
 import BUS.TaiKhoanBUS;
 import DTO.TaiKhoanValidateException;
@@ -182,6 +182,7 @@ public final class UI_QuanLyTaiKhoan extends javax.swing.JPanel {
         jPanel3.setPreferredSize(new java.awt.Dimension(70, 58));
 
         buttonThem.setText("⊕");
+        buttonThem.setToolTipText("Thêm tài khoản");
         buttonThem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonThemActionPerformed(evt);
@@ -189,6 +190,7 @@ public final class UI_QuanLyTaiKhoan extends javax.swing.JPanel {
         });
 
         buttonXoa.setText("⊖");
+        buttonXoa.setToolTipText("Xóa tài khoản");
         buttonXoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonXoaActionPerformed(evt);
@@ -196,6 +198,7 @@ public final class UI_QuanLyTaiKhoan extends javax.swing.JPanel {
         });
 
         buttonSua.setText("∗");
+        buttonSua.setToolTipText("Sửa tài khoản");
         buttonSua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonSuaActionPerformed(evt);
@@ -203,6 +206,7 @@ public final class UI_QuanLyTaiKhoan extends javax.swing.JPanel {
         });
 
         buttonLamMoi.setText("🗘");
+        buttonLamMoi.setToolTipText("Làm mới");
         buttonLamMoi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonLamMoiActionPerformed(evt);

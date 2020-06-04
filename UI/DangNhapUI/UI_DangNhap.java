@@ -5,18 +5,6 @@
  */
 package UI.DangNhapUI;
 
-import BUS.bus_DangNhap;
-import DTO.dto_DangNhap;
-import UI.ChuongTrinhUI.UI_ChuongTrinh;
-import UI.UI_Main;
-import java.awt.event.KeyEvent;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-
-/**
- *
- * @author ThinkPro
- */
 public class UI_DangNhap extends javax.swing.JFrame {
 
     /**
