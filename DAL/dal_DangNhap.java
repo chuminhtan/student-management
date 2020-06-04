@@ -8,6 +8,10 @@ package DAL;
 import DTO.dto_DangNhap;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -24,7 +28,7 @@ public class dal_DangNhap extends DBConnect {
                     + "FROM NHAN_VIEN "
                     + "WHERE TEN_DANG_NHAP=? AND MAT_KHAU=?";
 
-            PreparedStatement preStatement = conn.prepareStatement(sql);
+            PreparedStatement preStatement = this.conn.prepareStatement(sql);
             preStatement.setString(1, dangNhap.getTenDangNhap());
             preStatement.setString(2, dangNhap.getMatKhau());
 
@@ -39,9 +43,34 @@ public class dal_DangNhap extends DBConnect {
                 dn.setMatKhau(result.getString(4));
             }
             return dn;
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        } catch (SQLException ex) {
+            Logger.getLogger(dal_DangNhap.class.getName()).log(Level.SEVERE, null, ex);
             return dn;
         }
+    }
+
+    public ArrayList<dto_DangNhap> getList() {
+        ArrayList<dto_DangNhap> result = new ArrayList<>();
+
+        String sql = "SELECT * FROM NHANVIEN;";
+
+        try {
+            PreparedStatement preStatement = this.conn.prepareStatement(sql);
+            ResultSet resultSet = preStatement.executeQuery();
+            while (resultSet.next()) {
+                result.add(new dto_DangNhap(
+                        resultSet.getString("MA_NV"),
+                        resultSet.getString("HO_TEN"),
+                        resultSet.getInt("LOAI"),
+                        resultSet.getString("TEN_DANG_NHAP"),
+                        resultSet.getString("MAT_KHAU"),
+                        resultSet.getString("SDT")
+                ));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(dal_DangNhap.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return result;
     }
 }

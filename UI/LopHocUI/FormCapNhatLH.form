@@ -76,10 +76,6 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="btnThemTenLop" alignment="0" min="-2" pref="234" max="-2" attributes="0"/>
                               <Component id="cbThemChuongTrinh" alignment="0" min="-2" pref="234" max="-2" attributes="0"/>
-                              <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="dateKTLop" alignment="0" pref="150" max="32767" attributes="0"/>
-                                  <Component id="dateBDLop" alignment="0" max="32767" attributes="0"/>
-                              </Group>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
@@ -97,7 +93,7 @@
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+                  <EmptySpace pref="50" max="32767" attributes="0"/>
               </Group>
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
@@ -121,21 +117,10 @@
                       <Component id="jLabel2" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
                       <Component id="cbThemChuongTrinh" alignment="3" pref="33" max="32767" attributes="0"/>
                   </Group>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
-                          <Component id="jLabel1" min="-2" pref="33" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="dateBDLop" min="-2" pref="33" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel10" alignment="0" min="-2" pref="33" max="-2" attributes="0"/>
-                      <Component id="dateKTLop" alignment="1" min="-2" pref="33" max="-2" attributes="0"/>
-                  </Group>
+                  <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+                  <Component id="jLabel1" min="-2" pref="33" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                  <Component id="jLabel10" min="-2" pref="33" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel8" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
@@ -248,10 +233,6 @@
             </Property>
             <Property name="text" type="java.lang.String" value="NG&#xc0;Y K&#x1ebe;T TH&#xda;C"/>
           </Properties>
-        </Component>
-        <Component class="com.toedter.calendar.JDateChooser" name="dateBDLop">
-        </Component>
-        <Component class="com.toedter.calendar.JDateChooser" name="dateKTLop">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
           <Properties>
