@@ -58,7 +58,7 @@ public class UI_ChuongTrinh extends javax.swing.JPanel {
         pnChuongTrinh.setBackground(new java.awt.Color(255, 255, 255));
 
         lblTimLop.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lblTimLop.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTimLop.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblTimLop.setText("TÌM CHƯƠNG TRÌNH");
 
         txtTimChuongTrinh.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -202,10 +202,10 @@ public class UI_ChuongTrinh extends javax.swing.JPanel {
                         .addComponent(jspLH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(50, 50, 50))
                     .addGroup(pnChuongTrinhLayout.createSequentialGroup()
-                        .addComponent(lblTimLop)
-                        .addGap(35, 35, 35)
+                        .addComponent(lblTimLop, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(50, 50, 50)
                         .addComponent(txtTimChuongTrinh, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 369, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 325, Short.MAX_VALUE)
                         .addComponent(btnThemChuongTrinh, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(72, 72, 72))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnChuongTrinhLayout.createSequentialGroup()
@@ -219,7 +219,7 @@ public class UI_ChuongTrinh extends javax.swing.JPanel {
             pnChuongTrinhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnChuongTrinhLayout.createSequentialGroup()
                 .addGroup(pnChuongTrinhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblTimLop, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblTimLop, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtTimChuongTrinh, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnThemChuongTrinh, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(25, 25, 25)

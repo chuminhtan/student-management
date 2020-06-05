@@ -6,7 +6,7 @@
 package BUS;
 
 import DTO.TaiKhoanValidateException;
-import DAL.TaiKhoanDAL;
+import DAL.dal_TaiKhoan;
 import DTO.TaiKhoanDTO;
 import java.math.BigInteger;
 import java.security.MessageDigest;
@@ -15,28 +15,22 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class TaiKhoanBUS {
+public class bus_TaiKhoan {
 
-    private TaiKhoanBUS() {
+    private bus_TaiKhoan() {
     }
-    private static TaiKhoanBUS instance;
+    private static bus_TaiKhoan instance;
 
-    public static TaiKhoanBUS getInstance() {
+    public static bus_TaiKhoan getInstance() {
         if (instance == null) {
-            instance = new TaiKhoanBUS();
+            instance = new bus_TaiKhoan();
         }
         return instance;
     }
 
     public ArrayList<TaiKhoanDTO> getDanhSachNhanVien() {
-        ArrayList<TaiKhoanDTO> nhanVienDTOs = TaiKhoanDAL.getInstance().getAll();
-
-        //Just for test
-        nhanVienDTOs.add(new TaiKhoanDTO("1", "Chu Min Ton", "0823451262", new java.util.Random().nextInt(3), "TonCuTeez", this.hashPassword("", null)));
-        nhanVienDTOs.add(new TaiKhoanDTO("2", "Hai Duy", "0789789789789", new java.util.Random().nextInt(3), "Duy789", this.hashPassword("", null)));
-        nhanVienDTOs.add(new TaiKhoanDTO("3", "Nguyen Minh Hy", "0890563456", new java.util.Random().nextInt(3), "HyHy", this.hashPassword("", null)));
-        nhanVienDTOs.add(new TaiKhoanDTO("4", "Không Phải Chu Min Ton", "0123456789", new java.util.Random().nextInt(3), "NotTan", this.hashPassword("", null)));
-
+        ArrayList<TaiKhoanDTO> nhanVienDTOs = dal_TaiKhoan.getInstance().getAll();
+        
         return nhanVienDTOs;
     }
 
@@ -48,7 +42,7 @@ public class TaiKhoanBUS {
         nhanVienDTO.validateMAT_KHAU();
         nhanVienDTO.validateSDT();
         nhanVienDTO.validateTEN_DANG_NHAP();
-        return TaiKhoanDAL.getInstance().them(nhanVienDTO);
+        return dal_TaiKhoan.getInstance().them(nhanVienDTO);
     }
 
     public boolean xoaNhanVien(TaiKhoanDTO nhanVienDTO) throws TaiKhoanValidateException {
@@ -56,7 +50,7 @@ public class TaiKhoanBUS {
             throw new TaiKhoanValidateException("Tài khoản không tồn tại.");
         }
         nhanVienDTO.validateMA_NV();
-        return TaiKhoanDAL.getInstance().xoa(nhanVienDTO);
+        return dal_TaiKhoan.getInstance().xoa(nhanVienDTO);
     }
 
     public boolean suaNhanVien(TaiKhoanDTO nhanVienDTO, TaiKhoanDTO newNhanVienDTO) throws TaiKhoanValidateException {
@@ -67,7 +61,7 @@ public class TaiKhoanBUS {
         nhanVienDTO.validateMAT_KHAU();
         nhanVienDTO.validateSDT();
         nhanVienDTO.validateTEN_DANG_NHAP();
-        return TaiKhoanDAL.getInstance().sua(nhanVienDTO, newNhanVienDTO);
+        return dal_TaiKhoan.getInstance().sua(nhanVienDTO, newNhanVienDTO);
     }
 
     public String hashPassword(String input, String hashMenthod) {
@@ -90,7 +84,7 @@ public class TaiKhoanBUS {
 
             return hashtext;
         } catch (NoSuchAlgorithmException ex) {
-            Logger.getLogger(TaiKhoanBUS.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(bus_TaiKhoan.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return null;

@@ -85,7 +85,7 @@ public class UI_KhachHang extends javax.swing.JPanel {
         });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel1.setText("TÌM KHÁCH HÀNG");
 
         txtTimKH.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -173,7 +173,6 @@ public class UI_KhachHang extends javax.swing.JPanel {
         tbKhachHang.setPreferredSize(new java.awt.Dimension(600, 450));
         tbKhachHang.setRowHeight(30);
         tbKhachHang.setRowMargin(5);
-        tbKhachHang.setSelectionBackground(new java.awt.Color(204, 204, 204));
         tbKhachHang.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tbKhachHang.setShowGrid(true);
         jspKH.setViewportView(tbKhachHang);
@@ -253,8 +252,8 @@ public class UI_KhachHang extends javax.swing.JPanel {
                         .addComponent(jspKH, javax.swing.GroupLayout.DEFAULT_SIZE, 1100, Short.MAX_VALUE)
                         .addGap(50, 50, 50))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(47, 47, 47)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(50, 50, 50)
                         .addComponent(txtTimKH, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnThemKH, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -264,7 +263,7 @@ public class UI_KhachHang extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtTimKH, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnThemKH, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))

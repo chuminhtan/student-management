@@ -56,20 +56,20 @@
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Component id="btnThongKe" max="32767" attributes="0"/>
                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                  <Component id="btnKhachHang" max="32767" attributes="0"/>
-                  <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
-                  <Component id="btnLopHoc" pref="156" max="32767" attributes="0"/>
+                  <Component id="btnKhachHang" min="-2" pref="145" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                  <Component id="btnLopHoc" max="32767" attributes="0"/>
                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   <Component id="btnCTHoc" max="32767" attributes="0"/>
                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   <Component id="btnTaiKhoan" max="32767" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="txtThongTinDangNhap" pref="231" max="32767" attributes="0"/>
+                  <Component id="txtThongTinDangNhap" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="btnDangXuat" pref="88" max="32767" attributes="0"/>
+                  <Component id="btnDangXuat" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
-              <Component id="pnBody" pref="1216" max="32767" attributes="0"/>
+              <Component id="pnBody" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -81,7 +81,6 @@
                           <Group type="103" alignment="1" groupAlignment="3" attributes="0">
                               <Component id="btnKhachHang" alignment="3" min="-2" pref="44" max="-2" attributes="0"/>
                               <Component id="btnLopHoc" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
-                              <Component id="btnCTHoc" alignment="3" min="-2" pref="46" max="-2" attributes="0"/>
                               <Component id="btnTaiKhoan" alignment="3" min="-2" pref="46" max="-2" attributes="0"/>
                           </Group>
                           <Component id="btnThongKe" min="-2" pref="46" max="-2" attributes="0"/>
@@ -90,9 +89,10 @@
                           <Component id="btnDangXuat" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
                           <Component id="txtThongTinDangNhap" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
                       </Group>
+                      <Component id="btnCTHoc" min="-2" pref="48" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-                  <Component id="pnBody" pref="650" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                  <Component id="pnBody" pref="606" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -132,7 +132,6 @@
               <Color id="Hand Cursor"/>
             </Property>
             <Property name="focusable" type="boolean" value="false"/>
-            <Property name="horizontalAlignment" type="int" value="2"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnThongKeActionPerformed"/>
@@ -155,7 +154,6 @@
               <Color id="Hand Cursor"/>
             </Property>
             <Property name="focusable" type="boolean" value="false"/>
-            <Property name="horizontalAlignment" type="int" value="2"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnKhachHangActionPerformed"/>
@@ -178,7 +176,6 @@
               <Color id="Hand Cursor"/>
             </Property>
             <Property name="focusable" type="boolean" value="false"/>
-            <Property name="horizontalAlignment" type="int" value="2"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLopHocActionPerformed"/>
@@ -201,7 +198,6 @@
               <Color id="Hand Cursor"/>
             </Property>
             <Property name="focusable" type="boolean" value="false"/>
-            <Property name="horizontalAlignment" type="int" value="2"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCTHocActionPerformed"/>
@@ -224,7 +220,6 @@
               <Color id="Hand Cursor"/>
             </Property>
             <Property name="focusable" type="boolean" value="false"/>
-            <Property name="horizontalAlignment" type="int" value="2"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTaiKhoanActionPerformed"/>

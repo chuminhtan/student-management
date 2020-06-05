@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package UI.QuanLyTaiKhoan;
+package UI.TaiKhoan;
 
-import BUS.TaiKhoanBUS;
+import BUS.bus_TaiKhoan;
 import DTO.TaiKhoanValidateException;
 import DTO.TaiKhoanDTO;
 import java.awt.Window;
@@ -221,7 +221,7 @@ public class FormThemTaiKhoan extends javax.swing.JDialog {
 
         boolean themResult;
         try {
-            themResult = TaiKhoanBUS.getInstance().themNhanVien(newNhanVienDTO);
+            themResult = bus_TaiKhoan.getInstance().themNhanVien(newNhanVienDTO);
             String messageResults = "Thêm tài khoản " + newNhanVienDTO.getHO_TEN() + " " + (themResult ? "thành công" : "thất bại");
             JOptionPane.showMessageDialog(this, messageResults, "Kết quả thêm tài khoản", JOptionPane.INFORMATION_MESSAGE);
         } catch (TaiKhoanValidateException ex) {

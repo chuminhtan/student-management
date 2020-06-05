@@ -3,10 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package UI.QuanLyTaiKhoan;
+package UI.TaiKhoan;
 
-import java.awt.Color;
-
-public interface CustomInterfaceBorder {
-    public void setColor(Color color);
+/**
+ *
+ * @author caonguyen
+ */
+public interface AfterSuaTaiKhoan {
+    public void DoAfterSuaTaiKhoan();
 }

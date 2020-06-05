@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package UI.QuanLyTaiKhoan;
+package UI;
 
+import UI.TaiKhoan.CustomInterfaceBorder;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
@@ -46,6 +47,12 @@ public class CustomComponentModify {
     public static final Color HOVER_LINK = new Color(0, 86, 179);
 
     public static final Color TRANSPARENT = new Color(0, 0, 0, 0);
+    
+    public static final Color THONGKE = new Color(0,204,106);
+    public static final Color KHACHHANG = new Color(255,0,151);
+    public static final Color LOPHOC = new Color(96,60,186);
+    public static final Color CHUONGTRINHHOC = new Color(0,171,169);
+    public static final Color TAIKHOAN = new Color(255,196,13);
 
     public static final String FONT_NOTO_SANS = "Noto Sans";
     public static final String FONT_NOTO_SERIF = "Noto Serif";

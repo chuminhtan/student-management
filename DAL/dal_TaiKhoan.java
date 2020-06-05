@@ -5,7 +5,7 @@
  */
 package DAL;
 
-import BUS.TaiKhoanBUS;
+import BUS.bus_TaiKhoan;
 import DTO.TaiKhoanDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,15 +14,15 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class TaiKhoanDAL {
+public class dal_TaiKhoan {
 
-    private TaiKhoanDAL() {
+    private dal_TaiKhoan() {
     }
-    private static TaiKhoanDAL instance;
+    private static dal_TaiKhoan instance;
 
-    public static TaiKhoanDAL getInstance() {
+    public static dal_TaiKhoan getInstance() {
         if (instance == null) {
-            instance = new TaiKhoanDAL();
+            instance = new dal_TaiKhoan();
         }
         return instance;
     }
@@ -54,7 +54,7 @@ public class TaiKhoanDAL {
             connection.commit();
             DatabaseConnection.getInstance().RemoveConnection(connection);
         } catch (Exception ex) {
-//            Logger.getLogger(TaiKhoanDAL.class.getName()).log(Level.SEVERE, null, ex);
+//            Logger.getLogger(dal_TaiKhoan.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return nhanVienDTOs;
@@ -81,7 +81,7 @@ public class TaiKhoanDAL {
 
             return queryResult > 0;
         } catch (Exception ex) {
-//            Logger.getLogger(TaiKhoanDAL.class.getName()).log(Level.SEVERE, null, ex);
+//            Logger.getLogger(dal_TaiKhoan.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }
@@ -102,7 +102,7 @@ public class TaiKhoanDAL {
 
             return queryResult > 0;
         } catch (Exception ex) {
-//            Logger.getLogger(TaiKhoanDAL.class.getName()).log(Level.SEVERE, null, ex);
+//            Logger.getLogger(dal_TaiKhoan.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }
@@ -129,7 +129,7 @@ public class TaiKhoanDAL {
 
             return queryResult > 0;
         } catch (Exception ex) {
-//            Logger.getLogger(TaiKhoanDAL.class.getName()).log(Level.SEVERE, null, ex);
+//            Logger.getLogger(dal_TaiKhoan.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }
