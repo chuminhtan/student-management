@@ -53,7 +53,7 @@ public class UI_ChiTietLop extends javax.swing.JFrame {
 
         pnLop.setBackground(new java.awt.Color(255, 255, 255));
 
-        btnThemLop.setBackground(new java.awt.Color(91, 155, 213));
+        btnThemLop.setBackground(new java.awt.Color(0, 102, 153));
         btnThemLop.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnThemLop.setForeground(new java.awt.Color(255, 255, 255));
         btnThemLop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/them lop.png"))); // NOI18N
@@ -136,7 +136,7 @@ public class UI_ChiTietLop extends javax.swing.JFrame {
             tbLopHoc.getColumnModel().getColumn(3).setMaxWidth(100);
         }
 
-        btnChiTietLop.setBackground(new java.awt.Color(239, 158, 154));
+        btnChiTietLop.setBackground(new java.awt.Color(0, 102, 102));
         btnChiTietLop.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnChiTietLop.setForeground(new java.awt.Color(255, 255, 255));
         btnChiTietLop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/lich su 3.png"))); // NOI18N
@@ -152,7 +152,7 @@ public class UI_ChiTietLop extends javax.swing.JFrame {
             }
         });
 
-        btnXoaLop.setBackground(new java.awt.Color(239, 158, 154));
+        btnXoaLop.setBackground(new java.awt.Color(0, 102, 102));
         btnXoaLop.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnXoaLop.setForeground(new java.awt.Color(255, 255, 255));
         btnXoaLop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/xoa.png"))); // NOI18N
@@ -170,7 +170,7 @@ public class UI_ChiTietLop extends javax.swing.JFrame {
             }
         });
 
-        btnUpdateLop.setBackground(new java.awt.Color(239, 158, 154));
+        btnUpdateLop.setBackground(new java.awt.Color(0, 102, 102));
         btnUpdateLop.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnUpdateLop.setForeground(new java.awt.Color(255, 255, 255));
         btnUpdateLop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cap nhat 1.png"))); // NOI18N
@@ -205,45 +205,41 @@ public class UI_ChiTietLop extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnLopLayout.createSequentialGroup()
-                .addContainerGap(578, Short.MAX_VALUE)
-                .addComponent(btnUpdateLop, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49)
-                .addComponent(btnChiTietLop)
-                .addGap(54, 54, 54)
-                .addComponent(btnXoaLop, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnLopLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(jspLH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pnLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(pnLopLayout.createSequentialGroup()
+                        .addGap(75, 75, 75)
+                        .addComponent(jTextArea1, javax.swing.GroupLayout.PREFERRED_SIZE, 571, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 393, Short.MAX_VALUE)
+                        .addComponent(btnThemLop, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnLopLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnUpdateLop, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnChiTietLop)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnXoaLop, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnLopLayout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(jspLH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(30, 30, 30))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnLopLayout.createSequentialGroup()
-                .addGap(75, 75, 75)
-                .addComponent(jTextArea1, javax.swing.GroupLayout.PREFERRED_SIZE, 571, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnThemLop, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(54, 54, 54))
         );
         pnLopLayout.setVerticalGroup(
             pnLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnLopLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGroup(pnLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnLopLayout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addComponent(jTextArea1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
-                        .addComponent(jspLH, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(pnLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnUpdateLop, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnChiTietLop, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnXoaLop, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(34, 34, 34))
-                    .addGroup(pnLopLayout.createSequentialGroup()
-                        .addGap(89, 89, 89)
-                        .addComponent(btnThemLop, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(41, 41, 41)
+                .addGroup(pnLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTextArea1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnThemLop, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                .addComponent(jspLH, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addGroup(pnLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnXoaLop, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnChiTietLop, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnUpdateLop, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

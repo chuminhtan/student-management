@@ -33,7 +33,7 @@ public class CustomComponentModify {
     public static final Color WARNING = new Color(255, 193, 7);
     public static final Color INFO = new Color(23, 162, 184);
     public static final Color LIGHT = new Color(248, 249, 250);
-    public static final Color DARK = new Color(52, 58, 64);
+    public static final Color DARK = new Color(0,102,153);
     public static final Color LINK = new Color(0, 123, 255);
 
     public static final Color HOVER_PRIMARY = new Color(0, 105, 217);
@@ -63,13 +63,16 @@ public class CustomComponentModify {
     };
 
     public void modifyButtonColor(JButton button, Color colorBgNormal, Color colorFgNormal, Color colorBorderNormal, Color colorBgHover, Color colorFgHover, Color colorBorderHover) {
-        button.setBackground(colorBgNormal);
+        
+        button.setBackground(colorBgNormal); 
         button.setForeground(colorFgNormal);
         button.setFocusPainted(false);
-
+        
+        
         if (button.getBorder() instanceof CustomInterfaceBorder) {
             ((CustomInterfaceBorder) button.getBorder()).setColor(colorBorderNormal);
         }
+
 
         button.addMouseListener(new MouseAdapter() {
             @Override
@@ -156,7 +159,7 @@ public class CustomComponentModify {
     }
 
     public void modifyButton(JButton button, buttonType type) {
-        this.modifyButton(button, type, new Font(FONT_NOTO_SANS, Font.PLAIN, 16));
+        this.modifyButton(button, type, new Font("Tahoma", Font.BOLD, 16));
     }
 
     public void modifyButton(JButton button) {

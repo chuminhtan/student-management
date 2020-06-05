@@ -11,6 +11,7 @@ import DTO.TaiKhoanValidateException;
 import DTO.TaiKhoanDTO;
 import java.awt.Color;
 import java.awt.Dialog;
+import java.awt.Font;
 import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.JOptionPane;
@@ -29,29 +30,32 @@ public final class UI_TaiKhoan extends javax.swing.JPanel {
         this.initComponents();
         this.initializeLookAndFeels();
         this.initializeEvents();
-
         this.refreshDataInTable();
     }
 
     public void initializeLookAndFeels() {
+        
+        buttonSua.setFont(new Font("Tahoma", Font.PLAIN, 12));
+        buttonThem.setFont(new Font("Tahoma", Font.PLAIN, 12));
+        buttonXoa.setFont(new Font("Tahoma", Font.PLAIN, 12));
+       
         this.buttonSua.setBorder(new CustomBorder(1));
-        CustomComponentModify.getInstance().modifyButtonColor(this.buttonSua, new Color(239, 158, 154), CustomComponentModify.LIGHT, CustomComponentModify.DARK, CustomComponentModify.LIGHT, new Color(239, 158, 154), CustomComponentModify.DARK);
-
+        CustomComponentModify.getInstance().modifyButtonColor(this.buttonSua, CustomComponentModify.TRANSPARENT, new Color(0,0,0),new Color(255,255,255), CustomComponentModify.TRANSPARENT, new Color(0,0,0), CustomComponentModify.DARK);
+        
         this.buttonThem.setBorder(new CustomBorder(1));
-        CustomComponentModify.getInstance().modifyButtonColor(this.buttonThem, new Color(91, 155, 213), CustomComponentModify.LIGHT, CustomComponentModify.DARK, CustomComponentModify.LIGHT, new Color(91, 155, 213), CustomComponentModify.DARK);
+        CustomComponentModify.getInstance().modifyButtonColor(this.buttonThem, CustomComponentModify.TRANSPARENT, new Color(0,0,0), new Color(0,102,153), CustomComponentModify.TRANSPARENT, new Color(0,0,0), CustomComponentModify.DARK);
 
         this.buttonXoa.setBorder(new CustomBorder(1));
-        CustomComponentModify.getInstance().modifyButtonColor(this.buttonXoa, new Color(239, 158, 154), CustomComponentModify.LIGHT, CustomComponentModify.DARK, CustomComponentModify.LIGHT, new Color(239, 158, 154), CustomComponentModify.DARK);
-
-        //this.buttonStopSearch.setBorder(new CustomCompoundBorder(1, 10));
-        //CustomComponentModify.getInstance().modifyButtonColor(this.buttonStopSearch, new Color(239, 158, 154), CustomComponentModify.LIGHT, CustomComponentModify.DARK, CustomComponentModify.LIGHT, new Color(239, 158, 154), CustomComponentModify.DARK);
-
-        //this.textfieldTuKhoa.setBorder(new CustomCompoundBorder(new CustomBorder(1, 0), 10));
+        CustomComponentModify.getInstance().modifyButtonColor(this.buttonXoa, CustomComponentModify.TRANSPARENT, new Color(0,0,0), new Color(239, 158, 154), CustomComponentModify.TRANSPARENT, new Color(0,0,0), CustomComponentModify.DARK);
+       
 
         this.tableNhanVien.getTableHeader().setForeground(CustomComponentModify.DARK);
         this.tableNhanVien.setSelectionBackground(new Color(0, 0, 0, 100));
         this.tableNhanVien.setModel(this.taiKhoanTableModel);
         this.taiKhoanTableModel.UpdataInTable();
+        tableNhanVien.getTableHeader().setFont(new Font("Tahoma", Font.BOLD, 12));
+        tableNhanVien.getTableHeader().setOpaque(false);
+        tableNhanVien.getTableHeader().setForeground(new Color(0, 0, 0));
 
         DefaultTableCellRenderer centerCellRenderer = new DefaultTableCellRenderer();
         centerCellRenderer.setHorizontalAlignment(SwingConstants.CENTER);
@@ -79,26 +83,27 @@ public final class UI_TaiKhoan extends javax.swing.JPanel {
         tableTaiKhoanColumnNames.add(0, "STT");
         this.taiKhoanTableModel.setColumnIdentifiers(tableTaiKhoanColumnNames);
 
-        this.tableNhanVien.getColumnModel().getColumn(0).setMaxWidth(30);
+        this.tableNhanVien.getColumnModel().getColumn(0).setMaxWidth(50);
         this.tableNhanVien.getColumnModel().getColumn(0).setCellRenderer(centerCellRenderer);
 
-        this.tableNhanVien.getColumnModel().getColumn(1).setMaxWidth(80);
-        this.tableNhanVien.getColumnModel().getColumn(1).setMinWidth(50);
+        this.tableNhanVien.getColumnModel().getColumn(1).setMaxWidth(100);
+        this.tableNhanVien.getColumnModel().getColumn(1).setMinWidth(100);
         this.tableNhanVien.getColumnModel().getColumn(1).setCellRenderer(centerCellRenderer);
 
-        this.tableNhanVien.getColumnModel().getColumn(2).setMaxWidth(300);
+        this.tableNhanVien.getColumnModel().getColumn(2).setMaxWidth(200);
         this.tableNhanVien.getColumnModel().getColumn(2).setMinWidth(200);
         this.tableNhanVien.getColumnModel().getColumn(2).setCellRenderer(leftCellRenderer);
 
-        this.tableNhanVien.getColumnModel().getColumn(3).setMaxWidth(120);
-        this.tableNhanVien.getColumnModel().getColumn(3).setMinWidth(100);
+        this.tableNhanVien.getColumnModel().getColumn(3).setMaxWidth(150);
+        this.tableNhanVien.getColumnModel().getColumn(3).setMinWidth(150);
         this.tableNhanVien.getColumnModel().getColumn(3).setCellRenderer(leftCellRenderer);
 
-        this.tableNhanVien.getColumnModel().getColumn(4).setMaxWidth(75);
+        this.tableNhanVien.getColumnModel().getColumn(4).setMinWidth(150);
+        this.tableNhanVien.getColumnModel().getColumn(4).setMaxWidth(150);
         this.tableNhanVien.getColumnModel().getColumn(4).setCellRenderer(loaiTaiKhoanCellRenderer);
 
-        this.tableNhanVien.getColumnModel().getColumn(5).setMaxWidth(300);
-        this.tableNhanVien.getColumnModel().getColumn(5).setMinWidth(200);
+        this.tableNhanVien.getColumnModel().getColumn(5).setMaxWidth(180);
+        this.tableNhanVien.getColumnModel().getColumn(5).setMinWidth(180);
         this.tableNhanVien.getColumnModel().getColumn(5).setCellRenderer(leftCellRenderer);
 
         this.tableNhanVien.getColumnModel().getColumn(6).setCellRenderer(leftCellRenderer);
@@ -165,7 +170,7 @@ public final class UI_TaiKhoan extends javax.swing.JPanel {
         buttonSua = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
-        setPreferredSize(new java.awt.Dimension(1200, 585));
+        setPreferredSize(new java.awt.Dimension(1200, 659));
 
         jScrollPane2.setBackground(new java.awt.Color(255, 255, 255));
         jScrollPane2.setBorder(null);
@@ -182,7 +187,7 @@ public final class UI_TaiKhoan extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "STT", "Mã nhân viên", "Họ tên", "Số điện thoại", "Loại", "Tên đăng nhập", "<ật khẩu"
+                "STT", "Mã NV", "Họ tên", "Số điện thoại", "Loại", "Tên đăng nhập", "<ật khẩu"
             }
         ) {
             Class[] types = new Class [] {
@@ -204,6 +209,8 @@ public final class UI_TaiKhoan extends javax.swing.JPanel {
         tableNhanVien.setRowHeight(30);
         jScrollPane2.setViewportView(tableNhanVien);
 
+        buttonXoa.setBackground(new java.awt.Color(255, 255, 255));
+        buttonXoa.setForeground(new java.awt.Color(239, 158, 154));
         buttonXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/xoa.png"))); // NOI18N
         buttonXoa.setText("XÓA");
         buttonXoa.setToolTipText("");
@@ -224,6 +231,8 @@ public final class UI_TaiKhoan extends javax.swing.JPanel {
         textfieldTuKhoa.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         textfieldTuKhoa.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 0, 1, 0, new java.awt.Color(109, 109, 109)));
 
+        buttonThem.setBackground(new java.awt.Color(255, 255, 255));
+        buttonThem.setForeground(new java.awt.Color(91, 155, 213));
         buttonThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/themmmm.png"))); // NOI18N
         buttonThem.setText("THÊM TÀI KHOẢN MỚI");
         buttonThem.setToolTipText("");
@@ -235,8 +244,10 @@ public final class UI_TaiKhoan extends javax.swing.JPanel {
             }
         });
 
+        buttonSua.setBackground(new java.awt.Color(255, 255, 255));
+        buttonSua.setForeground(new java.awt.Color(239, 158, 154));
         buttonSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cap nhat 1.png"))); // NOI18N
-        buttonSua.setText("SỬA");
+        buttonSua.setText("CẬP NHẬT");
         buttonSua.setToolTipText("");
         buttonSua.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         buttonSua.setPreferredSize(new java.awt.Dimension(100, 40));
@@ -258,34 +269,31 @@ public final class UI_TaiKhoan extends javax.swing.JPanel {
                         .addGap(50, 50, 50)
                         .addComponent(textfieldTuKhoa, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(buttonThem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(23, 23, 23))
+                        .addComponent(buttonThem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(buttonSua, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(51, 51, 51)
-                                .addComponent(buttonXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(17, 17, 17)))))
+                                .addComponent(buttonSua, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(buttonXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(50, 50, 50))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(labelTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(textfieldTuKhoa, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(buttonThem, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25)
-                .addComponent(jScrollPane2)
-                .addGap(11, 11, 11)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buttonXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonSua, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33))
+                    .addComponent(labelTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textfieldTuKhoa, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonThem, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buttonSua, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5))
         );
     }// </editor-fold>//GEN-END:initComponents
 

@@ -22,7 +22,7 @@ public class UI_ChuongTrinh extends javax.swing.JPanel {
         
         tbChuongTrinh.getTableHeader().setFont(new Font("Tahoma", Font.BOLD, 12));
         tbChuongTrinh.getTableHeader().setOpaque(false);
-        tbChuongTrinh.getTableHeader().setForeground(new Color(22, 105, 158));
+        tbChuongTrinh.getTableHeader().setForeground(new Color(0,0,0));
         tbChuongTrinh.setSelectionBackground(new Color(204,204,204));
     }
     /**
@@ -65,7 +65,7 @@ public class UI_ChuongTrinh extends javax.swing.JPanel {
         txtTimChuongTrinh.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtTimChuongTrinh.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 0, 1, 0, new java.awt.Color(153, 153, 153)));
 
-        btnThemChuongTrinh.setBackground(new java.awt.Color(91, 155, 213));
+        btnThemChuongTrinh.setBackground(new java.awt.Color(0, 102, 153));
         btnThemChuongTrinh.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnThemChuongTrinh.setForeground(new java.awt.Color(255, 255, 255));
         btnThemChuongTrinh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/them lop.png"))); // NOI18N
@@ -83,6 +83,7 @@ public class UI_ChuongTrinh extends javax.swing.JPanel {
 
         jspLH.setBackground(new java.awt.Color(255, 255, 255));
         jspLH.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jspLH.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         jspLH.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jspLH.setPreferredSize(new java.awt.Dimension(469, 400));
 
@@ -155,7 +156,7 @@ public class UI_ChuongTrinh extends javax.swing.JPanel {
             tbChuongTrinh.getColumnModel().getColumn(6).setMaxWidth(150);
         }
 
-        btnXoaChuongTrinh.setBackground(new java.awt.Color(239, 158, 154));
+        btnXoaChuongTrinh.setBackground(new java.awt.Color(0, 102, 102));
         btnXoaChuongTrinh.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnXoaChuongTrinh.setForeground(new java.awt.Color(255, 255, 255));
         btnXoaChuongTrinh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/xoa.png"))); // NOI18N
@@ -173,7 +174,7 @@ public class UI_ChuongTrinh extends javax.swing.JPanel {
             }
         });
 
-        btnCapNhatChuongTrinh.setBackground(new java.awt.Color(239, 158, 154));
+        btnCapNhatChuongTrinh.setBackground(new java.awt.Color(0, 102, 102));
         btnCapNhatChuongTrinh.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnCapNhatChuongTrinh.setForeground(new java.awt.Color(255, 255, 255));
         btnCapNhatChuongTrinh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cap nhat 1.png"))); // NOI18N
@@ -199,21 +200,18 @@ public class UI_ChuongTrinh extends javax.swing.JPanel {
                 .addGap(50, 50, 50)
                 .addGroup(pnChuongTrinhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(pnChuongTrinhLayout.createSequentialGroup()
-                        .addComponent(jspLH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(50, 50, 50))
-                    .addGroup(pnChuongTrinhLayout.createSequentialGroup()
                         .addComponent(lblTimLop, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(50, 50, 50)
                         .addComponent(txtTimChuongTrinh, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 325, Short.MAX_VALUE)
-                        .addComponent(btnThemChuongTrinh, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(72, 72, 72))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnChuongTrinhLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnCapNhatChuongTrinh, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(btnXoaChuongTrinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(74, 74, 74))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 347, Short.MAX_VALUE)
+                        .addComponent(btnThemChuongTrinh, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnChuongTrinhLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnCapNhatChuongTrinh, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnXoaChuongTrinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jspLH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(50, 50, 50))
         );
         pnChuongTrinhLayout.setVerticalGroup(
             pnChuongTrinhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -222,13 +220,13 @@ public class UI_ChuongTrinh extends javax.swing.JPanel {
                     .addComponent(lblTimLop, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtTimChuongTrinh, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnThemChuongTrinh, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25)
-                .addComponent(jspLH, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addComponent(jspLH, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(pnChuongTrinhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCapNhatChuongTrinh, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnXoaChuongTrinh, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(71, Short.MAX_VALUE))
+                .addGap(39, 39, 39))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
