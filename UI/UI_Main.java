@@ -10,7 +10,7 @@ import UI.ChuongTrinhUI.UI_ChuongTrinh;
 import UI.LopHocUI.UI_LopHoc;
 import UI.KhachHangUI.UI_KhachHang;
 import UI.DangNhapUI.UI_DangNhap;
-import UI.QuanLyTaiKhoan.UI_QuanLyTaiKhoan;
+import UI.TaiKhoan.UI_TaiKhoan;
 import java.awt.Color;
 
 public class UI_Main extends javax.swing.JFrame {
@@ -105,6 +105,11 @@ public class UI_Main extends javax.swing.JFrame {
         btnKhachHang.setContentAreaFilled(false);
         btnKhachHang.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnKhachHang.setFocusable(false);
+        btnKhachHang.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btnKhachHangMouseMoved(evt);
+            }
+        });
         btnKhachHang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnKhachHangActionPerformed(evt);
@@ -221,7 +226,6 @@ public class UI_Main extends javax.swing.JFrame {
                         .addGap(20, 20, 20)
                         .addComponent(btnCTHoc))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblCTHoc, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(12, 12, 12)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -367,6 +371,15 @@ public class UI_Main extends javax.swing.JFrame {
         new UI_DangNhap().show();
     }//GEN-LAST:event_btnDangXuatActionPerformed
 
+    private void btnKhachHangMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnKhachHangMouseMoved
+        lblKhachHang.setBackground(new Color(255,0,151));
+
+        lblThongKe.setBackground(new Color(255, 255, 255));
+        lblLopHoc.setBackground(new Color(255, 255, 255));
+        lblCTHoc.setBackground(new Color(255, 255, 255));
+        lblTaiKhoan.setBackground(new Color(255, 255, 255));
+    }//GEN-LAST:event_btnKhachHangMouseMoved
+
     /**
      * @param args the command line arguments
      */
@@ -413,7 +426,7 @@ public class UI_Main extends javax.swing.JFrame {
     private UI_LopHoc ui_lop = new UI_LopHoc();
     private UI_KhachHang ui_kh = new UI_KhachHang();
     private UI_ChuongTrinh ui_ct = new UI_ChuongTrinh();
-    private UI_QuanLyTaiKhoan ui_tk = new UI_QuanLyTaiKhoan();
+    private UI_TaiKhoan ui_tk = new UI_TaiKhoan();
     //Kết thúc biến tự định nghĩa
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
