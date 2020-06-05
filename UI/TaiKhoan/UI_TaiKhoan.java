@@ -207,6 +207,7 @@ public final class UI_TaiKhoan extends javax.swing.JPanel {
         buttonXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/xoa.png"))); // NOI18N
         buttonXoa.setText("XÓA");
         buttonXoa.setToolTipText("");
+        buttonXoa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         buttonXoa.setPreferredSize(new java.awt.Dimension(100, 40));
         buttonXoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -226,6 +227,7 @@ public final class UI_TaiKhoan extends javax.swing.JPanel {
         buttonThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/themmmm.png"))); // NOI18N
         buttonThem.setText("THÊM TÀI KHOẢN MỚI");
         buttonThem.setToolTipText("");
+        buttonThem.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         buttonThem.setPreferredSize(new java.awt.Dimension(200, 40));
         buttonThem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -236,6 +238,7 @@ public final class UI_TaiKhoan extends javax.swing.JPanel {
         buttonSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cap nhat 1.png"))); // NOI18N
         buttonSua.setText("SỬA");
         buttonSua.setToolTipText("");
+        buttonSua.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         buttonSua.setPreferredSize(new java.awt.Dimension(100, 40));
         buttonSua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
