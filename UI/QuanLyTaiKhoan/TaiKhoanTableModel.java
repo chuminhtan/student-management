@@ -23,33 +23,40 @@ public class TaiKhoanTableModel extends DefaultTableModel {
         return nhanVienDTOs;
     }
 
-    public void setNhanVienDTOs(Collection<TaiKhoanDTO> collection) {
+    public void setTaiKhoanDTOs(Collection<TaiKhoanDTO> collection) {
         this.nhanVienDTOs.clear();
         this.nhanVienDTOs.addAll(collection);
     }
-
-    public void AddNhanVienDTO(TaiKhoanDTO nhanVienDTO) {
-        this.nhanVienDTOs.add(nhanVienDTO);
-        this.UpdataInTable();
-    }
-
-    public void RemoveNhanVienDTO(TaiKhoanDTO nhanVienDTO) {
-        this.nhanVienDTOs.remove(nhanVienDTO);
-        this.UpdataInTable();
+    
+    public TaiKhoanDTO getTaiKhoanDTOAt(int rowSelected) {
+        Vector vectorTaiKhoanData = this.getDataVector().get(rowSelected);
+        vectorTaiKhoanData.remove(0);
+        return new TaiKhoanDTO().fromVector(vectorTaiKhoanData);
     }
 
     public void UpdataInTable() {
         super.getDataVector().clear();
-        for (TaiKhoanDTO nhanVienDTO : this.nhanVienDTOs) {
-            super.addRow(nhanVienDTO.toVector());
+        for (int rowIndex = 0; rowIndex < this.nhanVienDTOs.size(); rowIndex += 1) {
+            TaiKhoanDTO nhanVienDTO = this.nhanVienDTOs.get(rowIndex);
+            
+            Vector row = nhanVienDTO.toVector();
+            row.add(0, rowIndex);
+            
+            super.addRow(row);
         }
         super.fireTableDataChanged();
     }
 
     public void UpdataInTable(Collection<TaiKhoanDTO> inputNhanVienDTOs) {
         super.getDataVector().clear();
-        for (TaiKhoanDTO inputNhanVienDTO : inputNhanVienDTOs) {
-            super.addRow(inputNhanVienDTO.toVector());
+        ArrayList<TaiKhoanDTO> arraylistInputs = new ArrayList<>(inputNhanVienDTOs);
+        for (int rowIndex = 0; rowIndex < arraylistInputs.size(); rowIndex += 1) {
+            TaiKhoanDTO nhanVienDTO = arraylistInputs.get(rowIndex);
+            
+            Vector row = nhanVienDTO.toVector();
+            row.add(0, rowIndex);
+            
+            super.addRow(row);
         }
         super.fireTableDataChanged();
     }

@@ -44,7 +44,6 @@ public class TaiKhoanBUS {
         if (nhanVienDTO == null) {
             throw new TaiKhoanValidateException("Tài khoản không tồn tại.");
         }
-        nhanVienDTO.validateHO_TEN();
         nhanVienDTO.validateLOAI();
         nhanVienDTO.validateMAT_KHAU();
         nhanVienDTO.validateSDT();
@@ -64,7 +63,6 @@ public class TaiKhoanBUS {
         if (nhanVienDTO == null) {
             throw new TaiKhoanValidateException("Tài khoản không tồn tại.");
         }
-        nhanVienDTO.validateHO_TEN();
         nhanVienDTO.validateLOAI();
         nhanVienDTO.validateMAT_KHAU();
         nhanVienDTO.validateSDT();

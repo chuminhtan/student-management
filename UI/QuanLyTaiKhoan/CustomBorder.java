@@ -42,29 +42,37 @@ public class CustomBorder extends AbstractBorder implements CustomInterfaceBorde
     public CustomBorder() {
         super();
     }
-    
-     public CustomBorder(int width) {
-        super();        
-        this.topPiece = new BorderPiece(width);
-        this.rightPiece = new BorderPiece(width);
-        this.bottomPiece = new BorderPiece(width);
-        this.leftPiece = new BorderPiece(width);
+
+    public CustomBorder(int width) {
+        this(width, width, width, width);
     }
-     
-     public CustomBorder(int widthTopBottom, int widthRightLeft) {
-        super();        
-        this.topPiece = new BorderPiece(widthTopBottom);
-        this.rightPiece = new BorderPiece(widthRightLeft);
-        this.bottomPiece = new BorderPiece(widthTopBottom);
-        this.leftPiece = new BorderPiece(widthRightLeft);
+
+    public CustomBorder(int widthTopBottom, int widthRightLeft) {
+        this(widthTopBottom, widthRightLeft, widthTopBottom, widthRightLeft);
     }
-     
-     public CustomBorder(int widthTopPiece, int widthRightPiece, int widthBottomPiece, int widthLeftPiece) {
+
+    public CustomBorder(int widthTopPiece, int widthRightPiece, int widthBottomPiece, int widthLeftPiece) {
         super();
-        this.topPiece = new BorderPiece(widthTopPiece);
-        this.rightPiece = new BorderPiece(widthRightPiece);
-        this.bottomPiece = new BorderPiece(widthBottomPiece);
-        this.leftPiece = new BorderPiece(widthLeftPiece);
+        if (widthTopPiece <= 0) {
+            this.topPiece = null;
+        } else {
+            this.topPiece = new BorderPiece(widthTopPiece);
+        }
+        if (widthRightPiece <= 0) {
+            this.rightPiece = null;
+        } else {
+            this.rightPiece = new BorderPiece(widthRightPiece);
+        }
+        if (widthBottomPiece <= 0) {
+            this.bottomPiece = null;
+        } else {
+            this.bottomPiece = new BorderPiece(widthBottomPiece);
+        }
+        if (widthLeftPiece <= 0) {
+            this.leftPiece = null;
+        } else {
+            this.leftPiece = new BorderPiece(widthLeftPiece);
+        }
     }
 
     public CustomBorder(BorderPiece topPiece, BorderPiece rightPiece, BorderPiece bottomPiece, BorderPiece leftPiece) {

@@ -22,6 +22,18 @@ public class CustomCompoundBorder extends CompoundBorder implements CustomInterf
         this.insideBorder = new EmptyBorder(top, left, bottom, right);
     }
     
+    public CustomCompoundBorder(CustomBorder outsideBorder, int topbotton, int leftright) {
+        super();
+        this.outsideBorder = outsideBorder;
+        this.insideBorder = new EmptyBorder(topbotton, leftright, topbotton, leftright);
+    }
+    
+    public CustomCompoundBorder(CustomBorder outsideBorder, int width) {
+        super();
+        this.outsideBorder = outsideBorder;
+        this.insideBorder = new EmptyBorder(width, width, width, width);
+    }
+    
     public CustomCompoundBorder(CustomBorder outsideBorder) {
         this(outsideBorder, 0, 0, 0, 0);
     }

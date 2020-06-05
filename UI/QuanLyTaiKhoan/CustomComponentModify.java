@@ -58,6 +58,7 @@ public class CustomComponentModify {
     public void modifyButtonColor(JButton button, Color colorBgNormal, Color colorFgNormal, Color colorBorderNormal, Color colorBgHover, Color colorFgHover, Color colorBorderHover) {
         button.setBackground(colorBgNormal);
         button.setForeground(colorFgNormal);
+        button.setFocusPainted(false);
 
         if (button.getBorder() instanceof CustomInterfaceBorder) {
             ((CustomInterfaceBorder) button.getBorder()).setColor(colorBorderNormal);
