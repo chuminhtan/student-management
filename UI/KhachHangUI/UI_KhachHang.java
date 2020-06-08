@@ -23,7 +23,7 @@ public class UI_KhachHang extends javax.swing.JPanel {
         tbKhachHang.getTableHeader().setFont(new Font("Tahoma", Font.BOLD, 12));
         tbKhachHang.getTableHeader().setOpaque(false);
         tbKhachHang.getTableHeader().setForeground(new Color(0,0,0));
-        tbKhachHang.setSelectionBackground(new java.awt.Color(204,204,204));
+        tbKhachHang.setSelectionBackground(new java.awt.Color(0, 64, 128));
     }
     
     
@@ -66,11 +66,10 @@ public class UI_KhachHang extends javax.swing.JPanel {
             }
         });
 
-        btnCapNhatKH.setBackground(new java.awt.Color(0, 102, 102));
+        btnCapNhatKH.setBackground(new java.awt.Color(255, 255, 255));
         btnCapNhatKH.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnCapNhatKH.setForeground(new java.awt.Color(255, 255, 255));
-        btnCapNhatKH.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cap nhat 1.png"))); // NOI18N
-        btnCapNhatKH.setText("CẬP NHẬT");
+        btnCapNhatKH.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/capnhat.png"))); // NOI18N
         btnCapNhatKH.setContentAreaFilled(false);
         btnCapNhatKH.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCapNhatKH.setFocusable(false);
@@ -84,9 +83,9 @@ public class UI_KhachHang extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel1.setText("TÌM KHÁCH HÀNG");
+        jLabel1.setText("Tìm Kiếm");
 
         txtTimKH.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtTimKH.setHorizontalAlignment(javax.swing.JTextField.LEFT);
@@ -98,11 +97,10 @@ public class UI_KhachHang extends javax.swing.JPanel {
             }
         });
 
-        btnThemKH.setBackground(new java.awt.Color(0, 102, 153));
+        btnThemKH.setBackground(new java.awt.Color(255, 255, 255));
         btnThemKH.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnThemKH.setForeground(new java.awt.Color(255, 255, 255));
-        btnThemKH.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/them lop.png"))); // NOI18N
-        btnThemKH.setText("TẠO KHÁCH HÀNG MỚI");
+        btnThemKH.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/taomoi.png"))); // NOI18N
         btnThemKH.setContentAreaFilled(false);
         btnThemKH.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnThemKH.setFocusable(false);
@@ -123,7 +121,7 @@ public class UI_KhachHang extends javax.swing.JPanel {
         jspKH.setPreferredSize(new java.awt.Dimension(469, 200));
         jspKH.setViewportView(null);
 
-        tbKhachHang.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        tbKhachHang.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tbKhachHang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, "1", "a", null, null, null, null, null, null},
@@ -198,11 +196,10 @@ public class UI_KhachHang extends javax.swing.JPanel {
             tbKhachHang.getColumnModel().getColumn(8).setMaxWidth(100);
         }
 
-        btnLichsuKH.setBackground(new java.awt.Color(0, 102, 102));
+        btnLichsuKH.setBackground(new java.awt.Color(255, 255, 255));
         btnLichsuKH.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnLichsuKH.setForeground(new java.awt.Color(255, 255, 255));
-        btnLichsuKH.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/lich su 3.png"))); // NOI18N
-        btnLichsuKH.setText("LỊCH SỬ");
+        btnLichsuKH.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/lichsukhachhang.png"))); // NOI18N
         btnLichsuKH.setContentAreaFilled(false);
         btnLichsuKH.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnLichsuKH.setFocusable(false);
@@ -210,17 +207,18 @@ public class UI_KhachHang extends javax.swing.JPanel {
         btnLichsuKH.setMinimumSize(new java.awt.Dimension(129, 49));
         btnLichsuKH.setOpaque(true);
         btnLichsuKH.setPreferredSize(new java.awt.Dimension(129, 49));
+        btnLichsuKH.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/images/lichsukhachhang.png"))); // NOI18N
         btnLichsuKH.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLichsuKHActionPerformed(evt);
             }
         });
 
-        btnXoaKH.setBackground(new java.awt.Color(0, 102, 102));
+        btnXoaKH.setBackground(new java.awt.Color(255, 255, 255));
         btnXoaKH.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnXoaKH.setForeground(new java.awt.Color(255, 255, 255));
         btnXoaKH.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/xoa.png"))); // NOI18N
-        btnXoaKH.setText("XÓA");
+        btnXoaKH.setToolTipText("");
         btnXoaKH.setContentAreaFilled(false);
         btnXoaKH.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnXoaKH.setFocusable(false);
@@ -242,40 +240,37 @@ public class UI_KhachHang extends javax.swing.JPanel {
                 .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel1)
                         .addGap(50, 50, 50)
-                        .addComponent(txtTimKH, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 344, Short.MAX_VALUE)
-                        .addComponent(btnThemKH, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(21, 21, 21))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnLichsuKH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtTimKH, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnCapNhatKH, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnLichsuKH, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnXoaKH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(15, 15, 15))
-                    .addComponent(jspKH, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(btnThemKH, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnCapNhatKH, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnXoaKH, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jspKH, javax.swing.GroupLayout.DEFAULT_SIZE, 1100, Short.MAX_VALUE))
                 .addGap(50, 50, 50))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtTimKH, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnThemKH, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(25, 25, 25)
-                .addComponent(jspKH, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(btnCapNhatKH, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnXoaKH, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnThemKH, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnCapNhatKH, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnXoaKH, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(47, 47, 47))
-                    .addComponent(btnLichsuKH, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtTimKH, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btnLichsuKH, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addComponent(jspKH, javax.swing.GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 

@@ -53,11 +53,10 @@ public class UI_ChiTietLop extends javax.swing.JFrame {
 
         pnLop.setBackground(new java.awt.Color(255, 255, 255));
 
-        btnThemLop.setBackground(new java.awt.Color(0, 102, 153));
+        btnThemLop.setBackground(new java.awt.Color(255, 255, 255));
         btnThemLop.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnThemLop.setForeground(new java.awt.Color(255, 255, 255));
-        btnThemLop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/them lop.png"))); // NOI18N
-        btnThemLop.setText("THÊM VÀO LỚP");
+        btnThemLop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/taomoi.png"))); // NOI18N
         btnThemLop.setContentAreaFilled(false);
         btnThemLop.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnThemLop.setFocusable(false);
@@ -136,10 +135,10 @@ public class UI_ChiTietLop extends javax.swing.JFrame {
             tbLopHoc.getColumnModel().getColumn(3).setMaxWidth(100);
         }
 
-        btnChiTietLop.setBackground(new java.awt.Color(0, 102, 102));
+        btnChiTietLop.setBackground(new java.awt.Color(255, 255, 255));
         btnChiTietLop.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnChiTietLop.setForeground(new java.awt.Color(255, 255, 255));
-        btnChiTietLop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/lich su 3.png"))); // NOI18N
+        btnChiTietLop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chuyenlop.png"))); // NOI18N
         btnChiTietLop.setText("CHUYỂN LỚP");
         btnChiTietLop.setActionCommand("");
         btnChiTietLop.setContentAreaFilled(false);
@@ -152,11 +151,10 @@ public class UI_ChiTietLop extends javax.swing.JFrame {
             }
         });
 
-        btnXoaLop.setBackground(new java.awt.Color(0, 102, 102));
+        btnXoaLop.setBackground(new java.awt.Color(255, 255, 255));
         btnXoaLop.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnXoaLop.setForeground(new java.awt.Color(255, 255, 255));
         btnXoaLop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/xoa.png"))); // NOI18N
-        btnXoaLop.setText("XÓA KHỎI LỚP");
         btnXoaLop.setContentAreaFilled(false);
         btnXoaLop.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnXoaLop.setFocusable(false);
@@ -170,11 +168,10 @@ public class UI_ChiTietLop extends javax.swing.JFrame {
             }
         });
 
-        btnUpdateLop.setBackground(new java.awt.Color(0, 102, 102));
+        btnUpdateLop.setBackground(new java.awt.Color(255, 255, 255));
         btnUpdateLop.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnUpdateLop.setForeground(new java.awt.Color(255, 255, 255));
-        btnUpdateLop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cap nhat 1.png"))); // NOI18N
-        btnUpdateLop.setText("CẬP NHẬT BẢNG ĐIỂM");
+        btnUpdateLop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/capnhatbangdiem.png"))); // NOI18N
         btnUpdateLop.setContentAreaFilled(false);
         btnUpdateLop.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnUpdateLop.setFocusable(false);
@@ -204,25 +201,20 @@ public class UI_ChiTietLop extends javax.swing.JFrame {
                 .addGap(527, 527, 527)
                 .addComponent(jLabel1)
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnLopLayout.createSequentialGroup()
-                .addGroup(pnLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(pnLopLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(pnLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnLopLayout.createSequentialGroup()
-                        .addGap(75, 75, 75)
                         .addComponent(jTextArea1, javax.swing.GroupLayout.PREFERRED_SIZE, 571, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 370, Short.MAX_VALUE)
-                        .addComponent(btnThemLop, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(23, 23, 23))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnLopLayout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addGroup(pnLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnLopLayout.createSequentialGroup()
-                                .addComponent(btnUpdateLop, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnChiTietLop)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnXoaLop, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(20, 20, 20))
-                            .addComponent(jspLH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 275, Short.MAX_VALUE)
+                        .addComponent(btnUpdateLop, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnChiTietLop, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnThemLop, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnXoaLop, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jspLH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(30, 30, 30))
         );
         pnLopLayout.setVerticalGroup(
@@ -230,17 +222,18 @@ public class UI_ChiTietLop extends javax.swing.JFrame {
             .addGroup(pnLopLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(41, 41, 41)
-                .addGroup(pnLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pnLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextArea1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnThemLop, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25)
-                .addComponent(jspLH, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
-                .addGroup(pnLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnXoaLop, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnChiTietLop, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnUpdateLop, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnLopLayout.createSequentialGroup()
+                        .addGroup(pnLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnChiTietLop, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnThemLop, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnUpdateLop, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnXoaLop, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(11, 11, 11)))
+                .addGap(7, 7, 7)
+                .addComponent(jspLH, javax.swing.GroupLayout.PREFERRED_SIZE, 570, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 

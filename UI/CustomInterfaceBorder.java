@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package UI.TaiKhoan;
+package UI;
 
-public interface AfterThemTaiKhoan {
-    public void DoAfterThemTaiKhoan();
+import java.awt.Color;
+
+public interface CustomInterfaceBorder {
+    public void setColor(Color color);
 }
