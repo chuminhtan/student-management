@@ -163,7 +163,7 @@ public final class UI_Main extends javax.swing.JFrame {
 
         btnThongKe.setBackground(new java.awt.Color(153, 255, 153));
         btnThongKe.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnThongKe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/thong k3.png"))); // NOI18N
+        btnThongKe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/report.png"))); // NOI18N
         btnThongKe.setText("THỐNG KÊ");
         btnThongKe.setContentAreaFilled(false);
         btnThongKe.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -176,7 +176,7 @@ public final class UI_Main extends javax.swing.JFrame {
 
         btnKhachHang.setBackground(new java.awt.Color(153, 255, 153));
         btnKhachHang.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnKhachHang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/khach hang 2.png"))); // NOI18N
+        btnKhachHang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/person.png"))); // NOI18N
         btnKhachHang.setText("KHÁCH HÀNG");
         btnKhachHang.setContentAreaFilled(false);
         btnKhachHang.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -189,7 +189,7 @@ public final class UI_Main extends javax.swing.JFrame {
 
         btnLopHoc.setBackground(new java.awt.Color(153, 255, 153));
         btnLopHoc.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnLopHoc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/class2.png"))); // NOI18N
+        btnLopHoc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/class.png"))); // NOI18N
         btnLopHoc.setText("LỚP HỌC");
         btnLopHoc.setContentAreaFilled(false);
         btnLopHoc.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -202,8 +202,8 @@ public final class UI_Main extends javax.swing.JFrame {
 
         btnCTHoc.setBackground(new java.awt.Color(153, 255, 153));
         btnCTHoc.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnCTHoc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chuong trinh hoc 1.png"))); // NOI18N
-        btnCTHoc.setText("CHƯƠNG TRÌNH HỌC");
+        btnCTHoc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/program.png"))); // NOI18N
+        btnCTHoc.setText("CHƯƠNG TRÌNH");
         btnCTHoc.setContentAreaFilled(false);
         btnCTHoc.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCTHoc.setFocusable(false);
@@ -215,7 +215,7 @@ public final class UI_Main extends javax.swing.JFrame {
 
         btnTaiKhoan.setBackground(new java.awt.Color(153, 255, 153));
         btnTaiKhoan.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnTaiKhoan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/tai khoan 1.png"))); // NOI18N
+        btnTaiKhoan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/lock.png"))); // NOI18N
         btnTaiKhoan.setText("TÀI KHOẢN");
         btnTaiKhoan.setContentAreaFilled(false);
         btnTaiKhoan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -263,8 +263,8 @@ public final class UI_Main extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(btnThongKe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(20, 20, 20)
-                .addComponent(btnKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
+                .addComponent(btnKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(btnLopHoc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(20, 20, 20)
                 .addComponent(btnCTHoc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -288,9 +288,8 @@ public final class UI_Main extends javax.swing.JFrame {
                             .addComponent(btnLopHoc, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnTaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(btnThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnDangXuat, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtThongTinDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnDangXuat, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtThongTinDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCTHoc, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addComponent(pnBody, javax.swing.GroupLayout.DEFAULT_SIZE, 620, Short.MAX_VALUE)

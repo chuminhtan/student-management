@@ -53,8 +53,8 @@
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Component id="btnThongKe" max="32767" attributes="0"/>
                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                  <Component id="btnKhachHang" min="-2" pref="145" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                  <Component id="btnKhachHang" min="-2" pref="147" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="btnLopHoc" max="32767" attributes="0"/>
                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   <Component id="btnCTHoc" max="32767" attributes="0"/>
@@ -82,10 +82,8 @@
                           </Group>
                           <Component id="btnThongKe" min="-2" pref="46" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnDangXuat" alignment="0" min="-2" pref="41" max="-2" attributes="0"/>
-                          <Component id="txtThongTinDangNhap" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="btnDangXuat" alignment="0" min="-2" pref="41" max="-2" attributes="0"/>
+                      <Component id="txtThongTinDangNhap" min="-2" pref="41" max="-2" attributes="0"/>
                       <Component id="btnCTHoc" min="-2" pref="48" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
@@ -124,7 +122,7 @@
               <Font name="Tahoma" size="14" style="1"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/thong k3.png"/>
+              <Image iconType="3" name="/images/report.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="TH&#x1ed0;NG K&#xca;"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
@@ -146,7 +144,7 @@
               <Font name="Tahoma" size="14" style="1"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/khach hang 2.png"/>
+              <Image iconType="3" name="/images/person.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="KH&#xc1;CH H&#xc0;NG"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
@@ -168,7 +166,7 @@
               <Font name="Tahoma" size="14" style="1"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/class2.png"/>
+              <Image iconType="3" name="/images/class.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="L&#x1eda;P H&#x1ecc;C"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
@@ -190,9 +188,9 @@
               <Font name="Tahoma" size="14" style="1"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/chuong trinh hoc 1.png"/>
+              <Image iconType="3" name="/images/program.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="CH&#x1af;&#x1a0;NG TR&#xcc;NH H&#x1ecc;C"/>
+            <Property name="text" type="java.lang.String" value="CH&#x1af;&#x1a0;NG TR&#xcc;NH"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
               <Color id="Hand Cursor"/>
@@ -212,7 +210,7 @@
               <Font name="Tahoma" size="14" style="1"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/tai khoan 1.png"/>
+              <Image iconType="3" name="/images/lock.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="T&#xc0;I KHO&#x1ea2;N"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
