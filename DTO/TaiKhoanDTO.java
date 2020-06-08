@@ -32,12 +32,12 @@ public class TaiKhoanDTO {
 
     public static Object[] getArrayColumnIdentifiers() {
         return new Object[]{
-            "Mã tài khoản",
-            "Họ tên",
-            "Số điện thoại",
-            "Loại",
-            "Tên đăng nhập",
-            "Mật khẩu"
+            "Mã TK",
+            "Họ Tên",
+            "Điện Thoại",
+            "Loại TK",
+            "Tên Đăng Nhập",
+            "Mật Khẩu"
         };
     }
 
