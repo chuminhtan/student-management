@@ -51,7 +51,7 @@ public class UI_ChuongTrinh extends javax.swing.JPanel {
     }
     
     // HÀM HIỂN THỊ THÔNG TIN LÊN BẢNG
-    public void hienThiDsChuongTrinh(int trangThai){
+    public static void hienThiDsChuongTrinh(int trangThai){
         new bus_ChuongTrinh().layDsChuongTrinh(trangThai);
     }
     

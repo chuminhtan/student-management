@@ -5,11 +5,13 @@
  */
 package DAL;
 
+import DTO.dto_ChungChi;
 import DTO.dto_ChuongTrinh;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.sql.Types;
+import java.util.Vector;
 
 /**
  *
@@ -101,6 +103,71 @@ public class dal_ChuongTrinh extends DBConnect{
         }
         return dsChuongTrinh;
     }
+    
+    
+    // HÀM LẤY CHỨNG CHỈ
+    public ArrayList<dto_ChungChi>layDsChungChi(){
+        
+        ArrayList<dto_ChungChi> dsChungChi = new ArrayList<dto_ChungChi>();
+        dto_ChungChi cc = null;
+        try{
+            String sql = "SELECT ma_chung_chi, ten_chung_chi, diem_toi_da, noi_dung "
+                    + "FROM chung_chi";
+            
+            PreparedStatement preStmt = conn.prepareStatement(sql);
+            ResultSet rs = preStmt.executeQuery();
+            
+            for(int i = 0; rs.next() == true; i++){
+                cc = new dto_ChungChi();
+                cc.setMaCc(rs.getInt(1));
+                cc.setTenCc(rs.getString(2));
+                cc.setDiemToiDa(rs.getFloat(3));
+                cc.setNoiDung(rs.getString(4));
+                
+                dsChungChi.add(cc);
+               
+            }
+            
+            conn.close();
+            return dsChungChi;
+        }
+        
+        catch(Exception ex){
+            ex.printStackTrace();
+            return dsChungChi;
+        }
+    }
+   
+    // HÀM THÊM CHUONG TRÌNH
+    public int themChuongTrinh(dto_ChuongTrinh ct){
+        
+        try{
+            String sql = "INSERT INTO chuong_trinh VALUES (chuong_trinh_sequence.NEXTVAL,?,?,?,?,?,?,?,?,?,?,?)";
+            
+            PreparedStatement preStmt = conn.prepareStatement(sql);
+            preStmt.setInt(1, ct.getMaCc());
+            preStmt.setString(2, ct.getTenCt());
+            preStmt.setFloat(3, ct.getDiemDauVao());
+            preStmt.setFloat(4, ct.getDiemDauRa());
+            preStmt.setString(5, ct.getNoiDung());
+            preStmt.setInt(6, ct.getTrangThai());
+            preStmt.setInt(7, ct.getTinhNghe());
+            preStmt.setInt(8, ct.getTinhNoi());
+            preStmt.setInt(9, ct.getTinhDoc());
+            preStmt.setInt(10, ct.getTinhViet());
+            preStmt.setInt(11, ct.getCachTinhDiem());
+            
+            int rs = preStmt.executeUpdate();
+            
+            conn.close();
+            return rs;
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+            return 0;
+        }
+    }
+    
     
     //MAIN
     public static void main(String[] args){

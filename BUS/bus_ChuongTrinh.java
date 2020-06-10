@@ -6,6 +6,7 @@
 package BUS;
 
 import DAL.dal_ChuongTrinh;
+import DTO.dto_ChungChi;
 import DTO.dto_ChuongTrinh;
 import UI.ChuongTrinhUI.UI_ChuongTrinh;
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
  */
 public class bus_ChuongTrinh {
     
+    
     // HÀM LÂY GIÁ TRỊ HIỂN THỊ LÊN BẢNG.
     public void layDsChuongTrinh(int trangThai){
         
@@ -24,9 +26,23 @@ public class bus_ChuongTrinh {
         UI_ChuongTrinh.reloadTable(dsChuongTrinh);
     }
     
+    
     // HÀM LẤY DANH SÁCH TÌM KIẾM HIỂN THỊ LÊN BẢNG
     public void layDsTimKiem(String text){
         ArrayList<dto_ChuongTrinh> dsChuongTrinh = new dal_ChuongTrinh().timChuongTrinh(text);
         UI_ChuongTrinh.reloadTable(dsChuongTrinh);    
     }
+    
+    
+    // HÀM LẤY THÔNG TIN CHỨNG CHỈ
+    public ArrayList<dto_ChungChi> layDsChungChi(){
+        
+        return new dal_ChuongTrinh().layDsChungChi();
+    }
+    
+    // HÀM THÊM CHƯƠNG TRÌNH
+    public int themChuongTrinh(dto_ChuongTrinh ct){
+        return new dal_ChuongTrinh().themChuongTrinh(ct);
+    }
+    
 }
