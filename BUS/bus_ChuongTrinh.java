@@ -8,6 +8,7 @@ package BUS;
 import DAL.dal_ChuongTrinh;
 import DTO.dto_ChungChi;
 import DTO.dto_ChuongTrinh;
+import DTO.dto_ChuongTrinh_ChungChi;
 import UI.ChuongTrinhUI.UI_ChuongTrinh;
 import java.util.ArrayList;
 
@@ -43,6 +44,23 @@ public class bus_ChuongTrinh {
     // HÀM THÊM CHƯƠNG TRÌNH
     public int themChuongTrinh(dto_ChuongTrinh ct){
         return new dal_ChuongTrinh().themChuongTrinh(ct);
+    }
+    
+    // HÀM LẤY GIÁ TRỊ CHƯƠNG TRÌNH + CHỨNG CHỈ
+    public dto_ChuongTrinh_ChungChi layChuongTrinhChungChi(dto_ChuongTrinh ct){
+        return new dal_ChuongTrinh().layThongTinCtCc(ct);
+    }
+    
+    // HÀM CẬP NHẬT CHƯƠNG TRÌNH
+    public int capNhatChuongTrinh(dto_ChuongTrinh ct){
+        
+        return new dal_ChuongTrinh().capNhatChuongTrinh(ct);
+    }
+    
+    // HÀM XÓA CHƯƠNG TRÌNH
+    public int xoaChuongTrinh(int ma_ct){
+        
+        return new dal_ChuongTrinh().xoaChuongTrinh(ma_ct);
     }
     
 }

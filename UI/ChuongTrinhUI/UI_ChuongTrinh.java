@@ -7,10 +7,12 @@ package UI.ChuongTrinhUI;
 
 import BUS.bus_ChuongTrinh;
 import DTO.dto_ChuongTrinh;
+import DTO.dto_ChuongTrinh_ChungChi;
 import java.awt.Color;
 import java.awt.Font;
 import java.util.ArrayList;
 import java.util.Vector;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -27,49 +29,95 @@ public class UI_ChuongTrinh extends javax.swing.JPanel {
         setupTable();
         hienThiDsChuongTrinh(0);
 
-
     }
+
     /**
-     * Khu vực của Tân
-     * WARNING: Do NOT modify this code.
+     * Khu vực của Tân WARNING: Do NOT modify this code.
      */
-    public void hideBtnCt(){
+    public void hideBtnCt() {
         btnCapNhatChuongTrinh.setVisible(false);
         btnThemChuongTrinh.setVisible(false);
         btnXoaChuongTrinh.setVisible(false);
     }
-    
+
     /*Biến tự định nghĩa*/
     static dto_ChuongTrinh static_chuongTrinh = new dto_ChuongTrinh();
     static DefaultTableModel static_dtmChuongTrinh = new DefaultTableModel();
     static ArrayList<dto_ChuongTrinh> static_dsChuongTrinh = new ArrayList<dto_ChuongTrinh>();
-    
-    
+    private dto_ChuongTrinh ct_trans;
+
+    // HÀM XÓA CHƯƠNG TRÌNH
+    public void xoaChuongTrinh() {
+
+        dto_ChuongTrinh_ChungChi chuongTrinh_chungChi = new dto_ChuongTrinh_ChungChi();
+
+        chuongTrinh_chungChi = layThongTinChon();
+
+        if (chuongTrinh_chungChi != null) {
+
+            int rs = new bus_ChuongTrinh().xoaChuongTrinh(chuongTrinh_chungChi.getMaCt());
+
+            if (rs > 0) {
+
+                hienThiDsChuongTrinh(0);
+                JOptionPane.showMessageDialog(null, "Thành Công");
+                
+            } else {
+                
+                JOptionPane.showMessageDialog(null, "Thất Bại");
+            }
+        }
+    }
+
+    // HÀM LẤY THÔNG TIN CỦA CHƯƠNG TRÌNH ĐƯỢC CHỌN
+    public dto_ChuongTrinh_ChungChi layThongTinChon() {
+
+        dto_ChuongTrinh_ChungChi ct_cc = null;
+
+        int row = tbChuongTrinh.getSelectedRow();
+
+        if (row >= 0) {
+            this.ct_trans = new dto_ChuongTrinh();
+
+            this.ct_trans = (dto_ChuongTrinh) static_dsChuongTrinh.get(row);
+
+            ct_cc = new dto_ChuongTrinh_ChungChi();
+
+            ct_cc = new bus_ChuongTrinh().layChuongTrinhChungChi(ct_trans);
+            
+        } else {
+            
+            JOptionPane.showMessageDialog(null, "Chưa chọn dòng dữ liệu");
+        }
+        return ct_cc;
+    }
+
+    // HÀM XÓA
     // HÀM HIỂN THỊ THÔNG TIN TÌM KIẾM
-    public void hienThiDsTimKiem(String text){
+    public void hienThiDsTimKiem(String text) {
         new bus_ChuongTrinh().layDsTimKiem(text);
     }
-    
+
     // HÀM HIỂN THỊ THÔNG TIN LÊN BẢNG
-    public static void hienThiDsChuongTrinh(int trangThai){
+    public static void hienThiDsChuongTrinh(int trangThai) {
         new bus_ChuongTrinh().layDsChuongTrinh(trangThai);
     }
-    
+
     // HÀM LOAD DỮ LIỆU LÊN BẢNG
-    public static void reloadTable(ArrayList<dto_ChuongTrinh> dsChuongTrinh){
-        
+    public static void reloadTable(ArrayList<dto_ChuongTrinh> dsChuongTrinh) {
+
         static_dsChuongTrinh = new ArrayList<dto_ChuongTrinh>();
         static_dsChuongTrinh = dsChuongTrinh;
-        
+
         int stt = 0;
-        
+
         static_dtmChuongTrinh.setRowCount(0);
-        
-        for(dto_ChuongTrinh ct : dsChuongTrinh){
-            
+
+        for (dto_ChuongTrinh ct : dsChuongTrinh) {
+
             stt++;
             Vector<Object> vc = new Vector<Object>();
-            
+
             vc.add(stt);
             vc.add(ct.getMaCt());
             vc.add(ct.getTenCt());
@@ -77,19 +125,21 @@ public class UI_ChuongTrinh extends javax.swing.JPanel {
             vc.add(ct.getDiemDauVao());
             vc.add(ct.getDiemDauRa());
             vc.add(ct.getNoiDung());
-            
-            if(ct.getTrangThai() == 0)
+
+            if (ct.getTrangThai() == 0) {
                 vc.add("Đóng");
-            else
+            } else {
                 vc.add("Mở");
-            
+            }
+
             static_dtmChuongTrinh.addRow(vc);
         }
     }
+
     // HÀM TẠO BẢNG
-    public void setupTable(){
+    public void setupTable() {
         static_dtmChuongTrinh = new DefaultTableModel();
-        
+
         static_dtmChuongTrinh.addColumn("STT");
         static_dtmChuongTrinh.addColumn("Mã CT");
         static_dtmChuongTrinh.addColumn("Tên Chương Trình");
@@ -98,31 +148,30 @@ public class UI_ChuongTrinh extends javax.swing.JPanel {
         static_dtmChuongTrinh.addColumn("Đầu Ra");
         static_dtmChuongTrinh.addColumn("Nội Dung");
         static_dtmChuongTrinh.addColumn("Trạng Thái");
-        
-        tbChuongTrinh.setModel(static_dtmChuongTrinh);
-        
-        tbChuongTrinh.getColumnModel().getColumn(0).setMaxWidth(50);
-	tbChuongTrinh.getColumnModel().getColumn(1).setMinWidth(80);
-	tbChuongTrinh.getColumnModel().getColumn(1).setMaxWidth(80);
-	tbChuongTrinh.getColumnModel().getColumn(2).setMinWidth(150);
-	tbChuongTrinh.getColumnModel().getColumn(2).setMaxWidth(150);
-	tbChuongTrinh.getColumnModel().getColumn(3).setMinWidth(100);
-	tbChuongTrinh.getColumnModel().getColumn(3).setMaxWidth(80);
-	tbChuongTrinh.getColumnModel().getColumn(4).setMaxWidth(80);
-	tbChuongTrinh.getColumnModel().getColumn(4).setMinWidth(80);
-	tbChuongTrinh.getColumnModel().getColumn(5).setMaxWidth(80);
-	tbChuongTrinh.getColumnModel().getColumn(5).setMinWidth(80);
-	tbChuongTrinh.getColumnModel().getColumn(6).setMinWidth(300);
-	tbChuongTrinh.getColumnModel().getColumn(7).setMaxWidth(80);
 
-        
+        tbChuongTrinh.setModel(static_dtmChuongTrinh);
+
+        tbChuongTrinh.getColumnModel().getColumn(0).setMaxWidth(50);
+        tbChuongTrinh.getColumnModel().getColumn(1).setMinWidth(80);
+        tbChuongTrinh.getColumnModel().getColumn(1).setMaxWidth(80);
+        tbChuongTrinh.getColumnModel().getColumn(2).setMinWidth(150);
+        tbChuongTrinh.getColumnModel().getColumn(2).setMaxWidth(150);
+        tbChuongTrinh.getColumnModel().getColumn(3).setMinWidth(100);
+        tbChuongTrinh.getColumnModel().getColumn(3).setMaxWidth(80);
+        tbChuongTrinh.getColumnModel().getColumn(4).setMaxWidth(80);
+        tbChuongTrinh.getColumnModel().getColumn(4).setMinWidth(80);
+        tbChuongTrinh.getColumnModel().getColumn(5).setMaxWidth(80);
+        tbChuongTrinh.getColumnModel().getColumn(5).setMinWidth(80);
+        tbChuongTrinh.getColumnModel().getColumn(6).setMinWidth(300);
+        tbChuongTrinh.getColumnModel().getColumn(7).setMaxWidth(80);
+
         tbChuongTrinh.getTableHeader().setFont(new Font("Tahoma", Font.BOLD, 12));
         tbChuongTrinh.getTableHeader().setOpaque(false);
-        tbChuongTrinh.getTableHeader().setForeground(new Color(0,0,0));
+        tbChuongTrinh.getTableHeader().setForeground(new Color(0, 0, 0));
         tbChuongTrinh.setSelectionBackground(new Color(0, 64, 128));
-        
-        
+
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -238,6 +287,11 @@ public class UI_ChuongTrinh extends javax.swing.JPanel {
         tbChuongTrinh.setRowHeight(40);
         tbChuongTrinh.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tbChuongTrinh.getTableHeader().setReorderingAllowed(false);
+        tbChuongTrinh.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                tbChuongTrinhMouseEntered(evt);
+            }
+        });
         jspLH.setViewportView(tbChuongTrinh);
         if (tbChuongTrinh.getColumnModel().getColumnCount() > 0) {
             tbChuongTrinh.getColumnModel().getColumn(0).setMinWidth(50);
@@ -361,11 +415,21 @@ public class UI_ChuongTrinh extends javax.swing.JPanel {
     }//GEN-LAST:event_btnThemChuongTrinhActionPerformed
 
     private void btnXoaChuongTrinhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaChuongTrinhActionPerformed
-        // TODO add your handling code here:
+
+        int rs = JOptionPane.showConfirmDialog(null, "Đồng ý xóa ?", "Xác Nhận Xóa", JOptionPane.YES_NO_OPTION);
+
+        if (rs == 0) {
+            xoaChuongTrinh();
+        }
     }//GEN-LAST:event_btnXoaChuongTrinhActionPerformed
 
     private void btnCapNhatChuongTrinhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatChuongTrinhActionPerformed
-        new FormCapNhatChuongTrinh().show();
+
+        dto_ChuongTrinh_ChungChi chuongTrinh_chungChi = layThongTinChon();
+        if (chuongTrinh_chungChi != null) {
+            new FormCapNhatChuongTrinh(chuongTrinh_chungChi).show();
+        }
+
     }//GEN-LAST:event_btnCapNhatChuongTrinhActionPerformed
 
     private void ckBoxCtDongMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ckBoxCtDongMouseClicked
@@ -373,20 +437,23 @@ public class UI_ChuongTrinh extends javax.swing.JPanel {
     }//GEN-LAST:event_ckBoxCtDongMouseClicked
 
     private void ckBoxCtDongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ckBoxCtDongActionPerformed
-        
-        if(ckBoxCtDong.isSelected()){
+
+        if (ckBoxCtDong.isSelected()) {
             hienThiDsChuongTrinh(1);
-        }
-        else{
+        } else {
             hienThiDsChuongTrinh(0);
         }
     }//GEN-LAST:event_ckBoxCtDongActionPerformed
 
     private void txtTimChuongTrinhKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimChuongTrinhKeyReleased
-        
+
         String text = txtTimChuongTrinh.getText();
         hienThiDsTimKiem(text);
     }//GEN-LAST:event_txtTimChuongTrinhKeyReleased
+
+    private void tbChuongTrinhMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbChuongTrinhMouseEntered
+
+    }//GEN-LAST:event_tbChuongTrinhMouseEntered
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

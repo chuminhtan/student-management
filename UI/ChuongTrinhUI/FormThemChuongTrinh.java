@@ -52,29 +52,30 @@ public class FormThemChuongTrinh extends javax.swing.JFrame {
        btnGroup.add(radTrungBinhCong);
        
        ButtonGroup btnGroupTrangThai = new ButtonGroup();
-       btnGroupTrangThai.add(radDong);
-       btnGroupTrangThai.add(radMo);
-       
+        btnGroupTrangThai.add(radDong);
+        btnGroupTrangThai.add(radMo);
+
     }
-    
-    
+
     // HÀM THÊM CHƯƠNG TRÌNH
-    public void themChuongTrinh(){
-        
+    public void themChuongTrinh() {
+
         dto_ChuongTrinh ct = new dto_ChuongTrinh();
         ct = layThongTinNhap();
-        
-        int rs = new bus_ChuongTrinh().themChuongTrinh(ct);
-        
-        if(rs == 0){
-            
-            JOptionPane.showMessageDialog(null, "Không thành công");
+
+        if (ct != null) {
+            int rs = new bus_ChuongTrinh().themChuongTrinh(ct);
+
+            if (rs == 0) {
+
+                JOptionPane.showMessageDialog(null, "Không thành công");
+            } else {
+
+                UI_ChuongTrinh.hienThiDsChuongTrinh(1);
+                JOptionPane.showMessageDialog(null, "Thành công");
+            }
         }
-        else{
-            
-            UI_ChuongTrinh.hienThiDsChuongTrinh(1);
-            JOptionPane.showMessageDialog(null, "Thành công");
-        }
+
     }
     
     // HÀM LẤY THÔNG TIN NHẬP - trả về 1 chuong trình
@@ -97,6 +98,7 @@ public class FormThemChuongTrinh extends javax.swing.JFrame {
         
         boolean isCkDong = radDong.isSelected();
         boolean isCkMo = radMo.isSelected();
+        
         
         String strNoiDung = txtNoiDung.getText();
         
@@ -155,6 +157,11 @@ public class FormThemChuongTrinh extends javax.swing.JFrame {
                 ct.setCachTinhDiem(1);
             else
                 ct.setCachTinhDiem(2); 
+            
+            if(isCkDong == true)
+                ct.setTrangThai(0);
+            else
+                ct.setTrangThai(1);
         }
         return ct;
         
@@ -167,7 +174,7 @@ public class FormThemChuongTrinh extends javax.swing.JFrame {
             return 0;
         }
         
-        if(ckNghe == ckNoi == ckDoc == ckViet == ckTong == ckTrungBinhCong == ckDong == ckMo ==false){
+        if(ckDong == ckMo == ckNghe == ckNoi == ckDoc == ckViet == ckTong == ckTrungBinhCong == ckDong == ckMo ==false){
             return 0;
         }
         
@@ -281,19 +288,22 @@ public class FormThemChuongTrinh extends javax.swing.JFrame {
         txtDiemDauVao.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         txtDiemDauVao.setForeground(new java.awt.Color(0, 102, 153));
         txtDiemDauVao.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtDiemDauVao.setText("250");
 
         jLabel5.setText("Điểm Đầu Ra");
 
         txtDiemDauRa.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtDiemDauRa.setForeground(new java.awt.Color(0, 102, 153));
         txtDiemDauRa.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtDiemDauRa.setText("500");
 
         jLabel6.setText("Chứng Chỉ");
 
         cbTenCc.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         cbTenCc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbTenCc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbTenCcActionPerformed(evt);
+            }
+        });
 
         jLabel7.setText("Cách Tính Tổng Điểm Thành Phần");
 
@@ -317,14 +327,12 @@ public class FormThemChuongTrinh extends javax.swing.JFrame {
 
         txtMaCc.setEditable(false);
         txtMaCc.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtMaCc.setText("15242");
 
         jLabel10.setText("Điểm Tối Đa");
 
         txtDiemToiDa.setEditable(false);
         txtDiemToiDa.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtDiemToiDa.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtDiemToiDa.setText("990");
 
         lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/ielts.png"))); // NOI18N
         lblLogo.setText("ẢNH");
@@ -501,6 +509,12 @@ public class FormThemChuongTrinh extends javax.swing.JFrame {
     private void btnXacNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXacNhanActionPerformed
         themChuongTrinh();
     }//GEN-LAST:event_btnXacNhanActionPerformed
+
+    private void cbTenCcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTenCcActionPerformed
+        dto_ChungChi cc = (dto_ChungChi)static_dfcDsChungChi.getSelectedItem();
+        txtMaCc.setText(cc.getMaCc()+"");
+        txtDiemToiDa.setText(cc.getDiemToiDa()+"");
+    }//GEN-LAST:event_cbTenCcActionPerformed
 
     /**
      * @param args the command line arguments

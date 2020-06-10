@@ -22,6 +22,7 @@ public final class UI_Main extends javax.swing.JFrame {
 
     public UI_Main() {
         initComponents();
+        setResizable(false);
         this.changeTabEffect(btnThongKe, "thongke");
     }
 

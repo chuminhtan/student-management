@@ -215,8 +215,8 @@ increment by 1
 start with 6000
 
 --insert
-insert into lop values (5000, 170, 5503, "IELTS 4.0 K12", to_date('01/06/2020','DD/MM/YYYY'), to_date('31/09/2020','DD/MM/YYYY'), 'Sony Ericson','A.400', 1);
-insert into lop values (5001, 170, 5503, "IELTS 4.0 K13", to_date('01/06/2020','DD/MM/YYYY'), to_date('31/09/2020','DD/MM/YYYY'), 'Sony Ericson','A.401', 1);
+insert into lop values (5000, 170, 5503, "IELTS 4.0 K12", to_date('01/06/2020','DD/MM/YYYY'), to_date('30/09/2020','DD/MM/YYYY'), 'Sony Ericson','A.400', 1);
+insert into lop values (5001, 170, 5503, "IELTS 4.0 K13", to_date('01/06/2020','DD/MM/YYYY'), to_date('30/09/2020','DD/MM/YYYY'), 'Sony Ericson','A.401', 1);
 insert into lop values (5002, 160, 5503, "TOEIC LR250 K12", to_date('09/06/2020','DD/MM/YYYY'), to_date('30/08/2020','DD/MM/YYYY'), 'Nokia Romantic','A.500', 1);
 insert into lop values (5003, 161, 5503, "TOEIC LR500 K12", to_date('09/06/2020','DD/MM/YYYY'), to_date('30/08/2020','DD/MM/YYYY'), 'Xampp Apache','A.501', 1);
 insert into lop values (5004, 162, 5503, "TOEIC LR700 K12", to_date('09/06/2020','DD/MM/YYYY'), to_date('30/08/2020','DD/MM/YYYY'), 'Nokia Romantic','A.500', 1);
