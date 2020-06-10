@@ -12,32 +12,35 @@ package DTO;
 public class dto_ChuongTrinh {
     private int maCt;
     private String tenCt;
-    private int diemDauVao;
-    private int capDo;
+    private String tenCc;
+    private float diemDauVao;
+    private float diemDauRa;
     private String noiDung;
-    private int trangThai;
-    
+    private int trangThai; // 0-đóng , 1-mở
 
     public dto_ChuongTrinh() {
     }
     
-    
-    public dto_ChuongTrinh(int maCt, String tenCt) {
-        this.maCt = maCt;
-        this.tenCt = tenCt;
-    }
     //getter
 
     public int getMaCt() {
         return maCt;
     }
 
+    public String getTenCc() {
+        return tenCc;
+    }
+
     public String getTenCt() {
         return tenCt;
     }
 
-    public int getDiemDauVao() {
+    public float getDiemDauVao() {
         return diemDauVao;
+    }
+
+    public float getDiemDauRa() {
+        return diemDauRa;
     }
 
     public String getNoiDung() {
@@ -47,22 +50,28 @@ public class dto_ChuongTrinh {
     public int getTrangThai() {
         return trangThai;
     }
-
-    public int getCapDo() {
-        return capDo;
-    }
+    
+    
     //setter
 
     public void setMaCt(int maCt) {
         this.maCt = maCt;
     }
 
+    public void setTenCc(String tenCc) {
+        this.tenCc = tenCc;
+    }
+
     public void setTenCt(String tenCt) {
         this.tenCt = tenCt;
     }
 
-    public void setDiemDauVao(int diemDauVao) {
+    public void setDiemDauVao(float diemDauVao) {
         this.diemDauVao = diemDauVao;
+    }
+
+    public void setDiemDauRa(float diemDauRa) {
+        this.diemDauRa = diemDauRa;
     }
 
     public void setNoiDung(String noiDung) {
@@ -71,10 +80,6 @@ public class dto_ChuongTrinh {
 
     public void setTrangThai(int trangThai) {
         this.trangThai = trangThai;
-    }
-
-    public void setCapDo(int capDo) {
-        this.capDo = capDo;
     }
     
     

@@ -73,8 +73,9 @@ public class UI_ChuongTrinh extends javax.swing.JPanel {
             vc.add(stt);
             vc.add(ct.getMaCt());
             vc.add(ct.getTenCt());
+            vc.add(ct.getTenCc());
             vc.add(ct.getDiemDauVao());
-            vc.add(ct.getCapDo());
+            vc.add(ct.getDiemDauRa());
             vc.add(ct.getNoiDung());
             
             if(ct.getTrangThai() == 0)
@@ -92,8 +93,9 @@ public class UI_ChuongTrinh extends javax.swing.JPanel {
         static_dtmChuongTrinh.addColumn("STT");
         static_dtmChuongTrinh.addColumn("Mã CT");
         static_dtmChuongTrinh.addColumn("Tên Chương Trình");
-        static_dtmChuongTrinh.addColumn("Điểm Đầu Vào");
-        static_dtmChuongTrinh.addColumn("Cấp Độ");
+        static_dtmChuongTrinh.addColumn("Chứng Chỉ");
+        static_dtmChuongTrinh.addColumn("Đầu Vào");
+        static_dtmChuongTrinh.addColumn("Đầu Ra");
         static_dtmChuongTrinh.addColumn("Nội Dung");
         static_dtmChuongTrinh.addColumn("Trạng Thái");
         
@@ -102,14 +104,17 @@ public class UI_ChuongTrinh extends javax.swing.JPanel {
         tbChuongTrinh.getColumnModel().getColumn(0).setMaxWidth(50);
 	tbChuongTrinh.getColumnModel().getColumn(1).setMinWidth(80);
 	tbChuongTrinh.getColumnModel().getColumn(1).setMaxWidth(80);
-	tbChuongTrinh.getColumnModel().getColumn(2).setMinWidth(200);
-	tbChuongTrinh.getColumnModel().getColumn(2).setMaxWidth(200);
+	tbChuongTrinh.getColumnModel().getColumn(2).setMinWidth(150);
+	tbChuongTrinh.getColumnModel().getColumn(2).setMaxWidth(150);
 	tbChuongTrinh.getColumnModel().getColumn(3).setMinWidth(100);
-	tbChuongTrinh.getColumnModel().getColumn(3).setMaxWidth(100);
-	tbChuongTrinh.getColumnModel().getColumn(4).setMaxWidth(100);
-	tbChuongTrinh.getColumnModel().getColumn(4).setMinWidth(100);
-	tbChuongTrinh.getColumnModel().getColumn(6).setMinWidth(80);
-	tbChuongTrinh.getColumnModel().getColumn(6).setMaxWidth(80);
+	tbChuongTrinh.getColumnModel().getColumn(3).setMaxWidth(80);
+	tbChuongTrinh.getColumnModel().getColumn(4).setMaxWidth(80);
+	tbChuongTrinh.getColumnModel().getColumn(4).setMinWidth(80);
+	tbChuongTrinh.getColumnModel().getColumn(5).setMaxWidth(80);
+	tbChuongTrinh.getColumnModel().getColumn(5).setMinWidth(80);
+	tbChuongTrinh.getColumnModel().getColumn(6).setMinWidth(300);
+	tbChuongTrinh.getColumnModel().getColumn(7).setMaxWidth(80);
+
         
         tbChuongTrinh.getTableHeader().setFont(new Font("Tahoma", Font.BOLD, 12));
         tbChuongTrinh.getTableHeader().setOpaque(false);

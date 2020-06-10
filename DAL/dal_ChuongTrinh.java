@@ -9,6 +9,7 @@ import DTO.dto_ChuongTrinh;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.sql.Types;
 
 /**
  *
@@ -25,13 +26,14 @@ public class dal_ChuongTrinh extends DBConnect{
         
         String sql="";
         if(trangThai == 0){
-            sql = "SELECT ma_ct, ten_ct, diem_dau_vao, cap_do, noi_dung, trang_thai "
-                    + "FROM chuong_trinh "
-                    + "WHERE trang_thai = 1";
+            sql = "SELECT ma_ct, ten_ct, ten_chung_chi, chuong_trinh.diem_dau_vao, chuong_trinh.diem_dau_ra, chuong_trinh.noi_dung, chuong_trinh.trang_thai "
+                    + "FROM chuong_trinh, chung_chi "
+                    + "WHERE chuong_trinh.ma_chung_chi = chung_chi.ma_chung_chi AND chuong_trinh.trang_thai = 1";
         }
         else{
-            sql = "SELECT ma_ct, ten_ct, diem_dau_vao, cap_do, noi_dung, trang_thai "
-                    + "FROM chuong_trinh "
+            sql = "SELECT ma_ct, ten_ct, ten_chung_chi, chuong_trinh.diem_dau_vao, chuong_trinh.diem_dau_ra,  chuong_trinh.noi_dung, chuong_trinh.trang_thai "
+                    + "FROM chuong_trinh, chung_chi "
+                    + "WHERE chuong_trinh.ma_chung_chi = chung_chi.ma_chung_chi "
                     + "ORDER BY trang_thai DESC";
         }
         try{
@@ -44,10 +46,11 @@ public class dal_ChuongTrinh extends DBConnect{
                         
                         ct.setMaCt(rs.getInt(1));
                         ct.setTenCt(rs.getString(2));
-                        ct.setDiemDauVao(rs.getInt(3));
-                        ct.setCapDo(rs.getInt(4));
-                        ct.setNoiDung(rs.getString(5));
-                        ct.setTrangThai(rs.getInt(6));
+                        ct.setTenCc(rs.getString(3));
+                        ct.setDiemDauVao(rs.getFloat(4));
+                        ct.setDiemDauRa(rs.getFloat(5));
+                        ct.setNoiDung(rs.getString(6));
+                        ct.setTrangThai(rs.getInt(7));
                         
                         dsChuongTrinh.add(ct);
                     }
@@ -70,24 +73,25 @@ public class dal_ChuongTrinh extends DBConnect{
         dto_ChuongTrinh ct = null;
         
         try {
-            String sql = "SELECT ma_ct, ten_ct, diem_dau_vao, cap_do, noi_dung, trang_thai "
-                    + "FROM chuong_trinh "
-                    + "WHERE LOWER(ten_ct) like N'%" + txt + "%' "
-                    + "OR LOWER(ma_ct) like N'" + txt + "%'";
+            String sql = "SELECT ma_ct, ten_ct, chung_chi.ten_chung_chi, chuong_trinh.diem_dau_vao, chuong_trinh.diem_dau_ra, chuong_trinh.noi_dung, chuong_trinh.trang_thai "
+                    + "FROM chuong_trinh JOIN chung_chi ON chuong_trinh.ma_chung_chi = chung_chi.ma_chung_chi "
+                    + "WHERE LOWER(chuong_trinh.ten_ct) like N'%" + txt + "%' "
+                    + "OR LOWER(chuong_trinh.ma_ct) like N'" + txt + "%'";
             
             PreparedStatement preStmt = conn.prepareStatement(sql);
             ResultSet rs = preStmt.executeQuery();
 
             while (rs.next()) {
                 ct = new dto_ChuongTrinh();
-                
-                ct.setMaCt(rs.getInt(1));
-                ct.setTenCt(rs.getString(2));
-                ct.setDiemDauVao(rs.getInt(3));
-                ct.setCapDo(rs.getInt(4));
-                ct.setNoiDung(rs.getString(5));
-                ct.setTrangThai(rs.getInt(6));
-                        
+
+                        ct.setMaCt(rs.getInt(1));
+                        ct.setTenCt(rs.getString(2));
+                        ct.setTenCc(rs.getString(3));
+                        ct.setDiemDauVao(rs.getFloat(4));
+                        ct.setDiemDauRa(rs.getFloat(5));
+                        ct.setNoiDung(rs.getString(6));
+                        ct.setTrangThai(rs.getInt(7));
+
                 dsChuongTrinh.add(ct);
             }
             conn.close();
