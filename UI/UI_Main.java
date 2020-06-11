@@ -154,6 +154,7 @@ public final class UI_Main extends javax.swing.JFrame {
 
         btnDangXuat.setBackground(new java.awt.Color(255, 255, 255));
         btnDangXuat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/dangxuat.png"))); // NOI18N
+        btnDangXuat.setToolTipText("Đăng Xuất");
         btnDangXuat.setBorder(null);
         btnDangXuat.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnDangXuat.addActionListener(new java.awt.event.ActionListener() {
@@ -231,6 +232,7 @@ public final class UI_Main extends javax.swing.JFrame {
         txtThongTinDangNhap.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtThongTinDangNhap.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtThongTinDangNhap.setText("<Tên Nhân Viên>-<Mã NV>");
+        txtThongTinDangNhap.setToolTipText("Thông Tin Người Dùng");
         txtThongTinDangNhap.setBorder(null);
         txtThongTinDangNhap.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -8,6 +8,7 @@ package UI.ChuongTrinhUI;
 import BUS.bus_ChuongTrinh;
 import DTO.dto_ChuongTrinh;
 import DTO.dto_ChuongTrinh_ChungChi;
+import UI.ChungChi.UI_ChungChi;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
@@ -374,6 +375,11 @@ public class UI_ChuongTrinh extends javax.swing.JPanel {
         btnChungChi.setBorderPainted(false);
         btnChungChi.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnChungChi.setFocusPainted(false);
+        btnChungChi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChungChiActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnChuongTrinhLayout = new javax.swing.GroupLayout(pnChuongTrinh);
         pnChuongTrinh.setLayout(pnChuongTrinhLayout);
@@ -488,6 +494,10 @@ public class UI_ChuongTrinh extends javax.swing.JPanel {
     private void tbChuongTrinhMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbChuongTrinhMouseEntered
 
     }//GEN-LAST:event_tbChuongTrinhMouseEntered
+
+    private void btnChungChiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChungChiActionPerformed
+        new UI_ChungChi().show();
+    }//GEN-LAST:event_btnChungChiActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

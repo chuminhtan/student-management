@@ -102,6 +102,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/images/dangxuat.png"/>
             </Property>
+            <Property name="toolTipText" type="java.lang.String" value="&#x110;&#x103;ng Xu&#x1ea5;t"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>
@@ -231,6 +232,7 @@
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="text" type="java.lang.String" value="&lt;T&#xea;n Nh&#xe2;n Vi&#xea;n&gt;-&lt;M&#xe3; NV&gt;"/>
+            <Property name="toolTipText" type="java.lang.String" value="Th&#xf4;ng Tin Ng&#x1b0;&#x1edd;i D&#xf9;ng"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>
