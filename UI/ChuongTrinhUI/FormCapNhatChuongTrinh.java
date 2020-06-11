@@ -44,16 +44,17 @@ public class FormCapNhatChuongTrinh extends javax.swing.JFrame {
         dto_ChuongTrinh ct = new dto_ChuongTrinh();
         ct = layThongTinNhap();
 
-        if(ct != null){
-            
-        int rs = new bus_ChuongTrinh().capNhatChuongTrinh(ct);
+        if (ct != null) {
 
-        if (rs == 0) {
-            JOptionPane.showMessageDialog(null, "Thất Bại");
-        } else {
-            UI_ChuongTrinh.hienThiDsChuongTrinh(0);
-            JOptionPane.showMessageDialog(null, "Hoàn Tất");
-        }
+            int rs = new bus_ChuongTrinh().capNhatChuongTrinh(ct);
+
+            if (rs == 0) {
+                JOptionPane.showMessageDialog(null, "Thất Bại");
+            } else {
+
+                UI_ChuongTrinh.hienThiDsChuongTrinh(1);
+                JOptionPane.showMessageDialog(null, "Hoàn Tất");
+            }
         }
     }
 

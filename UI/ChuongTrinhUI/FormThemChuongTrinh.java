@@ -69,9 +69,10 @@ public class FormThemChuongTrinh extends javax.swing.JFrame {
             if (rs == 0) {
 
                 JOptionPane.showMessageDialog(null, "Không thành công");
-            } else {
-
-                UI_ChuongTrinh.hienThiDsChuongTrinh(1);
+            } 
+            else {
+                
+                UI_ChuongTrinh.hienThiDsChuongTrinh(0);
                 JOptionPane.showMessageDialog(null, "Thành công");
             }
         }
@@ -174,7 +175,7 @@ public class FormThemChuongTrinh extends javax.swing.JFrame {
             return 0;
         }
         
-        if(ckDong == ckMo == ckNghe == ckNoi == ckDoc == ckViet == ckTong == ckTrungBinhCong == ckDong == ckMo ==false){
+        if(ckNghe == ckNoi == ckDoc == ckViet == ckTong == ckTrungBinhCong == ckDong == ckMo ==false){
             return 0;
         }
         

@@ -9,6 +9,7 @@ import BUS.bus_ChuongTrinh;
 import DTO.dto_ChuongTrinh;
 import DTO.dto_ChuongTrinh_ChungChi;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
 import java.util.ArrayList;
 import java.util.Vector;
@@ -28,7 +29,6 @@ public class UI_ChuongTrinh extends javax.swing.JPanel {
         initComponents();
         setupTable();
         hienThiDsChuongTrinh(0);
-
     }
 
     /**
@@ -40,11 +40,19 @@ public class UI_ChuongTrinh extends javax.swing.JPanel {
         btnXoaChuongTrinh.setVisible(false);
     }
 
-    /*Biến tự định nghĩa*/
+    // LẤY TRẠNG THÁI CỦA checkbox hiển thị trương trình đóng
+    public boolean isCkChuongTrinhDong() {
+        return ckBoxCtDong.isSelected();
+    }
+
+    
+    //Biến tự định nghĩa
+    
     static dto_ChuongTrinh static_chuongTrinh = new dto_ChuongTrinh();
     static DefaultTableModel static_dtmChuongTrinh = new DefaultTableModel();
     static ArrayList<dto_ChuongTrinh> static_dsChuongTrinh = new ArrayList<dto_ChuongTrinh>();
     private dto_ChuongTrinh ct_trans;
+
 
     // HÀM XÓA CHƯƠNG TRÌNH
     public void xoaChuongTrinh() {
@@ -61,9 +69,9 @@ public class UI_ChuongTrinh extends javax.swing.JPanel {
 
                 hienThiDsChuongTrinh(0);
                 JOptionPane.showMessageDialog(null, "Thành Công");
-                
+
             } else {
-                
+
                 JOptionPane.showMessageDialog(null, "Thất Bại");
             }
         }
@@ -84,15 +92,14 @@ public class UI_ChuongTrinh extends javax.swing.JPanel {
             ct_cc = new dto_ChuongTrinh_ChungChi();
 
             ct_cc = new bus_ChuongTrinh().layChuongTrinhChungChi(ct_trans);
-            
+
         } else {
-            
+
             JOptionPane.showMessageDialog(null, "Chưa chọn dòng dữ liệu");
         }
         return ct_cc;
     }
 
-    // HÀM XÓA
     // HÀM HIỂN THỊ THÔNG TIN TÌM KIẾM
     public void hienThiDsTimKiem(String text) {
         new bus_ChuongTrinh().layDsTimKiem(text);
@@ -101,6 +108,7 @@ public class UI_ChuongTrinh extends javax.swing.JPanel {
     // HÀM HIỂN THỊ THÔNG TIN LÊN BẢNG
     public static void hienThiDsChuongTrinh(int trangThai) {
         new bus_ChuongTrinh().layDsChuongTrinh(trangThai);
+        
     }
 
     // HÀM LOAD DỮ LIỆU LÊN BẢNG
@@ -134,6 +142,7 @@ public class UI_ChuongTrinh extends javax.swing.JPanel {
 
             static_dtmChuongTrinh.addRow(vc);
         }
+        
     }
 
     // HÀM TẠO BẢNG
@@ -190,6 +199,7 @@ public class UI_ChuongTrinh extends javax.swing.JPanel {
         btnXoaChuongTrinh = new javax.swing.JButton();
         btnCapNhatChuongTrinh = new javax.swing.JButton();
         ckBoxCtDong = new javax.swing.JCheckBox();
+        btnChungChi = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(1200, 620));
 
@@ -212,6 +222,7 @@ public class UI_ChuongTrinh extends javax.swing.JPanel {
         btnThemChuongTrinh.setBackground(new java.awt.Color(255, 255, 255));
         btnThemChuongTrinh.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnThemChuongTrinh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/taomoi.png"))); // NOI18N
+        btnThemChuongTrinh.setToolTipText("Tạo Mới");
         btnThemChuongTrinh.setContentAreaFilled(false);
         btnThemChuongTrinh.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnThemChuongTrinh.setFocusable(false);
@@ -284,7 +295,7 @@ public class UI_ChuongTrinh extends javax.swing.JPanel {
         tbChuongTrinh.setGridColor(new java.awt.Color(0, 102, 102));
         tbChuongTrinh.setMinimumSize(new java.awt.Dimension(665, 1000));
         tbChuongTrinh.setRequestFocusEnabled(false);
-        tbChuongTrinh.setRowHeight(40);
+        tbChuongTrinh.setRowHeight(50);
         tbChuongTrinh.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tbChuongTrinh.getTableHeader().setReorderingAllowed(false);
         tbChuongTrinh.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -312,6 +323,7 @@ public class UI_ChuongTrinh extends javax.swing.JPanel {
         btnXoaChuongTrinh.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnXoaChuongTrinh.setForeground(new java.awt.Color(255, 255, 255));
         btnXoaChuongTrinh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/xoa.png"))); // NOI18N
+        btnXoaChuongTrinh.setToolTipText("Xóa");
         btnXoaChuongTrinh.setContentAreaFilled(false);
         btnXoaChuongTrinh.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnXoaChuongTrinh.setFocusable(false);
@@ -328,6 +340,7 @@ public class UI_ChuongTrinh extends javax.swing.JPanel {
         btnCapNhatChuongTrinh.setBackground(new java.awt.Color(255, 255, 255));
         btnCapNhatChuongTrinh.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnCapNhatChuongTrinh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/capnhat.png"))); // NOI18N
+        btnCapNhatChuongTrinh.setToolTipText("Cập Nhật");
         btnCapNhatChuongTrinh.setContentAreaFilled(false);
         btnCapNhatChuongTrinh.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCapNhatChuongTrinh.setFocusable(false);
@@ -355,6 +368,13 @@ public class UI_ChuongTrinh extends javax.swing.JPanel {
             }
         });
 
+        btnChungChi.setBackground(new java.awt.Color(255, 255, 255));
+        btnChungChi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chungchi.png"))); // NOI18N
+        btnChungChi.setToolTipText("Quản Lý Chứng Chỉ");
+        btnChungChi.setBorderPainted(false);
+        btnChungChi.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnChungChi.setFocusPainted(false);
+
         javax.swing.GroupLayout pnChuongTrinhLayout = new javax.swing.GroupLayout(pnChuongTrinh);
         pnChuongTrinh.setLayout(pnChuongTrinhLayout);
         pnChuongTrinhLayout.setHorizontalGroup(
@@ -369,6 +389,8 @@ public class UI_ChuongTrinh extends javax.swing.JPanel {
                         .addGap(26, 26, 26)
                         .addComponent(ckBoxCtDong)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnChungChi, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(btnThemChuongTrinh, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnCapNhatChuongTrinh, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -390,8 +412,9 @@ public class UI_ChuongTrinh extends javax.swing.JPanel {
                         .addGroup(pnChuongTrinhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtTimChuongTrinh, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblTimLop, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ckBoxCtDong))))
-                .addGap(10, 10, 10)
+                            .addComponent(ckBoxCtDong)))
+                    .addComponent(btnChungChi, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(jspLH, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
         );
@@ -448,7 +471,18 @@ public class UI_ChuongTrinh extends javax.swing.JPanel {
     private void txtTimChuongTrinhKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimChuongTrinhKeyReleased
 
         String text = txtTimChuongTrinh.getText();
-        hienThiDsTimKiem(text);
+
+        if (text.isEmpty() == false) {
+            hienThiDsTimKiem(text);
+        } else {
+
+            if (ckBoxCtDong.isSelected() == true) {
+                hienThiDsChuongTrinh(1);
+            } else {
+                hienThiDsChuongTrinh(0);
+            }
+        }
+
     }//GEN-LAST:event_txtTimChuongTrinhKeyReleased
 
     private void tbChuongTrinhMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbChuongTrinhMouseEntered
@@ -458,6 +492,7 @@ public class UI_ChuongTrinh extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCapNhatChuongTrinh;
+    private javax.swing.JButton btnChungChi;
     private javax.swing.JButton btnThemChuongTrinh;
     private javax.swing.JButton btnXoaChuongTrinh;
     private javax.swing.JCheckBox ckBoxCtDong;

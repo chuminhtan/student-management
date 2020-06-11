@@ -14,6 +14,7 @@ public class dto_ChungChi {
     private String tenCc;
     private float diemToiDa;
     private String noiDung;
+    private String srcImg;
     
     //constructor
 
@@ -22,6 +23,11 @@ public class dto_ChungChi {
     
     //getter
 
+    public String getSrcImg() {
+        return srcImg;
+    }
+    
+    
     public int getMaCc() {
         return maCc;
     }
@@ -55,6 +61,11 @@ public class dto_ChungChi {
     public void setNoiDung(String noiDung) {
         this.noiDung = noiDung;
     }
+
+    public void setSrcImg(String srcImg) {
+        this.srcImg = srcImg;
+    }
+    
     
     public String toString(){
         return tenCc;

@@ -35,7 +35,7 @@ public class bus_ChuongTrinh {
     }
     
     
-    // HÀM LẤY THÔNG TIN CHỨNG CHỈ
+    // HÀM LẤY CHỨNG CHỈ
     public ArrayList<dto_ChungChi> layDsChungChi(){
         
         return new dal_ChuongTrinh().layDsChungChi();

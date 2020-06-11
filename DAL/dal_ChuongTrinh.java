@@ -112,7 +112,7 @@ public class dal_ChuongTrinh extends DBConnect{
         ArrayList<dto_ChungChi> dsChungChi = new ArrayList<dto_ChungChi>();
         dto_ChungChi cc = null;
         try{
-            String sql = "SELECT ma_chung_chi, ten_chung_chi, diem_toi_da, noi_dung "
+            String sql = "SELECT ma_chung_chi, ten_chung_chi, diem_toi_da, noi_dung, src_img "
                     + "FROM chung_chi";
             
             PreparedStatement preStmt = conn.prepareStatement(sql);
@@ -124,6 +124,7 @@ public class dal_ChuongTrinh extends DBConnect{
                 cc.setTenCc(rs.getString(2));
                 cc.setDiemToiDa(rs.getFloat(3));
                 cc.setNoiDung(rs.getString(4));
+                cc.setSrcImg(rs.getString(5));
                 
                 dsChungChi.add(cc);
                
@@ -276,6 +277,8 @@ public class dal_ChuongTrinh extends DBConnect{
             return 0;
         }
     }
+    
+    
     //MAIN
     public static void main(String[] args){
         ArrayList<dto_ChuongTrinh> dsChuongTrinh = new dal_ChuongTrinh().layDsChuongTrinh(0);
