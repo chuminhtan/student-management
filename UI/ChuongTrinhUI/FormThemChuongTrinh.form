@@ -437,10 +437,11 @@
         </Component>
         <Component class="javax.swing.JLabel" name="lblLogo">
           <Properties>
+            <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/images/ielts.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="&#x1ea2;NH"/>
+            <Property name="text" type="java.lang.String" value="&#x1ea2;nh 300x150"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel11">

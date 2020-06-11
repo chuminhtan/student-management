@@ -11,6 +11,7 @@ import DTO.dto_ChuongTrinh;
 import DTO.dto_ChuongTrinh_ChungChi;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -233,6 +234,7 @@ public class FormCapNhatChuongTrinh extends javax.swing.JFrame {
 
         txtMaCc.setText(ct_cc.getMaCc() + "");
         txtDiemToiDa.setText(ct_cc.getDiemToiDa() + "");
+        lblLogo.setIcon(new ImageIcon(ct_cc.getSrcImg()));
     }
 
     /**

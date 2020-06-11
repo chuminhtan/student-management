@@ -125,9 +125,7 @@ public class dal_ChuongTrinh extends DBConnect{
                 cc.setDiemToiDa(rs.getFloat(3));
                 cc.setNoiDung(rs.getString(4));
                 cc.setSrcImg(rs.getString(5));
-                
-                dsChungChi.add(cc);
-               
+                dsChungChi.add(cc); 
             }
             
             conn.close();
@@ -177,7 +175,7 @@ public class dal_ChuongTrinh extends DBConnect{
         dto_ChuongTrinh_ChungChi ct_cc_return = null;
         
         try{
-            String sql= "SELECT chuong_trinh.ten_ct, chuong_trinh.diem_dau_vao, chuong_trinh.diem_dau_ra, chuong_trinh.trang_thai, chuong_trinh.noi_dung, chuong_trinh.tinh_diem_nghe, chuong_trinh.tinh_diem_noi, chuong_trinh.tinh_diem_doc, chuong_trinh.tinh_diem_viet, chuong_trinh.cach_tinh_diem ,chung_chi.ma_chung_chi, chung_chi.ten_chung_chi, chung_chi.diem_toi_da, chuong_trinh.ma_ct "
+            String sql= "SELECT chuong_trinh.ten_ct, chuong_trinh.diem_dau_vao, chuong_trinh.diem_dau_ra, chuong_trinh.trang_thai, chuong_trinh.noi_dung, chuong_trinh.tinh_diem_nghe, chuong_trinh.tinh_diem_noi, chuong_trinh.tinh_diem_doc, chuong_trinh.tinh_diem_viet, chuong_trinh.cach_tinh_diem ,chung_chi.ma_chung_chi, chung_chi.ten_chung_chi, chung_chi.diem_toi_da, chuong_trinh.ma_ct, chung_chi.src_img "
                     + "FROM chuong_trinh, chung_chi "
                     + "WHERE chuong_trinh.ma_chung_chi = chung_chi.ma_chung_chi AND chuong_trinh.ma_ct = ?";
             
@@ -203,6 +201,7 @@ public class dal_ChuongTrinh extends DBConnect{
                 ct_cc_return.setTenCc(rs.getString(12));
                 ct_cc_return.setDiemToiDa(rs.getFloat(13));
                 ct_cc_return.setMaCt(rs.getInt(14));
+                ct_cc_return.setSrcImg(rs.getString(15));
             }
             conn.close();
             

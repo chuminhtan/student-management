@@ -11,6 +11,7 @@ import DTO.dto_ChuongTrinh;
 import java.util.ArrayList;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
@@ -79,7 +80,7 @@ public class FormThemChuongTrinh extends javax.swing.JFrame {
 
     }
     
-    // HÀM LẤY THÔNG TIN NHẬP - trả về 1 chuong trình
+    // HÀM LẤY THÔNG TIN NHẬP
     public dto_ChuongTrinh layThongTinNhap(){
         
         dto_ChungChi cc = (dto_ChungChi)static_dfcDsChungChi.getSelectedItem();
@@ -335,8 +336,9 @@ public class FormThemChuongTrinh extends javax.swing.JFrame {
         txtDiemToiDa.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtDiemToiDa.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
+        lblLogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/ielts.png"))); // NOI18N
-        lblLogo.setText("ẢNH");
+        lblLogo.setText("Ảnh 300x150");
 
         jLabel11.setText("Trạng Thái");
 
@@ -515,6 +517,7 @@ public class FormThemChuongTrinh extends javax.swing.JFrame {
         dto_ChungChi cc = (dto_ChungChi)static_dfcDsChungChi.getSelectedItem();
         txtMaCc.setText(cc.getMaCc()+"");
         txtDiemToiDa.setText(cc.getDiemToiDa()+"");
+        lblLogo.setIcon(new ImageIcon(cc.getSrcImg()));
     }//GEN-LAST:event_cbTenCcActionPerformed
 
     /**

@@ -17,6 +17,7 @@ import javax.swing.table.DefaultTableModel;
 import java.io.File;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -29,14 +30,149 @@ public class UI_ChungChi extends javax.swing.JFrame {
      */
     public UI_ChungChi() {
         initComponents();
-        caiDatGiaoDien();
+        giaoDienBanDau();
     }
 
     // BIẾN TỰ ĐỊNH NGHĨA
     private boolean isChinhSua;
+    String img;
     DefaultTableModel dtmChungChi;
     ArrayList<dto_ChungChi> dsChungChi;
+    
+    
+    // HÀM XÓA CHỨNG CHỈ
+    public void xoaChungChi(){
+        dto_ChungChi selected = duLieuDuocChon();
+        
+        if(selected == null){
+            JOptionPane.showMessageDialog(null, "Chưa chọn thông tin");
+        }
+        else{
+            
+            int rs = new bus_ChungChi().xoaChungChi(selected.getMaCc());
+            
+            if(rs == 0)
+                    JOptionPane.showMessageDialog(null, "Thất Bại");
+            else{
+                
+                giaoDienBanDau();
+                JOptionPane.showMessageDialog(null, "Thành Công");
+            }
+        }
+        
+        
+    }
+    
+    // HÀM CẬP NHẬT CHỨNG CHỈ
+    public void capNhatChungChi() {
+        dto_ChungChi cc = new dto_ChungChi();
+        
+        dto_ChungChi selected = duLieuDuocChon();
+        
+        cc = layThongTinNhap();
+        
+        cc.setMaCc(selected.getMaCc());
+        
+        if (cc != null) {
+            int kq = new bus_ChungChi().capNhatChungChi(cc);
 
+            if (kq == 0) {
+                JOptionPane.showMessageDialog(null, "Thất Bại");
+                
+            } else {
+
+                giaoDienBanDau();
+                JOptionPane.showMessageDialog(null, "Thành Công");
+            }
+        }
+    }
+    
+    // HÀM THÊM CHỨNG CHỈ
+    public void themChungChi() {
+        dto_ChungChi cc = new dto_ChungChi();
+
+        cc = layThongTinNhap();
+
+        if (cc != null) {
+            int kq = new bus_ChungChi().themChungChi(cc);
+
+            if (kq == 0) {
+                JOptionPane.showMessageDialog(null, "Thất Bại");
+            } else {
+
+                giaoDienBanDau();
+                JOptionPane.showMessageDialog(null, "Thành Công");
+            }
+        }
+    }
+    
+    // HÀM LẤY THÔNG TIN NHẬP Ở KHUNG BÊN PHẢI
+    public dto_ChungChi layThongTinNhap(){
+        
+        dto_ChungChi cc = null;
+       
+        String ten = txtTenChungChi.getText();
+        String strDiemToiDa = txtDiemToiDa.getText();
+        String noiDung = txtNoiDung.getText();
+        
+        int kq = kiemTra(ten, strDiemToiDa, noiDung);
+        
+        if(kq == 0)
+        {
+            JOptionPane.showMessageDialog(null, "Chưa nhập đủ thông tin");
+        }
+        else if(kq == 1){
+            JOptionPane.showMessageDialog(null, "Điểm nhập vào không hợp lệ");
+        }
+        else{
+            
+            cc = new dto_ChungChi();
+            Float diemToiDa = Float.parseFloat(strDiemToiDa);
+            
+            cc.setTenCc(ten);
+            cc.setDiemToiDa(diemToiDa);
+            cc.setNoiDung(noiDung);
+            
+            if(img == null)
+                cc.setSrcImg("");
+            else
+                cc.setSrcImg(img);
+        }
+        
+        return cc;
+    }
+    
+    // HÀM KIỂM TRA DỮ LIỆU NHẬP VÀO
+    public int kiemTra(String ten, String strDiemToiDa, String noiDung){
+        
+        if(ten.isEmpty() || strDiemToiDa.isEmpty() || noiDung.isEmpty())
+            return 0; // dữ liệu chưa điền đủ
+        
+         Float diemToiDa;
+        try{
+            
+            diemToiDa = Float.parseFloat(strDiemToiDa);
+        }
+        catch(Exception e){
+            
+            e.printStackTrace();
+            return 1;//Số nhập vào không đúng
+        }
+        
+        if(diemToiDa >= 1000)
+            return 1;
+        
+        return 2;
+    }
+    
+    // HÀM RESET THÔNG TIN CHI TIẾT CHO KHUNG BÊN PHẢI
+    public void xoaThongTinChiTiet(){
+        txtTenChungChi.setText("");
+        txtDiemToiDa.setText("");
+        txtNoiDung.setText("");
+        lblImg.setIcon(null);
+        
+    }
     // HÀM XEM THÔNG TIN CHI TIẾT CHO KHUNG BÊN PHẢI
     public void xemThongTinChiTiet(dto_ChungChi cc) {
         xemMode();
@@ -47,7 +183,6 @@ public class UI_ChungChi extends javax.swing.JFrame {
         ImageIcon img = new ImageIcon(cc.getSrcImg());
             
         lblImg.setIcon(img);
-
 
     }
 
@@ -61,14 +196,17 @@ public class UI_ChungChi extends javax.swing.JFrame {
     }
 
     // HÀM THIẾT LẬP GIAO DIỆN BAN ĐẦU
-    public void caiDatGiaoDien() {
+    public void giaoDienBanDau() {
         setupTable();
         taoMoiMode();
-
+        
+        xoaThongTinChiTiet();
+        
+        this.img = "";
         dsChungChi = new ArrayList<dto_ChungChi>();
         dsChungChi = new bus_ChungChi().layDsChungChi();
         reloadTable(dsChungChi);
-
+        
     }
 
     // HÀM CÀI CHẾ ĐỘ XEM THÔNG TIN
@@ -86,11 +224,14 @@ public class UI_ChungChi extends javax.swing.JFrame {
         btnXacNhan.setText("TẠO MỚI");
         btnXacNhan.setVisible(true);
         btnChooseFile.setVisible(true);
+        xoaThongTinChiTiet();
+        
     }
 
     // HÀM CÀI CHẾ ĐỘ CẬP NHẬT
     public void capNhatMode() {
         this.isChinhSua = true;
+        
         lblMode.setText("Cập Nhật");
         btnXacNhan.setText("CẬP NHẬT");
         btnXacNhan.setVisible(true);
@@ -283,6 +424,7 @@ public class UI_ChungChi extends javax.swing.JFrame {
         jScrollPane2.setViewportView(txtNoiDung);
 
         lblImg.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblImg.setText("Ảnh 300x150");
         lblImg.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(204, 204, 204)));
         lblImg.setPreferredSize(new java.awt.Dimension(300, 150));
 
@@ -433,11 +575,22 @@ public class UI_ChungChi extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCapNhatChungChiActionPerformed
 
     private void btnXoaChungChiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaChungChiActionPerformed
-        // TODO add your handling code here:
+        int rs = JOptionPane.showConfirmDialog(null, "Đồng ý xóa ?", "Xác Nhận Xóa", JOptionPane.YES_NO_OPTION);
+
+        if (rs == 0) {
+            xoaChungChi();
+        }
+        
+
     }//GEN-LAST:event_btnXoaChungChiActionPerformed
 
     private void btnXacNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXacNhanActionPerformed
-
+        if(isChinhSua == true){
+            capNhatChungChi();
+        }
+        else{
+            themChungChi();  
+        }
     }//GEN-LAST:event_btnXacNhanActionPerformed
 
     private void tbChungChiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbChungChiMouseClicked
@@ -474,18 +627,16 @@ public class UI_ChungChi extends javax.swing.JFrame {
         JFileChooser fileChooser = new JFileChooser();
 
         int returnValue = fileChooser.showOpenDialog(null);
-
+        
+        img = "";
+        
         //Neu file duoc chon
         if (returnValue == JFileChooser.APPROVE_OPTION){
             File selectedFile = fileChooser.getSelectedFile();
             
-            String src = selectedFile.getPath();
+            img = selectedFile.getPath();
             
-            ImageIcon img = new ImageIcon(src);
-
-            lblImg.setIcon(new ImageIcon(src));
-            
-            
+            lblImg.setIcon(new ImageIcon(img));
         }
         
         

@@ -23,4 +23,22 @@ public class bus_ChungChi {
         
         return dsChungChi;
     }
+    
+    // HÀM THÊM CHỨNG CHỈ
+    public int themChungChi(dto_ChungChi cc){
+        
+        return new dal_ChungChi().themChungChi(cc);
+    }
+    
+    // HÀM CẬT NHẬT CHỨNG CHỈ
+    public int capNhatChungChi(dto_ChungChi cc){
+        
+        return new dal_ChungChi().capNhatChungChi(cc);
+    }
+    
+    // HÀM XÓA CHỨNG CHỈ
+    public int xoaChungChi(int ma_cc){
+        
+        return new dal_ChungChi().xoaChungChi(ma_cc);
+    }
 }

@@ -25,6 +25,7 @@ public class dto_ChuongTrinh_ChungChi {
     private int maCc;
     private String tenCc;
     private Float diemToiDa;
+    private String srcImg;
 
     public dto_ChuongTrinh_ChungChi() {
     }
@@ -33,6 +34,11 @@ public class dto_ChuongTrinh_ChungChi {
         return maCt;
     }
 
+    public String getSrcImg() {
+        return srcImg;
+    }
+
+    
     public String getTenCt() {
         return tenCt;
     }
@@ -140,6 +146,11 @@ public class dto_ChuongTrinh_ChungChi {
     public void setDiemToiDa(Float diemToiDa) {
         this.diemToiDa = diemToiDa;
     }
+
+    public void setSrcImg(String srcImg) {
+        this.srcImg = srcImg;
+    }
+    
     
     public String toString(){
         return tenCc;
