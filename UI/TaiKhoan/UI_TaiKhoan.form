@@ -25,14 +25,13 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
+              <EmptySpace min="35" pref="35" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                       <Component id="jspKH" min="-2" pref="789" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="txtTimTaiKhoan" min="-2" pref="250" max="-2" attributes="0"/>
@@ -53,7 +52,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="pnThem" pref="0" max="32767" attributes="0"/>
+                  <Component id="pnThem" pref="622" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
@@ -74,7 +73,7 @@
                       </Group>
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                       <Component id="jspKH" min="-2" pref="466" max="-2" attributes="0"/>
-                      <EmptySpace pref="64" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -319,11 +318,12 @@
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="btnChooseFile" min="-2" max="-2" attributes="0"/>
+                                          <Component id="btnChooseFile" pref="0" max="32767" attributes="0"/>
                                       </Group>
                                       <Component id="txtTenDangNhap" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
                                       <Component id="txtsdt" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
                                   </Group>
+                                  <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" attributes="0">
                                           <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
@@ -331,15 +331,12 @@
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
                                           <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
                                               <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                                               <Component id="btnDoiMatKhau" alignment="0" min="-2" max="-2" attributes="0"/>
                                               <Component id="txtMatKhau" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
+                                              <Component id="cbLoai" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
                                           </Group>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                                          <Component id="cbLoai" min="-2" pref="130" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
