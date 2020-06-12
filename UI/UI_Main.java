@@ -6,10 +6,11 @@
 package UI;
 
 import DTO.dto_DangNhap;
-import UI.ChuongTrinhUI.UI_ChuongTrinh;
-import UI.LopHocUI.UI_LopHoc;
-import UI.KhachHangUI.UI_KhachHang;
-import UI.DangNhapUI.UI_DangNhap;
+import DTO.dto_TaiKhoan;
+import UI.ChuongTrinh.UI_ChuongTrinh;
+import UI.LopHoc.UI_LopHoc;
+import UI.KhachHang.UI_KhachHang;
+import UI.DangNhap.UI_DangNhap;
 import UI.TaiKhoan.UI_TaiKhoan;
 import java.awt.Color;
 import java.awt.Font;
@@ -120,8 +121,8 @@ public final class UI_Main extends javax.swing.JFrame {
     }
 
     //method hiển thị thông tin người dùng bên góc phải phía trên UI_Main
-    public void setThongTinDangNhap(dto_DangNhap dn) {
-        txtThongTinDangNhap.setText(dn.getMa() + " | " + dn.getHoTen());
+    public void setThongTinDangNhap(dto_TaiKhoan tk) {
+        txtThongTinDangNhap.setText(tk.getMa() + " | " + tk.getHoTen());
     }
 
     /*  ====================Hết khu vực của Tân
@@ -150,9 +151,9 @@ public final class UI_Main extends javax.swing.JFrame {
         setTitle("Quản Lý Trung Tâm Anh Ngữ");
         setSize(new java.awt.Dimension(1200, 700));
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(230, 245, 255));
 
-        btnDangXuat.setBackground(new java.awt.Color(255, 255, 255));
+        btnDangXuat.setBackground(new java.awt.Color(239, 245, 245));
         btnDangXuat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/dangxuat.png"))); // NOI18N
         btnDangXuat.setToolTipText("Đăng Xuất");
         btnDangXuat.setBorder(null);
@@ -295,8 +296,7 @@ public final class UI_Main extends javax.swing.JFrame {
                     .addComponent(txtThongTinDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCTHoc, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
-                .addComponent(pnBody, javax.swing.GroupLayout.DEFAULT_SIZE, 620, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(pnBody, javax.swing.GroupLayout.DEFAULT_SIZE, 631, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

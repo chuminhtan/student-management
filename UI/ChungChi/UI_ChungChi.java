@@ -5,9 +5,12 @@
  */
 package UI.ChungChi;
 
+import BUS.BCrypt;
 import BUS.bus_ChungChi;
 import BUS.bus_ChuongTrinh;
 import DTO.dto_ChungChi;
+import UI.DangNhap.UI_DangNhap;
+import UI.pnXacNhanMatKhau;
 import java.awt.Color;
 import java.awt.Font;
 import java.util.ArrayList;
@@ -17,7 +20,10 @@ import javax.swing.table.DefaultTableModel;
 import java.io.File;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 
 /**
  *
@@ -34,34 +40,50 @@ public class UI_ChungChi extends javax.swing.JFrame {
     }
 
     // BIẾN TỰ ĐỊNH NGHĨA
-    private boolean isChinhSua;
+    private boolean isCapNhat;
     String img;
     DefaultTableModel dtmChungChi;
     ArrayList<dto_ChungChi> dsChungChi;
 
     // HÀM XÓA CHỨNG CHỈ
     public void xoaChungChi() {
+        
         dto_ChungChi selected = duLieuDuocChon();
 
         if (selected != null) {
+            pnXacNhanMatKhau pn = new pnXacNhanMatKhau();
+            
+            int luaChon = JOptionPane.showConfirmDialog(null, pn, "Xác Minh Người Dùng", JOptionPane.OK_CANCEL_OPTION);
 
-            int chonLua = JOptionPane.showConfirmDialog(null, "Đồng ý xóa ?", "Xác Nhận Xóa", JOptionPane.YES_NO_OPTION);
-            if (chonLua == 0) {
-                int rs = new bus_ChungChi().xoaChungChi(selected.getMaCc());
+            if (luaChon == 0) {
+                
+                String matKhauNhap = pn.getMatKhau();
+                boolean ketQua = kiemTraMatKhau(matKhauNhap);
 
-                if (rs == 0) {
-                    JOptionPane.showMessageDialog(null, "Thất Bại");
-                } else {
+                if (ketQua == true) {
+                    int rs = new bus_ChungChi().xoaChungChi(selected.getMaCc());
 
-                    giaoDienBanDau();
-                    JOptionPane.showMessageDialog(null, "Thành Công");
+                    if (rs == 0) {
+                        JOptionPane.showMessageDialog(null, "Lỗi");
+                    } else {
+                        giaoDienBanDau();
+                        JOptionPane.showMessageDialog(null, "Đã Xóa");
+                    }
                 }
+                else
+                    JOptionPane.showMessageDialog(null, "Mật Khẩu Không Chính Xác");
             }
-
         }
-
     }
-
+    
+    // HÀM XÁC MINH NGƯỜI D
+    public boolean kiemTraMatKhau(String matKhauNhap){
+        String mk = UI_DangNhap.layMatKhauDangNhap();
+        
+        boolean kq = BCrypt.checkpw(matKhauNhap, mk);
+        return kq;
+    }
+    
     // HÀM CẬP NHẬT CHỨNG CHỈ
     public void capNhatChungChi() {
         dto_ChungChi cc = new dto_ChungChi();
@@ -76,12 +98,12 @@ public class UI_ChungChi extends javax.swing.JFrame {
             int kq = new bus_ChungChi().capNhatChungChi(cc);
 
             if (kq == 0) {
-                JOptionPane.showMessageDialog(null, "Thất Bại");
+                JOptionPane.showMessageDialog(null, "Lỗi");
 
             } else {
 
                 giaoDienBanDau();
-                JOptionPane.showMessageDialog(null, "Thành Công");
+                JOptionPane.showMessageDialog(null, "Đã cập nhật");
             }
         }
     }
@@ -96,11 +118,11 @@ public class UI_ChungChi extends javax.swing.JFrame {
             int kq = new bus_ChungChi().themChungChi(cc);
 
             if (kq == 0) {
-                JOptionPane.showMessageDialog(null, "Thất Bại");
+                JOptionPane.showMessageDialog(null, "Lỗi");
             } else {
 
                 giaoDienBanDau();
-                JOptionPane.showMessageDialog(null, "Thành Công");
+                JOptionPane.showMessageDialog(null, "Hoàn Tất");
             }
         }
     }
@@ -168,10 +190,9 @@ public class UI_ChungChi extends javax.swing.JFrame {
         txtDiemToiDa.setText("");
         txtNoiDung.setText("");
         lblImg.setIcon(null);
-
     }
 
-    // HÀM XEM THÔNG TIN CHI TIẾT CHO KHUNG BÊN PHẢI
+    // HÀM HIỂN THỊ THÔNG TIN CHI TIẾT CHO DỮ LIỆU ĐƯỢC CHỌN
     public void xemThongTinChiTiet(dto_ChungChi cc) {
         xemMode();
         txtTenChungChi.setText(cc.getTenCc());
@@ -184,7 +205,7 @@ public class UI_ChungChi extends javax.swing.JFrame {
 
     }
 
-    // HÀM LẤY ĐỐI TƯỢNG ĐƯỢC CHỌN
+    // HÀM LẤY ĐỐI TƯỢNG ĐƯỢC CHỌN TRONG BẢNG
     public dto_ChungChi duLieuDuocChon() {
         int row = tbChungChi.getSelectedRow();
 
@@ -215,7 +236,7 @@ public class UI_ChungChi extends javax.swing.JFrame {
 
     // HÀM CÀI CHẾ ĐỘ XEM THÔNG TIN
     public void xemMode() {
-        this.isChinhSua = false;
+        this.isCapNhat = false;
         lblMode.setText("Thông Tin");
         btnXacNhan.setVisible(false);
         btnChooseFile.setVisible(false);
@@ -223,7 +244,7 @@ public class UI_ChungChi extends javax.swing.JFrame {
 
     // HÀM CÀI CHẾ ĐỘ TẠO MỚI
     public void taoMoiMode() {
-        this.isChinhSua = false;
+        this.isCapNhat = false;
         lblMode.setText("Tạo Mới");
         btnXacNhan.setText("TẠO MỚI");
         btnXacNhan.setVisible(true);
@@ -234,7 +255,7 @@ public class UI_ChungChi extends javax.swing.JFrame {
 
     // HÀM CÀI CHẾ ĐỘ CẬP NHẬT
     public void capNhatMode() {
-        this.isChinhSua = true;
+        this.isCapNhat = true;
 
         lblMode.setText("Cập Nhật");
         btnXacNhan.setText("CẬP NHẬT");
@@ -270,7 +291,11 @@ public class UI_ChungChi extends javax.swing.JFrame {
     // HÀM TẠO BẢNG
 
     public void setupTable() {
-        dtmChungChi = new DefaultTableModel();
+        dtmChungChi = new DefaultTableModel() {
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
 
         dtmChungChi.addColumn("STT");
         dtmChungChi.addColumn("Mã Chứng Chỉ");
@@ -328,19 +353,19 @@ public class UI_ChungChi extends javax.swing.JFrame {
         setTitle("Quản Lý Chứng Chỉ");
         setPreferredSize(new java.awt.Dimension(1200, 700));
 
-        pnChuongTtrinh.setBackground(new java.awt.Color(255, 255, 255));
+        pnChuongTtrinh.setBackground(new java.awt.Color(230, 245, 255));
         pnChuongTtrinh.setPreferredSize(new java.awt.Dimension(1200, 700));
 
         tbChungChi.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tbChungChi.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         tbChungChi.setMaximumSize(new java.awt.Dimension(2147483647, 10000));
@@ -361,7 +386,7 @@ public class UI_ChungChi extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tbChungChi);
 
-        btnThemChungChi.setBackground(new java.awt.Color(255, 255, 255));
+        btnThemChungChi.setBackground(new java.awt.Color(230, 245, 255));
         btnThemChungChi.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnThemChungChi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/taomoi.png"))); // NOI18N
         btnThemChungChi.setToolTipText("Tạo Mới");
@@ -376,7 +401,7 @@ public class UI_ChungChi extends javax.swing.JFrame {
             }
         });
 
-        btnCapNhatChungChi.setBackground(new java.awt.Color(255, 255, 255));
+        btnCapNhatChungChi.setBackground(new java.awt.Color(230, 245, 255));
         btnCapNhatChungChi.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnCapNhatChungChi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/capnhat.png"))); // NOI18N
         btnCapNhatChungChi.setToolTipText("Tạo Mới");
@@ -391,7 +416,7 @@ public class UI_ChungChi extends javax.swing.JFrame {
             }
         });
 
-        btnXoaChungChi.setBackground(new java.awt.Color(255, 255, 255));
+        btnXoaChungChi.setBackground(new java.awt.Color(230, 245, 255));
         btnXoaChungChi.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnXoaChungChi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/xoa.png"))); // NOI18N
         btnXoaChungChi.setToolTipText("Tạo Mới");
@@ -406,7 +431,7 @@ public class UI_ChungChi extends javax.swing.JFrame {
             }
         });
 
-        pnThem.setBackground(new java.awt.Color(255, 255, 255));
+        pnThem.setBackground(new java.awt.Color(230, 245, 255));
 
         lblMode.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblMode.setText("Tạo Mới");
@@ -525,7 +550,7 @@ public class UI_ChungChi extends javax.swing.JFrame {
         pnChuongTtrinhLayout.setHorizontalGroup(
             pnChuongTtrinhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnChuongTtrinhLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(30, 30, 30)
                 .addGroup(pnChuongTtrinhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnChuongTtrinhLayout.createSequentialGroup()
                         .addComponent(btnXoaChungChi, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -533,10 +558,10 @@ public class UI_ChungChi extends javax.swing.JFrame {
                         .addComponent(btnCapNhatChungChi, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnThemChungChi, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 792, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 769, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(38, 38, 38)
                 .addComponent(pnThem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
         pnChuongTtrinhLayout.setVerticalGroup(
             pnChuongTtrinhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -549,8 +574,8 @@ public class UI_ChungChi extends javax.swing.JFrame {
                     .addComponent(btnCapNhatChungChi, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnXoaChungChi, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 588, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 556, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -592,7 +617,7 @@ public class UI_ChungChi extends javax.swing.JFrame {
     }//GEN-LAST:event_btnXoaChungChiActionPerformed
 
     private void btnXacNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXacNhanActionPerformed
-        if (isChinhSua == true) {
+        if (isCapNhat == true) {
             capNhatChungChi();
         } else {
             themChungChi();

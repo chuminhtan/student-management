@@ -9,7 +9,7 @@ import DAL.dal_ChuongTrinh;
 import DTO.dto_ChungChi;
 import DTO.dto_ChuongTrinh;
 import DTO.dto_ChuongTrinh_ChungChi;
-import UI.ChuongTrinhUI.UI_ChuongTrinh;
+import UI.ChuongTrinh.UI_ChuongTrinh;
 import java.util.ArrayList;
 
 /**

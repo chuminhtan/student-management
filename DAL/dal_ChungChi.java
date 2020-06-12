@@ -86,7 +86,7 @@ public class dal_ChungChi extends DBConnect {
                     + "src_img = ? "
                     + "WHERE ma_chung_chi = ?";
             
-            PreparedStatement preStmt = conn.prepareCall(sql);
+            PreparedStatement preStmt = conn.prepareStatement(sql);
             preStmt.setString(1, cc.getTenCc());
             preStmt.setFloat(2, cc.getDiemToiDa());
             preStmt.setString(3, cc.getNoiDung());
