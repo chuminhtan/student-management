@@ -149,11 +149,11 @@ public final class UI_Main extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Quản Lý Trung Tâm Anh Ngữ");
-        setSize(new java.awt.Dimension(1200, 700));
+        setSize(new java.awt.Dimension(1200, 720));
 
         jPanel1.setBackground(new java.awt.Color(230, 245, 255));
 
-        btnDangXuat.setBackground(new java.awt.Color(239, 245, 245));
+        btnDangXuat.setBackground(new java.awt.Color(230, 245, 255));
         btnDangXuat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/dangxuat.png"))); // NOI18N
         btnDangXuat.setToolTipText("Đăng Xuất");
         btnDangXuat.setBorder(null);
@@ -232,7 +232,7 @@ public final class UI_Main extends javax.swing.JFrame {
         txtThongTinDangNhap.setEditable(false);
         txtThongTinDangNhap.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtThongTinDangNhap.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtThongTinDangNhap.setText("<Tên Nhân Viên>-<Mã NV>");
+        txtThongTinDangNhap.setText("<Mã>|<Tên Nhân Viên>");
         txtThongTinDangNhap.setToolTipText("Thông Tin Người Dùng");
         txtThongTinDangNhap.setBorder(null);
         txtThongTinDangNhap.addActionListener(new java.awt.event.ActionListener() {
@@ -275,8 +275,8 @@ public final class UI_Main extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addComponent(btnTaiKhoan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(txtThongTinDangNhap)
-                .addGap(48, 48, 48)
+                .addComponent(txtThongTinDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
                 .addComponent(btnDangXuat)
                 .addContainerGap())
             .addComponent(pnBody, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)

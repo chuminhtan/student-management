@@ -48,107 +48,19 @@ public class UI_LopHoc extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        pnLop = new javax.swing.JPanel();
-        jspLH = new javax.swing.JScrollPane();
-        tbLopHoc = new javax.swing.JTable();
         btnUpdateLop = new javax.swing.JButton();
         btnXoaLop = new javax.swing.JButton();
         btnChiTietLop = new javax.swing.JButton();
         lblTimLop = new javax.swing.JLabel();
         txtTimLop = new javax.swing.JTextField();
+        jspLH = new javax.swing.JScrollPane();
+        tbLopHoc = new javax.swing.JTable();
         btnThemLop = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(230, 245, 255));
-        setMaximumSize(new java.awt.Dimension(1200, 659));
-        setMinimumSize(new java.awt.Dimension(1200, 659));
+        setMaximumSize(new java.awt.Dimension(1200, 620));
+        setMinimumSize(new java.awt.Dimension(1200, 620));
         setPreferredSize(new java.awt.Dimension(1200, 620));
-        setRequestFocusEnabled(false);
-        setVerifyInputWhenFocusTarget(false);
-
-        pnLop.setBackground(new java.awt.Color(230, 245, 255));
-        pnLop.setPreferredSize(new java.awt.Dimension(1200, 620));
-
-        jspLH.setBackground(new java.awt.Color(255, 255, 255));
-        jspLH.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        jspLH.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        jspLH.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jspLH.setPreferredSize(new java.awt.Dimension(469, 400));
-
-        tbLopHoc.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        tbLopHoc.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, "1", "a", null, null, null, null, null, null, null, null},
-                {null, "2", "a", null, null, null, null, null, null, null, null},
-                {null, "3", "a", null, null, null, null, null, null, null, null},
-                {null, "4", "a", null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "STT", "Mã Lớp", "Tên Lớp", "Tên Chương Trình", "Bắt Đầu", "Kết Thúc", "Số HV", "Giáo Viên", "Phòng", "ID Phụ Trách", "Trạng Thái"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        tbLopHoc.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        tbLopHoc.setDoubleBuffered(true);
-        tbLopHoc.setFocusable(false);
-        tbLopHoc.setPreferredSize(new java.awt.Dimension(1100, 450));
-        tbLopHoc.setRowHeight(30);
-        tbLopHoc.setSelectionBackground(new java.awt.Color(232, 57, 95));
-        tbLopHoc.getTableHeader().setReorderingAllowed(false);
-        jspLH.setViewportView(tbLopHoc);
-        if (tbLopHoc.getColumnModel().getColumnCount() > 0) {
-            tbLopHoc.getColumnModel().getColumn(0).setMinWidth(50);
-            tbLopHoc.getColumnModel().getColumn(0).setMaxWidth(50);
-            tbLopHoc.getColumnModel().getColumn(1).setMinWidth(100);
-            tbLopHoc.getColumnModel().getColumn(1).setMaxWidth(100);
-            tbLopHoc.getColumnModel().getColumn(2).setMinWidth(150);
-            tbLopHoc.getColumnModel().getColumn(2).setMaxWidth(150);
-            tbLopHoc.getColumnModel().getColumn(3).setMinWidth(150);
-            tbLopHoc.getColumnModel().getColumn(3).setMaxWidth(150);
-            tbLopHoc.getColumnModel().getColumn(4).setMinWidth(80);
-            tbLopHoc.getColumnModel().getColumn(4).setMaxWidth(80);
-            tbLopHoc.getColumnModel().getColumn(5).setMinWidth(80);
-            tbLopHoc.getColumnModel().getColumn(5).setMaxWidth(80);
-            tbLopHoc.getColumnModel().getColumn(6).setMinWidth(50);
-            tbLopHoc.getColumnModel().getColumn(6).setMaxWidth(50);
-            tbLopHoc.getColumnModel().getColumn(8).setMinWidth(100);
-            tbLopHoc.getColumnModel().getColumn(8).setMaxWidth(100);
-            tbLopHoc.getColumnModel().getColumn(9).setMinWidth(100);
-            tbLopHoc.getColumnModel().getColumn(9).setMaxWidth(100);
-        }
 
         btnUpdateLop.setBackground(new java.awt.Color(230, 245, 255));
         btnUpdateLop.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -211,6 +123,64 @@ public class UI_LopHoc extends javax.swing.JPanel {
             }
         });
 
+        jspLH.setBackground(new java.awt.Color(255, 255, 255));
+        jspLH.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jspLH.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        jspLH.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jspLH.setPreferredSize(new java.awt.Dimension(469, 400));
+
+        tbLopHoc.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        tbLopHoc.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "STT", "Mã Lớp", "Tên Lớp", "Tên Chương Trình", "Bắt Đầu", "Kết Thúc", "Số HV", "Giáo Viên", "Phòng", "ID Phụ Trách", "Trạng Thái"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tbLopHoc.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        tbLopHoc.setDoubleBuffered(true);
+        tbLopHoc.setFocusable(false);
+        tbLopHoc.setRowHeight(30);
+        tbLopHoc.setSelectionBackground(new java.awt.Color(232, 57, 95));
+        tbLopHoc.getTableHeader().setReorderingAllowed(false);
+        jspLH.setViewportView(tbLopHoc);
+        if (tbLopHoc.getColumnModel().getColumnCount() > 0) {
+            tbLopHoc.getColumnModel().getColumn(0).setMinWidth(50);
+            tbLopHoc.getColumnModel().getColumn(0).setMaxWidth(50);
+            tbLopHoc.getColumnModel().getColumn(1).setMinWidth(100);
+            tbLopHoc.getColumnModel().getColumn(1).setMaxWidth(100);
+            tbLopHoc.getColumnModel().getColumn(2).setMinWidth(150);
+            tbLopHoc.getColumnModel().getColumn(2).setMaxWidth(150);
+            tbLopHoc.getColumnModel().getColumn(3).setMinWidth(150);
+            tbLopHoc.getColumnModel().getColumn(3).setMaxWidth(150);
+            tbLopHoc.getColumnModel().getColumn(4).setMinWidth(80);
+            tbLopHoc.getColumnModel().getColumn(4).setMaxWidth(80);
+            tbLopHoc.getColumnModel().getColumn(5).setMinWidth(80);
+            tbLopHoc.getColumnModel().getColumn(5).setMaxWidth(80);
+            tbLopHoc.getColumnModel().getColumn(6).setMinWidth(50);
+            tbLopHoc.getColumnModel().getColumn(6).setMaxWidth(50);
+            tbLopHoc.getColumnModel().getColumn(8).setMinWidth(100);
+            tbLopHoc.getColumnModel().getColumn(8).setMaxWidth(100);
+            tbLopHoc.getColumnModel().getColumn(9).setMinWidth(100);
+            tbLopHoc.getColumnModel().getColumn(9).setMaxWidth(100);
+        }
+
         btnThemLop.setBackground(new java.awt.Color(230, 245, 255));
         btnThemLop.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnThemLop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/taomoi.png"))); // NOI18N
@@ -225,61 +195,44 @@ public class UI_LopHoc extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.GroupLayout pnLopLayout = new javax.swing.GroupLayout(pnLop);
-        pnLop.setLayout(pnLopLayout);
-        pnLopLayout.setHorizontalGroup(
-            pnLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnLopLayout.createSequentialGroup()
-                .addGroup(pnLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnLopLayout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(lblTimLop)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtTimLop, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 552, Short.MAX_VALUE)
-                        .addComponent(btnChiTietLop, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnThemLop, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnUpdateLop, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnXoaLop, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnLopLayout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(jspLH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(0, 0, 0))
-        );
-        pnLopLayout.setVerticalGroup(
-            pnLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnLopLayout.createSequentialGroup()
-                .addGroup(pnLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnUpdateLop, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnXoaLop, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnChiTietLop, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnThemLop, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(pnLopLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(pnLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtTimLop, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblTimLop, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(9, 9, 9)
-                .addComponent(jspLH, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(pnLop, javax.swing.GroupLayout.PREFERRED_SIZE, 1165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 35, Short.MAX_VALUE))
+                .addGap(35, 35, 35)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblTimLop)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtTimLop, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnChiTietLop, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(btnThemLop, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(btnUpdateLop, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(btnXoaLop, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(22, 22, 22))
+                    .addComponent(jspLH, javax.swing.GroupLayout.DEFAULT_SIZE, 1130, Short.MAX_VALUE))
+                .addGap(35, 35, 35))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(pnLop, javax.swing.GroupLayout.PREFERRED_SIZE, 613, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 46, Short.MAX_VALUE))
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnXoaLop, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnUpdateLop, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnThemLop, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnChiTietLop, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblTimLop, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtTimLop, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(20, 20, 20)
+                .addComponent(jspLH, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -310,7 +263,6 @@ public class UI_LopHoc extends javax.swing.JPanel {
     private javax.swing.JButton btnXoaLop;
     private javax.swing.JScrollPane jspLH;
     private javax.swing.JLabel lblTimLop;
-    private javax.swing.JPanel pnLop;
     private javax.swing.JTable tbLopHoc;
     private javax.swing.JTextField txtTimLop;
     // End of variables declaration//GEN-END:variables

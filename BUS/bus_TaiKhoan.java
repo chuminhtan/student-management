@@ -56,4 +56,10 @@ public class bus_TaiKhoan{
         
         return new dal_TaiKhoan().xoaTaiKhoan(tk);
     }
+    
+    // HÀM TÌM KIẾM 
+    public ArrayList<dto_TaiKhoan> layDsTimKiem(String text){
+        
+        return new dal_TaiKhoan().layDsTimKiem(text);
+    }
 }

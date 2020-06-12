@@ -187,4 +187,48 @@ public class dal_TaiKhoan extends DBConnect {
             return 0;
         }
     }
+    
+    // HÀM TÌM KIẾM
+    public ArrayList<dto_TaiKhoan> layDsTimKiem(String text){
+        
+        text= text.toLowerCase();
+        ArrayList<dto_TaiKhoan> dsTaiKhoan = new ArrayList<dto_TaiKhoan>();
+        dto_TaiKhoan tk = null;
+        
+        try{
+            
+            String sql = "SELECT ma_nv, ho_ten, sdt, loai, ten_dang_nhap, mat_khau, src_img "
+                    + "FROM nhan_vien "
+                    + "WHERE LOWER(ma_nv) LIKE N'%" + text +"%' "
+                    + "OR LOWER(ho_ten) LIKE N'%" + text + "%' "
+                    + "OR sdt LIKE N'%" + text + "%' "
+                    + "OR LOWER(ten_dang_nhap) LIKE N'%" + text + "%'";
+
+            
+            PreparedStatement preStmt = conn.prepareStatement(sql);
+            ResultSet rs = preStmt.executeQuery();
+            
+            while(rs.next()){
+                
+                tk= new dto_TaiKhoan();
+                
+                tk.setMa(rs.getInt(1));
+                tk.setHoTen(rs.getString(2));
+                tk.setSdt(rs.getString(3));
+                tk.setLoai(rs.getInt(4));
+                tk.setTenDangNhap(rs.getString(5));
+                tk.setMatKhau(rs.getString(6));
+                tk.setSrcImg(rs.getString(7));
+                
+                dsTaiKhoan.add(tk);
+            }
+            
+            conn.close();
+            return dsTaiKhoan;
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+            return dsTaiKhoan;
+        }
+    }
 }
