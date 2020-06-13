@@ -202,12 +202,12 @@ public class UI_ChuongTrinh extends javax.swing.JPanel {
         tbChuongTrinh = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(230, 245, 255));
-        setMinimumSize(new java.awt.Dimension(1350, 660));
-        setPreferredSize(new java.awt.Dimension(1350, 660));
+        setMinimumSize(new java.awt.Dimension(1350, 634));
+        setPreferredSize(new java.awt.Dimension(1350, 634));
 
         pnChuongTrinh.setBackground(new java.awt.Color(230, 245, 255));
-        pnChuongTrinh.setMinimumSize(new java.awt.Dimension(1350, 660));
-        pnChuongTrinh.setPreferredSize(new java.awt.Dimension(1350, 660));
+        pnChuongTrinh.setMinimumSize(new java.awt.Dimension(1350, 634));
+        pnChuongTrinh.setPreferredSize(new java.awt.Dimension(1350, 634));
 
         lblTimLop.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblTimLop.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -372,21 +372,21 @@ public class UI_ChuongTrinh extends javax.swing.JPanel {
                         .addComponent(txtTimChuongTrinh, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(ckBoxCtDong)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 438, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 426, Short.MAX_VALUE)
                         .addComponent(btnChungChi, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(97, 97, 97)
+                        .addGap(108, 108, 108)
                         .addComponent(btnThemChuongTrinh, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnCapNhatChuongTrinh, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(btnXoaChuongTrinh, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)))
+                        .addGap(20, 20, 20)))
                 .addGap(35, 35, 35))
         );
         pnChuongTrinhLayout.setVerticalGroup(
             pnChuongTrinhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnChuongTrinhLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addGap(30, 30, 30)
                 .addGroup(pnChuongTrinhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnChungChi, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnChuongTrinhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -396,7 +396,7 @@ public class UI_ChuongTrinh extends javax.swing.JPanel {
                     .addComponent(btnThemChuongTrinh, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCapNhatChuongTrinh, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnXoaChuongTrinh, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(11, 11, 11)
+                .addGap(10, 10, 10)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 535, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35))
         );

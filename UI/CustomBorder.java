@@ -5,7 +5,6 @@
  */
 package UI;
 
-import UI.CustomInterfaceBorder;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
@@ -14,7 +13,7 @@ import java.awt.Insets;
 import java.awt.geom.Rectangle2D;
 import javax.swing.border.AbstractBorder;
 
-public class CustomBorder extends AbstractBorder implements CustomInterfaceBorder {
+public class CustomBorder extends AbstractBorder{
 
     public static class BorderPiece {
 
@@ -39,7 +38,7 @@ public class CustomBorder extends AbstractBorder implements CustomInterfaceBorde
     private BorderPiece rightPiece = null;
     private BorderPiece bottomPiece = null;
     private BorderPiece leftPiece = null;
-
+    
     public CustomBorder() {
         super();
     }
@@ -83,8 +82,16 @@ public class CustomBorder extends AbstractBorder implements CustomInterfaceBorde
         this.bottomPiece = bottomPiece;
         this.leftPiece = leftPiece;
     }
-
-    @Override
+    
+    public static final Color WHITE = new Color(0, 0, 0, 0);
+    
+    public static final Color THONGKE = new Color(0,204,106);
+    public static final Color KHACHHANG = new Color(255,0,151);
+    public static final Color LOPHOC = new Color(96,60,186);
+    public static final Color CHUONGTRINHHOC = new Color(229, 20, 0);
+    public static final Color TAIKHOAN = new Color(255,196,13);
+    public static final Color TKB = new Color(250, 104, 0);
+    
     public void setColor(Color newColor) {
         if (this.topPiece != null) {
             this.topPiece.color = newColor;
