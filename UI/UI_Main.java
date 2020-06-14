@@ -336,7 +336,7 @@ public final class UI_Main extends javax.swing.JFrame {
                 .addComponent(btnChuongTrinh)
                 .addGap(80, 80, 80)
                 .addComponent(btnTaiKhoan)
-                .addGap(50, 50, 50))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)

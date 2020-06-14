@@ -1,4 +1,5 @@
-﻿/*==============================================================*/
+
+/*==============================================================*/
 /* DBMS name:      ORACLE Version 11g                           */
 /* Created on:     09/06/2020 8:59:01 CH                        */
 /*==============================================================*/
@@ -76,6 +77,7 @@ create table CHUNG_CHI
    TEN_CHUNG_CHI        VARCHAR2(100)        not null,
    NOI_DUNG             VARCHAR2(1000),
    DIEM_TOI_DA			NUMBER(4,1),
+   SRC_IMG              VARCHAR2(100)
    constraint PK_CHUNG_CHI primary key (MA_CHUNG_CHI)
 );
 
@@ -100,7 +102,12 @@ create table CHUONG_TRINH
    DIEM_DAU_VAO         NUMBER(4,1)          not null,
    DIEM_DAU_RA          NUMBER(4,1)          not null,
    NOI_DUNG             VARCHAR2(1000),
-   TRANG_THAI           NUMBER(1),
+   TRANG_THAI           NUMBER(1,0),
+   TINH_DIEM_NGHE       NUMBER(1,0),
+   TINH_DIEM_NOI       NUMBER(1,0),
+   TINH_DIEM_DOC       NUMBER(1,0),
+   TINH_DIEM_VIET       NUMBER(1,0),
+   CACH_TINH_DIEM       NUMBER(1,0),
    constraint PK_CHUONG_TRINH primary key (MA_CT)
 );
 
@@ -348,3 +355,99 @@ BEGIN
 	DELETE FROM LOP WHERE LOP.MA_NV = :OLD.MA_NV;
 END;
 
+
+
+
+/* ***********************************************     UPDATE MỚI NGÀY :     14/06/2020  *******************************/
+
+/*==============================================================*/
+/* Table: GIAOVIEN                                              */
+/*==============================================================*/
+create table GIAO_VIEN 
+(
+   MA_GV                NUMBER(38)           not null,
+   TEN_GV               VARCHAR2(100),
+   QUOC_TICH            VARCHAR2(100),
+   constraint PK_GIAOVIEN primary key (MA_GV)
+);
+--sequence
+create sequence gv_sequence
+increment by 1
+start with 10000
+--insert
+insert into giao_vien values(9000, 'Alexander Rud', 'Russia');
+insert into giao_vien values(9001, 'John Smith', 'American');
+insert into giao_vien values(9002, 'Anna Bella', 'Philippines');
+insert into giao_vien values(9003, 'Tom Cruise', 'American');
+
+/*==============================================================*/
+/* Table: PHONG                                             */
+/*==============================================================*/
+create table PHONG 
+(
+   MA_PHONG             NUMBER(38)           not null,
+   TEN_PHONG            VARCHAR2(100),
+   constraint PK_PHONG primary key (MA_PHONG)
+);
+
+--sequence
+create sequence phong_sequence
+increment by 1
+start with 8000
+
+--insert
+insert into phong values (7000, 'B5');
+insert into phong values (7001, 'B6');
+insert into phong values (7002, 'B7');
+insert into phong values (7003, 'B8');
+insert into phong values (7004, 'B9');
+
+/*=============================================================*/
+/* Table: LICH_NGAY                                             */
+/*==============================================================*/
+create table LICH_NGAY 
+(
+   MA_LOP               NUMBER(38)           not null,
+   MA_GV                NUMBER(38)           not null,
+   MA_PHONG             NUMBER(38)           not null,
+   THU                  NUMBER(1)           not null,
+   GIO_BD               NUMBER(2),
+   GIO_KT               NUMBER(2),
+   constraint PK_LICH_NGAY primary key (MA_LOP, MA_GV, MA_PHONG, THU)
+);
+
+--insert
+insert into LICH_NGAY values(5002,9000,7000,2, 8,10);
+insert into LICH_NGAY values(5002,9000,7000,4, 8,10);
+insert into LICH_NGAY values(5002,9000,7000,6, 8,10);
+insert into LICH_NGAY values(5004,9000,7000,2, 10,12);
+insert into LICH_NGAY values(5004,9001,7000,4, 10,12);
+insert into LICH_NGAY values(5004,9002,7000,6, 10,12);
+insert into LICH_NGAY values(5400,9003,7002,3, 19,21);
+insert into LICH_NGAY values(5400,9003,7002,5, 19,21);
+insert into LICH_NGAY values(5400,9003,7002,7, 19,21);
+--index
+create index LICH_NGAY_GV_FK on LICH_NGAY (
+   MA_GV ASC
+);
+
+create index CO_LICH_NGAY_PHONG_FK on LICH_NGAY (
+   MA_PHONG ASC
+);
+
+create index LICH_NGAY_FK on LICH_NGAY (
+   MA_LOP ASC
+);
+
+--fk
+alter table LICH_NGAY
+   add constraint FK_LICH_LOP foreign key (MA_LOP)
+      references LOP (MA_LOP);
+
+alter table LICH_NGAY
+   add constraint FK_LICH_GV foreign key (MA_GV)
+      references GIAOVIEN (MA_GV);
+
+alter table LICH_NGAY
+   add constraint FK_LICH_PHONG foreign key (MA_PHONG)
+      references PHONG (MA_PHONG);

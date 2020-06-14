@@ -52,9 +52,10 @@ public class FormCapNhatChuongTrinh extends javax.swing.JFrame {
             if (rs == 0) {
                 JOptionPane.showMessageDialog(null, "Thất Bại");
             } else {
-
-                UI_ChuongTrinh.hienThiDsChuongTrinh(1);
-                JOptionPane.showMessageDialog(null, "Hoàn Tất");
+                this.dispose();
+                JOptionPane.showMessageDialog(null, "Thành công");
+                UI_ChuongTrinh.hienThiDsChuongTrinh(2);
+ 
             }
         }
     }

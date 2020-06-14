@@ -33,7 +33,14 @@ public class UI_DangNhap extends javax.swing.JFrame {
     public static String layMatKhauDangNhap(){
         return static_tkNguoiDung.getMatKhau();
     }
-
+    
+    public static int layMaNguoiDung(){
+        return static_tkNguoiDung.getMa();
+    }
+    
+    public static int layLoaiNguoiDung(){
+        return static_tkNguoiDung.getLoai();
+    }
     
     //HÀM ĐĂNG NHẬP
     public void dangNhap() {

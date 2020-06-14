@@ -72,9 +72,10 @@ public class FormThemChuongTrinh extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Không thành công");
             } 
             else {
-                
-                UI_ChuongTrinh.hienThiDsChuongTrinh(0);
+                this.dispose();
                 JOptionPane.showMessageDialog(null, "Thành công");
+                UI_ChuongTrinh.hienThiDsChuongTrinh(2); // số 2 : load lại danh sách phụ thuộc vào có chọn dấu tích hay không
+                
             }
         }
 
@@ -176,7 +177,7 @@ public class FormThemChuongTrinh extends javax.swing.JFrame {
             return 0;
         }
         
-        if(ckNghe == ckNoi == ckDoc == ckViet == ckTong == ckTrungBinhCong == ckDong == ckMo ==false){
+        if(ckNghe == false && ckNoi == false && ckDoc == false && ckViet == false && ckTong == false && ckTrungBinhCong == false && ckDong == false && ckMo ==false){
             return 0;
         }
         

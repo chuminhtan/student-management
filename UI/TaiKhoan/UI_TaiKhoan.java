@@ -775,7 +775,14 @@ public class UI_TaiKhoan extends javax.swing.JPanel {
     }//GEN-LAST:event_btnThemTKActionPerformed
 
     private void btnXoaTKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaTKActionPerformed
-        xoaTaiKhoan();
+        dto_TaiKhoan tkSelected = duLieuDuocChon();
+        
+        if(tkSelected.getMa() == UI_DangNhap.layMaNguoiDung()){
+            JOptionPane.showMessageDialog(null, "Không thể xóa tài khoản của chính mình");
+        }
+        else
+            xoaTaiKhoan();
+        
     }//GEN-LAST:event_btnXoaTKActionPerformed
 
     private void btnChooseFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChooseFileActionPerformed
@@ -821,13 +828,24 @@ public class UI_TaiKhoan extends javax.swing.JPanel {
     private void btnDoiMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoiMatKhauActionPerformed
 
         if (this.isDoiMatKhau == false) {
-            int luaChon = JOptionPane.showConfirmDialog(null, "Bạn Muốn Thay Đổi Mật Khẩu?\nNhấn Yes và nhập mật khẩu mới vào ô Mật Khẩu sau đó nhấn Cập Nhật", "Đổi Mật Khẩu", JOptionPane.YES_NO_OPTION);
-
+            pnXacNhanMatKhau pn = new pnXacNhanMatKhau();
+            
+            int luaChon = JOptionPane.showConfirmDialog(null, pn, "Xác Minh Người Dùng", JOptionPane.OK_CANCEL_OPTION);
+            
             if (luaChon == 0) {
-                txtMatKhau.enable(true);
-                txtMatKhau.setText("");
-                btnDoiMatKhau.setText("Hủy Đổi Mật Khẩu");
-                this.isDoiMatKhau = true;
+                
+                String matKhauNhap = pn.getMatKhau();
+                boolean ketQua = kiemTraMatKhau(matKhauNhap);
+                
+                if (ketQua == true) {
+                    txtMatKhau.enable(true);
+                    txtMatKhau.setText("");
+                    btnDoiMatKhau.setText("Hủy Đổi Mật Khẩu");
+                    this.isDoiMatKhau = true;
+
+                } 
+                else
+                    JOptionPane.showMessageDialog(null, "Mật Khẩu Không Chính Xác");
             }
         } else {
             btnDoiMatKhau.setText("Đổi Mật Khẩu");

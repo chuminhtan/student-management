@@ -62,10 +62,10 @@
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="txtTimChuongTrinh" min="-2" pref="250" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="ckBoxCtDong" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="426" max="32767" attributes="0"/>
+                          <Component id="ckChuongTrinhDong" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="484" max="32767" attributes="0"/>
                           <Component id="btnChungChi" min="-2" pref="35" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="108" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                           <Component id="btnThemChuongTrinh" min="-2" pref="35" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="btnCapNhatChuongTrinh" min="-2" pref="35" max="-2" attributes="0"/>
@@ -86,7 +86,7 @@
                       <Component id="btnChungChi" alignment="1" min="-2" pref="35" max="-2" attributes="0"/>
                       <Group type="103" alignment="1" groupAlignment="3" attributes="0">
                           <Component id="txtTimChuongTrinh" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                          <Component id="ckBoxCtDong" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="ckChuongTrinhDong" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblTimLop" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                       </Group>
                       <Component id="btnThemChuongTrinh" alignment="1" min="-2" pref="35" max="-2" attributes="0"/>
@@ -223,7 +223,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCapNhatChuongTrinhActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JCheckBox" name="ckBoxCtDong">
+        <Component class="javax.swing.JCheckBox" name="ckChuongTrinhDong">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="f5" red="e6" type="rgb"/>
@@ -234,9 +234,12 @@
             <Property name="text" type="java.lang.String" value="Hi&#x1ec3;n th&#x1ecb; ch&#x1b0;&#x1a1;ng tr&#xec;nh &#x111;&#xe3; &#x111;&#xf3;ng"/>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ckBoxCtDongMouseClicked"/>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ckBoxCtDongActionPerformed"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ckChuongTrinhDongMouseClicked"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ckChuongTrinhDongActionPerformed"/>
           </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JButton" name="btnChungChi">
           <Properties>
