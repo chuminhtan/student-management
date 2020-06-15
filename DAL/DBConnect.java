@@ -7,27 +7,23 @@ package DAL;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
- * Tất cả các file DAL khác sẽ kế thừa class DBConnect và sử dụng luôn biến conn
- * mà không cần phải khởi tạo lại
+ * Tất cả các file DAL khác sẽ kế thừa class DBConnect và sử dụng luôn biến conn mà không cần phải khởi tạo lại
  */
 public class DBConnect {
-
     protected Connection conn;
-
-    public DBConnect() {
+    
+    public DBConnect(){
         final String url = "jdbc:oracle:thin:@localhost:1521:orcl";
-        final String user = "quanly";
-        final String password = "1234";
-        try {
-            conn = DriverManager.getConnection(url, user, password);
-        } catch (SQLException ex) {
-//            Logger.getLogger(DBConnect.class.getName()).log(Level.SEVERE, null, ex);
-        }
+	final String user = "QLTTAV";
+	final String password = "QLTTAV";
+	try {
+            conn = DriverManager.getConnection(url,user,password);
+	}
+	catch(Exception e) {
+		e.printStackTrace();
+	}
     }
 }

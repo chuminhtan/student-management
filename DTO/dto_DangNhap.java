@@ -12,10 +12,8 @@ package DTO;
 public class dto_DangNhap {
     private String ma;
     private String hoTen;
-    private int loai;
     private String tenDangNhap;
     private String matKhau;
-    private String sdt;
 
     public dto_DangNhap() {
     }
@@ -23,23 +21,6 @@ public class dto_DangNhap {
     public dto_DangNhap(String tenDangNhap, String matKhau) {
         this.tenDangNhap = tenDangNhap;
         this.matKhau = matKhau;
-    }
-
-    public dto_DangNhap(String ma, String hoTen, int loai, String tenDangNhap, String matKhau, String sdt) {
-        this.ma = ma;
-        this.hoTen = hoTen;
-        this.loai = loai;
-        this.tenDangNhap = tenDangNhap;
-        this.matKhau = matKhau;
-        this.sdt = sdt;
-    }
-
-    public int getLoai() {
-        return loai;
-    }
-
-    public void setLoai(int loai) {
-        this.loai = loai;
     }
 
 
@@ -75,11 +56,5 @@ public class dto_DangNhap {
         this.matKhau = matKhau;
     }
 
-    public String getSdt() {
-        return sdt;
-    }
-
-    public void setSdt(String sdt) {
-        this.sdt = sdt;
-    }
+    
 }

@@ -5,6 +5,15 @@
  */
 package UI.LopHocUI;
 
+import UI.UI_Main;
+import BUS.bus_LopHoc;
+import DTO.dto_LopHoc;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author ThinkPro
@@ -14,8 +23,35 @@ public class FormCapNhatLH extends javax.swing.JFrame {
     /**
      * Creates new form FormCapNhat
      */
+    UI_LopHoc lopHocUI = new UI_LopHoc();
+    bus_LopHoc bus = new bus_LopHoc();
+
+    private LopHocCallback lopHocCallback;
+
     public FormCapNhatLH() {
         initComponents();
+    }
+
+    public LopHocCallback getLopHocCallback() {
+        return lopHocCallback;
+    }
+
+    public void setLopHocCallback(LopHocCallback lopHocCallback) {
+        this.lopHocCallback = lopHocCallback;
+    }
+
+    public void insertOldDatainForm(dto_LopHoc currentLopHoc) {
+        try {
+            this.btnThemTenLop.setText(currentLopHoc.gettenLop());
+            this.cbThemChuongTrinh.setSelectedItem(currentLopHoc.getMaCT());
+            this.dateBDLop.setDate(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(currentLopHoc.getngayBD()));
+            this.dateKTLop.setDate(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(currentLopHoc.getngayKT()));
+            this.txtMaLop.setText(currentLopHoc.getMaLop());
+            this.txtThemGV.setText(currentLopHoc.getgiaoVien());
+            this.txtThemPH.setText(currentLopHoc.getphong());
+        } catch (ParseException ex) {
+            Logger.getLogger(FormCapNhatLH.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -37,17 +73,19 @@ public class FormCapNhatLH extends javax.swing.JFrame {
         txtThemPH = new javax.swing.JTextField();
         btnXacNhanThemLop = new javax.swing.JButton();
         cbThemChuongTrinh = new javax.swing.JComboBox<>();
-        jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        dateBDLop = new com.toedter.calendar.JDateChooser();
+        dateKTLop = new com.toedter.calendar.JDateChooser();
         jLabel3 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        txtMaLop = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cập Nhật Lớp Học");
         setBackground(new java.awt.Color(255, 255, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setMaximumSize(new java.awt.Dimension(512, 439));
         setMinimumSize(new java.awt.Dimension(512, 439));
-        setPreferredSize(new java.awt.Dimension(512, 439));
         setResizable(false);
 
         pnThemLop.setBackground(new java.awt.Color(255, 255, 255));
@@ -89,10 +127,7 @@ public class FormCapNhatLH extends javax.swing.JFrame {
             }
         });
 
-        cbThemChuongTrinh.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel9.setText("PHÒNG HỌC");
+        cbThemChuongTrinh.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3" }));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel10.setText("NGÀY KẾT THÚC");
@@ -100,67 +135,92 @@ public class FormCapNhatLH extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setText("CẬP NHẬT");
 
+        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel11.setText("Mã Lớp");
+
+        txtMaLop.setEditable(false);
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel12.setText("PHÒNG HỌC");
+
         javax.swing.GroupLayout pnThemLopLayout = new javax.swing.GroupLayout(pnThemLop);
         pnThemLop.setLayout(pnThemLopLayout);
         pnThemLopLayout.setHorizontalGroup(
             pnThemLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnThemLopLayout.createSequentialGroup()
-                .addGap(50, 50, 50)
                 .addGroup(pnThemLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnThemLopLayout.createSequentialGroup()
+                        .addGap(50, 50, 50)
                         .addGroup(pnThemLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(38, 38, 38)
-                        .addGroup(pnThemLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnThemTenLop, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbThemChuongTrinh, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(pnThemLopLayout.createSequentialGroup()
+                                .addGroup(pnThemLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(38, 38, 38)
+                                .addGroup(pnThemLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnThemTenLop, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cbThemChuongTrinh, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(pnThemLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(dateKTLop, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                                        .addComponent(dateBDLop, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addGroup(pnThemLopLayout.createSequentialGroup()
+                                .addGroup(pnThemLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(59, 59, 59)
+                                .addGroup(pnThemLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(txtThemGV, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtThemPH, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtMaLop, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(pnThemLopLayout.createSequentialGroup()
-                        .addGroup(pnThemLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(59, 59, 59)
-                        .addGroup(pnThemLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnXacNhanThemLop)
-                            .addGroup(pnThemLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(txtThemGV, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtThemPH, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(50, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnThemLopLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel3)
-                .addGap(224, 224, 224))
+                        .addGap(191, 191, 191)
+                        .addComponent(jLabel3))
+                    .addGroup(pnThemLopLayout.createSequentialGroup()
+                        .addGap(171, 171, 171)
+                        .addComponent(btnXacNhanThemLop)))
+                .addContainerGap(207, Short.MAX_VALUE))
         );
         pnThemLopLayout.setVerticalGroup(
             pnThemLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnThemLopLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(11, 11, 11)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19)
+                .addGap(18, 18, 18)
                 .addGroup(pnThemLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnThemTenLop, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(pnThemLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbThemChuongTrinh, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE))
-                .addGap(17, 17, 17)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
-                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbThemChuongTrinh))
+                .addGroup(pnThemLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnThemLopLayout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnThemLopLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(dateBDLop, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(11, 11, 11)
+                .addGroup(pnThemLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dateKTLop, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(pnThemLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtThemGV, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(pnThemLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtThemPH, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
-                .addComponent(btnXacNhanThemLop, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28))
+                    .addComponent(txtThemPH, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pnThemLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtMaLop, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addComponent(btnXacNhanThemLop, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -171,10 +231,12 @@ public class FormCapNhatLH extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnThemLop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(pnThemLop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 18, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(480, 476));
+        setSize(new java.awt.Dimension(480, 506));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -187,7 +249,30 @@ public class FormCapNhatLH extends javax.swing.JFrame {
     }//GEN-LAST:event_txtThemGVActionPerformed
 
     private void btnXacNhanThemLopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXacNhanThemLopActionPerformed
-        // TODO add your handling code here:
+        String tenLop = btnThemTenLop.getText();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        String maCT = (String) cbThemChuongTrinh.getSelectedItem();
+        String ngayBD = sdf.format(dateBDLop.getDate());
+        String ngayKT = sdf.format(dateKTLop.getDate());
+        String giaoVien = txtThemGV.getText();
+        String phong = txtThemPH.getText();
+        String maLop = txtMaLop.getText();
+
+        BUS.bus_LopHoc busLH = new bus_LopHoc();
+        boolean kt = busLH.capnhatLH(new dto_LopHoc(maLop, maCT, "1", tenLop, ngayBD, ngayKT, "30", giaoVien, phong, "1"));
+        if (kt == true) {
+            JOptionPane.showMessageDialog(null, "Cập nhật lớp thành công");
+            bus.hienThiDanhSach(lopHocUI.getTableLH());
+            lopHocUI.showTable();
+
+            //
+            this.lopHocCallback.Callback();
+            
+            //Close
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(null, "Cập nhật lớp không thành công");
+        }
     }//GEN-LAST:event_btnXacNhanThemLopActionPerformed
 
     /**
@@ -229,18 +314,22 @@ public class FormCapNhatLH extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField btnThemTenLop;
+    public javax.swing.JTextField btnThemTenLop;
     private javax.swing.JButton btnXacNhanThemLop;
-    private javax.swing.JComboBox<String> cbThemChuongTrinh;
+    public javax.swing.JComboBox<String> cbThemChuongTrinh;
+    public com.toedter.calendar.JDateChooser dateBDLop;
+    public com.toedter.calendar.JDateChooser dateKTLop;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel pnThemLop;
-    private javax.swing.JTextField txtThemGV;
-    private javax.swing.JTextField txtThemPH;
+    private javax.swing.JTextField txtMaLop;
+    public javax.swing.JTextField txtThemGV;
+    public javax.swing.JTextField txtThemPH;
     // End of variables declaration//GEN-END:variables
 }

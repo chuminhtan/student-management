@@ -7,80 +7,85 @@ package DTO;
 
 /**
  *
- * @author USER
+ * @author HaiDuyhd789
  */
 public class dto_ChuongTrinh {
-    private int maCt;
-    private String tenCt;
-    private String tenCc;
-    private float diemDauVao;
-    private float diemDauRa;
+    private String MaCT;
+    private String tenCT;
+    private String level;
+    private String diemDauVao;
     private String noiDung;
-    private int trangThai; // 0-đóng , 1-mở
+    private String trangThai;
+
 
     public dto_ChuongTrinh() {
     }
-    
-    //getter
 
-    public int getMaCt() {
-        return maCt;
-    }
-
-    public String getTenCc() {
-        return tenCc;
-    }
-
-    public String getTenCt() {
-        return tenCt;
-    }
-
-    public float getDiemDauVao() {
-        return diemDauVao;
-    }
-
-    public float getDiemDauRa() {
-        return diemDauRa;
-    }
-
-    public String getNoiDung() {
-        return noiDung;
-    }
-
-    public int getTrangThai() {
-        return trangThai;
-    }
-    
-    
-    //setter
-
-    public void setMaCt(int maCt) {
-        this.maCt = maCt;
-    }
-
-    public void setTenCc(String tenCc) {
-        this.tenCc = tenCc;
-    }
-
-    public void setTenCt(String tenCt) {
-        this.tenCt = tenCt;
-    }
-
-    public void setDiemDauVao(float diemDauVao) {
+    public dto_ChuongTrinh(String MaCT, String tenCT, String level, String diemDauVao, String noiDung, String trangThai) {
+        this.MaCT = MaCT;
+        this.tenCT = tenCT;
+        this.level = level;
         this.diemDauVao = diemDauVao;
-    }
-
-    public void setDiemDauRa(float diemDauRa) {
-        this.diemDauRa = diemDauRa;
-    }
-
-    public void setNoiDung(String noiDung) {
         this.noiDung = noiDung;
-    }
-
-    public void setTrangThai(int trangThai) {
         this.trangThai = trangThai;
     }
     
+    public dto_ChuongTrinh(String tenCT, String level, String diemDauVao, String noiDung, String trangThai) {
+        this.tenCT = tenCT;
+        this.level = level;
+        this.diemDauVao = diemDauVao;
+        this.noiDung = noiDung;
+        this.trangThai = trangThai;
+    }
+    
+    
+    public String getMaCT() {
+        return MaCT;
+    }
+    
+    
+    public String gettenCT() {
+        return tenCT;
+    }
+    
+    public String getlevel() {
+        return level;
+    }
+    
+    public String getdiemDauVao() {
+        return diemDauVao;
+    }
+    
+    public String getnoiDung() {
+        return noiDung;
+    }
+    
+    public String gettrangThai() {
+        return trangThai;
+    }
+    
+    public void setMaCT(String MaCT) {
+        this.MaCT = MaCT;
+    }
+    
+    public void settenCT(String tenCT) {
+        this.tenCT = tenCT;
+    }
+    
+    public void setlevel(String level) {
+        this.level = level;
+    }
+    
+    public void setdiemDauVao(String diemDauVao) {
+        this.diemDauVao = diemDauVao;
+    }
+    
+    public void setnoiDung(String noiDung) {
+        this.noiDung = noiDung;
+    }
+    
+    public void settrangThai(String trangThai) {
+        this.trangThai = trangThai;
+    }
     
 }

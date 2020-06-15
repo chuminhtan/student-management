@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package DAL;
+package UI.LopHocUI;
 
 /**
  *
  * @author HaiDuyhd789
  */
-public class dal_ChuongTrinh {
-    
+public interface LopHocCallback {
+    public void Callback();
 }
