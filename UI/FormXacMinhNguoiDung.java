@@ -14,12 +14,16 @@ import javax.swing.JOptionPane;
  */
 public class FormXacMinhNguoiDung {
     private String matKhauNhap;
-
+    private int luaChon;
+    
+    public int getLuaChon(){
+        return this.luaChon;
+    }
     public FormXacMinhNguoiDung() {
         pnXacNhanMatKhau pn = new pnXacNhanMatKhau();
-        int luaChon = JOptionPane.showConfirmDialog(null, pn, "Xác Minh Người Dùng", JOptionPane.OK_CANCEL_OPTION);
+        this.luaChon = JOptionPane.showConfirmDialog(null, pn, "Xác Minh Người Dùng", JOptionPane.OK_CANCEL_OPTION);
         
-        if (luaChon == 0) {  
+        if (this.luaChon == 0) {  
             this.matKhauNhap = pn.getMatKhau();
         }
     }

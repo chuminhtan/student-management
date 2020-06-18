@@ -20,9 +20,9 @@ public class bus_ChuongTrinh {
     
     
     // HÀM LÂY GIÁ TRỊ HIỂN THỊ LÊN BẢNG.
-    public void layDsChuongTrinh(int trangThai){
+    public void layDsChuongTrinh(boolean layTatCa){
         
-        ArrayList<dto_ChuongTrinh> dsChuongTrinh = new dal_ChuongTrinh().layDsChuongTrinh(trangThai);
+        ArrayList<dto_ChuongTrinh> dsChuongTrinh = new dal_ChuongTrinh().layDsChuongTrinh(layTatCa);
         
         UI_ChuongTrinh.reloadTable(dsChuongTrinh);
     }

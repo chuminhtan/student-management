@@ -33,7 +33,7 @@ public class UI_ChuongTrinh extends javax.swing.JPanel {
     public UI_ChuongTrinh() {
         initComponents();
         setupTable();
-        hienThiDsChuongTrinh(0);
+        hienThiDsChuongTrinh();
     }
 
     /**
@@ -80,7 +80,7 @@ public class UI_ChuongTrinh extends javax.swing.JPanel {
                         JOptionPane.showMessageDialog(null, "Lỗi");
                     
                     else {
-                        hienThiDsChuongTrinh(0);
+                        hienThiDsChuongTrinh();
                         
                         JOptionPane.showMessageDialog(null, "Đã Xóa");
                     }
@@ -90,15 +90,6 @@ public class UI_ChuongTrinh extends javax.swing.JPanel {
             }
         }
     
-    /* HÀM XÁC MINH NGƯỜI DÙNG
-    public boolean kiemTraMatKhau(String matKhauNhap){
-        
-        String mk = UI_DangNhap.layMatKhauDangNhap();
-        boolean kq = BCrypt.checkpw(matKhauNhap, mk);
-        
-        return kq;
-    }
-        */
     // HÀM LẤY THÔNG TIN CỦA CHƯƠNG TRÌNH ĐƯỢC CHỌN
     public dto_ChuongTrinh_ChungChi layThongTinChon() {
 
@@ -128,17 +119,8 @@ public class UI_ChuongTrinh extends javax.swing.JPanel {
     }
 
     // HÀM HIỂN THỊ THÔNG TIN LÊN BẢNG
-    public static void hienThiDsChuongTrinh(int trangThai) {
-        
-        if(trangThai == 0 || trangThai ==1)
-            new bus_ChuongTrinh().layDsChuongTrinh(trangThai);
-        else if(trangThai == 2){
-            
-            if(ckChuongTrinhDong.isSelected() == true)
-                new bus_ChuongTrinh().layDsChuongTrinh(1);
-            else
-                new bus_ChuongTrinh().layDsChuongTrinh(0);
-        }
+    public static void hienThiDsChuongTrinh() {
+        new bus_ChuongTrinh().layDsChuongTrinh(ckChuongTrinhDong.isSelected());
     }
     
 
@@ -467,11 +449,7 @@ public class UI_ChuongTrinh extends javax.swing.JPanel {
 
     private void ckChuongTrinhDongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ckChuongTrinhDongActionPerformed
 
-        if (ckChuongTrinhDong.isSelected()) {
-            hienThiDsChuongTrinh(1);
-        } else {
-            hienThiDsChuongTrinh(0);
-        }
+            hienThiDsChuongTrinh();
     }//GEN-LAST:event_ckChuongTrinhDongActionPerformed
 
     private void txtTimChuongTrinhKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimChuongTrinhKeyReleased
@@ -481,12 +459,8 @@ public class UI_ChuongTrinh extends javax.swing.JPanel {
         if (text.isEmpty() == false) {
             hienThiDsTimKiem(text);
         } else {
+                hienThiDsChuongTrinh();
 
-            if (ckChuongTrinhDong.isSelected() == true) {
-                hienThiDsChuongTrinh(1);
-            } else {
-                hienThiDsChuongTrinh(0);
-            }
         }
 
     }//GEN-LAST:event_txtTimChuongTrinhKeyReleased

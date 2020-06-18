@@ -74,7 +74,7 @@ public class FormThemChuongTrinh extends javax.swing.JFrame {
             else {
                 this.dispose();
                 JOptionPane.showMessageDialog(null, "Thành công");
-                UI_ChuongTrinh.hienThiDsChuongTrinh(2); // số 2 : load lại danh sách phụ thuộc vào có chọn dấu tích hay không
+                UI_ChuongTrinh.hienThiDsChuongTrinh();
                 
             }
         }
@@ -273,7 +273,7 @@ public class FormThemChuongTrinh extends javax.swing.JFrame {
         txtNoiDung.setPreferredSize(new java.awt.Dimension(150, 74));
         jScrollPane1.setViewportView(txtNoiDung);
 
-        btnXacNhan.setBackground(new java.awt.Color(91, 155, 213));
+        btnXacNhan.setBackground(new java.awt.Color(0, 102, 153));
         btnXacNhan.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnXacNhan.setForeground(new java.awt.Color(255, 255, 255));
         btnXacNhan.setText("XÁC NHẬN");
@@ -339,7 +339,6 @@ public class FormThemChuongTrinh extends javax.swing.JFrame {
 
         lblLogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/ielts.png"))); // NOI18N
-        lblLogo.setText("Ảnh 300x150");
 
         jLabel11.setText("Trạng Thái");
 
@@ -447,7 +446,6 @@ public class FormThemChuongTrinh extends javax.swing.JFrame {
                         .addGroup(pnThemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(jLabel5))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnThemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnThemLayout.createSequentialGroup()
                         .addGroup(pnThemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -476,7 +474,7 @@ public class FormThemChuongTrinh extends javax.swing.JFrame {
                         .addGroup(pnThemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtDiemToiDa, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtMaCc, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 14, Short.MAX_VALUE)))
+                        .addGap(0, 20, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnThemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(radCong)
@@ -492,7 +490,7 @@ public class FormThemChuongTrinh extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnXacNhan, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnXacNhan, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12))
         );
 

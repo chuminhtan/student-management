@@ -355,32 +355,6 @@ BEGIN
 	DELETE FROM LOP WHERE LOP.MA_NV = :OLD.MA_NV;
 END;
 
---Trigger khi xóa lớp thì xóa Lịch Ngày
-CREATE OR REPLACE TRIGGER TRIGGER_DELETE_LOP_DELETE_LICH_NGAY
-    BEFORE DELETE
-    ON LOP
-    FOR EACH ROW
-BEGIN
-    DELETE FROM LICH_NGAY WHERE LICH_NGAY.MA_LOP = :OLD.MA_LOP;
-END;
-
---Trigger khi xóa GIAOS VIEN thì xóa Lịch Ngày
-CREATE OR REPLACE TRIGGER TRIGGER_DELETE_GV_DELETE_LICH_NGAY
-    BEFORE DELETE
-    ON GIAO_VIEN
-    FOR EACH ROW
-BEGIN
-    DELETE FROM LICH_NGAY WHERE LICH_NGAY.MA_GV = :OLD.MA_GV;
-END;
-
---Trigger khi xóa PHÒNG thì xóa Lịch Ngày
-CREATE OR REPLACE TRIGGER TRIGGER_DELETE_PHONG_DELETE_LICH_NGAY
-    BEFORE DELETE
-    ON PHONG
-    FOR EACH ROW
-BEGIN
-    DELETE FROM LICH_NGAY WHERE LICH_NGAY.MA_PHONG = :OLD.MA_PHONG;
-END;
 
 
 
@@ -436,22 +410,31 @@ create table LICH_NGAY
    MA_LOP               NUMBER(38)           not null,
    MA_GV                NUMBER(38)           not null,
    MA_PHONG             NUMBER(38)           not null,
-   THU                  NUMBER(1)           not null,
+   NGAY                 DATE                 not null,
    GIO_BD               NUMBER(2),
    GIO_KT               NUMBER(2),
-   constraint PK_LICH_NGAY primary key (MA_LOP, MA_GV, MA_PHONG, THU)
+   constraint PK_LICH_NGAY primary key (MA_LOP, MA_GV, MA_PHONG, NGAY)
 );
 
 --insert
-insert into LICH_NGAY values(5002,9000,7000,2, 8,10);
-insert into LICH_NGAY values(5002,9000,7000,4, 8,10);
-insert into LICH_NGAY values(5002,9000,7000,6, 8,10);
-insert into LICH_NGAY values(5004,9000,7000,2, 10,12);
-insert into LICH_NGAY values(5004,9001,7000,4, 10,12);
-insert into LICH_NGAY values(5004,9002,7000,6, 10,12);
-insert into LICH_NGAY values(5400,9003,7002,3, 19,21);
-insert into LICH_NGAY values(5400,9003,7002,5, 19,21);
-insert into LICH_NGAY values(5400,9003,7002,7, 19,21);
+insert into LICH_NGAY values(5002,9000,7000,TO_DATE('09-06-2020','dd-mm-yyyy'), 8,10);
+insert into LICH_NGAY values(5002,9000,7000,TO_DATE('11-06-2020','dd-mm-yyyy'), 8,10);
+insert into LICH_NGAY values(5002,9000,7000,TO_DATE('13-06-2020','dd-mm-yyyy'), 8,10);
+insert into LICH_NGAY values(5002,9000,7000,TO_DATE('16-06-2020','dd-mm-yyyy'), 8,10);
+insert into LICH_NGAY values(5002,9000,7000,TO_DATE('18-06-2020','dd-mm-yyyy'), 8,10);
+insert into LICH_NGAY values(5002,9000,7000,TO_DATE('20-06-2020','dd-mm-yyyy'), 8,10);
+insert into LICH_NGAY values(5002,9000,7000,TO_DATE('23-06-2020','dd-mm-yyyy'), 8,10);
+insert into LICH_NGAY values(5002,9000,7000,TO_DATE('25-06-2020','dd-mm-yyyy'), 8,10);
+insert into LICH_NGAY values(5002,9000,7000,TO_DATE('27-06-2020','dd-mm-yyyy'), 8,10);
+insert into LICH_NGAY values(5004,9000,7000,TO_DATE('09-06-2020','dd-mm-yyyy'), 10,12);
+insert into LICH_NGAY values(5004,9001,7000,TO_DATE('11-06-2020','dd-mm-yyyy'), 10,12);
+insert into LICH_NGAY values(5004,9002,7000,TO_DATE('13-06-2020','dd-mm-yyyy'), 10,12);
+insert into LICH_NGAY values(5004,9000,7000,TO_DATE('16-06-2020','dd-mm-yyyy'), 10,12);
+insert into LICH_NGAY values(5004,9001,7000,TO_DATE('18-06-2020','dd-mm-yyyy'), 10,12);
+insert into LICH_NGAY values(5004,9002,7000,TO_DATE('20-06-2020','dd-mm-yyyy'), 10,12);
+insert into LICH_NGAY values(5004,9000,7000,TO_DATE('23-06-2020','dd-mm-yyyy'), 10,12);
+insert into LICH_NGAY values(5004,9001,7000,TO_DATE('25-06-2020','dd-mm-yyyy'), 10,12);
+insert into LICH_NGAY values(5004,9002,7000,TO_DATE('27-06-2020','dd-mm-yyyy'), 10,12);
 --index
 create index LICH_NGAY_GV_FK on LICH_NGAY (
    MA_GV ASC
@@ -472,7 +455,7 @@ alter table LICH_NGAY
 
 alter table LICH_NGAY
    add constraint FK_LICH_GV foreign key (MA_GV)
-      references GIAOVIEN (MA_GV);
+      references GIAO_VIEN (MA_GV);
 
 alter table LICH_NGAY
    add constraint FK_LICH_PHONG foreign key (MA_PHONG)

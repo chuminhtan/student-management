@@ -36,7 +36,7 @@ public final class UI_Main extends javax.swing.JFrame {
     // HÀM THAY ĐỔI MÀU
     public void changeTabButtonColor(JButton button, Color currentColor, Color hoverColor) {
 
-        CustomBorder customBorder = new CustomBorder(null, null, new CustomBorder.BorderPiece(5), null);
+        CustomBorder customBorder = new CustomBorder(null, null, new CustomBorder.BorderPiece(3), null);
         button.setBorder(customBorder);
         
         ((CustomBorder) button.getBorder()).setColor(currentColor);
@@ -239,6 +239,7 @@ public final class UI_Main extends javax.swing.JFrame {
         });
 
         pnBody.setBackground(new java.awt.Color(204, 255, 255));
+        pnBody.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 0, 0, 0, new java.awt.Color(0, 51, 102)));
         pnBody.setMinimumSize(new java.awt.Dimension(1350, 660));
         pnBody.setPreferredSize(new java.awt.Dimension(1350, 634));
         pnBody.setLayout(new java.awt.CardLayout());

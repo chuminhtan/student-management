@@ -54,7 +54,7 @@ public class FormCapNhatChuongTrinh extends javax.swing.JFrame {
             } else {
                 this.dispose();
                 JOptionPane.showMessageDialog(null, "Thành công");
-                UI_ChuongTrinh.hienThiDsChuongTrinh(2);
+                UI_ChuongTrinh.hienThiDsChuongTrinh();
  
             }
         }
@@ -300,7 +300,7 @@ public class FormCapNhatChuongTrinh extends javax.swing.JFrame {
         txtNoiDung.setPreferredSize(new java.awt.Dimension(150, 74));
         jScrollPane1.setViewportView(txtNoiDung);
 
-        btnXacNhan.setBackground(new java.awt.Color(91, 155, 213));
+        btnXacNhan.setBackground(new java.awt.Color(0, 102, 153));
         btnXacNhan.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnXacNhan.setForeground(new java.awt.Color(255, 255, 255));
         btnXacNhan.setText("XÁC NHẬN");
@@ -473,7 +473,6 @@ public class FormCapNhatChuongTrinh extends javax.swing.JFrame {
                         .addGroup(pnThemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(jLabel5))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnThemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnThemLayout.createSequentialGroup()
                         .addGroup(pnThemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -518,7 +517,7 @@ public class FormCapNhatChuongTrinh extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnXacNhan, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnXacNhan, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12))
         );
 

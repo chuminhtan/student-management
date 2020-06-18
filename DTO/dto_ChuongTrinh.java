@@ -134,6 +134,9 @@ public class dto_ChuongTrinh {
         this.cachTinhDiem = cachTinhDiem;
     }
     
-    
+    //toString
+    public String toString(){
+        return this.maCt + " - "  + this.tenCt;
+    }
     
 }

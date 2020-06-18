@@ -21,14 +21,15 @@ import java.util.Vector;
 public class dal_ChuongTrinh extends DBConnect{
     
     // HÀM LẤY DỮ LIỆU TRONG BẢNG CHUONGTRINH CÓ THAM SỐ
-    public ArrayList<dto_ChuongTrinh> layDsChuongTrinh(int trangThai){
+    public ArrayList<dto_ChuongTrinh> layDsChuongTrinh(boolean layTatCa){
         
         ArrayList<dto_ChuongTrinh> dsChuongTrinh = new ArrayList<dto_ChuongTrinh>();
         
         dto_ChuongTrinh ct = null;
         
         String sql="";
-        if(trangThai == 0){
+        
+        if(layTatCa == false){
             sql = "SELECT ma_ct, ten_ct, ten_chung_chi, chuong_trinh.diem_dau_vao, chuong_trinh.diem_dau_ra, chuong_trinh.noi_dung, chuong_trinh.trang_thai "
                     + "FROM chuong_trinh, chung_chi "
                     + "WHERE chuong_trinh.ma_chung_chi = chung_chi.ma_chung_chi AND chuong_trinh.trang_thai = 1";
@@ -280,7 +281,7 @@ public class dal_ChuongTrinh extends DBConnect{
     
     //MAIN
     public static void main(String[] args){
-        ArrayList<dto_ChuongTrinh> dsChuongTrinh = new dal_ChuongTrinh().layDsChuongTrinh(0);
+        ArrayList<dto_ChuongTrinh> dsChuongTrinh = new dal_ChuongTrinh().layDsChuongTrinh(true);
         
         for(dto_ChuongTrinh ct : dsChuongTrinh){
             System.out.println("Ma: " + ct.getMaCt());

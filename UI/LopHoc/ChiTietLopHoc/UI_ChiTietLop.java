@@ -7,7 +7,6 @@ package UI.LopHoc.ChiTietLopHoc;
 
 import DTO.dto_ChuongTrinh;
 import UI.LopHoc.ChiTietLopHoc.FormThemVaoLop;
-import UI.LopHoc.FormCapNhatLH;
 import java.awt.Color;
 import java.awt.Font;
 import java.util.ArrayList;
