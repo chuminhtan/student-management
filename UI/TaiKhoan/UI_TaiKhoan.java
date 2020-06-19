@@ -264,10 +264,12 @@ public class UI_TaiKhoan extends javax.swing.JPanel {
     public void giaoDienBanDau() {
         setupTable();
         taoMoiMode();
+        
         img = "";
         lblImg.setIcon(new ImageIcon(img));
         dsTaiKhoan = new ArrayList<dto_TaiKhoan>();
         dsTaiKhoan = new bus_TaiKhoan().layDsTaiKhoan();
+        
         reloadTable(dsTaiKhoan);
 
         dfcDsLoai = new DefaultComboBoxModel();
@@ -335,14 +337,11 @@ public class UI_TaiKhoan extends javax.swing.JPanel {
     // HÀM LOAD DỮ LIỆU LÊN BẢNG
     public void reloadTable(ArrayList<dto_TaiKhoan> dsTk) {
 
-        dsTaiKhoan = new ArrayList<dto_TaiKhoan>();
-        dsTaiKhoan = dsTk;
-
         int stt = 0;
 
         dtmTaiKhoan.setRowCount(0);
 
-        for (dto_TaiKhoan tk : dsTaiKhoan) {
+        for (dto_TaiKhoan tk : dsTk) {
 
             stt++;
             Vector<Object> vc = new Vector<Object>();

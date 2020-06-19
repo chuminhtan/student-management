@@ -336,9 +336,9 @@
               <Color blue="33" green="0" red="0" type="rgb"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/tkb.png"/>
+              <Image iconType="3" name="/images/teacher.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="TH&#x1edc;I KH&#xd3;A BI&#x1ec2;U"/>
+            <Property name="text" type="java.lang.String" value="GI&#xc1;O VI&#xca;N &amp; PH&#xd2;NG"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>

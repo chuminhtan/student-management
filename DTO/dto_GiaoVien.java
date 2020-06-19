@@ -12,9 +12,19 @@ package DTO;
 public class dto_GiaoVien {
     private int maGv;
     private String tenGv;
+    private int gioiTinh;
+    private String sdt;
     private String quocTich;
 
     public dto_GiaoVien() {
+    }
+
+    public int getGioiTinh() {
+        return gioiTinh;
+    }
+
+    public String getSdt() {
+        return sdt;
     }
 
     public int getMaGv() {
@@ -39,6 +49,14 @@ public class dto_GiaoVien {
 
     public void setQuocTich(String quocTich) {
         this.quocTich = quocTich;
+    }
+
+    public void setGioiTinh(int gioiTinh) {
+        this.gioiTinh = gioiTinh;
+    }
+
+    public void setSdt(String sdt) {
+        this.sdt = sdt;
     }
     
     //toString

@@ -135,11 +135,14 @@ public class pnLocThu extends javax.swing.JPanel {
         ckCn = new javax.swing.JCheckBox();
 
         setBackground(new java.awt.Color(230, 245, 255));
+        setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(204, 204, 204)));
         setMinimumSize(new java.awt.Dimension(347, 30));
         setPreferredSize(new java.awt.Dimension(347, 30));
 
         ckT2.setBackground(new java.awt.Color(230, 245, 255));
         ckT2.setText("T2");
+        ckT2.setMinimumSize(new java.awt.Dimension(37, 25));
+        ckT2.setPreferredSize(new java.awt.Dimension(37, 25));
         ckT2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ckT2ActionPerformed(evt);
@@ -148,6 +151,8 @@ public class pnLocThu extends javax.swing.JPanel {
 
         ckT4.setBackground(new java.awt.Color(230, 245, 255));
         ckT4.setText("T4");
+        ckT4.setMinimumSize(new java.awt.Dimension(37, 25));
+        ckT4.setPreferredSize(new java.awt.Dimension(37, 25));
         ckT4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ckT4ActionPerformed(evt);
@@ -200,33 +205,36 @@ public class pnLocThu extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(ckT2)
+                .addComponent(ckT2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(13, 13, 13)
                 .addComponent(ckT3)
                 .addGap(13, 13, 13)
-                .addComponent(ckT4)
+                .addComponent(ckT4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(13, 13, 13)
                 .addComponent(ckT5)
                 .addGap(13, 13, 13)
                 .addComponent(ckT6)
                 .addGap(13, 13, 13)
                 .addComponent(ckT7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                 .addComponent(ckCn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ckT2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ckT4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ckT3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ckT5)
-                    .addComponent(ckT6)
-                    .addComponent(ckT7)
-                    .addComponent(ckCn))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(ckT2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ckT3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ckT5)
+                            .addComponent(ckT6)
+                            .addComponent(ckT7)
+                            .addComponent(ckCn))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(ckT4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 

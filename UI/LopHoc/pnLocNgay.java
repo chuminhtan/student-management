@@ -100,7 +100,7 @@ public class pnLocNgay extends javax.swing.JPanel {
 
         btnXoaNgay.setBackground(new java.awt.Color(0, 102, 153));
         btnXoaNgay.setForeground(new java.awt.Color(255, 255, 255));
-        btnXoaNgay.setText("xóa");
+        btnXoaNgay.setText("Đặt Lại");
         btnXoaNgay.setBorderPainted(false);
         btnXoaNgay.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnXoaNgay.addActionListener(new java.awt.event.ActionListener() {
@@ -114,11 +114,11 @@ public class pnLocNgay extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(26, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(dcNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(34, 34, 34)
                 .addComponent(btnXoaNgay)
-                .addGap(69, 69, 69))
+                .addGap(41, 41, 41))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

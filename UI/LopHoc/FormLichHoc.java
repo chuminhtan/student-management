@@ -19,6 +19,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -48,6 +49,12 @@ public class FormLichHoc extends javax.swing.JFrame {
     }
 
     // BIẾN TỰ ĐỊNH NGHĨA
+    Font fontLblSelected = new Font("Tahoma", Font.BOLD,11);
+    Font fontLblNotSelected = new Font("Tahoma", Font.PLAIN,11);
+    Color colorSelected = new Color(153,0,0);
+    Color colorNotSelected = new Color(0,0,0);
+
+    
     dto_Thu t2;
     dto_Thu t3;
     dto_Thu t4;
@@ -465,7 +472,16 @@ public class FormLichHoc extends javax.swing.JFrame {
         tbNgayNghi.getTableHeader().setForeground(new Color(0, 0, 0));
         tbNgayNghi.setSelectionBackground(new Color(0, 64, 128));
     }
-
+    
+    // HÀM THAY ĐỔI MÀU SẮC CHO CK BOX KHI ĐƯỢC CHỌN
+    public void duocChon(JCheckBox ck){
+        ck.setFont(fontLblSelected);
+        ck.setForeground(colorSelected);
+    }
+    public void khongDuocChon(JCheckBox ck){
+        ck.setFont(fontLblNotSelected);
+        ck.setForeground(colorNotSelected);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -613,7 +629,6 @@ public class FormLichHoc extends javax.swing.JFrame {
         setTitle("Lịch Học");
         setBackground(new java.awt.Color(255, 255, 255));
         setMinimumSize(new java.awt.Dimension(1184, 729));
-        setPreferredSize(new java.awt.Dimension(1184, 729));
 
         pnTong.setBackground(new java.awt.Color(230, 245, 255));
         pnTong.setMinimumSize(new java.awt.Dimension(1184, 729));
@@ -622,7 +637,7 @@ public class FormLichHoc extends javax.swing.JFrame {
         pnLich.setBackground(new java.awt.Color(255, 255, 255));
         pnLich.setPreferredSize(new java.awt.Dimension(589, 900));
 
-        ckT2.setBackground(new java.awt.Color(230, 245, 255));
+        ckT2.setBackground(new java.awt.Color(255, 255, 255));
         ckT2.setText("Thứ 2");
         ckT2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -630,7 +645,7 @@ public class FormLichHoc extends javax.swing.JFrame {
             }
         });
 
-        ckT3.setBackground(new java.awt.Color(230, 245, 255));
+        ckT3.setBackground(new java.awt.Color(255, 255, 255));
         ckT3.setText("Thứ 3");
         ckT3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -638,7 +653,7 @@ public class FormLichHoc extends javax.swing.JFrame {
             }
         });
 
-        ckT4.setBackground(new java.awt.Color(230, 245, 255));
+        ckT4.setBackground(new java.awt.Color(255, 255, 255));
         ckT4.setText("Thứ 4");
         ckT4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -646,7 +661,7 @@ public class FormLichHoc extends javax.swing.JFrame {
             }
         });
 
-        ckT5.setBackground(new java.awt.Color(230, 245, 255));
+        ckT5.setBackground(new java.awt.Color(255, 255, 255));
         ckT5.setText("Thứ 5");
         ckT5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -654,7 +669,7 @@ public class FormLichHoc extends javax.swing.JFrame {
             }
         });
 
-        ckT7.setBackground(new java.awt.Color(230, 245, 255));
+        ckT7.setBackground(new java.awt.Color(255, 255, 255));
         ckT7.setText("Thứ 7");
         ckT7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -662,7 +677,7 @@ public class FormLichHoc extends javax.swing.JFrame {
             }
         });
 
-        ckT6.setBackground(new java.awt.Color(230, 245, 255));
+        ckT6.setBackground(new java.awt.Color(255, 255, 255));
         ckT6.setText("Thứ 6");
         ckT6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -670,7 +685,7 @@ public class FormLichHoc extends javax.swing.JFrame {
             }
         });
 
-        ckCn.setBackground(new java.awt.Color(230, 245, 255));
+        ckCn.setBackground(new java.awt.Color(255, 255, 255));
         ckCn.setText("CN");
         ckCn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1158,11 +1173,11 @@ public class FormLichHoc extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(phutKtT6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addGroup(pnSauLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel40)
                     .addComponent(cbGvT6, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addGroup(pnSauLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cbPhongT6, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel41))
@@ -1174,8 +1189,7 @@ public class FormLichHoc extends javax.swing.JFrame {
                 .addGroup(pnSauLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnSauLayout.createSequentialGroup()
                         .addGap(6, 6, 6)
-                        .addComponent(jLabel34)
-                        .addGap(36, 36, 36))
+                        .addComponent(jLabel34))
                     .addGroup(pnSauLayout.createSequentialGroup()
                         .addGroup(pnSauLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel33)
@@ -1191,8 +1205,8 @@ public class FormLichHoc extends javax.swing.JFrame {
                             .addComponent(cbGvT6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cbPhongT6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel39)
-                            .addComponent(gioBdT6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(4, 4, 4)))
+                            .addComponent(gioBdT6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(6, 6, 6)
                 .addGroup(pnSauLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnSauLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(phutKtT6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1426,16 +1440,20 @@ public class FormLichHoc extends javax.swing.JFrame {
                         .addComponent(ckCn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(ckT2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ckT3, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnLichLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(pnBay, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnSau, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnHai, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnBa, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnTu, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnNam, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnCn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(326, Short.MAX_VALUE))
+                .addGroup(pnLichLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnLichLayout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(pnHai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnLichLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(pnLichLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(pnTu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pnBa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pnNam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pnSau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pnBay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pnCn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
         pnLichLayout.setVerticalGroup(
             pnLichLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1468,7 +1486,7 @@ public class FormLichHoc extends javax.swing.JFrame {
                 .addGroup(pnLichLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(pnCn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(ckCn, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addContainerGap(76, Short.MAX_VALUE))
         );
 
         scLichHoc.setViewportView(pnLich);
@@ -1527,6 +1545,7 @@ public class FormLichHoc extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setForeground(new java.awt.Color(0, 0, 102));
         jLabel3.setText("Danh Sách Ngày Nghỉ");
 
         javax.swing.GroupLayout pnTongLayout = new javax.swing.GroupLayout(pnTong);
@@ -1601,58 +1620,88 @@ public class FormLichHoc extends javax.swing.JFrame {
 
     private void ckCnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ckCnActionPerformed
 
-        if (ckCn.isSelected())
+        if (ckCn.isSelected()){
             pnCn.setVisible(true);
-        else
+            duocChon(ckCn);
+        }
+            
+        else{
             pnCn.setVisible(false);
+            khongDuocChon(ckCn);
+        }
+            
     }//GEN-LAST:event_ckCnActionPerformed
 
     private void ckT6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ckT6ActionPerformed
 
-        if (ckT6.isSelected())
+        if (ckT6.isSelected()){
             pnSau.setVisible(true);
-        else
+            duocChon(ckT6);
+        }
+        else{
             pnSau.setVisible(false);
+            khongDuocChon(ckT6);
+        }
     }//GEN-LAST:event_ckT6ActionPerformed
 
     private void ckT7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ckT7ActionPerformed
 
-        if (ckT7.isSelected())
+        if (ckT7.isSelected()){
             pnBay.setVisible(true);
-        else
+            duocChon(ckT7);
+        }
+        else{
             pnBay.setVisible(false);
+            khongDuocChon(ckT7);
+        }
     }//GEN-LAST:event_ckT7ActionPerformed
 
     private void ckT5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ckT5ActionPerformed
 
-        if (ckT5.isSelected())
+        if (ckT5.isSelected()){
             pnNam.setVisible(true);
-        else
+            duocChon(ckT5);
+        }
+        else{
             pnNam.setVisible(false);
+            khongDuocChon(ckT5);
+        }
     }//GEN-LAST:event_ckT5ActionPerformed
 
     private void ckT4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ckT4ActionPerformed
 
-        if (ckT4.isSelected())
+        if (ckT4.isSelected()){
             pnTu.setVisible(true);
-        else
+            duocChon(ckT4);
+        }
+        else{
             pnTu.setVisible(false);
+            khongDuocChon(ckT4);
+        }
     }//GEN-LAST:event_ckT4ActionPerformed
 
     private void ckT3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ckT3ActionPerformed
 
-        if (ckT3.isSelected())
+        if (ckT3.isSelected()){
             pnBa.setVisible(true);
-        else
+            duocChon(ckT3);
+        }
+        else{
             pnBa.setVisible(false);
+            khongDuocChon(ckT3);
+        }
     }//GEN-LAST:event_ckT3ActionPerformed
 
     private void ckT2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ckT2ActionPerformed
 
-        if (ckT2.isSelected())
-            pnHai.setVisible(true);
-        else
+        if (ckT2.isSelected()){
+           pnHai.setVisible(true);
+           duocChon(ckT2);
+        }
+        else{
             pnHai.setVisible(false);
+            khongDuocChon(ckT2);
+        }
     }//GEN-LAST:event_ckT2ActionPerformed
 
     private void btnThemNgayNghiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemNgayNghiActionPerformed

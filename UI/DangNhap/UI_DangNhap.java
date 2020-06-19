@@ -31,6 +31,9 @@ public class UI_DangNhap extends javax.swing.JFrame {
     static dto_TaiKhoan static_tkNguoiDung;
     
     public static String layMatKhauDangNhap(){
+        
+        if(static_tkNguoiDung == null)
+            JOptionPane.showMessageDialog(null, "Trời ơi ! Chưa đăng nhập lấy gì mà xác minh mật khẩu được mấy ông nội");
         return static_tkNguoiDung.getMatKhau();
     }
     

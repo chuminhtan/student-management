@@ -11,7 +11,7 @@ import UI.ChuongTrinh.UI_ChuongTrinh;
 import UI.LopHoc.UI_LopHoc;
 import UI.KhachHang.UI_KhachHang;
 import UI.DangNhap.UI_DangNhap;
-import UI.TKB.UI_TKB;
+import UI.GV_Phong.UI_GV_Phong;
 import UI.TaiKhoan.UI_TaiKhoan;
 import java.awt.Color;
 import java.awt.Font;
@@ -281,8 +281,8 @@ public final class UI_Main extends javax.swing.JFrame {
         btnThoiKhoaBieu.setBackground(new java.awt.Color(153, 255, 153));
         btnThoiKhoaBieu.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         btnThoiKhoaBieu.setForeground(new java.awt.Color(0, 0, 51));
-        btnThoiKhoaBieu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/tkb.png"))); // NOI18N
-        btnThoiKhoaBieu.setText("THỜI KHÓA BIỂU");
+        btnThoiKhoaBieu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/teacher.png"))); // NOI18N
+        btnThoiKhoaBieu.setText("GIÁO VIÊN & PHÒNG");
         btnThoiKhoaBieu.setBorder(null);
         btnThoiKhoaBieu.setContentAreaFilled(false);
         btnThoiKhoaBieu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -495,7 +495,7 @@ public final class UI_Main extends javax.swing.JFrame {
     private UI_KhachHang ui_kh = new UI_KhachHang();
     private UI_ChuongTrinh ui_ct = new UI_ChuongTrinh();
     private UI_TaiKhoan ui_tk = new UI_TaiKhoan();
-    private UI_TKB ui_tkb = new UI_TKB();
+    private UI_GV_Phong ui_tkb = new UI_GV_Phong();
     //Kết thúc biến tự định nghĩa
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
