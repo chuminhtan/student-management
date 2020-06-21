@@ -193,8 +193,10 @@ public class FormCapNhatChuongTrinh extends javax.swing.JFrame {
         ButtonGroup btnGroupTrangThai = new ButtonGroup();
         btnGroupTrangThai.add(radDong);
         btnGroupTrangThai.add(radMo);
+        
         static_dfcChungChi = new DefaultComboBoxModel();
         static_dfcChungChi.addElement(ct_cc);
+        
         cbTenCc.setModel(static_dfcChungChi);
 
         cbTenCc.setSelectedItem(1);

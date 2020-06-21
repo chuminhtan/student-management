@@ -109,9 +109,10 @@ public class dal_ChungChi extends DBConnect {
         
         try{
             
-            String sql = "DELETE FROM chung_chi WHERE ma_chung_chi=" + ma_cc;
+            String sql = "DELETE FROM chung_chi WHERE ma_chung_chi=?";
             
             PreparedStatement preStmt = conn.prepareStatement(sql);
+            preStmt.setInt(1, ma_cc);
             int rs = preStmt.executeUpdate();
             
             conn.close();
@@ -122,5 +123,39 @@ public class dal_ChungChi extends DBConnect {
             ex.printStackTrace();
             return 0;
         }
+    }
+    
+    // HÀM LẤY CHỨNG CHỈ BẰNG MÃ _ không đóng connect
+    public dto_ChungChi layChungChi(int maChungChi){
+        
+        dto_ChungChi chungChi = null;
+        
+        String sql = "SELECT ma_chung_chi, ten_chung_chi, noi_dung, diem_toi_da, src_img "
+                + "FROM chung_chi "
+                + "WHERE ma_chung_chi =?";
+        
+        try{
+            
+            PreparedStatement preStmt = conn.prepareStatement(sql);
+            preStmt.setInt(1, maChungChi);
+            ResultSet rs = preStmt.executeQuery();
+                
+           if(rs.next()){
+            chungChi = new dto_ChungChi();
+            chungChi.setMaCc(rs.getInt(1));
+            chungChi.setTenCc(rs.getString(2));
+            chungChi.setNoiDung(rs.getString(3));
+            chungChi.setDiemToiDa(rs.getFloat(4));
+            chungChi.setSrcImg(rs.getString(5));
+           }
+
+ 
+            return chungChi;
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+            return null;
+        }
+        
     }
 }

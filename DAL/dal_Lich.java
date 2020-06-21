@@ -102,10 +102,11 @@ public class dal_Lich extends DBConnect{
         
         String sql = "SELECT ten_gv, quoc_tich "
                 + "FROM giao_vien "
-                + "WHERE ma_gv = " + maGv;
+                + "WHERE ma_gv = ?";
         
         try{
             PreparedStatement preStmt = conn.prepareStatement(sql);
+            preStmt.setInt(1, maGv);
             ResultSet rs = preStmt.executeQuery();
             
             if(rs.next()){
@@ -192,11 +193,12 @@ public class dal_Lich extends DBConnect{
     // XÓA DANH SÁCH LỚP HỌC
     public int xoaDsLich(int ma_lop){
         
-        String sql ="DELETE FROM lich_ngay WHERE ma_lop = " + ma_lop;
+        String sql ="DELETE FROM lich_ngay WHERE ma_lop = ?";
         
         try{
             
             PreparedStatement preStmt = conn.prepareStatement(sql);
+            preStmt.setInt(1,ma_lop);
             
             int rs = preStmt.executeUpdate();
             

@@ -522,6 +522,7 @@ public class UI_GV_Phong extends javax.swing.JPanel {
             }
         ));
         tbGiaoVien.setRowHeight(30);
+        tbGiaoVien.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tbGiaoVien.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 tbGiaoVienMousePressed(evt);
@@ -612,9 +613,9 @@ public class UI_GV_Phong extends javax.swing.JPanel {
                     .addComponent(jLabel5))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtQuocTich, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addGap(0, 64, Short.MAX_VALUE))
+                    .addComponent(jLabel6)
+                    .addComponent(txtQuocTich, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 75, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -633,7 +634,6 @@ public class UI_GV_Phong extends javax.swing.JPanel {
                             .addComponent(jLabel5)
                             .addComponent(jLabel6)
                             .addComponent(jLabel2))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTenGv, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbGioiTinhGv, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -764,6 +764,12 @@ public class UI_GV_Phong extends javax.swing.JPanel {
             }
         ));
         tbPhong.setRowHeight(30);
+        tbPhong.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tbPhong.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tbPhongMousePressed(evt);
+            }
+        });
         jScrollPane2.setViewportView(tbPhong);
 
         txtTimPhong.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -819,8 +825,8 @@ public class UI_GV_Phong extends javax.swing.JPanel {
                     .addComponent(jLabel8))
                 .addGap(35, 35, 35)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtTenPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9))
+                    .addComponent(jLabel9)
+                    .addComponent(txtTenPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -1047,7 +1053,7 @@ public class UI_GV_Phong extends javax.swing.JPanel {
     }//GEN-LAST:event_btnThemGvActionPerformed
 
     private void tbGiaoVienMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbGiaoVienMousePressed
-
+        giaoDienThemGiaoVien();
     }//GEN-LAST:event_tbGiaoVienMousePressed
 
     private void txtTimGvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimGvActionPerformed
@@ -1065,6 +1071,10 @@ public class UI_GV_Phong extends javax.swing.JPanel {
        String text = txtTimPhong.getText();
        timPhong(text);
     }//GEN-LAST:event_txtTimPhongKeyReleased
+
+    private void tbPhongMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPhongMousePressed
+        giaoDienThemPhong();
+    }//GEN-LAST:event_tbPhongMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

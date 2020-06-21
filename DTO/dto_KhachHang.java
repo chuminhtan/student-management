@@ -5,50 +5,57 @@
  */
 package DTO;
 
-import java.sql.Date;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 /**
  *
  * @author USER
  */
 public class dto_KhachHang {
-    private String MaKH;
-    private String hoTen;
+    private int MaKh;
+    private String tenKh;
     private Date ngaySinh;
-    private String gioiTinh;
+    private int gioiTinh;
     private String diaChi;
     private String sdt;
-    private String trangThai;
-    private String diemDauVao;
+    private float diemDauVao;
+    private int maChungChi;
+    private int maLop;
+    
+    private dto_ChungChi chungChiCanHoc;
+    private dto_LopHoc lopDangHoc;
+    private ArrayList<dto_LichSu> dsLichSu;
 
     public dto_KhachHang() {
     }
 
-    public dto_KhachHang(String MaKH, String hoTen, Date ngaySinh, String gioiTinh, String diaChi, String sdt, String trangThai, String diemDauVao) {
-        this.MaKH = MaKH;
-        this.hoTen = hoTen;
-        this.ngaySinh = ngaySinh;
-        this.gioiTinh = gioiTinh;
-        this.diaChi = diaChi;
-        this.sdt = sdt;
-        this.trangThai = trangThai;
-        this.diemDauVao = diemDauVao;
-    }
-    
-    
-    public String getMaKH() {
-        return MaKH;
+    public ArrayList<dto_LichSu> getDsLichSu() {
+        return dsLichSu;
     }
 
-    public String getHoTen() {
-        return hoTen;
+    public int getMaChungChi() {
+        return maChungChi;
+    }
+
+    public int getMaLop() {
+        return maLop;
+    }
+
+    public int getMaKh() {
+        return MaKh;
+    }
+
+    public String getTenKh() {
+        return tenKh;
     }
 
     public Date getNgaySinh() {
         return ngaySinh;
     }
 
-    public String getGioiTinh() {
+    public int getGioiTinh() {
         return gioiTinh;
     }
 
@@ -60,27 +67,27 @@ public class dto_KhachHang {
         return sdt;
     }
 
-    public String getTrangThai() {
-        return trangThai;
-    }
-
-    public String getDiemDauVao() {
+    public float getDiemDauVao() {
         return diemDauVao;
     }
 
-    public void setMaKH(String MaKH) {
-        this.MaKH = MaKH;
+    public dto_ChungChi getChungChiCanHoc() {
+        return chungChiCanHoc;
     }
 
-    public void setHoTen(String hoTen) {
-        this.hoTen = hoTen;
+    public dto_LopHoc getLopDangHoc() {
+        return lopDangHoc;
+    }
+
+    public void setTenKh(String tenKh) {
+        this.tenKh = tenKh;
     }
 
     public void setNgaySinh(Date ngaySinh) {
         this.ngaySinh = ngaySinh;
     }
 
-    public void setGioiTinh(String gioiTinh) {
+    public void setGioiTinh(int gioiTinh) {
         this.gioiTinh = gioiTinh;
     }
 
@@ -92,13 +99,36 @@ public class dto_KhachHang {
         this.sdt = sdt;
     }
 
-    public void setTrangThai(String trangThai) {
-        this.trangThai = trangThai;
-    }
-
-    public void setDiemDauVao(String diemDauVao) {
+    public void setDiemDauVao(float diemDauVao) {
         this.diemDauVao = diemDauVao;
     }
-    
-    
+
+    public void setChungChiCanHoc(dto_ChungChi chungChiCanHoc) {
+        this.chungChiCanHoc = chungChiCanHoc;
+    }
+
+    public void setLopDangHoc(dto_LopHoc lopDangHoc) {
+        this.lopDangHoc = lopDangHoc;
+    }
+
+    public void setMaKh(int MaKh) {
+        this.MaKh = MaKh;
+    }
+
+    public void setDsLichSu(ArrayList<dto_LichSu> dsLichSu) {
+        this.dsLichSu = dsLichSu;
+    }
+
+    public void setMaChungChi(int maChungChi) {
+        this.maChungChi = maChungChi;
+    }
+
+    public void setMaLop(int maLop) {
+        this.maLop = maLop;
+    }
+
+    public String layNgaySinh(){
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        return sdf.format(this.ngaySinh);
+    }
 }

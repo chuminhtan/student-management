@@ -59,7 +59,9 @@ public class dal_LopHoc extends DBConnect{
                 lop.setSoBuoi(rs.getInt(6));
                 lop.setTrangThai(rs.getInt(7));
                 
-                lop.setDsLich(new dal_Lich().layDsLichTheoLop(lop.getMaLop()));
+                if(lop.getMaLop() > 0)
+                    lop.setDsLich(new dal_Lich().layDsLichTheoLop(lop.getMaLop()));
+                
                 lop.setCt(layChuongTrinh(lop.getMaCt()));
                 lop.setTk(layTaiKhoan(lop.getMaNv()));
                 lop.setSiSo(laySiSo(lop.getMaLop()));
@@ -83,10 +85,11 @@ public class dal_LopHoc extends DBConnect{
         String sql = "SELECT COUNT(ma_kh) "
                 + "FROM kqht "
                 + "GROUP BY ma_lop "
-                + "HAVING ma_lop =" + maLop;
+                + "HAVING ma_lop =?";
         
         try{
             PreparedStatement preStmt = conn.prepareStatement(sql);
+            preStmt.setInt(1, maLop);
             ResultSet rs = preStmt.executeQuery();
             
             if(!rs.next()){
@@ -113,9 +116,10 @@ public class dal_LopHoc extends DBConnect{
         
         String sql = "SELECT ma_chung_chi, ten_ct, diem_dau_vao, diem_dau_ra, noi_dung, trang_thai, tinh_diem_nghe, tinh_diem_noi, tinh_diem_doc, tinh_diem_viet, cach_tinh_diem "
                 + "FROM chuong_trinh "
-                + "WHERE ma_ct =" + ma_ct;
+                + "WHERE ma_ct =?";
         try{
             PreparedStatement preStmt = conn.prepareStatement(sql);
+            preStmt.setInt(1, ma_ct);
             ResultSet rs = preStmt.executeQuery();
             
             if(rs.next()){
@@ -149,10 +153,11 @@ public class dal_LopHoc extends DBConnect{
         
         String sql = "SELECT ho_ten, sdt, loai, ten_dang_nhap, mat_khau, src_img "
                 + "FROM nhan_vien "
-                + "WHERE ma_nv = " + ma_tk;
+                + "WHERE ma_nv = ?";
         
         try{
             PreparedStatement preStmt = conn.prepareStatement(sql);
+            preStmt.setInt(1, ma_tk);
             ResultSet rs = preStmt.executeQuery();
             
             if(rs.next()){
@@ -293,6 +298,42 @@ public class dal_LopHoc extends DBConnect{
         catch(Exception ex){
             ex.printStackTrace();
             return 0;
+        }
+    }
+    
+    // HÀM LẤY THÔNG TIN LỚP BẰNG MÃ LỚP
+    public dto_LopHoc layLopHoc(int maLop){
+        
+        dto_LopHoc lop = null;
+        
+        String sql = "SELECT ma_lop, ma_ct, ma_nv, ten_lop, ngay_bd, so_buoi, trang_thai "
+                + "FROM lop "
+                + "WHERE ma_lop=" + maLop;
+        
+        try{
+            
+            PreparedStatement preStmt = conn.prepareStatement(sql);
+            ResultSet rs = preStmt.executeQuery();
+            
+            if(rs.next()){
+                
+                lop = new dto_LopHoc();
+                lop.setMaLop(rs.getInt(1));
+                lop.setMaCt(rs.getInt(2));
+                lop.setMaNv(rs.getInt(3));
+                lop.setTenLop(rs.getString(4));
+                lop.setNgayBd(rs.getDate(5));
+                lop.setSoBuoi(rs.getInt(6));
+                lop.setTrangThai(rs.getInt(7));
+                
+                lop.setDsLich(new dal_Lich().layDsLichTheoLop(maLop));
+            }
+            
+            return lop;
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+            return null;
         }
     }
     //main
