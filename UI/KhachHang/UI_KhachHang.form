@@ -398,8 +398,8 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lblKhachHang" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
-                      <Component id="btnXacNhan" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
+                      <Component id="lblKhachHang" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="btnXacNhan" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">

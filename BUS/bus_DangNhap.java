@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package BUS;
 
 import DAL.dal_TaiKhoan;
@@ -10,10 +5,6 @@ import DTO.dto_DangNhap;
 import DTO.dto_TaiKhoan;
 import UI.UI_Main;
 
-/**
- *
- * Xử lý tương tác giữa UI với DAL
- */
 public class bus_DangNhap {
 
     // HÀM ĐĂNG NHẬP

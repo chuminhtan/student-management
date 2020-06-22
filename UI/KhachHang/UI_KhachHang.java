@@ -12,7 +12,7 @@ import DTO.dto_ChungChi;
 import DTO.dto_KhachHang;
 import DTO.dto_LichSu;
 import UI.FormXacMinhNguoiDung;
-import static UI.LopHoc.UI_LopHoc.hienThiDsLop;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.util.ArrayList;
@@ -32,8 +32,9 @@ public class UI_KhachHang extends javax.swing.JPanel {
      */
     public UI_KhachHang() {
         initComponents();
-
         giaoDienBanDau();
+        reloadDuLieu();
+        reloadTableKhachHang(this.dsKhachHang);
     }
     
     // BIẾN TỰ ĐỊNH NGHĨA
@@ -61,7 +62,7 @@ public class UI_KhachHang extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(null, "Đã xóa khách hàng");
                 else{
                     JOptionPane.showMessageDialog(null, "Xóa Thành Công");
-                    giaoDienBanDau();
+                    reloadDuLieu();
                 }
             }
             else
@@ -83,7 +84,7 @@ public class UI_KhachHang extends javax.swing.JPanel {
             if(kq > 0){
                 
                 JOptionPane.showMessageDialog(null, "Đã cập nhật thay đổi");
-                giaoDienBanDau();
+                reloadDuLieu();
             }
             else
                 JOptionPane.showMessageDialog(null, "Lỗi");
@@ -101,9 +102,9 @@ public class UI_KhachHang extends javax.swing.JPanel {
             int kq = new bus_Khachhang().themKhachHang(kh);
             
             if(kq > 0){
-                
                 JOptionPane.showMessageDialog(null, "Đã tạo khách hàng mới");
-                giaoDienBanDau();
+                
+                reloadDuLieu();
             }
             else
                 JOptionPane.showMessageDialog(null, "Lỗi");
@@ -186,34 +187,49 @@ public class UI_KhachHang extends javax.swing.JPanel {
     // HÀM THIẾT LẬP GIAO DIỆN BAN ĐẦU
     public void giaoDienBanDau(){
         setupTableLichSu();
-        setupTableKhachHang();
+        setupTableKhachHang();        
+        giaoDienThem();   
+    }  
+    
+    // HÀM SETUP DỮ LIỆU BAND ĐẦU
+    public void reloadDuLieu(){    
+        setupDuLieuKhachHang();
+        setupDuLieuChungChi();
         
-        giaoDienThem();
-        
-        this.dsKhachHang = new ArrayList<dto_KhachHang>();
-        this.dsKhachHang = new bus_Khachhang().layDsKhachHang();
         reloadTableKhachHang(this.dsKhachHang);
         
+    }
+    
+    // HÀM SETUP DỮ LIỆU DANH SÁCH KHÁCH HÀNG
+    public void setupDuLieuKhachHang(){
+        this.dsKhachHang = new ArrayList<dto_KhachHang>();
+        this.dsKhachHang = new bus_Khachhang().layDsKhachHang();
+    }
+    
+    // HÀM SETUP DỮ LIỆU CHỨNG CHỈ
+    public void setupDuLieuChungChi(){
         this.dsChungChi = new ArrayList<dto_ChungChi>();
         this.dsChungChi = new bus_ChungChi().layDsChungChi();
         
         cbChungChi.removeAllItems();
+        
         for(dto_ChungChi cc : this.dsChungChi){
             cbChungChi.addItem(cc.getTenCc());
         }
-    }  
+   }
     
     // HÀM SET GIAO DIỆN CẬP NHẬT
     public void giaoDienCapNhat(){
         
         lblKhachHang.setText("Cập Nhật");
         isCapNhatKhachHang = true;
-        btnXacNhan.setVisible(true);
-        
+        btnXacNhan.setVisible(true);     
     }
     
     // HÀM HIỂN THỊ THÔNG TIN CHI TIẾT
     public void giaoDienChiTiet(dto_KhachHang kh){
+
+        reloadTableLichSu(kh.getDsLichSu());
         
         btnXacNhan.setVisible(false);
         lblKhachHang.setText("Thông Tin Chi Tiết");
@@ -226,16 +242,14 @@ public class UI_KhachHang extends javax.swing.JPanel {
             dcNgaySinh.setDate(kh.getNgaySinh());
             txtSdt.setText(kh.getSdt());
             txtDiaChi.setText(kh.getDiaChi());
+            
             txtDiemDauVao.setText(kh.getDiemDauVao() + "");
+            
             txtDiemToiDa.setText(kh.getChungChiCanHoc().getDiemToiDa() + "");
             
-            if(kh.getLopDangHoc() == null)
-                txtLopDangHoc.setText("---------------");
-            else
-                txtLopDangHoc.setText(kh.getLopDangHoc().getTenLop());
+            txtLopDangHoc.setText(kh.getTenLop());
             
             cbChungChi.setSelectedItem(kh.getChungChiCanHoc().getTenCc()); 
-            reloadTableLichSu(kh.getDsLichSu());
             
             this.khDuocChon = new dto_KhachHang();
             this.khDuocChon = kh;
@@ -255,6 +269,9 @@ public class UI_KhachHang extends javax.swing.JPanel {
         txtDiemDauVao.setText("");
         txtDiemToiDa.setText("");
         txtLopDangHoc.setText("");
+        dcNgaySinh.setDate(null);
+        tbKhachHang.clearSelection();
+                
     }
     
     // HÀM LẤY KHÁCH HÀNG ĐƯỢC CHỌN
@@ -272,6 +289,9 @@ public class UI_KhachHang extends javax.swing.JPanel {
             khDuocChon = new dto_KhachHang();
             khDuocChon = kh;
         }
+        kh.setDsLichSu(new bus_Khachhang().dsLichSu(kh.getMaKh()));
+        kh.setChungChiCanHoc( new bus_Khachhang().layChungChi(kh.getMaChungChi()));
+        
         return kh;
     }
 
@@ -302,6 +322,7 @@ public class UI_KhachHang extends javax.swing.JPanel {
         }
 
     }
+    
     // HÀM LOAD DỮ LIỆU LÊN BẢNG KHÁCH HÀNG
     public void reloadTableKhachHang(ArrayList<dto_KhachHang> dsKh) {
 
@@ -740,8 +761,8 @@ public class UI_KhachHang extends javax.swing.JPanel {
             pnThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnThongTinLayout.createSequentialGroup()
                 .addGroup(pnThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnXacNhan, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnXacNhan, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(pnThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
@@ -857,15 +878,6 @@ public class UI_KhachHang extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTenActionPerformed
 
-    private void btnXacNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXacNhanActionPerformed
-        
-        if(isCapNhatKhachHang == false)
-            themKhachHang();
-        
-        else
-            capNhatKhachHang();
-    }//GEN-LAST:event_btnXacNhanActionPerformed
-
     private void tbKhachHangMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKhachHangMousePressed
         giaoDienChiTiet(khachHangDuocChon());
     }//GEN-LAST:event_tbKhachHangMousePressed
@@ -878,6 +890,15 @@ public class UI_KhachHang extends javax.swing.JPanel {
             txtDiemToiDa.setText(cc.getDiemToiDa()+"");
         }
     }//GEN-LAST:event_cbChungChiActionPerformed
+
+    private void btnXacNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXacNhanActionPerformed
+
+        if(isCapNhatKhachHang == false)
+        themKhachHang();
+
+        else
+        capNhatKhachHang();
+    }//GEN-LAST:event_btnXacNhanActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCapNhatKH;

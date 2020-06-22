@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package BUS;
 
 import DAL.dal_ChuongTrinh;
@@ -15,24 +10,61 @@ import DTO.dto_GiaoVien;
 import DTO.dto_Lich;
 import DTO.dto_LopHoc;
 import DTO.dto_Phong;
+import DTO.dto_TaiKhoan;
 import java.util.ArrayList;
 
-/**
- *
- * @author USER
- */
 public class bus_LopHoc {
     
-    // HÀM LẤY DANH SÁCH LỚP HIỂN THỊ LÊN BẢNG
+    // HÀM LẤY DANH SÁCH LỚP
     public ArrayList<dto_LopHoc> layDsLop(boolean chonTatCa){
         
-        return new dal_LopHoc().layDsLop(chonTatCa);
+        ArrayList<dto_LopHoc> dsLopHoc = new dal_LopHoc().layDsLop(chonTatCa);
+         
+        return dsLopHoc;
+    }
+    
+    // HÀM LẤY CHƯƠNG TRÌNH
+    public ArrayList<dto_LopHoc> layChuongTrinh(ArrayList<dto_LopHoc> dsLop){
+        
+         for(dto_LopHoc lop : dsLop){
+            lop.setCt(new dal_LopHoc().layChuongTrinh(lop.getMaCt()));
+        }
+         
+         return dsLop;
+    }
+    
+        // HÀM Sỉ Số
+    public ArrayList<dto_LopHoc> laySiSo(ArrayList<dto_LopHoc> dsLop){
+        
+         for(dto_LopHoc lop : dsLop){
+            //lop.setCt(new dal_LopHoc().layChuongTrinh(lop.getMaCt()));
+            lop.setSiSo(new dal_LopHoc().laySiSo(lop.getMaLop()));
+        }
+         
+         return dsLop;
+    }
+    
+    // HÀM LẤY LỊCH HỌC
+    public ArrayList<dto_Lich> layDsLich(int maLop){
+        
+        return new dal_Lich().layDsLichTheoLop(maLop);
+    }
+    
+    // HÀM LẤY TÀI KHOẢN CHO LỚP
+    public dto_TaiKhoan layTaiKhoan(int maTk){
+        
+        return new dal_LopHoc().layTaiKhoan(maTk);
     }
     
     // HÀM LẤY DS TÌM KIẾM
     public ArrayList<dto_LopHoc> layDsLopTim(String text){
         
-        return new dal_LopHoc().layDsLopTim(text);
+        ArrayList<dto_LopHoc> dsLop = new dal_LopHoc().layDsLopTim(text);
+        
+        dsLop = layChuongTrinh(dsLop);
+        dsLop = laySiSo(dsLop);
+        
+        return dsLop;
     }
     
     // HÀM LẤY DS CHƯƠNG TRÌNH
@@ -93,5 +125,11 @@ public class bus_LopHoc {
     public ArrayList<dto_Lich> layDsLichTheoLop(int maLop){
         
         return new dal_Lich().layDsLichTheoLop(maLop);
+    }
+    
+    // CẬP NHẬT THỜI GIAN HỌC
+    public int capNhapThoiGianHoc(dto_LopHoc lop){
+        
+        return new dal_LopHoc().capNhatThoiGianHoc(lop);
     }
 }

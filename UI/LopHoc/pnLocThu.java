@@ -27,14 +27,16 @@ public class pnLocThu extends javax.swing.JPanel {
         initComponents();
         this.dsLop = new ArrayList<dto_LopHoc>();
         this.dsLop = new bus_LopHoc().layDsLop(true);
+        
     }
     // HÀM HIỂN THỊ LỚP ĐÃ LỌC
     public void hienThiLopDaLoc(){
         boolean isEmpty = layThongTin();
         
         if(isEmpty == false){
+            
            layDanhSachPhuHop();
-            UI_LopHoc.reloadTableLop(dsLopPhuHop);
+           UI_LopHoc.reloadTableLop(dsLopPhuHop);
         }
         else
             UI_LopHoc.reloadTableLop(dsLop);
@@ -85,6 +87,14 @@ public class pnLocThu extends javax.swing.JPanel {
         
         dsLopPhuHop = new ArrayList<dto_LopHoc>();
         
+        int size = this.dsLop.size();
+        
+        for(int i = 0; i<size; i++){
+            
+            this.dsLop.get(i).setDsLich(new bus_LopHoc().layDsLichTheoLop(this.dsLop.get(i).getMaLop()));
+        }
+        
+        this.dsLop = new bus_LopHoc().layChuongTrinh(dsLop);
         boolean timDuoc;
         
         // duyệt từng lớp đang có

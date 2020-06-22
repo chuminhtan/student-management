@@ -23,59 +23,84 @@ public class pnLocNgay extends javax.swing.JPanel {
     private Date ngayChon;
     private ArrayList<dto_LopHoc> dsLop;
     private ArrayList<dto_LopHoc> dsLopPhuHop;
-    
+
     public pnLocNgay() {
         initComponents();
+        reloadDuLieu();
+    }
+
+    // HÀM SET DỮ LIỆU
+    public void reloadDuLieu() {
+
         this.dsLop = new ArrayList<dto_LopHoc>();
         this.dsLop = new bus_LopHoc().layDsLop(true);
+
+        int size = this.dsLop.size();
+        for (int i = 0; i < size; i++) {
+
+            this.dsLop.get(i).setDsLich(new bus_LopHoc().layDsLichTheoLop(this.dsLop.get(i).getMaLop()));
+        }
+
+        this.dsLop = new bus_LopHoc().layChuongTrinh(dsLop);
         dcNgay.setDate(null);
     }
-    
-        // HÀM HIỂN THỊ LỚP ĐÃ LỌC
-    public void hienThiLopDaLoc(){
+
+    // HÀM HIỂN THỊ LỚP ĐÃ LỌC
+    public void hienThiLopDaLoc() {
         ngayChon = new Date();
         ngayChon = dcNgay.getDate();
-        
-        if(ngayChon != null){
-           layDanhSachPhuHop();
+
+        if (ngayChon != null) {
+            layDanhSachPhuHop();
             UI_LopHoc.reloadTableLop(dsLopPhuHop);
-        }
-        else
+        } else {
             UI_LopHoc.reloadTableLop(dsLop);
+        }
     }
-    public void stateChanged(javax.swing.event.ChangeEvent e){
+
+    public void stateChanged(javax.swing.event.ChangeEvent e) {
         System.out.println("h");
-        
+
     }
+
     // HÀM KIỂM TRA DANH SÁCH LỚP NHỮNG LỚP CÓ THỨ ĐÚNG VỚI YÊU CẦU
-    public void layDanhSachPhuHop(){
-        
+    public void layDanhSachPhuHop() {
+
         dsLopPhuHop = new ArrayList<dto_LopHoc>();
-        
+
+        int size = this.dsLop.size();
+        for (int i = 0; i < size; i++) {
+
+            this.dsLop.get(i).setDsLich(new bus_LopHoc().layDsLichTheoLop(this.dsLop.get(i).getMaLop()));
+        }
+
         boolean timDuoc;
-        
+
         // duyệt từng lớp đang có
-        for(dto_LopHoc lop : dsLop){
-            
+        for (dto_LopHoc lop : dsLop) {
+
             timDuoc = false;
-            
+
             //lấy ds những ngày học của lớp đó
             ArrayList<dto_Lich> dsLich = lop.getDsLich();
-            
+
             //kiểm tra từng ngày trong lớp xem có thứ trùng với thứ đã check không
-            for(dto_Lich lich : dsLich){
+            for (dto_Lich lich : dsLich) {
                 int namLich = lich.getTgBd().getYear();
                 int thangLich = lich.getTgBd().getMonth();
                 int ngayLich = lich.getTgBd().getDate();
-                
-                if(ngayChon.getYear() == namLich && ngayChon.getMonth() == thangLich && ngayChon.getDate() ==ngayLich ){
+
+                if (ngayChon.getYear() == namLich && ngayChon.getMonth() == thangLich && ngayChon.getDate() == ngayLich) {
                     timDuoc = true;
                     dsLopPhuHop.add(lop);
                     break;
-                }  
-            } 
+                }
+            }
+
         }
+
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

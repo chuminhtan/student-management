@@ -1,55 +1,42 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package BUS;
 
+import DAL.dal_ChungChi;
 import DAL.dal_KhachHang;
+import DAL.dal_LichSu;
+import DAL.dal_LopHoc;
+import DTO.dto_ChungChi;
 import DTO.dto_KhachHang;
 import DTO.dto_LichSu;
 import DTO.dto_Lich;
-import DTO.dto_LopHoc;
 import java.util.ArrayList;
 import java.util.Date;
 
-/**
- *
- * @author USER
- */
 public class bus_Khachhang {
-    
     
     // LẤY DS KHÁCH HÀNG
     public ArrayList<dto_KhachHang> layDsKhachHang(){
+         
+         return new dal_KhachHang().layDsKhachHang();
+    }
+    
+    // HÀM LẤY LỊCH SỬ KHÁCH HÀNG
+    public ArrayList<dto_LichSu> dsLichSu(int maKh){
         
-        ArrayList<dto_KhachHang> dsKhachHang = new ArrayList<>();
-        dsKhachHang = new dal_KhachHang().layDsKhachHang();
-        int i = 0;
-        // lấy ra từng khách hàng
-        for(dto_KhachHang kh : dsKhachHang){
-               
-            //lấy ra danh sách lịch sử của khách hàng đó
-            ArrayList<dto_LichSu> dsLichSu = new ArrayList<>();
-            dsLichSu = kh.getDsLichSu();
-            // lấy ra từng lịch sử trong danh sách
+        ArrayList<dto_LichSu> dsLichSu =  new ArrayList<dto_LichSu>();
+        dsLichSu = new dal_LichSu().dsLichSu(maKh);
+        
+        for(dto_LichSu ls : dsLichSu){
             
-            for(dto_LichSu ls : dsLichSu){
-                
-                // mỗi lịch sử có 1 lớp học - mỗi lớp đi kèm với 1 danh sách lịch học.
-                ArrayList<dto_Lich> dsLich = new ArrayList<dto_Lich>();
-                dsLich = ls.getLop().getDsLich();
-                
-                if(dsLich.size() >0){
-                    ls.setNgayBatDau(timNgayDau(dsLich));
-                    ls.setNgayKetThuc(timNgayCuoi(dsLich));
-                }
-               
-            }
-             i++;
+            ls.setLop(new dal_LopHoc().layLopHoc(ls.getMaLop()));
         }
         
-        return dsKhachHang;
+        return dsLichSu;
+    }
+    
+    // HÀM LẤY DTO CHỨNG CHỈ CHO KHÁCH HÀNG
+    public dto_ChungChi layChungChi(int maCc){
+        
+        return new dal_ChungChi().layChungChi(maCc);
     }
     
     // HÀM TÌM NGÀY ĐẦU TIÊN TRONG DANH SÁCH LỊCH HỌC

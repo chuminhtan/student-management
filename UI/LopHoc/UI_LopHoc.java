@@ -29,12 +29,12 @@ public class UI_LopHoc extends javax.swing.JPanel {
      * Creates new form LopHocUI
      */
     public UI_LopHoc() {
+       
         initComponents();
-        setupTableLop();
-        setupTableLich();
-        hienThiDsLop();
+        setupGiaoDienBanDau();
+        reloadDuLieuLop();
         thayPanel(pnLocThu);
-        cbLoc.setSelectedIndex(0);
+        //cbLoc.setSelectedIndex(0);
     }
    
     // BIẾN TỰ ĐỊNH NGHĨA
@@ -44,8 +44,6 @@ public class UI_LopHoc extends javax.swing.JPanel {
     pnLocThu pnLocThu = new pnLocThu();
     static ArrayList<dto_LopHoc> static_dsLopHoc;
     static ArrayList<dto_Lich> static_dsLich;
-    boolean isCheckLopDong;
-    
     
     public static ArrayList<dto_LopHoc> getDsLopHoc(){
         return static_dsLopHoc;
@@ -82,7 +80,7 @@ public class UI_LopHoc extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(null, "Không Thành Công");
                 else{
                     JOptionPane.showMessageDialog(null, "Xóa Thành Công");
-                    hienThiDsLop();
+                    reloadDuLieuLop();
                 }
             }
             else
@@ -91,26 +89,42 @@ public class UI_LopHoc extends javax.swing.JPanel {
 
         }
     }
+    
     // HÀM TÌM KIẾM
     public void hienThiDsTimLop(String text){
         ArrayList<dto_LopHoc> dsLopTim = new bus_LopHoc().layDsLopTim(text);
+        
         reloadTableLop(dsLopTim);
     }
-    // HÀM HIỂN THỊ THÔNG TIN LÊN DS LỚP HỌC
-    public static void hienThiDsLop(){
+    
+    // HÀM SETUP GIAO DIỆN BAN ĐẦU
+    public void setupGiaoDienBanDau(){
+        setupTableLop();
+        setupTableLich();
+    }
+    
+    // HÀM RELOAD DỮ LIỆU
+    public static void reloadDuLieuLop(){
+        static_dsLopHoc = new ArrayList<dto_LopHoc>();
+        static_dsLopHoc = new bus_LopHoc().layDsLop(ckLopDong.isSelected()); 
+        static_dsLopHoc = new bus_LopHoc().layChuongTrinh(static_dsLopHoc);
+        static_dsLopHoc = new bus_LopHoc().laySiSo(static_dsLopHoc);
         
-        ArrayList<dto_LopHoc> dsLop = new ArrayList<dto_LopHoc>();
-        boolean chonTatCa = ckLopDong.isSelected();
-        dsLop = new bus_LopHoc().layDsLop(chonTatCa);
-        reloadTableLop(dsLop);  
+        reloadTableLop(static_dsLopHoc);
     }
-    
+     
     // HÀM HIỂN THỊ DANH SÁCH LỊCH HỌC CỦA 1 LỚP
-    public void hienThiThongTinLop(dto_LopHoc lop){
-        txtPhuTrach.setText(lop.getTk().getMa() + " - " + lop.getTk().getHoTen());
-        reloadTableLich(lop);
+    public void hienThiThongTinLop(){
+        dto_LopHoc lop = layLopDuocChon();
+        
+        if(lop != null){
+           txtPhuTrach.setText(lop.getTk().getMa() + " - " + lop.getTk().getHoTen());
+           reloadTableLich(lop);
+        }
+
     }
     
+
     // HÀM LẤY ĐỐI TƯỢNG LỚP ĐƯỢC CHỌN
     public dto_LopHoc layLopDuocChon(){      
         int dong = tbLopHoc.getSelectedRow();
@@ -119,9 +133,14 @@ public class UI_LopHoc extends javax.swing.JPanel {
         if(dong > -1){
             lop = new dto_LopHoc(); 
             lop = static_dsLopHoc.get(dong);
+            lop.setDsLich(new bus_LopHoc().layDsLich(lop.getMaLop()));
+            lop.setTk(new bus_LopHoc().layTaiKhoan(lop.getMaNv()));
         }
+        
         return lop;
     }
+    
+    
     // HÀM TẢI LẠI DANH SÁCH LICH
     public static void reloadTableLich(dto_LopHoc lop) {
 
@@ -168,6 +187,7 @@ public class UI_LopHoc extends javax.swing.JPanel {
             vc.add(lop.getTenLop());
             vc.add(lop.getCt().getTenCt());
             vc.add(lop.layNgayBd());
+            vc.add(lop.layNgayKt());
             vc.add(lop.getSoBuoi());
             vc.add(lop.getSiSo());
 
@@ -229,9 +249,10 @@ public class UI_LopHoc extends javax.swing.JPanel {
         static_dtmLopHoc.addColumn("Tên Lớp");
         static_dtmLopHoc.addColumn("Chương Trình");
         static_dtmLopHoc.addColumn("Bắt Đầu");
+        static_dtmLopHoc.addColumn("Kết Thúc");
         static_dtmLopHoc.addColumn("Số Buổi");
         static_dtmLopHoc.addColumn("Sỉ Số");
-        static_dtmLopHoc.addColumn("Trạng Thái");
+        static_dtmLopHoc.addColumn("TT");
 
         tbLopHoc.setModel(static_dtmLopHoc);
 
@@ -367,14 +388,14 @@ public class UI_LopHoc extends javax.swing.JPanel {
 
             },
             new String [] {
-                "STT", "Mã Lớp", "Tên Lớp", "Chương Trình", "Bắt Đầu", "Sỉ Số", "Số Buổi", "Trạng Thái"
+                "STT", "Mã Lớp", "Tên Lớp", "Chương Trình", "Bắt Đầu", "", "Sỉ Số", "Số Buổi", "Trạng Thái"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Object.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Object.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false, true, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -409,8 +430,8 @@ public class UI_LopHoc extends javax.swing.JPanel {
             tbLopHoc.getColumnModel().getColumn(3).setMaxWidth(150);
             tbLopHoc.getColumnModel().getColumn(4).setMinWidth(80);
             tbLopHoc.getColumnModel().getColumn(4).setMaxWidth(80);
-            tbLopHoc.getColumnModel().getColumn(5).setMinWidth(50);
-            tbLopHoc.getColumnModel().getColumn(5).setMaxWidth(50);
+            tbLopHoc.getColumnModel().getColumn(6).setMinWidth(50);
+            tbLopHoc.getColumnModel().getColumn(6).setMaxWidth(50);
         }
 
         btnThemLop.setBackground(new java.awt.Color(230, 245, 255));
@@ -644,7 +665,7 @@ public class UI_LopHoc extends javax.swing.JPanel {
         lopChon = layLopDuocChon();     
         if(lopChon != null){
             if(lopChon.getMaNv() == UI_DangNhap.layMaNguoiDung() || UI_DangNhap.layLoaiNguoiDung() == 1){
-                int luaChon = JOptionPane.showConfirmDialog(null, "Lưu ý lịch học đã tồn tại!\n\nSau khi cập nhật lịch học cũ sẽ được thay thế bằng lịch mới\n\nBạn có muốn tiếp tục?", "Cập Nhật Lịch Học", JOptionPane.YES_NO_OPTION);
+                int luaChon = JOptionPane.showConfirmDialog(null, "Lưu ý \n\nSau khi cập nhật lịch học cũ sẽ được thay thế bằng lịch mới\n\nBạn có muốn tiếp tục?", "Cập Nhật Lịch Học", JOptionPane.YES_NO_OPTION);
                 if(luaChon == 0)
                     new FormLichHoc(lopChon).show();
             }       
@@ -674,7 +695,7 @@ public class UI_LopHoc extends javax.swing.JPanel {
     }//GEN-LAST:event_txtTimLopActionPerformed
 
     private void tbLopHocMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbLopHocMousePressed
-        hienThiThongTinLop(layLopDuocChon()); 
+        hienThiThongTinLop(); 
     }//GEN-LAST:event_tbLopHocMousePressed
 
     private void txtTimLopKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimLopKeyReleased
@@ -684,15 +705,16 @@ public class UI_LopHoc extends javax.swing.JPanel {
             hienThiDsTimLop(text);
         }
         else
-            hienThiDsLop();
+            reloadDuLieuLop();
     }//GEN-LAST:event_txtTimLopKeyReleased
 
     private void ckLopDongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ckLopDongActionPerformed
-        hienThiDsLop();
+
+        reloadDuLieuLop();
     }//GEN-LAST:event_ckLopDongActionPerformed
 
     private void btnChiTietLop1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChiTietLop1ActionPerformed
-        // TODO add your handling code here:
+        new UI_ChiTietLop(layLopDuocChon()).show();
     }//GEN-LAST:event_btnChiTietLop1ActionPerformed
 
     private void cbLocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbLocActionPerformed

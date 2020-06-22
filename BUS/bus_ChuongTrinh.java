@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package BUS;
 
 import DAL.dal_ChuongTrinh;
@@ -12,10 +7,6 @@ import DTO.dto_ChuongTrinh_ChungChi;
 import UI.ChuongTrinh.UI_ChuongTrinh;
 import java.util.ArrayList;
 
-/**
- *
- * @author USER
- */
 public class bus_ChuongTrinh {
     
     
@@ -61,6 +52,5 @@ public class bus_ChuongTrinh {
     public int xoaChuongTrinh(int ma_ct){
         
         return new dal_ChuongTrinh().xoaChuongTrinh(ma_ct);
-    }
-    
+    }  
 }

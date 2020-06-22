@@ -5,14 +5,11 @@
  */
 package DTO;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 /**
  *
  * @author USER
  */
-public class dto_LichSu {
+public class dto_kqht {
     private int maKh;
     private int maLop;
     private float nghe;
@@ -20,14 +17,14 @@ public class dto_LichSu {
     private float doc;
     private float viet;
     private float tong;
-
-    private dto_LopHoc lop;
     
-    public dto_LichSu() {
+    private dto_KhachHang kh;
+
+    public dto_kqht() {
     }
 
-    public dto_LopHoc getLop() {
-        return lop;
+    public dto_KhachHang getKh() {
+        return kh;
     }
 
     public int getMaKh() {
@@ -86,23 +83,9 @@ public class dto_LichSu {
         this.tong = tong;
     }
 
-    public void setLop(dto_LopHoc lop) {
-        this.lop = lop;
-    }
-
-    public String layNgayBd(){
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-        if(this.lop.getNgayBd() !=null)
-            return sdf.format(this.lop.getNgayBd());
-        else
-            return "";
+    public void setKh(dto_KhachHang kh) {
+        this.kh = kh;
     }
     
-    public String layNgayKt(){
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-        if(this.lop.getNgayKt() != null)
-            return sdf.format(this.lop.getNgayKt());
-        else
-            return "";
-    }
+    
 }

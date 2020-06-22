@@ -56,7 +56,7 @@ public class FormCapNhatLop extends javax.swing.JFrame {
             } else {
                 this.dispose();
                 JOptionPane.showMessageDialog(null, "Cập Nhật Hoàn Tất");
-                UI_LopHoc.hienThiDsLop();
+                UI_LopHoc.reloadDuLieuLop();
             }
         }
 
@@ -69,39 +69,21 @@ public class FormCapNhatLop extends javax.swing.JFrame {
         dto_LopHoc lop = null;
         
         String tenLop = txtTenLop.getText();
-        String strSoBuoi = txtSoBuoi.getText();
         
-        Date ngayBd = dateNgayBatDau.getDate();
         
         dto_ChuongTrinh ct = (dto_ChuongTrinh)cbChuongTrinh.getSelectedItem();
         
-        if(tenLop.isEmpty() || strSoBuoi.isEmpty() || ngayBd == null || ct == null){
+        if(tenLop.isEmpty()|| ct == null){
             JOptionPane.showMessageDialog(null, "Chưa Nhập Đủ Thông Tin");
             return null;
         }
         
-        int soBuoi=0;
-        try{
-            soBuoi = Integer.parseInt(strSoBuoi);
-            
-        }catch(Exception ex){
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Số Buổi Không Hợp Lệ");
-            return null;
-        }
         
         lop = new dto_LopHoc();
         lop.setMaLop(this.lopChon.getMaLop());
         lop.setMaCt(ct.getMaCt());
         lop.setTenLop(tenLop);
-        lop.setSoBuoi(soBuoi);
-        lop.setNgayBd(ngayBd);
-        
-        if(ckDongLop.isSelected())
-            lop.setTrangThai(0);
-        else
-            lop.setTrangThai(1);
-        
+              
         return lop;
     }
 
@@ -116,8 +98,6 @@ public class FormCapNhatLop extends javax.swing.JFrame {
         dfcbChuongTrinh = new DefaultComboBoxModel();
         dfcbChuongTrinh.addAll(dsChuongTrinh);
         txtTenLop.setText(this.lopChon.getTenLop());
-        txtSoBuoi.setText(this.lopChon.getSoBuoi()+"");
-        dateNgayBatDau.setDate(this.lopChon.getNgayBd());
         
         cbChuongTrinh.setModel(dfcbChuongTrinh);
 
@@ -136,17 +116,11 @@ public class FormCapNhatLop extends javax.swing.JFrame {
         txtTenLop = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         cbChuongTrinh = new javax.swing.JComboBox<>();
-        jLabel3 = new javax.swing.JLabel();
-        txtSoBuoi = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        dateNgayBatDau = new com.toedter.calendar.JDateChooser();
         btnXacNhan = new javax.swing.JButton();
-        ckDongLop = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cập Nhật Lớp");
         setMinimumSize(new java.awt.Dimension(500, 250));
-        setPreferredSize(new java.awt.Dimension(500, 250));
 
         pnCapNhatLop.setBackground(new java.awt.Color(230, 245, 255));
         pnCapNhatLop.setMinimumSize(new java.awt.Dimension(500, 250));
@@ -159,14 +133,6 @@ public class FormCapNhatLop extends javax.swing.JFrame {
         jLabel2.setText("Chương Trình");
 
         cbChuongTrinh.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jLabel3.setText("Số Buổi");
-
-        txtSoBuoi.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        txtSoBuoi.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtSoBuoi.setText("15");
-
-        jLabel4.setText("Ngày Bắt Đầu");
 
         btnXacNhan.setBackground(new java.awt.Color(0, 102, 153));
         btnXacNhan.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -183,8 +149,6 @@ public class FormCapNhatLop extends javax.swing.JFrame {
             }
         });
 
-        ckDongLop.setText("Đóng Lớp");
-
         javax.swing.GroupLayout pnCapNhatLopLayout = new javax.swing.GroupLayout(pnCapNhatLop);
         pnCapNhatLop.setLayout(pnCapNhatLopLayout);
         pnCapNhatLopLayout.setHorizontalGroup(
@@ -192,22 +156,15 @@ public class FormCapNhatLop extends javax.swing.JFrame {
             .addGroup(pnCapNhatLopLayout.createSequentialGroup()
                 .addGap(38, 38, 38)
                 .addGroup(pnCapNhatLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtTenLop, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
+                    .addComponent(txtTenLop, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                .addGroup(pnCapNhatLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(cbChuongTrinh, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
-                .addGroup(pnCapNhatLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel4)
-                    .addComponent(dateNgayBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addGroup(pnCapNhatLopLayout.createSequentialGroup()
-                        .addComponent(txtSoBuoi, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(ckDongLop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(36, 36, 36))
+                .addGap(32, 32, 32))
             .addGroup(pnCapNhatLopLayout.createSequentialGroup()
-                .addGap(177, 177, 177)
+                .addGap(181, 181, 181)
                 .addComponent(btnXacNhan, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -217,24 +174,14 @@ public class FormCapNhatLop extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addGroup(pnCapNhatLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel4))
+                    .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnCapNhatLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnCapNhatLopLayout.createSequentialGroup()
-                        .addComponent(txtTenLop, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(25, 25, 25)
-                        .addGroup(pnCapNhatLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnCapNhatLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtSoBuoi, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbChuongTrinh, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ckDongLop, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(dateNgayBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addGroup(pnCapNhatLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtTenLop, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbChuongTrinh, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(53, 53, 53)
                 .addComponent(btnXacNhan, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
+                .addContainerGap(87, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -248,7 +195,7 @@ public class FormCapNhatLop extends javax.swing.JFrame {
             .addComponent(pnCapNhatLop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        setSize(new java.awt.Dimension(516, 289));
+        setSize(new java.awt.Dimension(516, 239));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -295,14 +242,9 @@ public class FormCapNhatLop extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnXacNhan;
     private javax.swing.JComboBox<String> cbChuongTrinh;
-    private javax.swing.JCheckBox ckDongLop;
-    private com.toedter.calendar.JDateChooser dateNgayBatDau;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel pnCapNhatLop;
-    private javax.swing.JTextField txtSoBuoi;
     private javax.swing.JTextField txtTenLop;
     // End of variables declaration//GEN-END:variables
 }

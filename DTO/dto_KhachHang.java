@@ -22,10 +22,9 @@ public class dto_KhachHang {
     private String sdt;
     private float diemDauVao;
     private int maChungChi;
-    private int maLop;
+    private String tenLop;
     
     private dto_ChungChi chungChiCanHoc;
-    private dto_LopHoc lopDangHoc;
     private ArrayList<dto_LichSu> dsLichSu;
 
     public dto_KhachHang() {
@@ -39,8 +38,8 @@ public class dto_KhachHang {
         return maChungChi;
     }
 
-    public int getMaLop() {
-        return maLop;
+    public String getTenLop() {
+        return tenLop;
     }
 
     public int getMaKh() {
@@ -75,10 +74,6 @@ public class dto_KhachHang {
         return chungChiCanHoc;
     }
 
-    public dto_LopHoc getLopDangHoc() {
-        return lopDangHoc;
-    }
-
     public void setTenKh(String tenKh) {
         this.tenKh = tenKh;
     }
@@ -107,10 +102,6 @@ public class dto_KhachHang {
         this.chungChiCanHoc = chungChiCanHoc;
     }
 
-    public void setLopDangHoc(dto_LopHoc lopDangHoc) {
-        this.lopDangHoc = lopDangHoc;
-    }
-
     public void setMaKh(int MaKh) {
         this.MaKh = MaKh;
     }
@@ -123,8 +114,8 @@ public class dto_KhachHang {
         this.maChungChi = maChungChi;
     }
 
-    public void setMaLop(int maLop) {
-        this.maLop = maLop;
+    public void setTenLop(String tenLop) {
+        this.tenLop = tenLop;
     }
 
     public String layNgaySinh(){

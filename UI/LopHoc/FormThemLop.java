@@ -1,32 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package UI.LopHoc;
 
 import BUS.bus_LopHoc;
 import DTO.dto_ChuongTrinh;
-import DTO.dto_GiaoVien;
-import DTO.dto_Thu;
-import DTO.dto_Lich;
 import DTO.dto_LopHoc;
-import DTO.dto_Phong;
-import UI.ChuongTrinh.UI_ChuongTrinh;
 import UI.DangNhap.UI_DangNhap;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
-/**
- *
- * @author USER
- */
 public class FormThemLop extends javax.swing.JFrame {
 
     /**
@@ -36,87 +17,79 @@ public class FormThemLop extends javax.swing.JFrame {
         initComponents();
         setGiaoDienBanDau();
     }
-    
+
     DefaultComboBoxModel dfcbChuongTrinh;
     ArrayList<dto_ChuongTrinh> dsChuongTrinh;
     ArrayList<dto_LopHoc> dsLopHoc;
 
-    
     // HÀM THÊM LỚP HỌC VÀO DB
-    public void themLopHoc(){
-        
+    public void themLopHoc() {
+
         dto_LopHoc lop = new dto_LopHoc();
         lop = layThongTinNhap();
-        
-        if(lop != null){
+
+        if (lop != null) {
             int rs = new bus_LopHoc().themLopHoc(lop);
-            
-            if(rs == 0)
+
+            if (rs == 0) {
                 JOptionPane.showMessageDialog(null, "Thêm Không Thành Công");
-            else{
+            } else {
                 this.dispose();
-                JOptionPane.showMessageDialog(null, "Thêm Hoàn Tất");           
-                UI_LopHoc.hienThiDsLop();
+                JOptionPane.showMessageDialog(null, "Thêm Hoàn Tất");
+                UI_LopHoc.reloadDuLieuLop();
             }
         }
-        
+
     }
-    
+
     // HÀM LẤY THÔNG TIN NHẬP & KIỂM TRA DỮ LIỆU & TRẢ VỀ ĐỐI TƯỢNG LỚP HỌC
-    public dto_LopHoc layThongTinNhap(){
-        
+    public dto_LopHoc layThongTinNhap() {
+
         dto_LopHoc lop = null;
-        
+
         String tenLop = txtTenLop.getText();
         String strSoBuoi = txtSoBuoi.getText();
-        
-        Date ngayBd = dateNgayBatDau.getDate();
-        
-        dto_ChuongTrinh ct = (dto_ChuongTrinh)cbChuongTrinh.getSelectedItem();
-        if(tenLop.isEmpty() || strSoBuoi.isEmpty() || ngayBd == null || ct == null){
+
+        dto_ChuongTrinh ct = (dto_ChuongTrinh) cbChuongTrinh.getSelectedItem();
+        if (tenLop.isEmpty() || strSoBuoi.isEmpty() || ct == null) {
             JOptionPane.showMessageDialog(null, "Chưa Nhập Đủ Thông Tin");
             return null;
         }
-        
-        int soBuoi=0;
-        try{
+
+        int soBuoi = 0;
+        try {
             soBuoi = Integer.parseInt(strSoBuoi);
-            
-        }catch(Exception ex){
+
+        } catch (Exception ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "Số Buổi Không Hợp Lệ");
             return null;
         }
-        
+
         lop = new dto_LopHoc();
         lop.setMaNv(UI_DangNhap.layMaNguoiDung());
         lop.setMaCt(ct.getMaCt());
         lop.setTenLop(tenLop);
         lop.setSoBuoi(soBuoi);
-        lop.setNgayBd(ngayBd);
-        
-        if(ckDongLop.isSelected())
-            lop.setTrangThai(0);
-        else
-            lop.setTrangThai(1);
-        return lop; 
+        return lop;
     }
 
     // HÀM SET GIAO DIỆN BAN ĐẦU
-    public void setGiaoDienBanDau(){
+    public void setGiaoDienBanDau() {
         dsLopHoc = new ArrayList<dto_LopHoc>();
         dsLopHoc = UI_LopHoc.getDsLopHoc();
-        
+
         dsChuongTrinh = new ArrayList<dto_ChuongTrinh>();
         dsChuongTrinh = new bus_LopHoc().layDsChuongTrinh();
-        
+
         dfcbChuongTrinh = new DefaultComboBoxModel();
         dfcbChuongTrinh.addAll(dsChuongTrinh);
         txtTenLop.setText("");
         txtSoBuoi.setText("");
-        
+
         cbChuongTrinh.setModel(dfcbChuongTrinh);
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -133,10 +106,7 @@ public class FormThemLop extends javax.swing.JFrame {
         cbChuongTrinh = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         txtSoBuoi = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        dateNgayBatDau = new com.toedter.calendar.JDateChooser();
         btnXacNhan = new javax.swing.JButton();
-        ckDongLop = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Tạo Lớp Học Mới");
@@ -162,8 +132,6 @@ public class FormThemLop extends javax.swing.JFrame {
         txtSoBuoi.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtSoBuoi.setText("15");
 
-        jLabel4.setText("Ngày Bắt Đầu");
-
         btnXacNhan.setBackground(new java.awt.Color(0, 102, 153));
         btnXacNhan.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnXacNhan.setForeground(new java.awt.Color(255, 255, 255));
@@ -179,33 +147,30 @@ public class FormThemLop extends javax.swing.JFrame {
             }
         });
 
-        ckDongLop.setText("Đóng Lớp");
-
         javax.swing.GroupLayout pnThemLopLayout = new javax.swing.GroupLayout(pnThemLop);
         pnThemLop.setLayout(pnThemLopLayout);
         pnThemLopLayout.setHorizontalGroup(
             pnThemLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnThemLopLayout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addGroup(pnThemLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtTenLop, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(cbChuongTrinh, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
-                .addGroup(pnThemLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel4)
-                    .addComponent(dateNgayBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addGroup(pnThemLopLayout.createSequentialGroup()
-                        .addComponent(txtSoBuoi, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(ckDongLop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(36, 36, 36))
-            .addGroup(pnThemLopLayout.createSequentialGroup()
                 .addGap(177, 177, 177)
                 .addComponent(btnXacNhan, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(pnThemLopLayout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addGroup(pnThemLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnThemLopLayout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(pnThemLopLayout.createSequentialGroup()
+                        .addGroup(pnThemLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtTenLop, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1)
+                            .addComponent(txtSoBuoi, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                        .addGroup(pnThemLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(cbChuongTrinh, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(36, 36, 36))))
         );
         pnThemLopLayout.setVerticalGroup(
             pnThemLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -213,21 +178,15 @@ public class FormThemLop extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addGroup(pnThemLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel4))
+                    .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnThemLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnThemLopLayout.createSequentialGroup()
-                        .addComponent(txtTenLop, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(25, 25, 25)
-                        .addGroup(pnThemLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnThemLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtSoBuoi, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbChuongTrinh, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ckDongLop, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(dateNgayBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(pnThemLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtTenLop, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbChuongTrinh, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
+                .addComponent(jLabel3)
+                .addGap(3, 3, 3)
+                .addComponent(txtSoBuoi, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addComponent(btnXacNhan, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
@@ -291,12 +250,9 @@ public class FormThemLop extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnXacNhan;
     private javax.swing.JComboBox<String> cbChuongTrinh;
-    private javax.swing.JCheckBox ckDongLop;
-    private com.toedter.calendar.JDateChooser dateNgayBatDau;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel pnThemLop;
     private javax.swing.JTextField txtSoBuoi;
     private javax.swing.JTextField txtTenLop;

@@ -57,20 +57,17 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="ckT2" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                          <Component id="ckT3" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                          <Component id="ckT5" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="ckT6" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="ckT7" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="ckCn" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="ckT2" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                      <Component id="ckT3" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                      <Component id="ckT5" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="ckT6" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="ckT7" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="ckCn" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="ckT4" min="-2" pref="25" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
