@@ -1,136 +1,252 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package DAL;
 
-import BUS.bus_TaiKhoan;
-import DTO.TaiKhoanDTO;
-import java.sql.Connection;
+import DTO.dto_TaiKhoan;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-public class dal_TaiKhoan {
+public class dal_TaiKhoan extends DBConnect {
 
-    private dal_TaiKhoan() {
-    }
-    private static dal_TaiKhoan instance;
+    // HÀM ĐĂNG NHẬP
+    public dto_TaiKhoan dangNhap(dto_TaiKhoan tkNhap) {
 
-    public static dal_TaiKhoan getInstance() {
-        if (instance == null) {
-            instance = new dal_TaiKhoan();
-        }
-        return instance;
-    }
-
-    public ArrayList<TaiKhoanDTO> getAll() {
-        ArrayList<TaiKhoanDTO> nhanVienDTOs = new ArrayList<>();
+        dto_TaiKhoan tkTraVe = null;
 
         try {
-            Connection connection = DatabaseConnection.getInstance().CreateNewConnection();
-            connection.setAutoCommit(false);
 
-            String query = "SELECT * FROM NHANVIEN;";
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            String sql = "SELECT ma_nv, ten_nv, sdt, loai, ten_dang_nhap, mat_khau, src_img "
+                    + "FROM nhan_vien "
+                    + "WHERE ten_dang_nhap = ?";
 
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                TaiKhoanDTO nhanVienDTO = new TaiKhoanDTO(
-                        resultSet.getString("MA_NV"),
-                        resultSet.getString("HO_TEN"),
-                        resultSet.getString("SDT"),
-                        resultSet.getInt("LOAI"),
-                        resultSet.getString("TEN_DANG_NHAP"),
-                        resultSet.getString("MAT_KHAU")
-                );
+            PreparedStatement preStmt = conn.prepareStatement(sql);
+            preStmt.setString(1, tkNhap.getTenDangNhap());
 
-                nhanVienDTOs.add(nhanVienDTO);
+            ResultSet rs = preStmt.executeQuery();
+
+            while (rs.next()) {
+                tkTraVe = new dto_TaiKhoan();
+
+                tkTraVe.setMa(rs.getInt(1));
+                tkTraVe.setHoTen(rs.getString(2));
+                tkTraVe.setSdt(rs.getString(3));
+                tkTraVe.setLoai(rs.getInt(4));
+                tkTraVe.setTenDangNhap(rs.getString(5));
+                tkTraVe.setMatKhau(rs.getString(6));
+                tkTraVe.setSrcImg(rs.getString(7));
             }
 
-            connection.commit();
-            DatabaseConnection.getInstance().RemoveConnection(connection);
+            conn.close();
+            return tkTraVe;
         } catch (Exception ex) {
-//            Logger.getLogger(dal_TaiKhoan.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
+            return tkTraVe;
         }
 
-        return nhanVienDTOs;
     }
 
-    public boolean them(TaiKhoanDTO nhanVienDTO) {
+    // HÀM LẤY DANH SÁCH TÀI KHOẢN
+    public ArrayList<dto_TaiKhoan> layDsTaiKhoan() {
+
+        ArrayList<dto_TaiKhoan> dsTaiKhoan = new ArrayList<dto_TaiKhoan>();
+        dto_TaiKhoan tk = null;
+
         try {
-            Connection connection = DatabaseConnection.getInstance().CreateNewConnection();
-            connection.setAutoCommit(false);
 
-            String query = "INSERT INTO NHANVIEN (MA_NV,HO_TEN,SDT,LOAI,TEN_DANG_NHAP,MAT_KHAU) VALUES (?,?,?,?,?,?);";
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, nhanVienDTO.getMA_NV());
-            preparedStatement.setString(2, nhanVienDTO.getHO_TEN());
-            preparedStatement.setString(3, nhanVienDTO.getSDT());
-            preparedStatement.setInt(4, nhanVienDTO.getLOAI());
-            preparedStatement.setString(5, nhanVienDTO.getTEN_DANG_NHAP());
-            preparedStatement.setString(6, nhanVienDTO.getMAT_KHAU());
-            
-            int queryResult = preparedStatement.executeUpdate();
+            String sql = "SELECT ma_nv, ten_nv, sdt, loai, ten_dang_nhap, mat_khau, src_img "
+                    + "FROM nhan_vien";
 
-            connection.commit();
-            DatabaseConnection.getInstance().RemoveConnection(connection);
+            PreparedStatement preStmt = conn.prepareStatement(sql);
+            ResultSet rs = preStmt.executeQuery();
 
-            return queryResult > 0;
+            while (rs.next()) {
+
+                tk = new dto_TaiKhoan();
+
+                tk.setMa(rs.getInt(1));
+                tk.setHoTen(rs.getString(2));
+                tk.setSdt(rs.getString(3));
+                tk.setLoai(rs.getInt(4));
+                tk.setTenDangNhap(rs.getString(5));
+                tk.setMatKhau(rs.getString(6));
+                tk.setSrcImg(rs.getString(7));
+
+                dsTaiKhoan.add(tk);
+            }
+
+            conn.close();
+            return dsTaiKhoan;
         } catch (Exception ex) {
-//            Logger.getLogger(dal_TaiKhoan.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
+            return dsTaiKhoan;
         }
-        return false;
     }
 
-    public boolean xoa(TaiKhoanDTO nhanVienDTO) {
+    // HÀM THÊM TÀI KHOẢN
+    public int themTaiKhoan(dto_TaiKhoan tk) {
+
         try {
-            Connection connection = DatabaseConnection.getInstance().CreateNewConnection();
-            connection.setAutoCommit(false);
 
-            String query = "DELETE FROM NHANVIEN WHERE NHANVIEN.MA_NV = ?;";
-            PreparedStatement preparedStatement = DatabaseConnection.getInstance().CreateNewConnection().prepareStatement(query);
-            preparedStatement.setString(1, nhanVienDTO.getMA_NV());
-            
-            int queryResult = preparedStatement.executeUpdate();
+            String sql = "INSERT INTO nhan_vien (ma_nv, ten_nv, sdt, loai, ten_dang_nhap, mat_khau, src_img) "
+                    + "VALUES (nhan_vien_sequence.NEXTVAL,?,?,?,?,?,?)";
 
-            connection.commit();
-            DatabaseConnection.getInstance().RemoveConnection(connection);
+            PreparedStatement preStmt = conn.prepareStatement(sql);
 
-            return queryResult > 0;
+            preStmt.setString(1, tk.getHoTen());
+            preStmt.setString(2, tk.getSdt());
+            preStmt.setInt(3, tk.getLoai());
+            preStmt.setString(4, tk.getTenDangNhap());
+            preStmt.setString(5, tk.getMatKhau());
+            preStmt.setString(6, tk.getSrcImg());
+
+            int rs = preStmt.executeUpdate();
+
+            conn.close();
+            return rs;
         } catch (Exception ex) {
-//            Logger.getLogger(dal_TaiKhoan.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
+            return 0;
         }
-        return false;
     }
 
-    public boolean sua(TaiKhoanDTO nhanVienDTO, TaiKhoanDTO newNhanVienDTO) {
+    // HÀM CẬP NHẬT TÀI KHOẢN
+    public int capNhatTaiKhoan(dto_TaiKhoan tk, boolean capNhatMatKhau) {
+
         try {
-            Connection connection = DatabaseConnection.getInstance().CreateNewConnection();
-            connection.setAutoCommit(false);
+            String sql = "";
+            if (capNhatMatKhau == true) {
+                sql = "UPDATE nhan_vien "
+                        + "SET ten_nv=?,"
+                        + "sdt=?,"
+                        + "loai=?,"
+                        + "mat_khau=?,"
+                        + "src_img=? "
+                        + "WHERE ma_nv=?";
+            } else {
+                sql = "UPDATE nhan_vien "
+                        + "SET ten_nv=?,"
+                        + "sdt=?,"
+                        + "loai=?,"
+                        + "src_img=? "
+                        + "WHERE ma_nv=?";
+            }
 
-            String query = "UPDATE NHANVIEN SET NHANVIEN.MA_NV= ?, NHANVIEN.HO_TEN= ?, NHANVIEN.SDT= ?, NHANVIEN.LOAI= ?, NHANVIEN.TEN_DANG_NHAP= ?, NHANVIEN.MAT_KHAU= ? WHERE NHANVIEN.MA_NV = ?;";
-            PreparedStatement preparedStatement = DatabaseConnection.getInstance().CreateNewConnection().prepareStatement(query);
-            preparedStatement.setString(1, newNhanVienDTO.getMA_NV());
-            preparedStatement.setString(2, newNhanVienDTO.getHO_TEN());
-            preparedStatement.setString(3, newNhanVienDTO.getSDT());
-            preparedStatement.setInt(4, newNhanVienDTO.getLOAI());
-            preparedStatement.setString(5, newNhanVienDTO.getTEN_DANG_NHAP());
-            preparedStatement.setString(6, newNhanVienDTO.getMAT_KHAU());
-            preparedStatement.setString(7, nhanVienDTO.getMA_NV());
+            PreparedStatement preStmt = conn.prepareStatement(sql);
+            preStmt.setString(1, tk.getHoTen());
+            preStmt.setString(2, tk.getSdt());
+            preStmt.setInt(3, tk.getLoai());
 
-            int queryResult = preparedStatement.executeUpdate();
-            
-            connection.commit();
-            DatabaseConnection.getInstance().RemoveConnection(connection);
+            if (capNhatMatKhau == true) {
+                preStmt.setString(4, tk.getMatKhau());
+                preStmt.setString(5, tk.getSrcImg());
+                preStmt.setInt(6, tk.getMa());
+            } else {
+                preStmt.setString(4, tk.getSrcImg());
+                preStmt.setInt(5, tk.getMa());
+            }
 
-            return queryResult > 0;
+            int rs = preStmt.executeUpdate();
+
+            conn.close();
+            return rs;
+
         } catch (Exception ex) {
-//            Logger.getLogger(dal_TaiKhoan.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
+            return 0;
         }
-        return false;
     }
+
+    // HÀM XÓA MẬT KHẨU
+    public int xoaTaiKhoan(dto_TaiKhoan tk) {
+
+        try {
+
+            String sql = "DELETE FROM nhan_vien WHERE ma_nv=" + tk.getMa();
+
+            PreparedStatement preStmt = conn.prepareStatement(sql);
+            int rs = preStmt.executeUpdate();
+
+            conn.close();
+            return rs;
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return 0;
+        }
+    }
+
+    // HÀM TÌM KIẾM
+    public ArrayList<dto_TaiKhoan> layDsTimKiem(String text) {
+
+        text = text.toLowerCase();
+        ArrayList<dto_TaiKhoan> dsTaiKhoan = new ArrayList<dto_TaiKhoan>();
+        dto_TaiKhoan tk = null;
+
+        try {
+
+            String sql = "SELECT ma_nv, ten_nv, sdt, loai, ten_dang_nhap, mat_khau, src_img "
+                    + "FROM nhan_vien "
+                    + "WHERE LOWER(ma_nv) LIKE N'%" + text + "%' "
+                    + "OR LOWER(ho_ten) LIKE N'%" + text + "%' "
+                    + "OR sdt LIKE N'%" + text + "%' "
+                    + "OR LOWER(ten_dang_nhap) LIKE N'%" + text + "%'";
+
+            PreparedStatement preStmt = conn.prepareStatement(sql);
+            ResultSet rs = preStmt.executeQuery();
+
+            while (rs.next()) {
+
+                tk = new dto_TaiKhoan();
+
+                tk.setMa(rs.getInt(1));
+                tk.setHoTen(rs.getString(2));
+                tk.setSdt(rs.getString(3));
+                tk.setLoai(rs.getInt(4));
+                tk.setTenDangNhap(rs.getString(5));
+                tk.setMatKhau(rs.getString(6));
+                tk.setSrcImg(rs.getString(7));
+
+                dsTaiKhoan.add(tk);
+            }
+
+            conn.close();
+            return dsTaiKhoan;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return dsTaiKhoan;
+        }
+    }
+
+    // HÀM LẤY TÀI KHOẢN BẰNG MÃ TK
+    public dto_TaiKhoan layTaiKhoan(int ma_tk) {
+
+        dto_TaiKhoan tk = null;
+
+        String sql = "SELECT ten_nv, sdt, loai, ten_dang_nhap, mat_khau, src_img "
+                + "FROM nhan_vien "
+                + "WHERE ma_nv = ?";
+
+        try {
+            PreparedStatement preStmt = conn.prepareStatement(sql);
+            preStmt.setInt(1, ma_tk);
+            ResultSet rs = preStmt.executeQuery();
+
+            if (rs.next()) {
+                tk = new dto_TaiKhoan();
+                tk.setMa(ma_tk);
+                tk.setHoTen(rs.getString(1));
+                tk.setSdt(rs.getString(2));
+                tk.setLoai(rs.getInt(3));
+                tk.setTenDangNhap(rs.getString(4));
+                tk.setMatKhau(rs.getString(5));
+                tk.setSrcImg(rs.getString(6));
+            }
+            conn.close();
+            return tk;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+    
 }

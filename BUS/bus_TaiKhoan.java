@@ -1,92 +1,61 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package BUS;
 
-import DTO.TaiKhoanValidateException;
 import DAL.dal_TaiKhoan;
-import DTO.TaiKhoanDTO;
-import java.math.BigInteger;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import DTO.dto_TaiKhoan;
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-public class bus_TaiKhoan {
-
-    private bus_TaiKhoan() {
+public class bus_TaiKhoan{
+    
+    // HÀM LẤY DANH SÁCH TÀI KHOẢN
+    public ArrayList<dto_TaiKhoan> layDsTaiKhoan(){
+        return new dal_TaiKhoan().layDsTaiKhoan();
     }
-    private static bus_TaiKhoan instance;
-
-    public static bus_TaiKhoan getInstance() {
-        if (instance == null) {
-            instance = new bus_TaiKhoan();
-        }
-        return instance;
+    
+    // HÀM MÃ HÓA BCRYPT MẬT KHẨU
+    public String maHoaMatKhau(String matKhauNhap){
+        return BCrypt.hashpw(matKhauNhap,BCrypt.gensalt(12));
     }
-
-    public ArrayList<TaiKhoanDTO> getDanhSachNhanVien() {
-        ArrayList<TaiKhoanDTO> nhanVienDTOs = dal_TaiKhoan.getInstance().getAll();
+    
+    // HÀM KIỂM TRA KHỚP MẬT KHẨU
+    public boolean kiemTraKhopMatKhau(String matKhauNhap,String hash){
+        return BCrypt.checkpw(hash,matKhauNhap);
+    }
+    
+    // HÀM THÊM TÀI KHOẢN
+    public int themTaiKhoan(dto_TaiKhoan tk){
         
-        return nhanVienDTOs;
+        String hash = maHoaMatKhau(tk.getMatKhau());
+        tk.setMatKhau(hash);
+        
+        return new dal_TaiKhoan().themTaiKhoan(tk);
     }
 
-    public boolean themNhanVien(TaiKhoanDTO nhanVienDTO) throws TaiKhoanValidateException {
-        if (nhanVienDTO == null) {
-            throw new TaiKhoanValidateException("Tài khoản không tồn tại.");
+    // HÀM CẬP NHẬT TÀI KHOẢN
+    public int capNhatTaiKhoan(dto_TaiKhoan tk, boolean capNhatMatKhau){
+        
+        if(capNhatMatKhau == true){
+            String hash = maHoaMatKhau(tk.getMatKhau());
+            tk.setMatKhau(hash);
         }
-        nhanVienDTO.validateLOAI();
-        nhanVienDTO.validateMAT_KHAU();
-        nhanVienDTO.validateSDT();
-        nhanVienDTO.validateTEN_DANG_NHAP();
-        return dal_TaiKhoan.getInstance().them(nhanVienDTO);
+        
+        return new dal_TaiKhoan().capNhatTaiKhoan(tk, capNhatMatKhau);
     }
-
-    public boolean xoaNhanVien(TaiKhoanDTO nhanVienDTO) throws TaiKhoanValidateException {
-        if (nhanVienDTO == null) {
-            throw new TaiKhoanValidateException("Tài khoản không tồn tại.");
-        }
-        nhanVienDTO.validateMA_NV();
-        return dal_TaiKhoan.getInstance().xoa(nhanVienDTO);
+   
+    // HÀM XÓA TÀI KHOẢN
+    public int xoaTaiKhoan(dto_TaiKhoan tk){
+        
+        return new dal_TaiKhoan().xoaTaiKhoan(tk);
     }
-
-    public boolean suaNhanVien(TaiKhoanDTO nhanVienDTO, TaiKhoanDTO newNhanVienDTO) throws TaiKhoanValidateException {
-        if (nhanVienDTO == null) {
-            throw new TaiKhoanValidateException("Tài khoản không tồn tại.");
-        }
-        nhanVienDTO.validateLOAI();
-        nhanVienDTO.validateMAT_KHAU();
-        nhanVienDTO.validateSDT();
-        nhanVienDTO.validateTEN_DANG_NHAP();
-        return dal_TaiKhoan.getInstance().sua(nhanVienDTO, newNhanVienDTO);
+    
+    // HÀM TÌM KIẾM 
+    public ArrayList<dto_TaiKhoan> layDsTimKiem(String text){
+        
+        return new dal_TaiKhoan().layDsTimKiem(text);
     }
-
-    public String hashPassword(String input, String hashMenthod) {
-        if (hashMenthod == null) {
-            hashMenthod = "MD5";
-        }
-
-        try {
-            //Hash ra mảng các byte dữ liệu
-            byte[] messageDigest = MessageDigest.getInstance(hashMenthod).digest(input.getBytes());
-
-            //Convert mảng byte thành string
-            BigInteger signumResult = new BigInteger(1, messageDigest);
-            String hashtext = signumResult.toString(16);
-
-            //Thêm số 0 vào đầu cho đủ 32bit
-            while (hashtext.length() < 32) {
-                hashtext = "0" + hashtext;
-            }
-
-            return hashtext;
-        } catch (NoSuchAlgorithmException ex) {
-            Logger.getLogger(bus_TaiKhoan.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        return null;
+    // HAMF CẬP NHẬT MẬT KHẨU
+    public int capNhatMatKhau(dto_TaiKhoan tk){
+        
+        return new dal_TaiKhoan().capNhatTaiKhoan(tk,true);
     }
 }

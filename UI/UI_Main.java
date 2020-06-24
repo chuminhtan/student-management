@@ -5,31 +5,44 @@
  */
 package UI;
 
-import DTO.dto_DangNhap;
-import UI.ChuongTrinhUI.UI_ChuongTrinh;
-import UI.LopHocUI.UI_LopHoc;
-import UI.KhachHangUI.UI_KhachHang;
-import UI.DangNhapUI.UI_DangNhap;
+import DTO.dto_TaiKhoan;
+import UI.ChuongTrinh.UI_ChuongTrinh;
+import UI.LopHoc.UI_LopHoc;
+import UI.KhachHang.UI_KhachHang;
+import UI.DangNhap.UI_DangNhap;
+import UI.GV_Phong.UI_GV_Phong;
 import UI.TaiKhoan.UI_TaiKhoan;
+import UI.TaiKhoan.pnDoiMatKhau;
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import javax.swing.JButton;
-import javax.swing.JComponent;
 
 public final class UI_Main extends javax.swing.JFrame {
 
     public UI_Main() {
         initComponents();
-        this.changeTabEffect(btnThongKe, "thongke");
-    }
+        setResizable(false);
+        setAllTabButtonColor("thongke");
+        hienThiNgay();
 
+    }
+    //Biến tự định nghĩa
+    private UI_LopHoc ui_lop = new UI_LopHoc();
+    private UI_KhachHang ui_kh = new UI_KhachHang();
+    private UI_ChuongTrinh ui_ct = new UI_ChuongTrinh();
+    private UI_TaiKhoan ui_tk = new UI_TaiKhoan();
+    private UI_GV_Phong ui_gv_phong = new UI_GV_Phong();
+
+    // HÀM THAY ĐỔI MÀU
     public void changeTabButtonColor(JButton button, Color currentColor, Color hoverColor) {
-     
-        
-        CustomBorder customBorder = new CustomBorder(null, null, new CustomBorder.BorderPiece(5), null);
+
+        CustomBorder customBorder = new CustomBorder(null, null, new CustomBorder.BorderPiece(3), null);
         button.setBorder(customBorder);
+
         ((CustomBorder) button.getBorder()).setColor(currentColor);
 
         button.addMouseListener(new MouseAdapter() {
@@ -42,89 +55,89 @@ public final class UI_Main extends javax.swing.JFrame {
             @Override
             public void mouseEntered(MouseEvent e) {
                 super.mouseEntered(e);
-                    ((CustomBorder) button.getBorder()).setColor(hoverColor);
+                ((CustomBorder) button.getBorder()).setColor(hoverColor);
             }
         });
-
-        button.setFont(new Font("Noto Sans", Font.BOLD, 13));
-    }
-    /*
-    public void setAllTabButtonColor(Color currentColor, Color hoverColor) {
-            this.changeTabButtonColor(btnCTHoc, currentColor, hoverColor);
-            this.changeTabButtonColor(btnKhachHang, currentColor, hoverColor);
-            this.changeTabButtonColor(btnLopHoc, currentColor, hoverColor);
-            this.changeTabButtonColor(btnTaiKhoan, currentColor, hoverColor);
-            this.changeTabButtonColor(btnThongKe, currentColor, hoverColor);
-    }
-    */
-    
-     public void setAllTabButtonColor(String name) {
-         if(name.equals("thongke")){
-            this.changeTabButtonColor(btnCTHoc,CustomComponentModify.TRANSPARENT, CustomComponentModify.CHUONGTRINHHOC);
-            this.changeTabButtonColor(btnKhachHang,CustomComponentModify.TRANSPARENT, CustomComponentModify.KHACHHANG);
-            this.changeTabButtonColor(btnLopHoc, CustomComponentModify.TRANSPARENT, CustomComponentModify.LOPHOC);
-            this.changeTabButtonColor(btnTaiKhoan, CustomComponentModify.TRANSPARENT, CustomComponentModify.TAIKHOAN);
-            this.changeTabButtonColor(btnThongKe, CustomComponentModify.THONGKE, CustomComponentModify.THONGKE);
-         }
-                 else if(name.equals("khachhang")){
-            this.changeTabButtonColor(btnCTHoc,CustomComponentModify.TRANSPARENT, CustomComponentModify.CHUONGTRINHHOC);
-            this.changeTabButtonColor(btnKhachHang,CustomComponentModify.KHACHHANG, CustomComponentModify.KHACHHANG);
-            this.changeTabButtonColor(btnLopHoc, CustomComponentModify.TRANSPARENT, CustomComponentModify.LOPHOC);
-            this.changeTabButtonColor(btnTaiKhoan, CustomComponentModify.TRANSPARENT, CustomComponentModify.TAIKHOAN);
-            this.changeTabButtonColor(btnThongKe, CustomComponentModify.TRANSPARENT, CustomComponentModify.THONGKE);
-         }
-                 else if(name.equals("lophoc")){
-            this.changeTabButtonColor(btnCTHoc,CustomComponentModify.TRANSPARENT, CustomComponentModify.CHUONGTRINHHOC);
-            this.changeTabButtonColor(btnKhachHang,CustomComponentModify.TRANSPARENT, CustomComponentModify.KHACHHANG);
-            this.changeTabButtonColor(btnLopHoc, CustomComponentModify.LOPHOC, CustomComponentModify.LOPHOC);
-            this.changeTabButtonColor(btnTaiKhoan, CustomComponentModify.TRANSPARENT, CustomComponentModify.TAIKHOAN);
-            this.changeTabButtonColor(btnThongKe, CustomComponentModify.TRANSPARENT, CustomComponentModify.THONGKE);
-         }
-                          else if(name.equals("chuongtrinhhoc")){
-            this.changeTabButtonColor(btnCTHoc,CustomComponentModify.CHUONGTRINHHOC, CustomComponentModify.CHUONGTRINHHOC);
-            this.changeTabButtonColor(btnKhachHang,CustomComponentModify.TRANSPARENT, CustomComponentModify.KHACHHANG);
-            this.changeTabButtonColor(btnLopHoc, CustomComponentModify.TRANSPARENT, CustomComponentModify.LOPHOC);
-            this.changeTabButtonColor(btnTaiKhoan, CustomComponentModify.TRANSPARENT, CustomComponentModify.TAIKHOAN);
-            this.changeTabButtonColor(btnThongKe, CustomComponentModify.TRANSPARENT, CustomComponentModify.THONGKE);
-         }
-                                   else if(name.equals("taikhoan")){
-            this.changeTabButtonColor(btnCTHoc,CustomComponentModify.TRANSPARENT, CustomComponentModify.CHUONGTRINHHOC);
-            this.changeTabButtonColor(btnKhachHang,CustomComponentModify.TRANSPARENT, CustomComponentModify.KHACHHANG);
-            this.changeTabButtonColor(btnLopHoc, CustomComponentModify.TRANSPARENT, CustomComponentModify.LOPHOC);
-            this.changeTabButtonColor(btnTaiKhoan, CustomComponentModify.TAIKHOAN, CustomComponentModify.TAIKHOAN);
-            this.changeTabButtonColor(btnThongKe, CustomComponentModify.TRANSPARENT, CustomComponentModify.THONGKE);
-         }
-
-
-            
     }
 
-    public void changeTabEffect(JButton nextButton, String name) {
-       this.setAllTabButtonColor(name); 
+    // HÀM SET MÀU CHO TỪNG BUTTON
+    public void setAllTabButtonColor(String name) {
+        if (name.equals("thongke")) {
+            this.changeTabButtonColor(btnChuongTrinh, CustomBorder.WHITE, CustomBorder.CHUONGTRINHHOC);
+            this.changeTabButtonColor(btnKhachHang, CustomBorder.WHITE, CustomBorder.KHACHHANG);
+            this.changeTabButtonColor(btnLopHoc, CustomBorder.WHITE, CustomBorder.LOPHOC);
+            this.changeTabButtonColor(btnTaiKhoan, CustomBorder.WHITE, CustomBorder.TAIKHOAN);
+            this.changeTabButtonColor(btnThongKe, CustomBorder.THONGKE, CustomBorder.THONGKE);
+            this.changeTabButtonColor(btnGiaoVienPhong, CustomBorder.WHITE, CustomBorder.TKB);
+        } else if (name.equals("khachhang")) {
+            this.changeTabButtonColor(btnChuongTrinh, CustomBorder.WHITE, CustomBorder.CHUONGTRINHHOC);
+            this.changeTabButtonColor(btnKhachHang, CustomBorder.KHACHHANG, CustomBorder.KHACHHANG);
+            this.changeTabButtonColor(btnLopHoc, CustomBorder.WHITE, CustomBorder.LOPHOC);
+            this.changeTabButtonColor(btnTaiKhoan, CustomBorder.WHITE, CustomBorder.TAIKHOAN);
+            this.changeTabButtonColor(btnThongKe, CustomBorder.WHITE, CustomBorder.THONGKE);
+            this.changeTabButtonColor(btnGiaoVienPhong, CustomBorder.WHITE, CustomBorder.TKB);
+
+        } else if (name.equals("lophoc")) {
+            this.changeTabButtonColor(btnChuongTrinh, CustomBorder.WHITE, CustomBorder.CHUONGTRINHHOC);
+            this.changeTabButtonColor(btnKhachHang, CustomBorder.WHITE, CustomBorder.KHACHHANG);
+            this.changeTabButtonColor(btnLopHoc, CustomBorder.LOPHOC, CustomBorder.LOPHOC);
+            this.changeTabButtonColor(btnTaiKhoan, CustomBorder.WHITE, CustomBorder.TAIKHOAN);
+            this.changeTabButtonColor(btnThongKe, CustomBorder.WHITE, CustomBorder.THONGKE);
+            this.changeTabButtonColor(btnGiaoVienPhong, CustomBorder.WHITE, CustomBorder.TKB);
+        } else if (name.equals("chuongtrinh")) {
+            this.changeTabButtonColor(btnChuongTrinh, CustomBorder.CHUONGTRINHHOC, CustomBorder.CHUONGTRINHHOC);
+            this.changeTabButtonColor(btnKhachHang, CustomBorder.WHITE, CustomBorder.KHACHHANG);
+            this.changeTabButtonColor(btnLopHoc, CustomBorder.WHITE, CustomBorder.LOPHOC);
+            this.changeTabButtonColor(btnTaiKhoan, CustomBorder.WHITE, CustomBorder.TAIKHOAN);
+            this.changeTabButtonColor(btnThongKe, CustomBorder.WHITE, CustomBorder.THONGKE);
+            this.changeTabButtonColor(btnGiaoVienPhong, CustomBorder.WHITE, CustomBorder.TKB);
+        } else if (name.equals("taikhoan")) {
+            this.changeTabButtonColor(btnChuongTrinh, CustomBorder.WHITE, CustomBorder.CHUONGTRINHHOC);
+            this.changeTabButtonColor(btnKhachHang, CustomBorder.WHITE, CustomBorder.KHACHHANG);
+            this.changeTabButtonColor(btnLopHoc, CustomBorder.WHITE, CustomBorder.LOPHOC);
+            this.changeTabButtonColor(btnTaiKhoan, CustomBorder.TAIKHOAN, CustomBorder.TAIKHOAN);
+            this.changeTabButtonColor(btnThongKe, CustomBorder.WHITE, CustomBorder.THONGKE);
+            this.changeTabButtonColor(btnGiaoVienPhong, CustomBorder.WHITE, CustomBorder.TKB);
+        } else if (name.equals("gv_phong")) {
+            this.changeTabButtonColor(btnChuongTrinh, CustomBorder.WHITE, CustomBorder.CHUONGTRINHHOC);
+            this.changeTabButtonColor(btnKhachHang, CustomBorder.WHITE, CustomBorder.KHACHHANG);
+            this.changeTabButtonColor(btnLopHoc, CustomBorder.WHITE, CustomBorder.LOPHOC);
+            this.changeTabButtonColor(btnTaiKhoan, CustomBorder.WHITE, CustomBorder.TAIKHOAN);
+            this.changeTabButtonColor(btnThongKe, CustomBorder.WHITE, CustomBorder.THONGKE);
+            this.changeTabButtonColor(btnGiaoVienPhong, CustomBorder.WHITE, CustomBorder.THONGKE);
+            this.changeTabButtonColor(btnGiaoVienPhong, CustomBorder.TKB, CustomBorder.TKB);
+        }
+
     }
 
-    /*  =====================Khu vực của Tân======*/
+    // HÀM HIỂN THỊ NGÀY HIỆN TẠI
+    public void hienThiNgay() {
+
+        Calendar cal = Calendar.getInstance();
+        Date date = cal.getTime();
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+
+        lblNgay.setText(sdf.format(date));
+    }
+
     //method giao diện cho nhân viên ghi danh 
     public void showGhiDanh() {
         ui_lop.hideBtnLop();
-        btnTaiKhoan.setVisible(false);
         ui_ct.hideBtnCt();
     }
 
     //method giao diện cho nhân viên học vụ
     public void showHocVu() {
         ui_kh.hideBtnKh();
-        btnTaiKhoan.setVisible(false);
         ui_ct.hideBtnCt();
     }
 
     //method hiển thị thông tin người dùng bên góc phải phía trên UI_Main
-    public void setThongTinDangNhap(dto_DangNhap dn) {
-        txtThongTinDangNhap.setText(dn.getMa() + " | " + dn.getHoTen());
+    public void setThongTinDangNhap(dto_TaiKhoan tk) {
+        txtThongTinDangNhap.setText(tk.getMa() + " | " + tk.getHoTen());
     }
 
-    /*  ====================Hết khu vực của Tân
-     */
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -135,35 +148,31 @@ public final class UI_Main extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        btnDangXuat = new javax.swing.JButton();
         btnThongKe = new javax.swing.JButton();
         btnKhachHang = new javax.swing.JButton();
         btnLopHoc = new javax.swing.JButton();
-        btnCTHoc = new javax.swing.JButton();
         btnTaiKhoan = new javax.swing.JButton();
         txtThongTinDangNhap = new javax.swing.JTextField();
         pnBody = new javax.swing.JPanel();
         pnThongKe = new javax.swing.JPanel();
+        btnChuongTrinh = new javax.swing.JButton();
+        lblNgay = new javax.swing.JLabel();
+        btnGiaoVienPhong = new javax.swing.JButton();
+        btnDangXuat = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Quản Lý Trung Tâm Anh Ngữ");
-        setSize(new java.awt.Dimension(1200, 700));
+        setMinimumSize(new java.awt.Dimension(1366, 768));
+        setSize(new java.awt.Dimension(1366, 768));
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-
-        btnDangXuat.setBackground(new java.awt.Color(255, 255, 255));
-        btnDangXuat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/dangxuat.png"))); // NOI18N
-        btnDangXuat.setBorder(null);
-        btnDangXuat.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnDangXuat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDangXuatActionPerformed(evt);
-            }
-        });
+        jPanel1.setBackground(new java.awt.Color(230, 245, 255));
+        jPanel1.setMinimumSize(new java.awt.Dimension(1350, 729));
+        jPanel1.setPreferredSize(new java.awt.Dimension(1350, 729));
 
         btnThongKe.setBackground(new java.awt.Color(153, 255, 153));
-        btnThongKe.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnThongKe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/report.png"))); // NOI18N
+        btnThongKe.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        btnThongKe.setForeground(new java.awt.Color(0, 0, 51));
+        btnThongKe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/thongke_new.png"))); // NOI18N
         btnThongKe.setText("THỐNG KÊ");
         btnThongKe.setContentAreaFilled(false);
         btnThongKe.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -175,8 +184,9 @@ public final class UI_Main extends javax.swing.JFrame {
         });
 
         btnKhachHang.setBackground(new java.awt.Color(153, 255, 153));
-        btnKhachHang.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnKhachHang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/person.png"))); // NOI18N
+        btnKhachHang.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        btnKhachHang.setForeground(new java.awt.Color(0, 0, 51));
+        btnKhachHang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/kh.png"))); // NOI18N
         btnKhachHang.setText("KHÁCH HÀNG");
         btnKhachHang.setContentAreaFilled(false);
         btnKhachHang.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -188,8 +198,9 @@ public final class UI_Main extends javax.swing.JFrame {
         });
 
         btnLopHoc.setBackground(new java.awt.Color(153, 255, 153));
-        btnLopHoc.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnLopHoc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/class.png"))); // NOI18N
+        btnLopHoc.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        btnLopHoc.setForeground(new java.awt.Color(0, 0, 51));
+        btnLopHoc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/classroom.png"))); // NOI18N
         btnLopHoc.setText("LỚP HỌC");
         btnLopHoc.setContentAreaFilled(false);
         btnLopHoc.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -200,22 +211,10 @@ public final class UI_Main extends javax.swing.JFrame {
             }
         });
 
-        btnCTHoc.setBackground(new java.awt.Color(153, 255, 153));
-        btnCTHoc.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnCTHoc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/program.png"))); // NOI18N
-        btnCTHoc.setText("CHƯƠNG TRÌNH");
-        btnCTHoc.setContentAreaFilled(false);
-        btnCTHoc.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnCTHoc.setFocusable(false);
-        btnCTHoc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCTHocActionPerformed(evt);
-            }
-        });
-
         btnTaiKhoan.setBackground(new java.awt.Color(153, 255, 153));
-        btnTaiKhoan.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnTaiKhoan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/lock.png"))); // NOI18N
+        btnTaiKhoan.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        btnTaiKhoan.setForeground(new java.awt.Color(0, 0, 51));
+        btnTaiKhoan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/lock1.png"))); // NOI18N
         btnTaiKhoan.setText("TÀI KHOẢN");
         btnTaiKhoan.setContentAreaFilled(false);
         btnTaiKhoan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -227,9 +226,10 @@ public final class UI_Main extends javax.swing.JFrame {
         });
 
         txtThongTinDangNhap.setEditable(false);
-        txtThongTinDangNhap.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        txtThongTinDangNhap.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtThongTinDangNhap.setText("<Tên Nhân Viên>-<Mã NV>");
+        txtThongTinDangNhap.setBackground(new java.awt.Color(230, 245, 255));
+        txtThongTinDangNhap.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        txtThongTinDangNhap.setText("12323 | Nguyễn Thị Huyền Trang");
+        txtThongTinDangNhap.setToolTipText("Thông Tin Người Dùng");
         txtThongTinDangNhap.setBorder(null);
         txtThongTinDangNhap.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -238,61 +238,124 @@ public final class UI_Main extends javax.swing.JFrame {
         });
 
         pnBody.setBackground(new java.awt.Color(204, 255, 255));
+        pnBody.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 0, 0, 0, new java.awt.Color(0, 51, 102)));
+        pnBody.setMinimumSize(new java.awt.Dimension(1350, 660));
+        pnBody.setPreferredSize(new java.awt.Dimension(1350, 634));
         pnBody.setLayout(new java.awt.CardLayout());
 
         pnThongKe.setBackground(new java.awt.Color(255, 255, 255));
+        pnThongKe.setMinimumSize(new java.awt.Dimension(1350, 643));
+        pnThongKe.setPreferredSize(new java.awt.Dimension(1350, 660));
 
         javax.swing.GroupLayout pnThongKeLayout = new javax.swing.GroupLayout(pnThongKe);
         pnThongKe.setLayout(pnThongKeLayout);
         pnThongKeLayout.setHorizontalGroup(
             pnThongKeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1200, Short.MAX_VALUE)
+            .addGap(0, 1350, Short.MAX_VALUE)
         );
         pnThongKeLayout.setVerticalGroup(
             pnThongKeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 643, Short.MAX_VALUE)
         );
 
         pnBody.add(pnThongKe, "card4");
+
+        btnChuongTrinh.setBackground(new java.awt.Color(153, 255, 153));
+        btnChuongTrinh.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        btnChuongTrinh.setForeground(new java.awt.Color(0, 0, 51));
+        btnChuongTrinh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/book.png"))); // NOI18N
+        btnChuongTrinh.setText("CHƯƠNG TRÌNH");
+        btnChuongTrinh.setBorder(null);
+        btnChuongTrinh.setContentAreaFilled(false);
+        btnChuongTrinh.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnChuongTrinh.setFocusable(false);
+        btnChuongTrinh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChuongTrinhActionPerformed(evt);
+            }
+        });
+
+        lblNgay.setText("Ngày");
+
+        btnGiaoVienPhong.setBackground(new java.awt.Color(153, 255, 153));
+        btnGiaoVienPhong.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        btnGiaoVienPhong.setForeground(new java.awt.Color(0, 0, 51));
+        btnGiaoVienPhong.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/teacher.png"))); // NOI18N
+        btnGiaoVienPhong.setText("GIÁO VIÊN & PHÒNG");
+        btnGiaoVienPhong.setBorder(null);
+        btnGiaoVienPhong.setContentAreaFilled(false);
+        btnGiaoVienPhong.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnGiaoVienPhong.setFocusable(false);
+        btnGiaoVienPhong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGiaoVienPhongActionPerformed(evt);
+            }
+        });
+
+        btnDangXuat.setBackground(new java.awt.Color(230, 245, 255));
+        btnDangXuat.setForeground(new java.awt.Color(255, 255, 255));
+        btnDangXuat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/dangxuat.png"))); // NOI18N
+        btnDangXuat.setToolTipText("Đăng Xuất");
+        btnDangXuat.setBorder(null);
+        btnDangXuat.setBorderPainted(false);
+        btnDangXuat.setContentAreaFilled(false);
+        btnDangXuat.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnDangXuat.setDefaultCapable(false);
+        btnDangXuat.setFocusPainted(false);
+        btnDangXuat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDangXuatActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnThongKe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(20, 20, 20)
-                .addComponent(btnKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnLopHoc)
-                .addGap(38, 38, 38)
-                .addComponent(btnCTHoc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(20, 20, 20)
-                .addComponent(btnTaiKhoan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(txtThongTinDangNhap)
-                .addGap(48, 48, 48)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(txtThongTinDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pnBody, javax.swing.GroupLayout.PREFERRED_SIZE, 1350, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
                 .addComponent(btnDangXuat)
-                .addContainerGap())
-            .addComponent(pnBody, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(60, 60, 60)
+                .addComponent(btnThongKe)
+                .addGap(80, 80, 80)
+                .addComponent(btnKhachHang)
+                .addGap(80, 80, 80)
+                .addComponent(btnLopHoc)
+                .addGap(80, 80, 80)
+                .addComponent(btnGiaoVienPhong)
+                .addGap(80, 80, 80)
+                .addComponent(btnChuongTrinh)
+                .addGap(80, 80, 80)
+                .addComponent(btnTaiKhoan)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnLopHoc, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnTaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(btnThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnDangXuat, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtThongTinDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCTHoc, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
-                .addComponent(pnBody, javax.swing.GroupLayout.DEFAULT_SIZE, 620, Short.MAX_VALUE)
+                .addGap(10, 10, 10)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnLopHoc, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnGiaoVienPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnChuongTrinh, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnTaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnDangXuat))
+                .addGap(10, 10, 10)
+                .addComponent(pnBody, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtThongTinDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -300,14 +363,14 @@ public final class UI_Main extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        setSize(new java.awt.Dimension(1216, 759));
+        setSize(new java.awt.Dimension(1366, 768));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -316,51 +379,57 @@ public final class UI_Main extends javax.swing.JFrame {
     }//GEN-LAST:event_txtThongTinDangNhapActionPerformed
 
     private void btnTaiKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaiKhoanActionPerformed
-        this.changeTabEffect(btnTaiKhoan, "taikhoan");
+        setAllTabButtonColor("taikhoan");
 
         pnBody.removeAll();
         pnBody.repaint();
         pnBody.revalidate();
-        pnBody.add(ui_tk);
+
+        if (UI_DangNhap.layTaiKhoanDangNhap().getLoai() == 1) {
+            pnBody.add(new UI_TaiKhoan());
+        } else {
+            pnBody.add(new pnDoiMatKhau());
+        }
+
         pnBody.repaint();
         pnBody.revalidate();
     }//GEN-LAST:event_btnTaiKhoanActionPerformed
 
-    private void btnCTHocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCTHocActionPerformed
-        this.changeTabEffect(btnCTHoc,"chuongtrinhhoc");
-
-        pnBody.removeAll();
-        pnBody.repaint();
-        pnBody.revalidate();
-        pnBody.add(ui_ct);
-        pnBody.repaint();
-        pnBody.revalidate();
-    }//GEN-LAST:event_btnCTHocActionPerformed
-
     private void btnLopHocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLopHocActionPerformed
-        this.changeTabEffect(btnLopHoc, "lophoc");
+        setAllTabButtonColor("lophoc");
 
         pnBody.removeAll();
         pnBody.repaint();
         pnBody.revalidate();
-        pnBody.add(ui_lop);
+
+        if (UI_DangNhap.layTaiKhoanDangNhap().getLoai() == 2) {
+            pnBody.add(new UI_LopHoc(true));
+        } else {
+            pnBody.add(new UI_LopHoc());
+        }
         pnBody.repaint();
         pnBody.revalidate();
     }//GEN-LAST:event_btnLopHocActionPerformed
 
     private void btnKhachHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKhachHangActionPerformed
-        this.changeTabEffect(btnKhachHang, "khachhang");
+        setAllTabButtonColor("khachhang");
 
         pnBody.removeAll();
         pnBody.repaint();
         pnBody.revalidate();
-        pnBody.add(ui_kh);
+
+        if (UI_DangNhap.layTaiKhoanDangNhap().getLoai() == 3) {
+            pnBody.add(new UI_KhachHang(true));
+        } else {
+            pnBody.add(new UI_KhachHang());
+        }
+        pnBody.add(new UI_KhachHang());
         pnBody.repaint();
         pnBody.revalidate();
     }//GEN-LAST:event_btnKhachHangActionPerformed
 
     private void btnThongKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThongKeActionPerformed
-        this.changeTabEffect(btnThongKe, "thongke");
+        setAllTabButtonColor("thongke");
 
         pnBody.removeAll();
         pnBody.repaint();
@@ -368,6 +437,36 @@ public final class UI_Main extends javax.swing.JFrame {
         pnBody.repaint();
         pnBody.revalidate();
     }//GEN-LAST:event_btnThongKeActionPerformed
+
+    private void btnChuongTrinhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChuongTrinhActionPerformed
+        setAllTabButtonColor("chuongtrinh");
+        pnBody.removeAll();
+        pnBody.repaint();
+        if (UI_DangNhap.layTaiKhoanDangNhap().getLoai() != 1) {
+            pnBody.add(new UI_ChuongTrinh(true));
+        } else {
+            pnBody.add(new UI_ChuongTrinh());
+        }
+        pnBody.add(new UI_ChuongTrinh());
+        pnBody.repaint();
+        pnBody.revalidate();
+    }//GEN-LAST:event_btnChuongTrinhActionPerformed
+
+    private void btnGiaoVienPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGiaoVienPhongActionPerformed
+        setAllTabButtonColor("gv_phong");
+
+        pnBody.removeAll();
+        pnBody.repaint();
+
+        if (UI_DangNhap.layTaiKhoanDangNhap().getLoai() != 1) {
+            pnBody.add(new UI_GV_Phong(true));
+        } else {
+            pnBody.add(new UI_GV_Phong());
+        }
+        pnBody.add(new UI_GV_Phong());
+        pnBody.repaint();
+        pnBody.revalidate();
+    }//GEN-LAST:event_btnGiaoVienPhongActionPerformed
 
     private void btnDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangXuatActionPerformed
         dispose();
@@ -417,21 +516,17 @@ public final class UI_Main extends javax.swing.JFrame {
         });
     }
 
-    //Biến tự định nghĩa
-    private UI_LopHoc ui_lop = new UI_LopHoc();
-    private UI_KhachHang ui_kh = new UI_KhachHang();
-    private UI_ChuongTrinh ui_ct = new UI_ChuongTrinh();
-    private UI_TaiKhoan ui_tk = new UI_TaiKhoan();
-    //Kết thúc biến tự định nghĩa
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCTHoc;
+    private javax.swing.JButton btnChuongTrinh;
     private javax.swing.JButton btnDangXuat;
+    private javax.swing.JButton btnGiaoVienPhong;
     private javax.swing.JButton btnKhachHang;
     private javax.swing.JButton btnLopHoc;
     private javax.swing.JButton btnTaiKhoan;
     private javax.swing.JButton btnThongKe;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblNgay;
     private javax.swing.JPanel pnBody;
     private javax.swing.JPanel pnThongKe;
     private javax.swing.JTextField txtThongTinDangNhap;
