@@ -1596,7 +1596,6 @@ public class FormLichHoc extends javax.swing.JDialog {
         txtBuoiHoc.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtBuoiHoc.setForeground(new java.awt.Color(153, 0, 51));
         txtBuoiHoc.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtBuoiHoc.setText("12");
 
         javax.swing.GroupLayout pnTongLayout = new javax.swing.GroupLayout(pnTong);
         pnTong.setLayout(pnTongLayout);

@@ -49,23 +49,14 @@ public class FormThemLop extends javax.swing.JDialog {
         dto_LopHoc lop = null;
 
         String tenLop = txtTenLop.getText();
-        String strSoBuoi = txtSoBuoi.getText();
 
         dto_ChuongTrinh ct = (dto_ChuongTrinh) cbChuongTrinh.getSelectedItem();
-        if (tenLop.isEmpty() || strSoBuoi.isEmpty() || ct == null) {
+        if (tenLop.isEmpty() || ct == null) {
             JOptionPane.showMessageDialog(null, "Chưa Nhập Đủ Thông Tin");
             return null;
         }
 
         int soBuoi = 0;
-        try {
-            soBuoi = Integer.parseInt(strSoBuoi);
-
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Số Buổi Không Hợp Lệ");
-            return null;
-        }
 
         lop = new dto_LopHoc();
         lop.setMaNv(UI_DangNhap.layMaNguoiDung());
@@ -86,7 +77,6 @@ public class FormThemLop extends javax.swing.JDialog {
         dfcbChuongTrinh = new DefaultComboBoxModel();
         dfcbChuongTrinh.addAll(dsChuongTrinh);
         txtTenLop.setText("");
-        txtSoBuoi.setText("");
 
         cbChuongTrinh.setModel(dfcbChuongTrinh);
     }
@@ -105,8 +95,6 @@ public class FormThemLop extends javax.swing.JDialog {
         txtTenLop = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         cbChuongTrinh = new javax.swing.JComboBox<>();
-        jLabel3 = new javax.swing.JLabel();
-        txtSoBuoi = new javax.swing.JTextField();
         btnXacNhan = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -126,12 +114,6 @@ public class FormThemLop extends javax.swing.JDialog {
         jLabel2.setText("Chương Trình");
 
         cbChuongTrinh.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jLabel3.setText("Số Buổi");
-
-        txtSoBuoi.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        txtSoBuoi.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtSoBuoi.setText("15");
 
         btnXacNhan.setBackground(new java.awt.Color(0, 102, 153));
         btnXacNhan.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -153,25 +135,19 @@ public class FormThemLop extends javax.swing.JDialog {
         pnThemLopLayout.setHorizontalGroup(
             pnThemLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnThemLopLayout.createSequentialGroup()
-                .addGap(177, 177, 177)
-                .addComponent(btnXacNhan, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(pnThemLopLayout.createSequentialGroup()
                 .addGap(38, 38, 38)
                 .addGroup(pnThemLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnThemLopLayout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(pnThemLopLayout.createSequentialGroup()
-                        .addGroup(pnThemLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtTenLop, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1)
-                            .addComponent(txtSoBuoi, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
-                        .addGroup(pnThemLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(cbChuongTrinh, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(36, 36, 36))))
+                    .addComponent(txtTenLop, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addGroup(pnThemLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(cbChuongTrinh, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(36, 36, 36))
+            .addGroup(pnThemLopLayout.createSequentialGroup()
+                .addGap(181, 181, 181)
+                .addComponent(btnXacNhan, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnThemLopLayout.setVerticalGroup(
             pnThemLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -184,13 +160,9 @@ public class FormThemLop extends javax.swing.JDialog {
                 .addGroup(pnThemLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTenLop, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbChuongTrinh, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
-                .addComponent(jLabel3)
-                .addGap(3, 3, 3)
-                .addComponent(txtSoBuoi, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addGap(35, 35, 35)
                 .addComponent(btnXacNhan, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
+                .addContainerGap(105, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -204,7 +176,7 @@ public class FormThemLop extends javax.swing.JDialog {
             .addComponent(pnThemLop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        setSize(new java.awt.Dimension(516, 289));
+        setSize(new java.awt.Dimension(516, 197));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -253,9 +225,7 @@ public class FormThemLop extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> cbChuongTrinh;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel pnThemLop;
-    private javax.swing.JTextField txtSoBuoi;
     private javax.swing.JTextField txtTenLop;
     // End of variables declaration//GEN-END:variables
 }
