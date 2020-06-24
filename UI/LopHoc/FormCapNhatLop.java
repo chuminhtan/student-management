@@ -5,6 +5,7 @@ import DTO.dto_ChuongTrinh;
 import DTO.dto_LopHoc;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 public class FormCapNhatLop extends javax.swing.JDialog {
@@ -27,7 +28,7 @@ public class FormCapNhatLop extends javax.swing.JDialog {
         setGiaoDienBanDau();
     }
     
-    DefaultComboBoxModel dfcbChuongTrinh;
+    //DefaultComboBoxModel dfcbChuongTrinh;
     ArrayList<dto_ChuongTrinh> dsChuongTrinh;
     ArrayList<dto_LopHoc> dsLopHoc;
 
@@ -60,7 +61,7 @@ public class FormCapNhatLop extends javax.swing.JDialog {
         String tenLop = txtTenLop.getText();
         
         
-        dto_ChuongTrinh ct = (dto_ChuongTrinh)cbChuongTrinh.getSelectedItem();
+        dto_ChuongTrinh ct = this.dsChuongTrinh.get(cbChuongTrinh.getSelectedIndex());
         
         if(tenLop.isEmpty()|| ct == null){
             JOptionPane.showMessageDialog(null, "Chưa Nhập Đủ Thông Tin");
@@ -84,11 +85,12 @@ public class FormCapNhatLop extends javax.swing.JDialog {
         dsChuongTrinh = new ArrayList<dto_ChuongTrinh>();
         dsChuongTrinh = new bus_LopHoc().layDsChuongTrinh();
         
-        dfcbChuongTrinh = new DefaultComboBoxModel();
-        dfcbChuongTrinh.addAll(dsChuongTrinh);
         txtTenLop.setText(this.lopChon.getTenLop());
-        
-        cbChuongTrinh.setModel(dfcbChuongTrinh);
+      
+        cbChuongTrinh.removeAllItems();
+        for(dto_ChuongTrinh ct: this.dsChuongTrinh){
+            cbChuongTrinh.addItem(ct.getTenCt());
+        }
 
     }
     /**

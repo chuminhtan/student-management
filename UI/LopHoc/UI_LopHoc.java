@@ -663,7 +663,7 @@ public class UI_LopHoc extends javax.swing.JPanel {
         lopChon = layLopDuocChon();
         if (lopChon != null) {
             if (lopChon.getMaNv() == UI_DangNhap.layMaNguoiDung() || UI_DangNhap.layLoaiNguoiDung() == 1) {
-                int luaChon = JOptionPane.showConfirmDialog(null, "Lưu ý \n\nSau khi cập nhật lịch học cũ sẽ được thay thế bằng lịch mới\n\nBạn có muốn tiếp tục?", "Cập Nhật Lịch Học", JOptionPane.YES_NO_OPTION);
+                int luaChon = JOptionPane.showConfirmDialog(null, "Lưu ý \n\nSau khi cập nhật lịch học cũ sẽ được thay thế bằng lịch mới\nBạn có muốn tiếp tục?", "Cập Nhật Lịch Học", JOptionPane.YES_NO_OPTION);
                 if (luaChon == 0) {
                     new FormLichHoc(lopChon).show();
                 }

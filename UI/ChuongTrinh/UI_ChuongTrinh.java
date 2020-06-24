@@ -151,10 +151,12 @@ public class UI_ChuongTrinh extends javax.swing.JPanel {
 
         boolean isCkDong = radDong.isSelected();
         boolean isCkMo = radMo.isSelected();
-
+        
+        dto_ChungChi cc = this.dsChungChi.get(cbTenCc.getSelectedIndex());
         String strNoiDung = txtNoiDung.getText();
-
-        int kqkt = kiemTraThongTinNhap(this.ctDuocChon.getChungChi(), strTen, strDiemDauVao, strDiemDauRa, isCkNghe, isCkNoi, isCkDoc, isCkViet, isCkTinhTong, isCkTinhTrungBinhCong, strNoiDung, isCkDong, isCkMo);
+        
+        
+        int kqkt = kiemTraThongTinNhap(cc,strTen, strDiemDauVao, strDiemDauRa, isCkNghe, isCkNoi, isCkDoc, isCkViet, isCkTinhTong, isCkTinhTrungBinhCong, strNoiDung, isCkDong, isCkMo);
 
         if (kqkt == 0) {
             JOptionPane.showMessageDialog(null, "Chưa nhập đủ thông tin");

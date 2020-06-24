@@ -54,6 +54,7 @@ public class FormLichHoc extends javax.swing.JDialog {
     dto_Thu t7;
     dto_Thu Cn;
 
+    /*
     DefaultComboBoxModel dfcbGvT2;
     DefaultComboBoxModel dfcbGvT3;
     DefaultComboBoxModel dfcbGvT4;
@@ -68,7 +69,7 @@ public class FormLichHoc extends javax.swing.JDialog {
     DefaultComboBoxModel dfcbPhongT6;
     DefaultComboBoxModel dfcbPhongT7;
     DefaultComboBoxModel dfcbPhongCn;
-
+*/
     DefaultTableModel dtmNgayNghi;
     ArrayList<dto_GiaoVien> dsGiaoVien;
     ArrayList<dto_Phong> dsPhong;
@@ -404,13 +405,15 @@ public class FormLichHoc extends javax.swing.JDialog {
         if(gioBd >= gioKt){
             return null;
         }
-            
-        dto_GiaoVien gv = (dto_GiaoVien) cbGv.getSelectedItem();
+        
+        
+        dto_GiaoVien gv = this.dsGiaoVien.get(cbGv.getSelectedIndex());
         if (gv == null) {
             return null;
         }
 
-        dto_Phong phong = (dto_Phong) cbPhong.getSelectedItem();
+        dto_Phong phong = this.dsPhong.get(cbPhong.getSelectedIndex());
+        
         if (phong == null) {
             return null;
         }
@@ -466,13 +469,13 @@ public class FormLichHoc extends javax.swing.JDialog {
         dsPhong = new ArrayList<dto_Phong>();
         dsPhong = new bus_LopHoc().layDsPhong();
 
-        setComboBoxChonLich(dfcbGvT2, cbGvT2, dfcbPhongT2, cbPhongT2);
-        setComboBoxChonLich(dfcbGvT3, cbGvT3, dfcbPhongT3, cbPhongT3);
-        setComboBoxChonLich(dfcbGvT4, cbGvT4, dfcbPhongT4, cbPhongT4);
-        setComboBoxChonLich(dfcbGvT5, cbGvT5, dfcbPhongT5, cbPhongT5);
-        setComboBoxChonLich(dfcbGvT6, cbGvT6, dfcbPhongT6, cbPhongT6);
-        setComboBoxChonLich(dfcbGvT7, cbGvT7, dfcbPhongT7, cbPhongT7);
-        setComboBoxChonLich(dfcbGvCn, cbGvCn, dfcbPhongCn, cbPhongCn);
+        setComboBoxChonLich(cbGvT2, cbPhongT2);
+        setComboBoxChonLich(cbGvT3,cbPhongT3);
+        setComboBoxChonLich(cbGvT4, cbPhongT4);
+        setComboBoxChonLich(cbGvT5, cbPhongT5);
+        setComboBoxChonLich(cbGvT6, cbPhongT6);
+        setComboBoxChonLich(cbGvT7, cbPhongT7);
+        setComboBoxChonLich(cbGvCn, cbPhongCn);
 
         dsNgayNghi = new ArrayList<Date>();
         
@@ -483,15 +486,17 @@ public class FormLichHoc extends javax.swing.JDialog {
    
     
     // HÀM SET GIAO DIỆN CHO KHU VỰC THỨ
-    public void setComboBoxChonLich(DefaultComboBoxModel dfcbGv, JComboBox cbGv, DefaultComboBoxModel dfcbPhong, JComboBox cbPhong) {
-
-        dfcbGv = new DefaultComboBoxModel();
-        dfcbGv.addAll(dsGiaoVien);
-        cbGv.setModel(dfcbGv);
-
-        dfcbPhong = new DefaultComboBoxModel();
-        dfcbPhong.addAll(dsPhong);
-        cbPhong.setModel(dfcbPhong);
+    public void setComboBoxChonLich(JComboBox cbGv,JComboBox cbPhong) {
+        
+        cbGv.removeAllItems();
+        for(dto_GiaoVien gv: this.dsGiaoVien){
+            cbGv.addItem(gv.getTenGv());
+        }
+        
+        cbPhong.removeAllItems();
+        for(dto_Phong phong: this.dsPhong){
+            cbPhong.addItem(phong.getTenPhong());
+        }
     }
 
     // HÀM SETUP BẢNG NGÀY NGHỈ

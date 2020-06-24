@@ -258,7 +258,7 @@ public class dal_LopHoc extends DBConnect {
 
         dto_TaiKhoan tk = null;
 
-        String sql = "SELECT ho_ten,loai, ten_dang_nhap, mat_khau "
+        String sql = "SELECT ten_nv,loai, ten_dang_nhap, mat_khau "
                 + "FROM nhan_vien "
                 + "WHERE ma_nv = ?";
 
