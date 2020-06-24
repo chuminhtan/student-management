@@ -15,7 +15,8 @@ create table NHAN_VIEN
    SDT                  VARCHAR2(20),
    LOAI                 NUMBER(1),
    TEN_DANG_NHAP        VARCHAR2(100),
-   MAT_KHAU             VARCHAR2(100),
+   MAT_KHAU             VARCHAR2(200),
+   SRC_IMG				VARCHAR2(200)
    constraint PK_NHAN_VIEN primary key (MA_NV)
 );
 --sequence
@@ -32,7 +33,7 @@ create table CHUNG_CHI
    TEN_CHUNG_CHI        VARCHAR2(100)        not null,
    NOI_DUNG             VARCHAR2(1000),
    DIEM_TOI_DA			NUMBER(4,1),
-   SRC_IMG              VARCHAR2(100)
+   SRC_IMG              VARCHAR2(200)
    constraint PK_CHUNG_CHI primary key (MA_CHUNG_CHI)
 );
 
@@ -79,8 +80,8 @@ create index THUOC_CHUNG_CHI_FK on CHUONG_TRINH (
 create table KHACH_HANG 
 (
    MA_KH                NUMBER(38)           not null,
-   HO_TEN               VARCHAR2(100)        not null,
-   NGAYSINH_            DATE,
+   TEN_KH               VARCHAR2(100)        not null,
+   NGAY_SINH            DATE,
    GIOI_TINH            NUMBER(1),
    DIA_CHI              VARCHAR2(100),
    SDT                  VARCHAR2(20),

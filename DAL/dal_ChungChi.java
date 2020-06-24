@@ -43,7 +43,8 @@ public class dal_ChungChi extends DBConnect {
     public int themChungChi(dto_ChungChi cc) {
 
         try {
-            String sql = "INSERT INTO chung_chi VALUES (chung_chi_sequence.NEXTVAL,?,?,?,?)";
+            String sql = "INSERT INTO chung_chi (ma_chung_chi,ten_chung_chi,noi_dung,diem_toi_da,src_img)"
+                    + " VALUES (chung_chi_sequence.NEXTVAL,?,?,?,?)";
 
             PreparedStatement preStmt = conn.prepareCall(sql);
             preStmt.setString(1, cc.getTenCc());

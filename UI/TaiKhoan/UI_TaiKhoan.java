@@ -386,6 +386,8 @@ public class UI_TaiKhoan extends javax.swing.JPanel {
         tbTaiKhoan.getColumnModel().getColumn(3).setMaxWidth(100);
         tbTaiKhoan.getColumnModel().getColumn(4).setMaxWidth(80);
         tbTaiKhoan.getColumnModel().getColumn(4).setMinWidth(80);
+        tbTaiKhoan.getColumnModel().getColumn(5).setMinWidth(150);
+        tbTaiKhoan.getColumnModel().getColumn(5).setMaxWidth(150);
 
         tbTaiKhoan.getTableHeader().setFont(new Font("Tahoma", Font.BOLD, 12));
         tbTaiKhoan.getTableHeader().setOpaque(false);
@@ -493,7 +495,6 @@ public class UI_TaiKhoan extends javax.swing.JPanel {
         });
 
         jspKH.setBackground(new java.awt.Color(255, 255, 255));
-        jspKH.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jspKH.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         jspKH.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jspKH.setPreferredSize(new java.awt.Dimension(469, 1000));
@@ -524,7 +525,7 @@ public class UI_TaiKhoan extends javax.swing.JPanel {
             }
         });
         tbTaiKhoan.setFocusable(false);
-        tbTaiKhoan.setRowHeight(50);
+        tbTaiKhoan.setRowHeight(30);
         tbTaiKhoan.setRowMargin(5);
         tbTaiKhoan.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tbTaiKhoan.setShowGrid(true);

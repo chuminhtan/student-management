@@ -140,7 +140,19 @@ public class dal_ChuongTrinh extends DBConnect {
     public int themChuongTrinh(dto_ChuongTrinh ct) {
 
         try {
-            String sql = "INSERT INTO chuong_trinh VALUES (chuong_trinh_sequence.NEXTVAL,?,?,?,?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO chuong_trinh (ma_ct,"
+                    + "ma_chung_chi,"
+                    + "ten_ct,"
+                    + "diem_dau_vao,"
+                    + "diem_dau_ra,"
+                    + "noi_dung,"
+                    + "trang_thai,"
+                    + "tinh_diem_nghe,"
+                    + "tinh_diem_noi,"
+                    + "tinh_diem_doc,"
+                    + "tinh_diem_viet,"
+                    + "cach_tinh_diem) "
+                    + "VALUES (chuong_trinh_sequence.NEXTVAL,?,?,?,?,?,?,?,?,?,?,?)";
 
             PreparedStatement preStmt = conn.prepareStatement(sql);
             preStmt.setInt(1, ct.getMaCc());
