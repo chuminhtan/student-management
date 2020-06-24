@@ -128,6 +128,7 @@ public class dal_ChungChi extends DBConnect {
 
             if (rs.next()) {
                 chungChi = new dto_ChungChi();
+                
                 chungChi.setMaCc(rs.getInt(1));
                 chungChi.setTenCc(rs.getString(2));
                 chungChi.setNoiDung(rs.getString(3));

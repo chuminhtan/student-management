@@ -1,18 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package UI.KhachHang;
 
 import BUS.bus_ChungChi;
 import BUS.bus_Khachhang;
-import BUS.bus_LopHoc;
 import DTO.dto_ChungChi;
 import DTO.dto_KhachHang;
 import DTO.dto_LichSu;
 import UI.FormXacMinhNguoiDung;
-
 import java.awt.Color;
 import java.awt.Font;
 import java.util.ArrayList;
@@ -21,10 +14,6 @@ import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author ThinkPro
- */
 public class UI_KhachHang extends javax.swing.JPanel {
 
     /**
@@ -37,6 +26,14 @@ public class UI_KhachHang extends javax.swing.JPanel {
         reloadTableKhachHang(this.dsKhachHang);
     }
     
+    public UI_KhachHang(boolean isHocVu){
+        initComponents();
+        giaoDienBanDau();
+        reloadDuLieu();
+        reloadTableKhachHang(this.dsKhachHang);
+        hideBtnKh();
+    }
+
     // BIẾN TỰ ĐỊNH NGHĨA
     private dto_KhachHang khDuocChon;
     private boolean isCapNhatKhachHang;
@@ -45,220 +42,225 @@ public class UI_KhachHang extends javax.swing.JPanel {
     private ArrayList<dto_KhachHang> dsKhachHang;
     private ArrayList<dto_ChungChi> dsChungChi;
 
-    
+    // HÀM TÌM KIẾM
+    public void timKhachHang(String text) {
+        ArrayList<dto_KhachHang> dsKhachHangTim = new bus_Khachhang().layDsTimKiem(text);
+
+        reloadTableKhachHang(dsKhachHangTim);
+    }
+
     // HÀM XÓA KHÁCH HÀNG
-    public void xoaKhachHang(){
-        
-            FormXacMinhNguoiDung form = new FormXacMinhNguoiDung();
-            boolean ketQua = form.kiemTraMatKhau();
-            
-            if(form.getLuaChon() == 0){
-                
-                if(ketQua == true){
-                
+    public void xoaKhachHang() {
+
+        FormXacMinhNguoiDung form = new FormXacMinhNguoiDung();
+        boolean ketQua = form.kiemTraMatKhau();
+
+        if (form.getLuaChon() == 0) {
+
+            if (ketQua == true) {
+
                 int rs = new bus_Khachhang().xoaKhachHang(this.khDuocChon);
-                
-                if(rs == 0)
+
+                if (rs == 0) {
                     JOptionPane.showMessageDialog(null, "Đã xóa khách hàng");
-                else{
+                } else {
                     JOptionPane.showMessageDialog(null, "Xóa Thành Công");
                     reloadDuLieu();
                 }
-            }
-            else
+            } else {
                 JOptionPane.showMessageDialog(null, "Mật Khẩu Không Chính Xác");
             }
+        }
     }
-    
+
     // HÀM CẬP NHẬT KHÁCH HÀNG
-    public void capNhatKhachHang(){
-        
+    public void capNhatKhachHang() {
+
         dto_KhachHang khNhap = layKhNhap();
-        
-        if(khNhap != null){
-            
+
+        if (khNhap != null) {
+
             khNhap.setMaKh(this.khDuocChon.getMaKh());
-            
+
             int kq = new bus_Khachhang().capNhatKhachHang(khNhap);
-            
-            if(kq > 0){
-                
+
+            if (kq > 0) {
+
                 JOptionPane.showMessageDialog(null, "Đã cập nhật thay đổi");
                 reloadDuLieu();
-            }
-            else
+            } else {
                 JOptionPane.showMessageDialog(null, "Lỗi");
-            
+            }
+
         }
     }
+
     // HÀM THÊM KHÁCH HÀNG
-    public void themKhachHang(){
-        
+    public void themKhachHang() {
+
         dto_KhachHang kh = new dto_KhachHang();
         kh = layKhNhap();
-        
-        if(kh != null){
-            
+
+        if (kh != null) {
+
             int kq = new bus_Khachhang().themKhachHang(kh);
-            
-            if(kq > 0){
+
+            if (kq > 0) {
                 JOptionPane.showMessageDialog(null, "Đã tạo khách hàng mới");
-                
+
                 reloadDuLieu();
-            }
-            else
+            } else {
                 JOptionPane.showMessageDialog(null, "Lỗi");
+            }
         }
     }
-    
+
     // HÀM LẤY THÔNG TIN NHẬP VÀO
-    public dto_KhachHang layKhNhap(){
-        
+    public dto_KhachHang layKhNhap() {
+
         dto_KhachHang kh = null;
-        
+
         String ten = txtTen.getText();
         int gioiTinh;
-        
-        if(cbGioiTinh.getSelectedIndex() == 0)
+
+        if (cbGioiTinh.getSelectedIndex() == 0) {
             gioiTinh = 1;
-        else
+        } else {
             gioiTinh = 2;
-        
+        }
+
         Date ngaySinh = dcNgaySinh.getDate();
-        
+
         String strDienThoai = txtSdt.getText();
         String diaChi = txtDiaChi.getText();
         String strDiemDauVao = txtDiemDauVao.getText();
-        
-       int indexChungChi = cbChungChi.getSelectedIndex();
-       
-       dto_ChungChi cc = null;
-       if(indexChungChi > -1){
-           cc = new dto_ChungChi();
-           cc = this.dsChungChi.get(indexChungChi);
-       }
-           
-       
-       if(ten.isEmpty() || ngaySinh == null || strDienThoai.isEmpty() || diaChi.isEmpty() || strDiemDauVao.isEmpty() || indexChungChi <0){
-           JOptionPane.showMessageDialog(null, "Chưa nhập đủ thông tin");
-           return null;
-       }
-       
-       int sdt;
-       
-       
-       try{
-           sdt = Integer.parseInt(strDienThoai);
-       }
-       catch(Exception ex){
-           ex.printStackTrace();
-           JOptionPane.showMessageDialog(null, "Số điện thoại không hợp lệ");
-           return null;
-       }
-       
-       Float diemDauVao = 0F;
-       
-       try{
-           
-           diemDauVao = Float.parseFloat(strDiemDauVao);
-       }
-       catch(Exception ex){
-           ex.printStackTrace();
-           JOptionPane.showMessageDialog(null, "Điểm đầu vào không hợp lệ");
-       }
-       
-       if(diemDauVao > cc.getDiemToiDa()){
-           JOptionPane.showMessageDialog(null, "Điểm đầu vào không được lớn hơn điểm tối đa của chứng chỉ quy định");
-           return null;
-       }
-       
-       kh = new dto_KhachHang();
-       kh.setTenKh(ten);
-       kh.setGioiTinh(gioiTinh);
-       kh.setNgaySinh(ngaySinh);
-       kh.setSdt(strDienThoai);
-       kh.setDiaChi(diaChi);
-       kh.setDiemDauVao(diemDauVao);
-       kh.setMaChungChi(cc.getMaCc());
-       return kh;           
+
+        int indexChungChi = cbChungChi.getSelectedIndex();
+
+        dto_ChungChi cc = null;
+        if (indexChungChi > -1) {
+            cc = new dto_ChungChi();
+            cc = this.dsChungChi.get(indexChungChi);
+        }
+
+        if (ten.isEmpty() || ngaySinh == null || strDienThoai.isEmpty() || diaChi.isEmpty() || strDiemDauVao.isEmpty() || indexChungChi < 0) {
+            JOptionPane.showMessageDialog(null, "Chưa nhập đủ thông tin");
+            return null;
+        }
+
+        int sdt;
+
+        try {
+            sdt = Integer.parseInt(strDienThoai);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Số điện thoại không hợp lệ");
+            return null;
+        }
+
+        Float diemDauVao = 0F;
+
+        try {
+
+            diemDauVao = Float.parseFloat(strDiemDauVao);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Điểm đầu vào không hợp lệ");
+        }
+
+        if (diemDauVao > cc.getDiemToiDa()) {
+            JOptionPane.showMessageDialog(null, "Điểm đầu vào không được lớn hơn điểm tối đa của chứng chỉ quy định");
+            return null;
+        }
+
+        kh = new dto_KhachHang();
+        kh.setTenKh(ten);
+        kh.setGioiTinh(gioiTinh);
+        kh.setNgaySinh(ngaySinh);
+        kh.setSdt(strDienThoai);
+        kh.setDiaChi(diaChi);
+        kh.setDiemDauVao(diemDauVao);
+        kh.setMaChungChi(cc.getMaCc());
+        return kh;
     }
-    
-    
+
     // HÀM THIẾT LẬP GIAO DIỆN BAN ĐẦU
-    public void giaoDienBanDau(){
+    public void giaoDienBanDau() {
         setupTableLichSu();
-        setupTableKhachHang();        
-        giaoDienThem();   
-    }  
-    
+        setupTableKhachHang();
+        giaoDienThem();
+        lblKhachHang.setText("Thông Tin Chi Tiết");
+        btnXacNhan.setVisible(false);
+                
+    }
+
     // HÀM SETUP DỮ LIỆU BAND ĐẦU
-    public void reloadDuLieu(){    
+    public void reloadDuLieu() {
         setupDuLieuKhachHang();
         setupDuLieuChungChi();
-        
         reloadTableKhachHang(this.dsKhachHang);
-        
     }
-    
+
     // HÀM SETUP DỮ LIỆU DANH SÁCH KHÁCH HÀNG
-    public void setupDuLieuKhachHang(){
+    public void setupDuLieuKhachHang() {
         this.dsKhachHang = new ArrayList<dto_KhachHang>();
         this.dsKhachHang = new bus_Khachhang().layDsKhachHang();
     }
-    
+
     // HÀM SETUP DỮ LIỆU CHỨNG CHỈ
-    public void setupDuLieuChungChi(){
+    public void setupDuLieuChungChi() {
         this.dsChungChi = new ArrayList<dto_ChungChi>();
         this.dsChungChi = new bus_ChungChi().layDsChungChi();
-        
+
         cbChungChi.removeAllItems();
-        
-        for(dto_ChungChi cc : this.dsChungChi){
+
+        for (dto_ChungChi cc : this.dsChungChi) {
             cbChungChi.addItem(cc.getTenCc());
         }
-   }
-    
+    }
+
     // HÀM SET GIAO DIỆN CẬP NHẬT
-    public void giaoDienCapNhat(){
-        
+    public void giaoDienCapNhat() {
+
         lblKhachHang.setText("Cập Nhật");
         isCapNhatKhachHang = true;
-        btnXacNhan.setVisible(true);     
+        btnXacNhan.setVisible(true);
     }
-    
+
     // HÀM HIỂN THỊ THÔNG TIN CHI TIẾT
-    public void giaoDienChiTiet(dto_KhachHang kh){
+    public void giaoDienChiTiet(dto_KhachHang kh) {
 
         reloadTableLichSu(kh.getDsLichSu());
-        
+
         btnXacNhan.setVisible(false);
         lblKhachHang.setText("Thông Tin Chi Tiết");
-        
-        if(kh != null){
-                 
+
+        if (kh != null) {
+
             txtMa.setText(kh.getMaKh() + "");
             txtTen.setText(kh.getTenKh());
             cbGioiTinh.setSelectedIndex(kh.getGioiTinh() - 1);
             dcNgaySinh.setDate(kh.getNgaySinh());
             txtSdt.setText(kh.getSdt());
             txtDiaChi.setText(kh.getDiaChi());
-            
+
             txtDiemDauVao.setText(kh.getDiemDauVao() + "");
-            
+
             txtDiemToiDa.setText(kh.getChungChiCanHoc().getDiemToiDa() + "");
-            
+
             txtLopDangHoc.setText(kh.getTenLop());
-            
-            cbChungChi.setSelectedItem(kh.getChungChiCanHoc().getTenCc()); 
-            
+
+            cbChungChi.setSelectedItem(kh.getChungChiCanHoc().getTenCc());
+
             this.khDuocChon = new dto_KhachHang();
             this.khDuocChon = kh;
         }
-        
+
     }
+
     // HÀM SET GIAO DIỆN THÊM KHÁCH HÀNG
-    public void giaoDienThem(){
-        
+    public void giaoDienThem() {
+
         isCapNhatKhachHang = false;
         btnXacNhan.setVisible(true);
         lblKhachHang.setText("Tạo Khách Hàng Mới");
@@ -271,43 +273,42 @@ public class UI_KhachHang extends javax.swing.JPanel {
         txtLopDangHoc.setText("");
         dcNgaySinh.setDate(null);
         tbKhachHang.clearSelection();
-                
+
     }
-    
+
     // HÀM LẤY KHÁCH HÀNG ĐƯỢC CHỌN
-    public dto_KhachHang khachHangDuocChon(){
-        
+    public dto_KhachHang khachHangDuocChon() {
+
         int row = tbKhachHang.getSelectedRow();
-        
+
         dto_KhachHang kh = null;
-        
-        if(row > -1){
-            
+
+        if (row > -1) {
+
             kh = new dto_KhachHang();
             kh = dsKhachHang.get(row);
-            
+
             khDuocChon = new dto_KhachHang();
             khDuocChon = kh;
         }
         kh.setDsLichSu(new bus_Khachhang().dsLichSu(kh.getMaKh()));
-        kh.setChungChiCanHoc( new bus_Khachhang().layChungChi(kh.getMaChungChi()));
-        
+        kh.setChungChiCanHoc(new bus_Khachhang().layChungChi(kh.getMaChungChi()));
+
         return kh;
     }
 
-    
     // HÀM LOAD DỮ LIỆU LÊN BẢNG LỊCH SỬ
     public void reloadTableLichSu(ArrayList<dto_LichSu> dsLichSu) {
 
         int stt = 0;
-        
+
         dtmLichSu.setRowCount(0);
 
         for (dto_LichSu ls : dsLichSu) {
 
             stt++;
-            
-            Vector<Object> vc = new Vector<Object>();   
+
+            Vector<Object> vc = new Vector<Object>();
             vc.add(stt);
             vc.add(ls.layNgayBd());
             vc.add(ls.layNgayKt());
@@ -322,30 +323,31 @@ public class UI_KhachHang extends javax.swing.JPanel {
         }
 
     }
-    
+
     // HÀM LOAD DỮ LIỆU LÊN BẢNG KHÁCH HÀNG
     public void reloadTableKhachHang(ArrayList<dto_KhachHang> dsKh) {
 
         int stt = 0;
         this.dsKhachHang = new ArrayList<dto_KhachHang>();
         this.dsKhachHang = dsKh;
-        
+
         dtmKhachHang.setRowCount(0);
 
         for (dto_KhachHang kh : this.dsKhachHang) {
 
             stt++;
             Vector<Object> vc = new Vector<Object>();
-            
+
             vc.add(stt);
             vc.add(kh.getMaKh());
             vc.add(kh.getTenKh());
-            
-            if(kh.getGioiTinh() == 1)
+
+            if (kh.getGioiTinh() == 1) {
                 vc.add("Nam");
-            else
+            } else {
                 vc.add("Nữ");
-            
+            }
+
             vc.add(kh.layNgaySinh());
             vc.add(kh.getSdt());
 
@@ -353,7 +355,7 @@ public class UI_KhachHang extends javax.swing.JPanel {
         }
 
     }
-    
+
     // HÀM TẠO BẢNG LỊCH SỬ
     public void setupTableLichSu() {
         dtmLichSu = new DefaultTableModel() {
@@ -372,7 +374,6 @@ public class UI_KhachHang extends javax.swing.JPanel {
         dtmLichSu.addColumn("Viết");
         dtmLichSu.addColumn("Tổng");
 
-
         tbLichSu.setModel(dtmLichSu);
 
         tbLichSu.getColumnModel().getColumn(0).setMaxWidth(50);
@@ -387,6 +388,7 @@ public class UI_KhachHang extends javax.swing.JPanel {
         tbLichSu.setSelectionBackground(new Color(0, 64, 128));
 
     }
+
     // HÀM TẠO BẢNG KHÁCH HÀNG
     public void setupTableKhachHang() {
         dtmKhachHang = new DefaultTableModel() {
@@ -402,7 +404,6 @@ public class UI_KhachHang extends javax.swing.JPanel {
         dtmKhachHang.addColumn("Ngày Sinh");
         dtmKhachHang.addColumn("Điện Thoại");
 
-
         tbKhachHang.setModel(dtmKhachHang);
 
         tbKhachHang.getColumnModel().getColumn(0).setMaxWidth(50);
@@ -417,17 +418,16 @@ public class UI_KhachHang extends javax.swing.JPanel {
         tbKhachHang.setSelectionBackground(new Color(0, 64, 128));
 
     }
-    
+
     // ẨN MỘT SỐ NÚT ĐỂ PHẦN QUYỀN
-    public void hideBtnKh(){
+    public void hideBtnKh() {
         btnCapNhatKH.setVisible(false);
         btnThemKH.setVisible(false);
         btnXoaKH.setVisible(false);
+        
     }
-    
-    
+
     /*Hết khu vực của Tân*/
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -437,13 +437,8 @@ public class UI_KhachHang extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnCapNhatKH = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        txtTimKH = new javax.swing.JTextField();
-        btnThemKH = new javax.swing.JButton();
         jspKH = new javax.swing.JScrollPane();
         tbKhachHang = new javax.swing.JTable();
-        btnXoaKH = new javax.swing.JButton();
         pnThongTin = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -470,6 +465,11 @@ public class UI_KhachHang extends javax.swing.JPanel {
         btnXacNhan = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
         txtDiemToiDa = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        txtTimKH = new javax.swing.JTextField();
+        btnXoaKH = new javax.swing.JButton();
+        btnThemKH = new javax.swing.JButton();
+        btnCapNhatKH = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(230, 245, 255));
         setAlignmentX(0.0F);
@@ -479,53 +479,6 @@ public class UI_KhachHang extends javax.swing.JPanel {
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 formMouseClicked(evt);
-            }
-        });
-
-        btnCapNhatKH.setBackground(new java.awt.Color(230, 245, 255));
-        btnCapNhatKH.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnCapNhatKH.setForeground(new java.awt.Color(255, 255, 255));
-        btnCapNhatKH.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/capnhat.png"))); // NOI18N
-        btnCapNhatKH.setContentAreaFilled(false);
-        btnCapNhatKH.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnCapNhatKH.setFocusable(false);
-        btnCapNhatKH.setMaximumSize(new java.awt.Dimension(129, 49));
-        btnCapNhatKH.setMinimumSize(new java.awt.Dimension(129, 49));
-        btnCapNhatKH.setOpaque(true);
-        btnCapNhatKH.setPreferredSize(new java.awt.Dimension(129, 49));
-        btnCapNhatKH.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCapNhatKHActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel1.setText("Tìm Kiếm");
-
-        txtTimKH.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        txtTimKH.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        txtTimKH.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(153, 153, 153)));
-        txtTimKH.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        txtTimKH.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTimKHActionPerformed(evt);
-            }
-        });
-
-        btnThemKH.setBackground(new java.awt.Color(230, 245, 255));
-        btnThemKH.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnThemKH.setForeground(new java.awt.Color(255, 255, 255));
-        btnThemKH.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/taomoi.png"))); // NOI18N
-        btnThemKH.setContentAreaFilled(false);
-        btnThemKH.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnThemKH.setFocusable(false);
-        btnThemKH.setMaximumSize(new java.awt.Dimension(217, 60));
-        btnThemKH.setMinimumSize(new java.awt.Dimension(217, 60));
-        btnThemKH.setOpaque(true);
-        btnThemKH.setPreferredSize(new java.awt.Dimension(209, 30));
-        btnThemKH.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnThemKHActionPerformed(evt);
             }
         });
 
@@ -560,7 +513,7 @@ public class UI_KhachHang extends javax.swing.JPanel {
             }
         });
         tbKhachHang.setFocusable(false);
-        tbKhachHang.setRowHeight(40);
+        tbKhachHang.setRowHeight(30);
         tbKhachHang.setRowMargin(5);
         tbKhachHang.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tbKhachHang.setShowGrid(true);
@@ -583,26 +536,11 @@ public class UI_KhachHang extends javax.swing.JPanel {
             tbKhachHang.getColumnModel().getColumn(4).setMaxWidth(100);
         }
 
-        btnXoaKH.setBackground(new java.awt.Color(230, 245, 255));
-        btnXoaKH.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnXoaKH.setForeground(new java.awt.Color(255, 255, 255));
-        btnXoaKH.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/xoa.png"))); // NOI18N
-        btnXoaKH.setToolTipText("");
-        btnXoaKH.setContentAreaFilled(false);
-        btnXoaKH.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnXoaKH.setFocusable(false);
-        btnXoaKH.setMaximumSize(new java.awt.Dimension(129, 49));
-        btnXoaKH.setMinimumSize(new java.awt.Dimension(129, 49));
-        btnXoaKH.setOpaque(true);
-        btnXoaKH.setPreferredSize(new java.awt.Dimension(129, 49));
-        btnXoaKH.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnXoaKHActionPerformed(evt);
-            }
-        });
-
         pnThongTin.setBackground(new java.awt.Color(250, 250, 250));
         pnThongTin.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 102)));
+        pnThongTin.setMinimumSize(new java.awt.Dimension(613, 500));
+        pnThongTin.setPreferredSize(new java.awt.Dimension(613, 500));
+        pnThongTin.setRequestFocusEnabled(false);
 
         jLabel2.setText("Quá Trình Học Tập");
 
@@ -798,12 +736,85 @@ public class UI_KhachHang extends javax.swing.JPanel {
                         .addComponent(cbChungChi, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(txtDiemDauVao, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtLopDangHoc, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
+
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel1.setText("Tìm Kiếm");
+
+        txtTimKH.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtTimKH.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        txtTimKH.setToolTipText("Tìm theo mã, họ tên, số điện thoại");
+        txtTimKH.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(153, 153, 153)));
+        txtTimKH.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        txtTimKH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTimKHActionPerformed(evt);
+            }
+        });
+        txtTimKH.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTimKHKeyReleased(evt);
+            }
+        });
+
+        btnXoaKH.setBackground(new java.awt.Color(230, 245, 255));
+        btnXoaKH.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnXoaKH.setForeground(new java.awt.Color(255, 255, 255));
+        btnXoaKH.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/xoa.png"))); // NOI18N
+        btnXoaKH.setToolTipText("Xóa Thông Tin Khách Hàng");
+        btnXoaKH.setContentAreaFilled(false);
+        btnXoaKH.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnXoaKH.setFocusable(false);
+        btnXoaKH.setMaximumSize(new java.awt.Dimension(129, 49));
+        btnXoaKH.setMinimumSize(new java.awt.Dimension(129, 49));
+        btnXoaKH.setOpaque(true);
+        btnXoaKH.setPreferredSize(new java.awt.Dimension(129, 49));
+        btnXoaKH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaKHActionPerformed(evt);
+            }
+        });
+
+        btnThemKH.setBackground(new java.awt.Color(230, 245, 255));
+        btnThemKH.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnThemKH.setForeground(new java.awt.Color(255, 255, 255));
+        btnThemKH.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/taomoi.png"))); // NOI18N
+        btnThemKH.setToolTipText("Tạo Khách Hàng Mới");
+        btnThemKH.setContentAreaFilled(false);
+        btnThemKH.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnThemKH.setFocusable(false);
+        btnThemKH.setMaximumSize(new java.awt.Dimension(217, 60));
+        btnThemKH.setMinimumSize(new java.awt.Dimension(217, 60));
+        btnThemKH.setOpaque(true);
+        btnThemKH.setPreferredSize(new java.awt.Dimension(209, 30));
+        btnThemKH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemKHActionPerformed(evt);
+            }
+        });
+
+        btnCapNhatKH.setBackground(new java.awt.Color(230, 245, 255));
+        btnCapNhatKH.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnCapNhatKH.setForeground(new java.awt.Color(255, 255, 255));
+        btnCapNhatKH.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/capnhat.png"))); // NOI18N
+        btnCapNhatKH.setToolTipText("Cập Nhật Thông Tin Khách Hàng");
+        btnCapNhatKH.setContentAreaFilled(false);
+        btnCapNhatKH.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCapNhatKH.setFocusable(false);
+        btnCapNhatKH.setMaximumSize(new java.awt.Dimension(129, 49));
+        btnCapNhatKH.setMinimumSize(new java.awt.Dimension(129, 49));
+        btnCapNhatKH.setOpaque(true);
+        btnCapNhatKH.setPreferredSize(new java.awt.Dimension(129, 49));
+        btnCapNhatKH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCapNhatKHActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -811,38 +822,41 @@ public class UI_KhachHang extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtTimKH, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(292, 292, 292)
+                        .addGap(261, 261, 261)
                         .addComponent(btnThemKH, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCapNhatKH, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnXoaKH, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jspKH, javax.swing.GroupLayout.PREFERRED_SIZE, 672, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(pnThongTin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(22, Short.MAX_VALUE))
+                        .addComponent(btnCapNhatKH, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnXoaKH, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jspKH, javax.swing.GroupLayout.PREFERRED_SIZE, 654, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addComponent(pnThongTin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnXoaKH, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnThemKH, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCapNhatKH, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtTimKH, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(7, 7, 7)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtTimKH, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(5, 5, 5))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnXoaKH, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnCapNhatKH, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnThemKH, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnThongTin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jspKH, javax.swing.GroupLayout.DEFAULT_SIZE, 571, Short.MAX_VALUE))
+                    .addComponent(pnThongTin, javax.swing.GroupLayout.DEFAULT_SIZE, 576, Short.MAX_VALUE)
+                    .addComponent(jspKH))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -853,14 +867,14 @@ public class UI_KhachHang extends javax.swing.JPanel {
 
     private void btnCapNhatKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatKHActionPerformed
 
-         giaoDienCapNhat();
+        giaoDienCapNhat();
 
     }//GEN-LAST:event_btnCapNhatKHActionPerformed
 
     private void btnXoaKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaKHActionPerformed
         dto_KhachHang kh = khachHangDuocChon();
-        
-        if(kh != null)
+
+        if (kh != null)
             xoaKhachHang();
         else
             JOptionPane.showMessageDialog(null, "Chưa chọn khách hàng");
@@ -871,7 +885,7 @@ public class UI_KhachHang extends javax.swing.JPanel {
     }//GEN-LAST:event_btnThemKHActionPerformed
 
     private void txtTimKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimKHActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_txtTimKHActionPerformed
 
     private void txtTenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTenActionPerformed
@@ -884,21 +898,30 @@ public class UI_KhachHang extends javax.swing.JPanel {
 
     private void cbChungChiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbChungChiActionPerformed
         int row = cbChungChi.getSelectedIndex();
-        
-        if(row > -1){
+
+        if (row > -1) {
             dto_ChungChi cc = this.dsChungChi.get(row);
-            txtDiemToiDa.setText(cc.getDiemToiDa()+"");
+            txtDiemToiDa.setText(cc.getDiemToiDa() + "");
         }
     }//GEN-LAST:event_cbChungChiActionPerformed
 
     private void btnXacNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXacNhanActionPerformed
 
-        if(isCapNhatKhachHang == false)
-        themKhachHang();
+        if (isCapNhatKhachHang == false)
+            themKhachHang();
 
         else
-        capNhatKhachHang();
+            capNhatKhachHang();
     }//GEN-LAST:event_btnXacNhanActionPerformed
+
+    private void txtTimKHKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKHKeyReleased
+        String text = txtTimKH.getText();
+
+        if (text.isEmpty())
+            reloadDuLieu();
+        else
+            timKhachHang(text);
+    }//GEN-LAST:event_txtTimKHKeyReleased
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCapNhatKH;

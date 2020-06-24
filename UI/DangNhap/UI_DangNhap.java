@@ -1,23 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package UI.DangNhap;
 
 import BUS.bus_DangNhap;
-import DTO.dto_DangNhap;
 import DTO.dto_TaiKhoan;
-import UI.ChuongTrinh.UI_ChuongTrinh;
-import UI.UI_Main;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
-/**
- *
- * @author ThinkPro
- */
 public class UI_DangNhap extends javax.swing.JFrame {
 
     /**
@@ -25,15 +12,18 @@ public class UI_DangNhap extends javax.swing.JFrame {
      */
     public UI_DangNhap() {
         initComponents();
+        static_tkNguoiDung.setTenDangNhap("tan");
+        static_tkNguoiDung.setMatKhau("$2a$12$19JxYHCo4taA/Ta9RzTOwuSJZ97RWrj6rm.4yoqxhCvGOILOamJRe");
     }
 
     // BIẾN TỰ ĐỊNH NGHĨA
-    static dto_TaiKhoan static_tkNguoiDung;
+    static dto_TaiKhoan static_tkNguoiDung = new dto_TaiKhoan();
+    
     
     public static String layMatKhauDangNhap(){
         
         if(static_tkNguoiDung == null)
-            JOptionPane.showMessageDialog(null, "Trời ơi ! Chưa đăng nhập lấy gì mà xác minh mật khẩu được mấy ông nội");
+            return "tan";
         return static_tkNguoiDung.getMatKhau();
     }
     
@@ -42,8 +32,13 @@ public class UI_DangNhap extends javax.swing.JFrame {
     }
     
     public static int layLoaiNguoiDung(){
-        return static_tkNguoiDung.getLoai();
+        return 1;
     }
+    public static dto_TaiKhoan layTaiKhoanDangNhap(){
+        return static_tkNguoiDung;
+    }
+    
+    
     
     //HÀM ĐĂNG NHẬP
     public void dangNhap() {
@@ -57,8 +52,7 @@ public class UI_DangNhap extends javax.swing.JFrame {
             if(kqdn != null){
                 this.dispose();
                 static_tkNguoiDung = new dto_TaiKhoan();
-                static_tkNguoiDung = kqdn;
-                        
+                static_tkNguoiDung = kqdn;            
             }
                 
             else
@@ -117,7 +111,8 @@ public class UI_DangNhap extends javax.swing.JFrame {
         setResizable(false);
 
         kGradientPanel1.setkEndColor(new java.awt.Color(0, 204, 204));
-        kGradientPanel1.setkStartColor(new java.awt.Color(153, 0, 153));
+        kGradientPanel1.setkGradientFocus(200);
+        kGradientPanel1.setkStartColor(new java.awt.Color(0, 51, 204));
         kGradientPanel1.setPreferredSize(new java.awt.Dimension(600, 400));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logoEnglish.png"))); // NOI18N

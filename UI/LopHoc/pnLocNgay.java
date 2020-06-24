@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package UI.LopHoc;
 
 import BUS.bus_LopHoc;
@@ -11,10 +6,6 @@ import DTO.dto_LopHoc;
 import java.util.ArrayList;
 import java.util.Date;
 
-/**
- *
- * @author USER
- */
 public class pnLocNgay extends javax.swing.JPanel {
 
     /**

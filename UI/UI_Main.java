@@ -5,7 +5,6 @@
  */
 package UI;
 
-import DTO.dto_DangNhap;
 import DTO.dto_TaiKhoan;
 import UI.ChuongTrinh.UI_ChuongTrinh;
 import UI.LopHoc.UI_LopHoc;
@@ -13,15 +12,14 @@ import UI.KhachHang.UI_KhachHang;
 import UI.DangNhap.UI_DangNhap;
 import UI.GV_Phong.UI_GV_Phong;
 import UI.TaiKhoan.UI_TaiKhoan;
+import UI.TaiKhoan.pnDoiMatKhau;
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import javax.swing.JButton;
-import javax.swing.JComponent;
 
 public final class UI_Main extends javax.swing.JFrame {
 
@@ -30,7 +28,7 @@ public final class UI_Main extends javax.swing.JFrame {
         setResizable(false);
         setAllTabButtonColor("thongke");
         hienThiNgay();
-        
+
     }
     //Biến tự định nghĩa
     private UI_LopHoc ui_lop = new UI_LopHoc();
@@ -38,13 +36,13 @@ public final class UI_Main extends javax.swing.JFrame {
     private UI_ChuongTrinh ui_ct = new UI_ChuongTrinh();
     private UI_TaiKhoan ui_tk = new UI_TaiKhoan();
     private UI_GV_Phong ui_gv_phong = new UI_GV_Phong();
-    
+
     // HÀM THAY ĐỔI MÀU
     public void changeTabButtonColor(JButton button, Color currentColor, Color hoverColor) {
 
         CustomBorder customBorder = new CustomBorder(null, null, new CustomBorder.BorderPiece(3), null);
         button.setBorder(customBorder);
-        
+
         ((CustomBorder) button.getBorder()).setColor(currentColor);
 
         button.addMouseListener(new MouseAdapter() {
@@ -78,7 +76,7 @@ public final class UI_Main extends javax.swing.JFrame {
             this.changeTabButtonColor(btnTaiKhoan, CustomBorder.WHITE, CustomBorder.TAIKHOAN);
             this.changeTabButtonColor(btnThongKe, CustomBorder.WHITE, CustomBorder.THONGKE);
             this.changeTabButtonColor(btnGiaoVienPhong, CustomBorder.WHITE, CustomBorder.TKB);
-            
+
         } else if (name.equals("lophoc")) {
             this.changeTabButtonColor(btnChuongTrinh, CustomBorder.WHITE, CustomBorder.CHUONGTRINHHOC);
             this.changeTabButtonColor(btnKhachHang, CustomBorder.WHITE, CustomBorder.KHACHHANG);
@@ -100,8 +98,7 @@ public final class UI_Main extends javax.swing.JFrame {
             this.changeTabButtonColor(btnTaiKhoan, CustomBorder.TAIKHOAN, CustomBorder.TAIKHOAN);
             this.changeTabButtonColor(btnThongKe, CustomBorder.WHITE, CustomBorder.THONGKE);
             this.changeTabButtonColor(btnGiaoVienPhong, CustomBorder.WHITE, CustomBorder.TKB);
-        }
-            else if (name.equals("gv_phong")) {
+        } else if (name.equals("gv_phong")) {
             this.changeTabButtonColor(btnChuongTrinh, CustomBorder.WHITE, CustomBorder.CHUONGTRINHHOC);
             this.changeTabButtonColor(btnKhachHang, CustomBorder.WHITE, CustomBorder.KHACHHANG);
             this.changeTabButtonColor(btnLopHoc, CustomBorder.WHITE, CustomBorder.LOPHOC);
@@ -127,14 +124,12 @@ public final class UI_Main extends javax.swing.JFrame {
     //method giao diện cho nhân viên ghi danh 
     public void showGhiDanh() {
         ui_lop.hideBtnLop();
-        btnTaiKhoan.setVisible(false);
         ui_ct.hideBtnCt();
     }
 
     //method giao diện cho nhân viên học vụ
     public void showHocVu() {
         ui_kh.hideBtnKh();
-        btnTaiKhoan.setVisible(false);
         ui_ct.hideBtnCt();
     }
 
@@ -143,8 +138,6 @@ public final class UI_Main extends javax.swing.JFrame {
         txtThongTinDangNhap.setText(tk.getMa() + " | " + tk.getHoTen());
     }
 
-    /*  ====================Hết khu vực của Tân
-     */
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -391,7 +384,13 @@ public final class UI_Main extends javax.swing.JFrame {
         pnBody.removeAll();
         pnBody.repaint();
         pnBody.revalidate();
-        pnBody.add(new UI_TaiKhoan());
+
+        if (UI_DangNhap.layTaiKhoanDangNhap().getLoai() == 1) {
+            pnBody.add(new UI_TaiKhoan());
+        } else {
+            pnBody.add(new pnDoiMatKhau());
+        }
+
         pnBody.repaint();
         pnBody.revalidate();
     }//GEN-LAST:event_btnTaiKhoanActionPerformed
@@ -402,7 +401,12 @@ public final class UI_Main extends javax.swing.JFrame {
         pnBody.removeAll();
         pnBody.repaint();
         pnBody.revalidate();
-        pnBody.add(new UI_LopHoc());
+
+        if (UI_DangNhap.layTaiKhoanDangNhap().getLoai() == 2) {
+            pnBody.add(new UI_LopHoc(true));
+        } else {
+            pnBody.add(new UI_LopHoc());
+        }
         pnBody.repaint();
         pnBody.revalidate();
     }//GEN-LAST:event_btnLopHocActionPerformed
@@ -413,6 +417,12 @@ public final class UI_Main extends javax.swing.JFrame {
         pnBody.removeAll();
         pnBody.repaint();
         pnBody.revalidate();
+
+        if (UI_DangNhap.layTaiKhoanDangNhap().getLoai() == 3) {
+            pnBody.add(new UI_KhachHang(true));
+        } else {
+            pnBody.add(new UI_KhachHang());
+        }
         pnBody.add(new UI_KhachHang());
         pnBody.repaint();
         pnBody.revalidate();
@@ -430,9 +440,13 @@ public final class UI_Main extends javax.swing.JFrame {
 
     private void btnChuongTrinhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChuongTrinhActionPerformed
         setAllTabButtonColor("chuongtrinh");
-
         pnBody.removeAll();
         pnBody.repaint();
+        if (UI_DangNhap.layTaiKhoanDangNhap().getLoai() != 1) {
+            pnBody.add(new UI_ChuongTrinh(true));
+        } else {
+            pnBody.add(new UI_ChuongTrinh());
+        }
         pnBody.add(new UI_ChuongTrinh());
         pnBody.repaint();
         pnBody.revalidate();
@@ -443,6 +457,12 @@ public final class UI_Main extends javax.swing.JFrame {
 
         pnBody.removeAll();
         pnBody.repaint();
+
+        if (UI_DangNhap.layTaiKhoanDangNhap().getLoai() != 1) {
+            pnBody.add(new UI_GV_Phong(true));
+        } else {
+            pnBody.add(new UI_GV_Phong());
+        }
         pnBody.add(new UI_GV_Phong());
         pnBody.repaint();
         pnBody.revalidate();
@@ -495,7 +515,6 @@ public final class UI_Main extends javax.swing.JFrame {
             }
         });
     }
-
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

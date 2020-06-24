@@ -1,9 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package UI.LopHoc;
+
 import BUS.bus_LopHoc;
 import DTO.dto_Lich;
 import DTO.dto_LopHoc;
@@ -12,46 +8,45 @@ import UI.FormXacMinhNguoiDung;
 import UI.LopHoc.ChiTietLopHoc.UI_ChiTietLop;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author ThinkPro
- */
 public class UI_LopHoc extends javax.swing.JPanel {
 
     /**
      * Creates new form LopHocUI
      */
     public UI_LopHoc() {
-       
         initComponents();
         setupGiaoDienBanDau();
         reloadDuLieuLop();
         thayPanel(pnLocThu);
-        //cbLoc.setSelectedIndex(0);
     }
-   
+    
+    public UI_LopHoc(boolean isGhiDanh){
+        initComponents();
+        setupGiaoDienBanDau();
+        reloadDuLieuLop();
+        thayPanel(pnLocThu);
+        hideBtnLop();
+    }
     // BIẾN TỰ ĐỊNH NGHĨA
     static DefaultTableModel static_dtmLopHoc;
     static DefaultTableModel static_dtmLich;
-    
+
     pnLocThu pnLocThu = new pnLocThu();
     static ArrayList<dto_LopHoc> static_dsLopHoc;
     static ArrayList<dto_Lich> static_dsLich;
-    
-    public static ArrayList<dto_LopHoc> getDsLopHoc(){
+
+    public static ArrayList<dto_LopHoc> getDsLopHoc() {
         return static_dsLopHoc;
     }
-    
-    
+
     // HÀM THAY PANEL
-    public void thayPanel(JPanel pn){
+    public void thayPanel(JPanel pn) {
         pnLoc.removeAll();
         pnLoc.repaint();
         pnLoc.add(pn);
@@ -59,88 +54,88 @@ public class UI_LopHoc extends javax.swing.JPanel {
         pnLoc.revalidate();
 
     }
-    
+
     // HÀM XÓA LỚP
-    public void xoaLop(){
-        
+    public void xoaLop() {
+
         dto_LopHoc lop = layLopDuocChon();
-        
-        if(lop != null){
-            
+
+        if (lop != null) {
+
             FormXacMinhNguoiDung form = new FormXacMinhNguoiDung();
             boolean ketQua = form.kiemTraMatKhau();
-            
-            if(form.getLuaChon() == 0){
-                
-                if(ketQua == true){
-                
-                int rs = new bus_LopHoc().xoaLop(lop);
-                
-                if(rs == 0)
-                    JOptionPane.showMessageDialog(null, "Không Thành Công");
-                else{
-                    JOptionPane.showMessageDialog(null, "Xóa Thành Công");
-                    reloadDuLieuLop();
+
+            if (form.getLuaChon() == 0) {
+
+                if (ketQua == true) {
+
+                    int rs = new bus_LopHoc().xoaLop(lop);
+
+                    if (rs == 0) {
+                        JOptionPane.showMessageDialog(null, "Không Thành Công");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Xóa Thành Công");
+                        reloadDuLieuLop();
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Mật Khẩu Không Chính Xác");
                 }
-            }
-            else
-                JOptionPane.showMessageDialog(null, "Mật Khẩu Không Chính Xác");
             }
 
         }
     }
-    
+
     // HÀM TÌM KIẾM
-    public void hienThiDsTimLop(String text){
+    public void hienThiDsTimLop(String text) {
         ArrayList<dto_LopHoc> dsLopTim = new bus_LopHoc().layDsLopTim(text);
-        
+
         reloadTableLop(dsLopTim);
     }
-    
+
     // HÀM SETUP GIAO DIỆN BAN ĐẦU
-    public void setupGiaoDienBanDau(){
+    public void setupGiaoDienBanDau() {
         setupTableLop();
         setupTableLich();
     }
-    
+
     // HÀM RELOAD DỮ LIỆU
-    public static void reloadDuLieuLop(){
+    public static void reloadDuLieuLop() {
         static_dsLopHoc = new ArrayList<dto_LopHoc>();
-        static_dsLopHoc = new bus_LopHoc().layDsLop(ckLopDong.isSelected()); 
+        static_dsLopHoc = new bus_LopHoc().layDsLop(ckLopDong.isSelected());
         static_dsLopHoc = new bus_LopHoc().layChuongTrinh(static_dsLopHoc);
         static_dsLopHoc = new bus_LopHoc().laySiSo(static_dsLopHoc);
-        
+
         reloadTableLop(static_dsLopHoc);
     }
-     
+
     // HÀM HIỂN THỊ DANH SÁCH LỊCH HỌC CỦA 1 LỚP
-    public void hienThiThongTinLop(){
+    public void hienThiThongTinLop() {
         dto_LopHoc lop = layLopDuocChon();
-        
-        if(lop != null){
-           txtPhuTrach.setText(lop.getTk().getMa() + " - " + lop.getTk().getHoTen());
-           reloadTableLich(lop);
+
+        if (lop != null) {
+            txtPhuTrach.setText(lop.getTk().getMa() + " - " + lop.getTk().getHoTen());
+            reloadTableLich(lop);
         }
 
     }
-    
 
     // HÀM LẤY ĐỐI TƯỢNG LỚP ĐƯỢC CHỌN
-    public dto_LopHoc layLopDuocChon(){      
+    public dto_LopHoc layLopDuocChon() {
         int dong = tbLopHoc.getSelectedRow();
         dto_LopHoc lop = null;
-        
-        if(dong > -1){
-            lop = new dto_LopHoc(); 
+
+        if (dong > -1) {
+            lop = new dto_LopHoc();
             lop = static_dsLopHoc.get(dong);
             lop.setDsLich(new bus_LopHoc().layDsLich(lop.getMaLop()));
             lop.setTk(new bus_LopHoc().layTaiKhoan(lop.getMaNv()));
+            lop.setCt(new bus_LopHoc().layMotChuongTrinh(lop.getMaCt()));
+            lop.getCt().setChungChi(new bus_LopHoc().layMotChungChi(lop.getCt().getMaCc()));
         }
-        
+
         return lop;
     }
-    
-    
+
     // HÀM TẢI LẠI DANH SÁCH LICH
     public static void reloadTableLich(dto_LopHoc lop) {
 
@@ -156,18 +151,20 @@ public class UI_LopHoc extends javax.swing.JPanel {
             Vector<Object> vc = new Vector<Object>();
             vc.add(stt);
             vc.add(lich.getNgayHoc());
-            
-            if(lich.getThu() == 1)
+
+            if (lich.getThu() == 1) {
                 vc.add("CN");
-            else
+            } else {
                 vc.add(lich.getThu());
-            
-            vc.add(lich.getGioBd() + " - " +lich.getGioKt());
+            }
+
+            vc.add(lich.getGioBd() + " - " + lich.getGioKt());
             vc.add(lich.getGv().getTenGv());
             vc.add(lich.getPhong().getTenPhong());
             static_dtmLich.addRow(vc);
         }
     }
+
     // HÀM TẢI LẠI DANH SÁCH LỚP
     public static void reloadTableLop(ArrayList<dto_LopHoc> dsLop) {
 
@@ -200,11 +197,11 @@ public class UI_LopHoc extends javax.swing.JPanel {
             static_dtmLopHoc.addRow(vc);
         }
     }
-    
+
     // HÀM TẠO BẢNG LỊCH
     public void setupTableLich() {
-        static_dtmLich = new DefaultTableModel(){
-                public boolean isCellEditable(int row, int column) {
+        static_dtmLich = new DefaultTableModel() {
+            public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
@@ -228,18 +225,18 @@ public class UI_LopHoc extends javax.swing.JPanel {
         tbLich.getColumnModel().getColumn(3).setMaxWidth(100);
         tbLich.getColumnModel().getColumn(5).setMinWidth(50);
         tbLich.getColumnModel().getColumn(5).setMaxWidth(50);
-        
+
         tbLich.getTableHeader().setFont(new Font("Tahoma", Font.BOLD, 12));
         tbLich.getTableHeader().setOpaque(false);
         tbLich.getTableHeader().setForeground(new Color(0, 0, 0));
         tbLich.setSelectionBackground(new Color(0, 64, 128));
 
     }
-    
+
     // HÀM TẠO BẢNG LỚP HỌC
     public void setupTableLop() {
-        static_dtmLopHoc = new DefaultTableModel(){
-                public boolean isCellEditable(int row, int column) {
+        static_dtmLopHoc = new DefaultTableModel() {
+            public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
@@ -276,20 +273,18 @@ public class UI_LopHoc extends javax.swing.JPanel {
         tbLopHoc.getTableHeader().setForeground(new Color(0, 0, 0));
         tbLopHoc.setSelectionBackground(new Color(0, 64, 128));
     }
-    
+
     // HÀM ẨN CHỨC NĂNG DÀNH CHO GIAO DIỆN GHI DANH
-    public void hideBtnLop(){
+    public void hideBtnLop() {
         btnLichHoc.setVisible(false);
         btnThemLop.setVisible(false);
         btnCapNhatLop.setVisible(false);
         btnXoaLop.setVisible(false);
-    } 
-    
-    // SỰ KIỆN KHI LỰA CHỌN CHỨC NĂNG LỌC
+        btnLichHoc.setVisible(false);
+        btnVaoLop.setVisible(false);
+    }
 
-    
-    
-    
+    // SỰ KIỆN KHI LỰA CHỌN CHỨC NĂNG LỌC
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -314,7 +309,7 @@ public class UI_LopHoc extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         txtPhuTrach = new javax.swing.JTextField();
         btnLichHoc = new javax.swing.JButton();
-        btnChiTietLop1 = new javax.swing.JButton();
+        btnVaoLop = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         cbLoc = new javax.swing.JComboBox<>();
         pnLoc = new javax.swing.JPanel();
@@ -364,6 +359,7 @@ public class UI_LopHoc extends javax.swing.JPanel {
         lblTimLop.setText("Tìm Kiếm");
 
         txtTimLop.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        txtTimLop.setToolTipText("Tìm theo mã, tên, chương trình");
         txtTimLop.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(153, 153, 153)));
         txtTimLop.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -409,7 +405,7 @@ public class UI_LopHoc extends javax.swing.JPanel {
         tbLopHoc.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         tbLopHoc.setDoubleBuffered(true);
         tbLopHoc.setFocusable(false);
-        tbLopHoc.setRowHeight(40);
+        tbLopHoc.setRowHeight(30);
         tbLopHoc.setSelectionBackground(new java.awt.Color(232, 57, 95));
         tbLopHoc.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tbLopHoc.getTableHeader().setReorderingAllowed(false);
@@ -499,19 +495,19 @@ public class UI_LopHoc extends javax.swing.JPanel {
             }
         });
 
-        btnChiTietLop1.setBackground(new java.awt.Color(0, 102, 153));
-        btnChiTietLop1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnChiTietLop1.setForeground(new java.awt.Color(255, 255, 255));
-        btnChiTietLop1.setText("Vào Lớp");
-        btnChiTietLop1.setToolTipText("Chi Tiết Lớp");
-        btnChiTietLop1.setBorder(null);
-        btnChiTietLop1.setContentAreaFilled(false);
-        btnChiTietLop1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnChiTietLop1.setFocusable(false);
-        btnChiTietLop1.setOpaque(true);
-        btnChiTietLop1.addActionListener(new java.awt.event.ActionListener() {
+        btnVaoLop.setBackground(new java.awt.Color(0, 102, 153));
+        btnVaoLop.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnVaoLop.setForeground(new java.awt.Color(255, 255, 255));
+        btnVaoLop.setText("Vào Lớp");
+        btnVaoLop.setToolTipText("Chi Tiết Lớp");
+        btnVaoLop.setBorder(null);
+        btnVaoLop.setContentAreaFilled(false);
+        btnVaoLop.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnVaoLop.setFocusable(false);
+        btnVaoLop.setOpaque(true);
+        btnVaoLop.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnChiTietLop1ActionPerformed(evt);
+                btnVaoLopActionPerformed(evt);
             }
         });
 
@@ -523,19 +519,21 @@ public class UI_LopHoc extends javax.swing.JPanel {
                 .addGap(27, 27, 27)
                 .addGroup(pnThongTinLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnThongTinLopLayout.createSequentialGroup()
-                        .addGroup(pnThongTinLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(pnThongTinLopLayout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(135, 135, 135)
-                                .addComponent(btnLichHoc, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(32, Short.MAX_VALUE))
+                        .addGap(211, 211, 211)
+                        .addComponent(jLabel2)
+                        .addGap(135, 135, 135)
+                        .addComponent(btnLichHoc, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
                     .addGroup(pnThongTinLopLayout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtPhuTrach, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnChiTietLop1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(btnVaoLop, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))))
+            .addGroup(pnThongTinLopLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         pnThongTinLopLayout.setVerticalGroup(
             pnThongTinLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -548,7 +546,7 @@ public class UI_LopHoc extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 449, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
                 .addGroup(pnThongTinLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnChiTietLop1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnVaoLop, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPhuTrach, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10))
@@ -592,7 +590,7 @@ public class UI_LopHoc extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblTimLop)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -606,7 +604,7 @@ public class UI_LopHoc extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(pnLoc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jspLH, javax.swing.GroupLayout.PREFERRED_SIZE, 763, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(18, 27, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnThemLop, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -641,17 +639,17 @@ public class UI_LopHoc extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCapNhatLopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatLopActionPerformed
-    
+
         dto_LopHoc lopChon = new dto_LopHoc();
         lopChon = layLopDuocChon();
-        
-        if(lopChon != null){
-            if(lopChon.getMaNv() == UI_DangNhap.layMaNguoiDung() || UI_DangNhap.layLoaiNguoiDung() == 1) 
+
+        if (lopChon != null) {
+            if (lopChon.getMaNv() == UI_DangNhap.layMaNguoiDung() || UI_DangNhap.layLoaiNguoiDung() == 1) {
                 new FormCapNhatLop(lopChon).show();
-            else
+            } else {
                 JOptionPane.showMessageDialog(null, "Người Phụ Trách Mới Được Thực Hiện Thao Tác Này");
-        }
-        else
+            }
+        } else
             JOptionPane.showMessageDialog(null, "Chưa Chọn Lớp");
     }//GEN-LAST:event_btnCapNhatLopActionPerformed
 
@@ -660,34 +658,34 @@ public class UI_LopHoc extends javax.swing.JPanel {
     }//GEN-LAST:event_btnThemLopActionPerformed
 
     private void btnLichHocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLichHocActionPerformed
-    
+
         dto_LopHoc lopChon = new dto_LopHoc();
-        lopChon = layLopDuocChon();     
-        if(lopChon != null){
-            if(lopChon.getMaNv() == UI_DangNhap.layMaNguoiDung() || UI_DangNhap.layLoaiNguoiDung() == 1){
+        lopChon = layLopDuocChon();
+        if (lopChon != null) {
+            if (lopChon.getMaNv() == UI_DangNhap.layMaNguoiDung() || UI_DangNhap.layLoaiNguoiDung() == 1) {
                 int luaChon = JOptionPane.showConfirmDialog(null, "Lưu ý \n\nSau khi cập nhật lịch học cũ sẽ được thay thế bằng lịch mới\n\nBạn có muốn tiếp tục?", "Cập Nhật Lịch Học", JOptionPane.YES_NO_OPTION);
-                if(luaChon == 0)
+                if (luaChon == 0) {
                     new FormLichHoc(lopChon).show();
-            }       
-            else
+                }
+            } else {
                 JOptionPane.showMessageDialog(null, "Người Phụ Trách Mới Được Thực Hiện Thao Tác Này");
-        }
-        else
+            }
+        } else
             JOptionPane.showMessageDialog(null, "Chưa Chọn Lớp");
     }//GEN-LAST:event_btnLichHocActionPerformed
 
     private void btnXoaLopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaLopActionPerformed
-            dto_LopHoc lop = layLopDuocChon();
-            
-            if(lop != null){
-                
-                if(lop.getMaNv() == UI_DangNhap.layMaNguoiDung() || UI_DangNhap.layLoaiNguoiDung() ==1)
-                    xoaLop();
-                else
-                    JOptionPane.showMessageDialog(null, "Người Phụ Trách Mới Được Thực Hiện Thao Tác Này");
+        dto_LopHoc lop = layLopDuocChon();
+
+        if (lop != null) {
+
+            if (lop.getMaNv() == UI_DangNhap.layMaNguoiDung() || UI_DangNhap.layLoaiNguoiDung() == 1) {
+                xoaLop();
+            } else {
+                JOptionPane.showMessageDialog(null, "Người Phụ Trách Mới Được Thực Hiện Thao Tác Này");
             }
-            else
-                JOptionPane.showMessageDialog(null, "Chưa Chọn Lớp");
+        } else
+            JOptionPane.showMessageDialog(null, "Chưa Chọn Lớp");
     }//GEN-LAST:event_btnXoaLopActionPerformed
 
     private void txtTimLopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimLopActionPerformed
@@ -695,16 +693,15 @@ public class UI_LopHoc extends javax.swing.JPanel {
     }//GEN-LAST:event_txtTimLopActionPerformed
 
     private void tbLopHocMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbLopHocMousePressed
-        hienThiThongTinLop(); 
+        hienThiThongTinLop();
     }//GEN-LAST:event_tbLopHocMousePressed
 
     private void txtTimLopKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimLopKeyReleased
-        String text= txtTimLop.getText();
-        
-        if(!text.isEmpty()){
+        String text = txtTimLop.getText();
+
+        if (!text.isEmpty()) {
             hienThiDsTimLop(text);
-        }
-        else
+        } else
             reloadDuLieuLop();
     }//GEN-LAST:event_txtTimLopKeyReleased
 
@@ -713,26 +710,26 @@ public class UI_LopHoc extends javax.swing.JPanel {
         reloadDuLieuLop();
     }//GEN-LAST:event_ckLopDongActionPerformed
 
-    private void btnChiTietLop1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChiTietLop1ActionPerformed
+    private void btnVaoLopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVaoLopActionPerformed
         new UI_ChiTietLop(layLopDuocChon()).show();
-    }//GEN-LAST:event_btnChiTietLop1ActionPerformed
+    }//GEN-LAST:event_btnVaoLopActionPerformed
 
     private void cbLocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbLocActionPerformed
         int row = cbLoc.getSelectedIndex();
-        
-        if(row == 0)
+
+        if (row == 0)
             thayPanel(new pnLocThu());
-        
-        else if(row == 1)
+
+        else if (row == 1)
             thayPanel(new pnLocNgay());
     }//GEN-LAST:event_cbLocActionPerformed
 
- 
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCapNhatLop;
-    private javax.swing.JButton btnChiTietLop1;
     private javax.swing.JButton btnLichHoc;
     private javax.swing.JButton btnThemLop;
+    private javax.swing.JButton btnVaoLop;
     private javax.swing.JButton btnXoaLop;
     private javax.swing.JComboBox<String> cbLoc;
     private static javax.swing.JCheckBox ckLopDong;

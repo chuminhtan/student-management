@@ -8,12 +8,13 @@ import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
-public class FormThemLop extends javax.swing.JFrame {
+public class FormThemLop extends javax.swing.JDialog {
 
     /**
      * Creates new form FormThemLop
      */
     public FormThemLop() {
+        this.setModal(true);
         initComponents();
         setGiaoDienBanDau();
     }

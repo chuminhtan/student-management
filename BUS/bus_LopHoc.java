@@ -1,10 +1,12 @@
 package BUS;
 
+import DAL.dal_ChungChi;
 import DAL.dal_ChuongTrinh;
 import DAL.dal_GiaoVien;
 import DAL.dal_Lich;
 import DAL.dal_LopHoc;
 import DAL.dal_Phong;
+import DTO.dto_ChungChi;
 import DTO.dto_ChuongTrinh;
 import DTO.dto_GiaoVien;
 import DTO.dto_Lich;
@@ -23,7 +25,7 @@ public class bus_LopHoc {
         return dsLopHoc;
     }
     
-    // HÀM LẤY CHƯƠNG TRÌNH
+    // HÀM LẤY CHƯƠNG TRÌNH CHO DS LỚP
     public ArrayList<dto_LopHoc> layChuongTrinh(ArrayList<dto_LopHoc> dsLop){
         
          for(dto_LopHoc lop : dsLop){
@@ -33,6 +35,18 @@ public class bus_LopHoc {
          return dsLop;
     }
     
+    // HÀM LẤY CHƯƠNG TRÌNH CHO 1 LỚP
+    public dto_ChuongTrinh layMotChuongTrinh(int maCt){
+        
+        return new dal_ChuongTrinh().layChuongTrinh(maCt);
+
+    }
+    
+    // HÀM LẤY CHỨNG CHỈ
+    public dto_ChungChi layMotChungChi(int maCc){
+        
+        return new dal_ChungChi().layChungChi(maCc);
+    }
         // HÀM Sỉ Số
     public ArrayList<dto_LopHoc> laySiSo(ArrayList<dto_LopHoc> dsLop){
         

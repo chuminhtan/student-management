@@ -3,6 +3,7 @@ package DAL;
 import DTO.dto_TaiKhoan;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 public class dal_TaiKhoan extends DBConnect {
@@ -14,7 +15,7 @@ public class dal_TaiKhoan extends DBConnect {
 
         try {
 
-            String sql = "SELECT ma_nv, ho_ten, sdt, loai, ten_dang_nhap, mat_khau, src_img "
+            String sql = "SELECT ma_nv, ten_nv, sdt, loai, ten_dang_nhap, mat_khau, src_img "
                     + "FROM nhan_vien "
                     + "WHERE ten_dang_nhap = ?";
 
@@ -52,7 +53,7 @@ public class dal_TaiKhoan extends DBConnect {
 
         try {
 
-            String sql = "SELECT ma_nv, ho_ten, sdt, loai, ten_dang_nhap, mat_khau, src_img "
+            String sql = "SELECT ma_nv, ten_nv, sdt, loai, ten_dang_nhap, mat_khau, src_img "
                     + "FROM nhan_vien";
 
             PreparedStatement preStmt = conn.prepareStatement(sql);
@@ -86,7 +87,8 @@ public class dal_TaiKhoan extends DBConnect {
 
         try {
 
-            String sql = "INSERT INTO nhan_vien VALUES (nhan_vien_sequence.NEXTVAL,?,?,?,?,?,?)";
+            String sql = "INSERT INTO nhan_vien (ma_nv, ten_nv, sdt, loai, ten_dang_nhap, mat_khau, src_img) "
+                    + "VALUES (nhan_vien_sequence.NEXTVAL,?,?,?,?,?,?)";
 
             PreparedStatement preStmt = conn.prepareStatement(sql);
 
@@ -114,7 +116,7 @@ public class dal_TaiKhoan extends DBConnect {
             String sql = "";
             if (capNhatMatKhau == true) {
                 sql = "UPDATE nhan_vien "
-                        + "SET ho_ten=?,"
+                        + "SET ten_nv=?,"
                         + "sdt=?,"
                         + "loai=?,"
                         + "mat_khau=?,"
@@ -122,7 +124,7 @@ public class dal_TaiKhoan extends DBConnect {
                         + "WHERE ma_nv=?";
             } else {
                 sql = "UPDATE nhan_vien "
-                        + "SET ho_ten=?,"
+                        + "SET ten_nv=?,"
                         + "sdt=?,"
                         + "loai=?,"
                         + "src_img=? "
@@ -182,7 +184,7 @@ public class dal_TaiKhoan extends DBConnect {
 
         try {
 
-            String sql = "SELECT ma_nv, ho_ten, sdt, loai, ten_dang_nhap, mat_khau, src_img "
+            String sql = "SELECT ma_nv, ten_nv, sdt, loai, ten_dang_nhap, mat_khau, src_img "
                     + "FROM nhan_vien "
                     + "WHERE LOWER(ma_nv) LIKE N'%" + text + "%' "
                     + "OR LOWER(ho_ten) LIKE N'%" + text + "%' "
@@ -220,7 +222,7 @@ public class dal_TaiKhoan extends DBConnect {
 
         dto_TaiKhoan tk = null;
 
-        String sql = "SELECT ho_ten, sdt, loai, ten_dang_nhap, mat_khau, src_img "
+        String sql = "SELECT ten_nv, sdt, loai, ten_dang_nhap, mat_khau, src_img "
                 + "FROM nhan_vien "
                 + "WHERE ma_nv = ?";
 
@@ -246,4 +248,5 @@ public class dal_TaiKhoan extends DBConnect {
             return null;
         }
     }
+    
 }

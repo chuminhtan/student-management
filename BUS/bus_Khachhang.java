@@ -108,4 +108,10 @@ public class bus_Khachhang {
         
         return new dal_KhachHang().xoaKhachHang(kh);
     }
+    
+    // HÀM TÌM KHÁCH HÀNG
+    public ArrayList<dto_KhachHang> layDsTimKiem(String text){
+        
+        return new dal_KhachHang().layDsTimKiem(text);
+    }
 }

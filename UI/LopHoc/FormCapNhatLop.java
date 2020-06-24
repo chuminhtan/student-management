@@ -1,24 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package UI.LopHoc;
 
 import BUS.bus_LopHoc;
 import DTO.dto_ChuongTrinh;
 import DTO.dto_LopHoc;
-import UI.DangNhap.UI_DangNhap;
 import java.util.ArrayList;
-import java.util.Date;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author USER
- */
-public class FormCapNhatLop extends javax.swing.JFrame {
+public class FormCapNhatLop extends javax.swing.JDialog {
 
     /**
      * Creates new form FormCapNhatLop

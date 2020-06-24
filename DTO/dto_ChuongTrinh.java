@@ -4,19 +4,23 @@ public class dto_ChuongTrinh {
     private int maCt;
     private String tenCt;
     private int maCc;
-    private String tenCc;
     private float diemDauVao;
     private float diemDauRa;
     private String noiDung;
     private int trangThai; // 0-đóng , 1-mở
-    
     private int tinhNghe;
     private int tinhNoi;
     private int tinhDoc;
     private int tinhViet;
     private int cachTinhDiem;
+    
+    private dto_ChungChi chungChi;
 
     public dto_ChuongTrinh() {
+    }
+
+    public dto_ChungChi getChungChi() {
+        return chungChi;
     }
 
     public int getMaCt() {
@@ -29,10 +33,6 @@ public class dto_ChuongTrinh {
 
     public int getMaCc() {
         return maCc;
-    }
-
-    public String getTenCc() {
-        return tenCc;
     }
 
     public float getDiemDauVao() {
@@ -85,10 +85,6 @@ public class dto_ChuongTrinh {
         this.maCc = maCc;
     }
 
-    public void setTenCc(String tenCc) {
-        this.tenCc = tenCc;
-    }
-
     public void setDiemDauVao(float diemDauVao) {
         this.diemDauVao = diemDauVao;
     }
@@ -123,6 +119,10 @@ public class dto_ChuongTrinh {
 
     public void setCachTinhDiem(int cachTinhDiem) {
         this.cachTinhDiem = cachTinhDiem;
+    }
+
+    public void setChungChi(dto_ChungChi chungChi) {
+        this.chungChi = chungChi;
     }
     
     //toString

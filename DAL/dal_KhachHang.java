@@ -167,7 +167,48 @@ public class dal_KhachHang extends DBConnect {
             ex.printStackTrace();
             return null;
         }
+    }
+    
+    public ArrayList<dto_KhachHang> layDsTimKiem(String text){
+        text = text.toLowerCase();
+        
+        ArrayList<dto_KhachHang> dsKhachHang = new ArrayList<dto_KhachHang>();
+        dto_KhachHang kh = null;
+        
+        
+        String sql = "SELECT ma_kh, ten_kh, gioi_tinh, ngay_sinh, sdt, dia_chi, diem_dau_vao, chung_chi_can_hoc, lop_dang_hoc "
+                + "FROM khach_hang "
+                + "WHERE ma_kh LIKE N'%" + text + "%' "
+                + "OR LOWER(ten_kh) LIKE N'%" + text + "%' "
+                + "OR LOWER(sdt) LIKE N'" + text +"%' "
+                + "OR LOWER(dia_chi) LIKE N'%" + text + "%' ";
+        try{
+            PreparedStatement preStmt = conn.prepareStatement(sql);
+            ResultSet rs = preStmt.executeQuery();
 
+            while (rs.next()) {
+
+                kh = new dto_KhachHang();
+                kh.setMaKh(rs.getInt(1));
+                kh.setTenKh(rs.getString(2));
+                kh.setGioiTinh(rs.getInt(3));
+                kh.setNgaySinh(rs.getDate(4));
+                kh.setSdt(rs.getString(5));
+                kh.setDiaChi(rs.getString(6));
+                kh.setDiemDauVao(rs.getFloat(7));
+                kh.setMaChungChi(rs.getInt(8));
+                kh.setTenLop(rs.getString(9));
+
+                dsKhachHang.add(kh);
+            }
+            
+            conn.close();
+            return dsKhachHang;
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+            return null;
+        }
     }
 
 }

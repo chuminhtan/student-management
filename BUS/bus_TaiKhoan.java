@@ -14,12 +14,12 @@ public class bus_TaiKhoan{
     
     // HÀM MÃ HÓA BCRYPT MẬT KHẨU
     public String maHoaMatKhau(String matKhauNhap){
-        return BCrypt.hashpw(matKhauNhap, BCrypt.gensalt(12));
+        return BCrypt.hashpw(matKhauNhap,BCrypt.gensalt(12));
     }
     
     // HÀM KIỂM TRA KHỚP MẬT KHẨU
     public boolean kiemTraKhopMatKhau(String matKhauNhap,String hash){
-        return BCrypt.checkpw(matKhauNhap, hash);
+        return BCrypt.checkpw(hash,matKhauNhap);
     }
     
     // HÀM THÊM TÀI KHOẢN
@@ -52,5 +52,10 @@ public class bus_TaiKhoan{
     public ArrayList<dto_TaiKhoan> layDsTimKiem(String text){
         
         return new dal_TaiKhoan().layDsTimKiem(text);
+    }
+    // HAMF CẬP NHẬT MẬT KHẨU
+    public int capNhatMatKhau(dto_TaiKhoan tk){
+        
+        return new dal_TaiKhoan().capNhatTaiKhoan(tk,true);
     }
 }

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package UI.ChuongTrinh;
 
 import BUS.bus_ChuongTrinh;
@@ -12,19 +7,15 @@ import java.util.ArrayList;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author USER
- */
-public class FormThemChuongTrinh extends javax.swing.JFrame {
+public class FormThemChuongTrinh extends javax.swing.JDialog {
 
     /**
      * Creates new form FormThemChuongTrinh
      */
     public FormThemChuongTrinh() {
+        this.setModal(true);
         initComponents();
         setupForm();
     }
@@ -69,12 +60,11 @@ public class FormThemChuongTrinh extends javax.swing.JFrame {
 
             if (rs == 0) {
 
-                JOptionPane.showMessageDialog(null, "Không thành công");
+                JOptionPane.showMessageDialog(null, "Lỗi");
             } 
             else {
                 this.dispose();
-                JOptionPane.showMessageDialog(null, "Thành công");
-                UI_ChuongTrinh.hienThiDsChuongTrinh();
+                JOptionPane.showMessageDialog(null, "Đã tạo chương trình mới");
                 
             }
         }

@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package UI.LopHoc;
 
 import BUS.bus_LopHoc;
@@ -24,11 +20,7 @@ import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author USER
- */
-public class FormLichHoc extends javax.swing.JFrame {
+public class FormLichHoc extends javax.swing.JDialog {
 
     private dto_LopHoc lop;
 
@@ -37,10 +29,10 @@ public class FormLichHoc extends javax.swing.JFrame {
      */
     public FormLichHoc() {
         initComponents();
-        setGiaoDienBanDau();
     }
 
     public FormLichHoc(dto_LopHoc lopChon) {
+        this.setModal(true);
         initComponents();
         setGiaoDienBanDau();
 

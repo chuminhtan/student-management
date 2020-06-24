@@ -6,9 +6,7 @@
 package UI.ChuongTrinh;
 
 import BUS.bus_ChuongTrinh;
-import DTO.dto_ChungChi;
 import DTO.dto_ChuongTrinh;
-import DTO.dto_ChuongTrinh_ChungChi;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
@@ -18,25 +16,23 @@ import javax.swing.JOptionPane;
  *
  * @author USER
  */
-public class FormCapNhatChuongTrinh extends javax.swing.JFrame {
+public class FormCapNhatChuongTrinh extends javax.swing.JDialog {
 
     /**
      * Creates new form CapNhatChuongTrinh
      */
-    private dto_ChuongTrinh_ChungChi ct_cc;
+    private dto_ChuongTrinh ct;
     private DefaultComboBoxModel static_dfcChungChi;
 
     public FormCapNhatChuongTrinh() {
         initComponents();
-        setResizable(false);
     }
 
-    public FormCapNhatChuongTrinh(dto_ChuongTrinh_ChungChi ct_cc) {
+    public FormCapNhatChuongTrinh(dto_ChuongTrinh ct) {
+        this.setModal(true);
         initComponents();
-        setResizable(false);
-        this.ct_cc = ct_cc;
+        this.ct = ct;
         setupForm();
-
     }
 
     // HÀM CẬP NHẬT LẠI CHƯƠNG TRÌNH
@@ -50,11 +46,10 @@ public class FormCapNhatChuongTrinh extends javax.swing.JFrame {
             int rs = new bus_ChuongTrinh().capNhatChuongTrinh(ct);
 
             if (rs == 0) {
-                JOptionPane.showMessageDialog(null, "Thất Bại");
+                JOptionPane.showMessageDialog(null, "Lỗi");
             } else {
                 this.dispose();
-                JOptionPane.showMessageDialog(null, "Thành công");
-                UI_ChuongTrinh.hienThiDsChuongTrinh();
+                JOptionPane.showMessageDialog(null, "Đã cập nhật chương trình");
  
             }
         }
@@ -106,7 +101,7 @@ public class FormCapNhatChuongTrinh extends javax.swing.JFrame {
 
             ct = new dto_ChuongTrinh();
 
-            ct.setMaCt(ct_cc.getMaCt());
+            ct.setMaCt(ct.getMaCt());
             ct.setTenCt(strTen);
             ct.setDiemDauVao(diemDauVao);
             ct.setDiemDauRa(diemDauRa);
@@ -195,49 +190,49 @@ public class FormCapNhatChuongTrinh extends javax.swing.JFrame {
         btnGroupTrangThai.add(radMo);
         
         static_dfcChungChi = new DefaultComboBoxModel();
-        static_dfcChungChi.addElement(ct_cc);
+        static_dfcChungChi.addElement(ct);
         
         cbTenCc.setModel(static_dfcChungChi);
 
         cbTenCc.setSelectedItem(1);
         cbTenCc.setEnabled(false);
 
-        txtTenCt.setText(ct_cc.getTenCt());
-        txtDiemDauVao.setText(ct_cc.getDiemDauVao() + "");
-        txtDiemDauRa.setText(ct_cc.getDiemDauRa() + "");
-        txtNoiDung.setText(ct_cc.getNoiDung());
+        txtTenCt.setText(ct.getTenCt());
+        txtDiemDauVao.setText(ct.getDiemDauVao() + "");
+        txtDiemDauRa.setText(ct.getDiemDauRa() + "");
+        txtNoiDung.setText(ct.getNoiDung());
 
-        if (ct_cc.getTinhNghe() == 1) {
+        if (ct.getTinhNghe() == 1) {
             ckNghe.setSelected(true);
         }
 
-        if (ct_cc.getTinhNoi() == 1) {
+        if (ct.getTinhNoi() == 1) {
             ckNoi.setSelected(true);
         }
 
-        if (ct_cc.getTinhDoc() == 1) {
+        if (ct.getTinhDoc() == 1) {
             ckDoc.setSelected(true);
         }
 
-        if (ct_cc.getTinhViet() == 1) {
+        if (ct.getTinhViet() == 1) {
             ckViet.setSelected(true);
         }
 
-        if (ct_cc.getCachTinhDiem() == 1) {
+        if (ct.getCachTinhDiem() == 1) {
             radCong.setSelected(true);
         } else {
             radTrungBinhCong.setSelected(true);
         }
 
-        if (ct_cc.getTrangThai() == 1) {
+        if (ct.getTrangThai() == 1) {
             radMo.setSelected(true);
         } else {
             radDong.setSelected(true);
         }
 
-        txtMaCc.setText(ct_cc.getMaCc() + "");
-        txtDiemToiDa.setText(ct_cc.getDiemToiDa() + "");
-        lblLogo.setIcon(new ImageIcon(ct_cc.getSrcImg()));
+        txtMaCc.setText(ct.getMaCc() + "");
+        txtDiemToiDa.setText(ct.getChungChi().getDiemToiDa() + "");
+        lblLogo.setIcon(new ImageIcon(ct.getChungChi().getSrcImg()));
     }
 
     /**
