@@ -135,7 +135,17 @@ public final class UI_Main extends javax.swing.JFrame {
 
     //method hiển thị thông tin người dùng bên góc phải phía trên UI_Main
     public void setThongTinDangNhap(dto_TaiKhoan tk) {
-        txtThongTinDangNhap.setText(tk.getMa() + " | " + tk.getHoTen());
+        
+        String chucVu = "";
+        
+        if(tk.getLoai() == 1)
+            chucVu = "Quản Lý";
+        else if(tk.getLoai() == 2)
+            chucVu = "Ghi Danh";
+        else
+            chucVu = "Học vụ";
+        
+        txtThongTinDangNhap.setText(tk.getMa() + " | " +chucVu + " | " +  tk.getHoTen());
     }
 
     /**

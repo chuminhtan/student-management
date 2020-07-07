@@ -50,7 +50,8 @@ public class FormThemLop extends javax.swing.JDialog {
 
         String tenLop = txtTenLop.getText();
 
-        dto_ChuongTrinh ct = (dto_ChuongTrinh) cbChuongTrinh.getSelectedItem();
+        dto_ChuongTrinh ct = this.dsChuongTrinh.get(cbChuongTrinh.getSelectedIndex());
+        
         if (tenLop.isEmpty() || ct == null) {
             JOptionPane.showMessageDialog(null, "Chưa Nhập Đủ Thông Tin");
             return null;

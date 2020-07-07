@@ -7,9 +7,7 @@ import DAL.dal_LopHoc;
 import DTO.dto_ChungChi;
 import DTO.dto_KhachHang;
 import DTO.dto_LichSu;
-import DTO.dto_Lich;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class bus_Khachhang {
     
@@ -39,58 +37,7 @@ public class bus_Khachhang {
         return new dal_ChungChi().layChungChi(maCc);
     }
     
-    // HÀM TÌM NGÀY ĐẦU TIÊN TRONG DANH SÁCH LỊCH HỌC
-    public Date timNgayDau(ArrayList<dto_Lich> dsLich){
-        
-        Date ngayDau = new Date();
-        ngayDau.setYear(dsLich.get(0).getTgBd().getYear());
-        ngayDau.setMonth(dsLich.get(0).getTgBd().getMonth());
-        ngayDau.setDate(dsLich.get(0).getTgBd().getDate());
-        
-        int size = dsLich.size();
-        
-        for(int i = 0; i < size; i++){
-            
-            for(int j = i + 1 ; j < size; j++){
-                
-                if(dsLich.get(j).getTgBd().before(ngayDau)){
-                    ngayDau.setYear(dsLich.get(j).getTgBd().getYear());  
-                    ngayDau.setMonth(dsLich.get(j).getTgBd().getMonth());
-                    ngayDau.setDate(dsLich.get(j).getTgBd().getDate());
-                    
-                }
-            }
-        }
-        
-        return ngayDau;
-    }
-    
-    // HÀM TÌM NGÀY CUỐI CÙNG TRONG DANH SÁCH LỊCH HỌC
-    public Date timNgayCuoi(ArrayList<dto_Lich> dsLich){
-        
-        Date ngayCuoi= new Date();
-        ngayCuoi.setYear(dsLich.get(0).getTgBd().getYear());
-        ngayCuoi.setMonth(dsLich.get(0).getTgBd().getMonth());
-        ngayCuoi.setDate(dsLich.get(0).getTgBd().getDate());
-
-        
-        int size = dsLich.size();
-        
-        for(int i = 0; i < size; i++){
-            
-            for(int j = i +1 ; j < size; j++){
-                
-                if(dsLich.get(j).getTgBd().after(ngayCuoi)){
-                    ngayCuoi.setYear(dsLich.get(j).getTgBd().getYear());
-                    ngayCuoi.setMonth(dsLich.get(j).getTgBd().getMonth());
-                    ngayCuoi.setDate(dsLich.get(j).getTgBd().getDate());
-                }
-            }
-        }
-        
-        return ngayCuoi;
-    }
-    
+      
     // HÀM THÊM KHÁCH HÀNG
     public int themKhachHang(dto_KhachHang kh){
         

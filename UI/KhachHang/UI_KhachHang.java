@@ -1,3 +1,4 @@
+
 package UI.KhachHang;
 
 import BUS.bus_ChungChi;
@@ -194,7 +195,7 @@ public class UI_KhachHang extends javax.swing.JPanel {
                 
     }
 
-    // HÀM SETUP DỮ LIỆU BAND ĐẦU
+    // HÀM SETUP DỮ LIỆU BAN ĐẦU
     public void reloadDuLieu() {
         setupDuLieuKhachHang();
         setupDuLieuChungChi();

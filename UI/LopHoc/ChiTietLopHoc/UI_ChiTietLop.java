@@ -51,22 +51,25 @@ public class UI_ChiTietLop extends javax.swing.JDialog {
     
     
     // HÀM XÓA LỚP ĐANG HỌC
-    public void xoaKhachHangKhoiLop(){
-        
+    public void xoaKhachHangKhoiLop() {
+
         layKhachHangDuocChon();
-        
-        if(this.khDuocChon != null){
-            
+
+        if (this.khDuocChon != null) {
+
             int luaChon = JOptionPane.showConfirmDialog(null, "Bạn muốn xóa khách hàng này ra khỏi lớp ?\nNhấn Yes để tiếp tục", "Xác Nhận Xóa", JOptionPane.YES_NO_OPTION);
-            
-            int kq = new bus_kqht().xoaKhachHangKhoiLop(khDuocChon);
-            
-            if(kq > 0){
-                JOptionPane.showMessageDialog(null, "Đã xóa khách hàng khỏi lớp");
-                reloadDuLieu();
+
+            if (luaChon == 0) {
+                int kq = new bus_kqht().xoaKhachHangKhoiLop(khDuocChon);
+
+                if (kq > 0) {
+                    JOptionPane.showMessageDialog(null, "Đã xóa khách hàng khỏi lớp");
+                    reloadDuLieu();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Lỗi");
+                }
             }
-            else
-                JOptionPane.showMessageDialog(null, "Lỗi");
+
         }
     }
     // HÀM CẬP NHẬT KQHT
@@ -326,11 +329,37 @@ public class UI_ChiTietLop extends javax.swing.JDialog {
             vc.add(kh.layNgaySinh());
             vc.add(kh.getSdt());
 
-            vc.add(kqht.getNghe());
+            if (kqht.getNghe() == -1) {
+                vc.add("");
+            } else {
+                vc.add(kqht.getNghe());
+            }
+
+            if (kqht.getNoi() == -1) {
+                vc.add("");
+            } else {
+                vc.add(kqht.getNoi());
+            }
             vc.add(kqht.getNoi());
-            vc.add(kqht.getDoc());
-            vc.add(kqht.getViet());
-            vc.add(kqht.getTong());
+
+            if (kqht.getDoc() == -1) {
+                vc.add("");
+            } else {
+                vc.add(kqht.getDoc());
+            }
+
+            if (kqht.getViet() == -1) {
+                vc.add("");
+            } else {
+                vc.add(kqht.getViet());
+            }
+
+            if (kqht.getTong() == -1) {
+                vc.add("");
+            } else {
+                vc.add(kqht.getTong());
+            }
+
             dtmDanhSach.addRow(vc);
         }
     }

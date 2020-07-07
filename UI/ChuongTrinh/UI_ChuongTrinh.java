@@ -275,7 +275,7 @@ public class UI_ChuongTrinh extends javax.swing.JPanel {
         int row = cbTenCc.getSelectedIndex();   
         this.ccDuocChon = new dto_ChungChi();
         
-        if(row > 0 ){
+        if(row >= 0 ){
             this.ccDuocChon = this.dsChungChi.get(row);
             txtMaCc.setText(this.ccDuocChon.getMaCc()+"");
             txtDiemToiDa.setText(this.ccDuocChon.getDiemToiDa()+"");

@@ -711,7 +711,15 @@ public class UI_LopHoc extends javax.swing.JPanel {
     }//GEN-LAST:event_ckLopDongActionPerformed
 
     private void btnVaoLopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVaoLopActionPerformed
-        new UI_ChiTietLop(layLopDuocChon()).show();
+        
+        dto_LopHoc lop = new dto_LopHoc();
+        lop = layLopDuocChon();
+        
+        if(lop != null)
+            new UI_ChiTietLop(lop).show();
+        else
+            JOptionPane.showMessageDialog(null, "Chưa chọn lớp");
+
     }//GEN-LAST:event_btnVaoLopActionPerformed
 
     private void cbLocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbLocActionPerformed

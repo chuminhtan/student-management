@@ -120,10 +120,10 @@ public class dal_GiaoVien extends DBConnect {
 
         String sql = "SELECT ma_gv, ten_gv, gioi_tinh, sdt, quoc_tich "
                 + "FROM giao_vien "
-                + "WHERE ma_gv LIKE N'?%' "
-                + "OR LOWER(ten_gv) LIKE N'?%' "
-                + "OR LOWER(sdt) LIKE N'?%' "
-                + "OR LOWER(quoc_tich) LIKE N'?%'";
+                + "WHERE ma_gv LIKE N'" + text + "%'"
+                + "OR LOWER(ten_gv) LIKE N'%" + text + "%'"
+                + "OR LOWER(sdt) LIKE N'%" + text +"%'"
+                + "OR LOWER(quoc_tich) LIKE N'" + text + "'";
 
         try {
 

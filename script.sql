@@ -16,7 +16,7 @@ create table NHAN_VIEN
    LOAI                 NUMBER(1),
    TEN_DANG_NHAP        VARCHAR2(100),
    MAT_KHAU             VARCHAR2(200),
-   SRC_IMG		        VARCHAR2(200),
+   SRC_IMG		VARCHAR2(200),
    constraint PK_NHAN_VIEN primary key (MA_NV)
 );
 --sequence
