@@ -1,4 +1,3 @@
-
 package UI.LopHoc;
 
 import BUS.bus_LopHoc;
@@ -41,11 +40,11 @@ public class FormLichHoc extends javax.swing.JDialog {
     }
 
     // BIẾN TỰ ĐỊNH NGHĨA
-    Font fontLblSelected = new Font("Tahoma", Font.BOLD,11);
-    Font fontLblNotSelected = new Font("Tahoma", Font.PLAIN,11);
-    Color colorSelected = new Color(153,0,0);
-    Color colorNotSelected = new Color(0,0,0);
-    
+    Font fontLblSelected = new Font("Tahoma", Font.BOLD, 11);
+    Font fontLblNotSelected = new Font("Tahoma", Font.PLAIN, 11);
+    Color colorSelected = new Color(153, 0, 0);
+    Color colorNotSelected = new Color(0, 0, 0);
+
     dto_Thu t2;
     dto_Thu t3;
     dto_Thu t4;
@@ -54,79 +53,60 @@ public class FormLichHoc extends javax.swing.JDialog {
     dto_Thu t7;
     dto_Thu Cn;
 
-    /*
-    DefaultComboBoxModel dfcbGvT2;
-    DefaultComboBoxModel dfcbGvT3;
-    DefaultComboBoxModel dfcbGvT4;
-    DefaultComboBoxModel dfcbGvT5;
-    DefaultComboBoxModel dfcbGvT6;
-    DefaultComboBoxModel dfcbGvT7;
-    DefaultComboBoxModel dfcbGvCn;
-    DefaultComboBoxModel dfcbPhongT2;
-    DefaultComboBoxModel dfcbPhongT3;
-    DefaultComboBoxModel dfcbPhongT4;
-    DefaultComboBoxModel dfcbPhongT5;
-    DefaultComboBoxModel dfcbPhongT6;
-    DefaultComboBoxModel dfcbPhongT7;
-    DefaultComboBoxModel dfcbPhongCn;
-*/
     DefaultTableModel dtmNgayNghi;
     ArrayList<dto_GiaoVien> dsGiaoVien;
     ArrayList<dto_Phong> dsPhong;
     ArrayList<dto_Lich> dsLichHeThong;
     ArrayList<Date> dsNgayNghi;
     ArrayList<dto_Thu> dsThu;
-    
+
     Date dBatDau;
     int soBuoiHoc;
-    
+
     // HÀM THÊM DS LỊCH TẠO VÀO CSDL
     public void themLich() {
-       
-        
+
         int kqNhap = layThongTinNhap();
-        
-        if(kqNhap == 1){
+
+        if (kqNhap == 1) {
             JOptionPane.showMessageDialog(null, "Thời gian học không hợp lệ hoặc chưa nhập đủ thông tin !\nVui lòng kiểm tra lại");
-        }
-        else if (kqNhap == 2)
-                JOptionPane.showMessageDialog(null, "Lịch học lớp mới phải được tính từ ngày hôm nay");
-        else{
+        } else if (kqNhap == 2) {
+            JOptionPane.showMessageDialog(null, "Lịch học lớp mới phải được tính từ ngày hôm nay");
+        } else {
             ArrayList<dto_Lich> dsLich = new ArrayList<dto_Lich>();
-            
+
             dsLich = lichHocChiTiet(dsThu);
-            
 
-            
-            if(dsLich != null){
+            if (dsLich != null) {
 
-                
-                if(lop.getDsLich() != null)
+                if (lop.getDsLich() != null) {
                     new bus_LopHoc().xoaDsLich(lop.getMaLop());
-                
+                }
+
                 int kq = new bus_LopHoc().themDsLich(dsLich);
-                
-                if(kq == 1){
-                                             
+
+                if (kq == 1) {
+
                     this.lop.setNgayBd(dsLich.get(0).getTgBd());
                     this.lop.setNgayKt(dsLich.get(dsLich.size() - 1).getTgKt());
                     this.lop.setSoBuoi(this.soBuoiHoc);
-                    
+
                     int kqCapNhat = new bus_LopHoc().capNhapThoiGianHoc(this.lop);
-                    
-                    if(kqCapNhat < 0)
+
+                    if (kqCapNhat < 0) {
                         JOptionPane.showMessageDialog(null, "Cập nhật thời gian học cho lớp không thành công");
-                    else
+                    } else {
                         UI_LopHoc.reloadDuLieuLop();
-                    
+                    }
+
                     this.dispose();
                     JOptionPane.showMessageDialog(null, "Cập Nhật Lịch Hoàn Tất");
-                    
+
                     lop.setDsLich(new bus_LopHoc().layDsLichTheoLop(lop.getMaLop()));
                     UI_LopHoc.reloadTableLich(lop);
-                }
-                else
+                } else {
                     JOptionPane.showMessageDialog(null, "Lỗi Cơ Sở Dữ Liệu");
+                }
             }
         }
         this.soBuoiHoc = 0;
@@ -157,20 +137,20 @@ public class FormLichHoc extends javax.swing.JDialog {
 
         dsThu = new ArrayList<dto_Thu>();
         ArrayList<dto_Lich> dsLich = new ArrayList<dto_Lich>();
-        
+
         String strBuoiHoc = txtBuoiHoc.getText();
-        
-        if(strBuoiHoc.isEmpty())
+
+        if (strBuoiHoc.isEmpty()) {
             return 1;
-        
-        try{
-            this.soBuoiHoc = Integer.parseInt(strBuoiHoc);
         }
-        catch(Exception ex){
+
+        try {
+            this.soBuoiHoc = Integer.parseInt(strBuoiHoc);
+        } catch (Exception ex) {
             ex.printStackTrace();
             return 1;
         }
-        
+
         if (ckT2.isSelected()) {
             t2 = setThongTinThu(2, gioBdT2, phutBdT2, gioKtT2, phutKtT2, cbGvT2, cbPhongT2);
             if (t2 == null) {
@@ -225,23 +205,25 @@ public class FormLichHoc extends javax.swing.JDialog {
             }
             dsThu.add(Cn);
         }
-        
+
         dBatDau = dcTuNgay.getDate();
-        
-        if(dBatDau == null)
+
+        if (dBatDau == null) {
             return 1;
-        
+        }
+
         dBatDau.setHours(23);
         dBatDau.setMinutes(59);
         Date d = new Date();
         d.setHours(0);
         d.setMinutes(0);
         d.setSeconds(0);
-        
-        int kq =  d.compareTo(dBatDau);
-        if(d.after(dBatDau))
+
+        int kq = d.compareTo(dBatDau);
+        if (d.after(dBatDau)) {
             return 2;
-        
+        }
+
         return 0;
     }
 
@@ -249,6 +231,7 @@ public class FormLichHoc extends javax.swing.JDialog {
     public ArrayList<dto_Lich> lichHocChiTiet(ArrayList<dto_Thu> dsThu) {
 
         ArrayList<dto_Lich> dsLich = new ArrayList<dto_Lich>();
+
         dto_Lich lich = null;
         int demBuoiHoc = 0;
 
@@ -297,47 +280,48 @@ public class FormLichHoc extends javax.swing.JDialog {
                         // kiểm tra lịch có bị trùng giáo viên và phòng học không
                         for (dto_Lich lichCu : dsLichHeThong) {
 
-                            trungGvPhong = ktTrungGvPhong(lich, lichCu);
+                            if (lichCu.getMaLop() != this.lop.getMaLop()) {
+                                trungGvPhong = ktTrungGvPhong(lich, lichCu);
 
-                            // bị trùng giáo viên.
-                            if (trungGvPhong == 1) {
-                                
-                                String mess = "Lịch ";
-                                
-                                if (thu.getDayOfWeek() == 1) {
-                                    mess += "CHỦ NHẬT ";
-                                } else {
-                                    mess += "THỨ " + thu.getDayOfWeek() + " ";
+                                // bị trùng giáo viên.
+                                if (trungGvPhong == 1) {
+
+                                    String mess = "Lịch ";
+
+                                    if (thu.getDayOfWeek() == 1) {
+                                        mess += "CHỦ NHẬT ";
+                                    } else {
+                                        mess += "THỨ " + thu.getDayOfWeek() + " ";
+                                    }
+
+                                    mess += "trùng giờ dạy của GIÁO VIÊN tại:"
+                                            + "\n\nLớp: " + lichCu.getMaLop()
+                                            + "\n\nThời Gian: ";
+                                    mess += lichCu.getNgayGioBd() + " đến " + lichCu.getNgayGioKt();
+
+                                    JOptionPane.showMessageDialog(null, mess);
+
+                                    return null;
+                                } // bị trùng phòng
+                                else if (trungGvPhong == 2) {
+
+                                    String mess = "Lịch ";
+                                    if (thu.getDayOfWeek() == 1) {
+                                        mess += "CHỦ NHẬT ";
+                                    } else {
+                                        mess += "THỨ " + thu.getDayOfWeek() + " ";
+                                    }
+
+                                    mess += "trùng PHÒNG HỌC tại:"
+                                            + "\n\nLớp: " + lichCu.getMaLop()
+                                            + "\n\nThời Gian: ";
+                                    mess += lichCu.getNgayGioBd() + " đến " + lichCu.getNgayGioKt();
+                                    JOptionPane.showMessageDialog(null, mess);
+                                    return null;
+
                                 }
-
-                                mess += "trùng giờ dạy của GIÁO VIÊN tại:"
-                                        + "\n\nLớp: " + lichCu.getMaLop()
-                                        + "\n\nThời Gian: ";
-                                mess += lichCu.getNgayGioBd() + " đến " + lichCu.getNgayGioKt();
-
-                                JOptionPane.showMessageDialog(null, mess);
-                                
-                                return null;
                             }
-                            
-                            // bị trùng phòng
-                            if(trungGvPhong == 2){
-                                
-                                String mess = "Lịch ";
-                                if (thu.getDayOfWeek() == 1) {
-                                    mess += "CHỦ NHẬT ";
-                                } else {
-                                    mess += "THỨ " + thu.getDayOfWeek() + " ";
-                                }
-                              
-                                mess += "trùng PHÒNG HỌC tại:"
-                                        + "\n\nLớp: " + lichCu.getMaLop()
-                                        + "\n\nThời Gian: ";
-                                mess += lichCu.getNgayGioBd() + " đến " + lichCu.getNgayGioKt();
-                                JOptionPane.showMessageDialog(null, mess);
-                                return null;
-                                
-                            }
+
                         }
                         dsLich.add(lich);
                         demBuoiHoc++;
@@ -350,50 +334,49 @@ public class FormLichHoc extends javax.swing.JDialog {
 
         }
 
-        
         return dsLich;
     }
-    
+
     // HÀM KIỂM TRA XEM GIÁO VIÊN VÀ PHÒNG HỌC TRONG NGÀY TẠO ĐÓ CÓ TRÙNG VỚI TRONG HỆ THỐNG KHÔNG
-    public int ktTrungGvPhong(dto_Lich lichMoi, dto_Lich lichCu){
+    public int ktTrungGvPhong(dto_Lich lichMoi, dto_Lich lichCu) {
         Date tgbdMoi = lichMoi.getTgBd();
-        Date tgktMoi= lichMoi.getTgKt();
+        Date tgktMoi = lichMoi.getTgKt();
         Date tgbdCu = lichCu.getTgBd();
         Date tgktCu = lichCu.getTgKt();
-        
+
         // nếu hai ngày này là 1
-        if( tgbdMoi.getYear() == tgbdCu.getYear() && tgbdMoi.getMonth() == tgbdCu.getMonth() && tgbdMoi.getDate() == tgbdCu.getDate()){
-            
+        if (tgbdMoi.getYear() == tgbdCu.getYear() && tgbdMoi.getMonth() == tgbdCu.getMonth() && tgbdMoi.getDate() == tgbdCu.getDate()) {
+
             //kiểm tra xem có trùng mã giáo viên không?
-            if(lichMoi.getMaGv() == lichCu.getMaGv()){
-                
+            if (lichMoi.getMaGv() == lichCu.getMaGv()) {
+
                 int gioBdMoi = tgbdMoi.getHours();
                 int gioKtMoi = tgbdMoi.getHours();
                 int gioBdCu = tgbdCu.getHours();
                 int gioKtCu = tgktCu.getHours();
                 //nếu trùng mã giáo viên thì kiểm tra xem giờ học của lịch mới mà có giáo viên đó có nằm ngoài khung giờ mà giáo viên đó đang dạy ở lịch cũ hay không
-                if(gioBdMoi >= gioBdCu && gioBdMoi <= gioKtCu || gioKtMoi >= gioBdCu && gioKtMoi <= gioKtCu)
+                if (gioBdMoi >= gioBdCu && gioBdMoi <= gioKtCu || gioKtMoi >= gioBdCu && gioKtMoi <= gioKtCu) {
                     return 1; // trùng giờ dạy giáo viên
-                
+                }
             }
-            
+
             // nếu không trùng mã giáo viên thì kiểm tra mã phòng học xem có bị trùng phòng học không
-            if(lichMoi.getMaPhong() == lichCu.getMaPhong()){
-                
+            if (lichMoi.getMaPhong() == lichCu.getMaPhong()) {
+
                 // nếu trùng mã phòng thì kiểm tra 2 khung giờ học có bị trùng phòng học không
                 int gioBdMoi = tgbdMoi.getHours();
                 int gioKtMoi = tgbdMoi.getHours();
                 int gioBdCu = tgbdCu.getHours();
                 int gioKtCu = tgktCu.getHours();
-                
-                if(gioBdMoi >= gioBdCu && gioBdMoi <= gioKtCu || gioKtMoi >= gioBdCu && gioKtMoi <= gioKtCu)
+
+                if (gioBdMoi >= gioBdCu && gioBdMoi <= gioKtCu || gioKtMoi >= gioBdCu && gioKtMoi <= gioKtCu) {
                     return 2; // trùng giờ dạy giáo viên               
+                }
             }
-        }    
+        }
         return 0; // hợp lệ
     }
-    
-    
+
     // HÀM CÀI ĐẶT GIÁ TRỊ CHO THỨ 2-3-4-5-6-7-CN
     public dto_Thu setThongTinThu(int dayOfWeek, JComboBox cbGioBd, JComboBox cbPhutBd, JComboBox cbGioKt, JComboBox cbPhutKt, JComboBox cbGv, JComboBox cbPhong) {
 
@@ -401,19 +384,18 @@ public class FormLichHoc extends javax.swing.JDialog {
         int phutBd = Integer.parseInt((String) cbPhutBd.getSelectedItem());
         int gioKt = Integer.parseInt((String) cbGioKt.getSelectedItem());
         int phutKt = Integer.parseInt((String) cbPhutKt.getSelectedItem());
-        
-        if(gioBd >= gioKt){
+
+        if (gioBd >= gioKt) {
             return null;
         }
-        
-        
+
         dto_GiaoVien gv = this.dsGiaoVien.get(cbGv.getSelectedIndex());
         if (gv == null) {
             return null;
         }
 
         dto_Phong phong = this.dsPhong.get(cbPhong.getSelectedIndex());
-        
+
         if (phong == null) {
             return null;
         }
@@ -421,8 +403,7 @@ public class FormLichHoc extends javax.swing.JDialog {
         dto_Thu thu = new dto_Thu(dayOfWeek, gioBd, phutBd, gioKt, phutKt, gv, phong);
         return thu;
     }
-    
-    
+
     // HÀM RELOAD TABLE
     public void reloadTable() {
         dtmNgayNghi.setRowCount(0);
@@ -452,6 +433,7 @@ public class FormLichHoc extends javax.swing.JDialog {
             dtmNgayNghi.addRow(vc);
         }
     }
+
     // HÀM SET GIAO DIỆN BAN ĐẦU
     public void setGiaoDienBanDau() {
         setupTable();
@@ -470,7 +452,7 @@ public class FormLichHoc extends javax.swing.JDialog {
         dsPhong = new bus_LopHoc().layDsPhong();
 
         setComboBoxChonLich(cbGvT2, cbPhongT2);
-        setComboBoxChonLich(cbGvT3,cbPhongT3);
+        setComboBoxChonLich(cbGvT3, cbPhongT3);
         setComboBoxChonLich(cbGvT4, cbPhongT4);
         setComboBoxChonLich(cbGvT5, cbPhongT5);
         setComboBoxChonLich(cbGvT6, cbPhongT6);
@@ -478,23 +460,21 @@ public class FormLichHoc extends javax.swing.JDialog {
         setComboBoxChonLich(cbGvCn, cbPhongCn);
 
         dsNgayNghi = new ArrayList<Date>();
-        
+
         this.dsLichHeThong = new ArrayList<dto_Lich>();
         this.dsLichHeThong = new bus_LopHoc().layDsLichNgay();
     }
-    
-   
-    
+
     // HÀM SET GIAO DIỆN CHO KHU VỰC THỨ
-    public void setComboBoxChonLich(JComboBox cbGv,JComboBox cbPhong) {
-        
+    public void setComboBoxChonLich(JComboBox cbGv, JComboBox cbPhong) {
+
         cbGv.removeAllItems();
-        for(dto_GiaoVien gv: this.dsGiaoVien){
+        for (dto_GiaoVien gv : this.dsGiaoVien) {
             cbGv.addItem(gv.getTenGv());
         }
-        
+
         cbPhong.removeAllItems();
-        for(dto_Phong phong: this.dsPhong){
+        for (dto_Phong phong : this.dsPhong) {
             cbPhong.addItem(phong.getTenPhong());
         }
     }
@@ -516,16 +496,18 @@ public class FormLichHoc extends javax.swing.JDialog {
         tbNgayNghi.getTableHeader().setForeground(new Color(0, 0, 0));
         tbNgayNghi.setSelectionBackground(new Color(0, 64, 128));
     }
-    
+
     // HÀM THAY ĐỔI MÀU SẮC CHO CK BOX KHI ĐƯỢC CHỌN
-    public void duocChon(JCheckBox ck){
+    public void duocChon(JCheckBox ck) {
         ck.setFont(fontLblSelected);
         ck.setForeground(colorSelected);
     }
-    public void khongDuocChon(JCheckBox ck){
+
+    public void khongDuocChon(JCheckBox ck) {
         ck.setFont(fontLblNotSelected);
         ck.setForeground(colorNotSelected);
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -1698,25 +1680,22 @@ public class FormLichHoc extends javax.swing.JDialog {
 
     private void ckCnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ckCnActionPerformed
 
-        if (ckCn.isSelected()){
+        if (ckCn.isSelected()) {
             pnCn.setVisible(true);
             duocChon(ckCn);
-        }
-            
-        else{
+        } else {
             pnCn.setVisible(false);
             khongDuocChon(ckCn);
         }
-            
+
     }//GEN-LAST:event_ckCnActionPerformed
 
     private void ckT6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ckT6ActionPerformed
 
-        if (ckT6.isSelected()){
+        if (ckT6.isSelected()) {
             pnSau.setVisible(true);
             duocChon(ckT6);
-        }
-        else{
+        } else {
             pnSau.setVisible(false);
             khongDuocChon(ckT6);
         }
@@ -1724,11 +1703,10 @@ public class FormLichHoc extends javax.swing.JDialog {
 
     private void ckT7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ckT7ActionPerformed
 
-        if (ckT7.isSelected()){
+        if (ckT7.isSelected()) {
             pnBay.setVisible(true);
             duocChon(ckT7);
-        }
-        else{
+        } else {
             pnBay.setVisible(false);
             khongDuocChon(ckT7);
         }
@@ -1736,11 +1714,10 @@ public class FormLichHoc extends javax.swing.JDialog {
 
     private void ckT5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ckT5ActionPerformed
 
-        if (ckT5.isSelected()){
+        if (ckT5.isSelected()) {
             pnNam.setVisible(true);
             duocChon(ckT5);
-        }
-        else{
+        } else {
             pnNam.setVisible(false);
             khongDuocChon(ckT5);
         }
@@ -1748,11 +1725,10 @@ public class FormLichHoc extends javax.swing.JDialog {
 
     private void ckT4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ckT4ActionPerformed
 
-        if (ckT4.isSelected()){
+        if (ckT4.isSelected()) {
             pnTu.setVisible(true);
             duocChon(ckT4);
-        }
-        else{
+        } else {
             pnTu.setVisible(false);
             khongDuocChon(ckT4);
         }
@@ -1760,11 +1736,10 @@ public class FormLichHoc extends javax.swing.JDialog {
 
     private void ckT3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ckT3ActionPerformed
 
-        if (ckT3.isSelected()){
+        if (ckT3.isSelected()) {
             pnBa.setVisible(true);
             duocChon(ckT3);
-        }
-        else{
+        } else {
             pnBa.setVisible(false);
             khongDuocChon(ckT3);
         }
@@ -1772,25 +1747,24 @@ public class FormLichHoc extends javax.swing.JDialog {
 
     private void ckT2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ckT2ActionPerformed
 
-        if (ckT2.isSelected()){
-           pnHai.setVisible(true);
-           duocChon(ckT2);
-        }
-        else{
+        if (ckT2.isSelected()) {
+            pnHai.setVisible(true);
+            duocChon(ckT2);
+        } else {
             pnHai.setVisible(false);
             khongDuocChon(ckT2);
         }
     }//GEN-LAST:event_ckT2ActionPerformed
 
     private void btnThemNgayNghiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemNgayNghiActionPerformed
-        
+
         Date d = new Date();
         d = dateNgayNghi.getDate();
-        
+
         d.setHours(0);
         d.setMinutes(0);
         d.setSeconds(0);
-        
+
         themNgayNghi(d);
     }//GEN-LAST:event_btnThemNgayNghiActionPerformed
 

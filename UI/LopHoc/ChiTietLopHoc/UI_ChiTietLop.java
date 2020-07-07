@@ -27,7 +27,7 @@ public class UI_ChiTietLop extends javax.swing.JDialog {
     }
 
     public UI_ChiTietLop(dto_LopHoc lopHoc) {
-        
+
         initComponents();
 
         this.lopHoc = new dto_LopHoc();
@@ -47,9 +47,6 @@ public class UI_ChiTietLop extends javax.swing.JDialog {
     boolean tinhDoc = true;
     boolean tinhViet = true;
 
-    
-    
-    
     // HÀM XÓA LỚP ĐANG HỌC
     public void xoaKhachHangKhoiLop() {
 
@@ -72,32 +69,33 @@ public class UI_ChiTietLop extends javax.swing.JDialog {
 
         }
     }
+
     // HÀM CẬP NHẬT KQHT
-    public void capNhatKqht(){
-        
+    public void capNhatKqht() {
 
         dto_kqht kqht = new dto_kqht();
         kqht = layThongTinNhap();
-        
-        if(kqht != null){
+
+        if (kqht != null) {
             layKhachHangDuocChon();
-            
+
             kqht.setMaKh(this.khDuocChon.getMaKh());
             kqht.setMaLop(this.khDuocChon.getMaLop());
-            
+
             int kq = new bus_kqht().capNhatKqht(kqht);
-            
-            if(kq > 0) {
-                
+
+            if (kq > 0) {
+
                 giaoDienBanDau();
                 JOptionPane.showMessageDialog(null, "Đã cập nhật điểm");
                 reloadDuLieu();
-            }
-            else
+            } else {
                 JOptionPane.showMessageDialog(null, "Lỗi");
-            
+            }
+
         }
     }
+
     // HÀM SET GIAO DIỆN BAN ĐẦU
     public void giaoDienBanDau() {
         setupTable();
@@ -221,26 +219,30 @@ public class UI_ChiTietLop extends javax.swing.JDialog {
             tong /= size;
             tong = Math.round(tong);
         }
-        
-        if(tong > this.lopHoc.getCt().getChungChi().getDiemToiDa()){
+
+        if (tong > this.lopHoc.getCt().getChungChi().getDiemToiDa()) {
             JOptionPane.showMessageDialog(null, "Tổng điểm thành phần không thể lớn hơn điểm tối đa của chứng chỉ");
             return null;
         }
-        
-       kqht = new dto_kqht();
-       
-       if(tinhNghe == true)
-           kqht.setNghe(nghe);
-        if(tinhNoi == true)
-           kqht.setNoi(noi);   
-       if(tinhDoc == true)
-           kqht.setDoc(doc); 
-       if(tinhViet == true)
-           kqht.setViet(viet);
-       
-       kqht.setTong(tong);
-       
-       return kqht;
+
+        kqht = new dto_kqht();
+
+        if (tinhNghe == true) {
+            kqht.setNghe(nghe);
+        }
+        if (tinhNoi == true) {
+            kqht.setNoi(noi);
+        }
+        if (tinhDoc == true) {
+            kqht.setDoc(doc);
+        }
+        if (tinhViet == true) {
+            kqht.setViet(viet);
+        }
+
+        kqht.setTong(tong);
+
+        return kqht;
     }
 
     // HÀM SET GIAO DIỆN CẬP NHẬT
@@ -258,11 +260,36 @@ public class UI_ChiTietLop extends javax.swing.JDialog {
 
         txtMaKh.setText(this.khDuocChon.getMaKh() + "");
         txtTenKh.setText(this.khDuocChon.getKh().getTenKh());
-        txtTongDiem.setText(this.khDuocChon.getTong() + "");
-        txtNghe.setText(this.khDuocChon.getNghe() + "");
-        txtNoi.setText(this.khDuocChon.getNoi() + "");
-        txtDoc.setText(this.khDuocChon.getDoc() + "");
-        txtViet.setText(this.khDuocChon.getViet() + "");
+
+        if (this.khDuocChon.getTong() == -1) {
+            txtTongDiem.setText("");
+        } else {
+            txtTongDiem.setText(this.khDuocChon.getTong() + "");
+        }
+
+        if (this.khDuocChon.getNghe() == -1) {
+            txtNghe.setText("");
+        } else {
+            txtNghe.setText(this.khDuocChon.getNghe() + "");
+        }
+
+        if (this.khDuocChon.getNoi() == -1) {
+            txtNoi.setText("");
+        } else {
+            txtNoi.setText(this.khDuocChon.getNoi() + "");
+        }
+
+        if (this.khDuocChon.getDoc() == -1) {
+            txtDoc.setText("");
+        } else {
+            txtDoc.setText(this.khDuocChon.getDoc() + "");
+        }
+
+        if (this.khDuocChon.getViet() == -1) {
+            txtViet.setText("");
+        } else {
+            txtViet.setText(this.khDuocChon.getViet() + "");
+        }
     }
 
     // HÀM LẤY KHÁCH HÀNG ĐƯỢC CHON
@@ -289,7 +316,7 @@ public class UI_ChiTietLop extends javax.swing.JDialog {
         lblDiemDauRa.setText(lopHoc.getCt().getDiemDauRa() + "");
         lblChungChi.setText(this.lopHoc.getCt().getChungChi().getTenCc());
         lblDiemToiDa.setText(this.lopHoc.getCt().getChungChi().getDiemToiDa() + "");
-                
+
         this.setTitle(this.lopHoc.getTenLop() + " - " + this.lopHoc.getMaLop());
 
     }
@@ -340,7 +367,6 @@ public class UI_ChiTietLop extends javax.swing.JDialog {
             } else {
                 vc.add(kqht.getNoi());
             }
-            vc.add(kqht.getNoi());
 
             if (kqht.getDoc() == -1) {
                 vc.add("");
