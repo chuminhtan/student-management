@@ -104,8 +104,8 @@ public class dal_ChuongTrinh extends DBConnect {
                 + "cach_tinh_diem "
                 + "FROM chuong_trinh "
                 + "WHERE LOWER(ten_ct) LIKE N'%" + text + "%' "
-                + "OR LOWER(ma_ct) LIKE N'%" + text + "%' "
-                + "OR LOWER(noi_dung) LIKE N'%" + text +"%'";
+                + "OR LOWER(ma_ct) LIKE N'%" + text + "%'";
+
 
         try {
             PreparedStatement preStmt = conn.prepareStatement(sql);

@@ -395,13 +395,13 @@ public final class UI_Main extends javax.swing.JFrame {
         pnBody.repaint();
         pnBody.revalidate();
         
-        /*
+        
         if (UI_DangNhap.layTaiKhoanDangNhap().getLoai() == 1) {
             pnBody.add(new UI_TaiKhoan());
         } else {
             pnBody.add(new pnDoiMatKhau());
         }
-        */
+        
         pnBody.add(new UI_TaiKhoan());
         pnBody.repaint();
         pnBody.revalidate();

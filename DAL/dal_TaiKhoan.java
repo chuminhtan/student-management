@@ -187,7 +187,7 @@ public class dal_TaiKhoan extends DBConnect {
             String sql = "SELECT ma_nv, ten_nv, sdt, loai, ten_dang_nhap, mat_khau, src_img "
                     + "FROM nhan_vien "
                     + "WHERE LOWER(ma_nv) LIKE N'%" + text + "%' "
-                    + "OR LOWER(ho_ten) LIKE N'%" + text + "%' "
+                    + "OR LOWER(ten_nv) LIKE N'%" + text + "%' "
                     + "OR sdt LIKE N'%" + text + "%' "
                     + "OR LOWER(ten_dang_nhap) LIKE N'%" + text + "%'";
 
