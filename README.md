@@ -1,5 +1,5 @@
 # quanlytrungtam
-The project is used to manage students for the Education centre. It is developed by Java Swing and Oracel Database.
+The project is used to manage students in the Education centre. It is developed by Java Swing and Oracel Database.
 <p align="center">
   <img src="blob/1.png" alt="">
   <img src="blob/2.png"  alt="">
